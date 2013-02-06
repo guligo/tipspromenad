@@ -1,1 +1,1 @@
-Tipspromenad
+This is repository for Tipspromenad project.
