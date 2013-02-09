@@ -12,7 +12,7 @@
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 	
 	<!-- dependency injection -->
-	<context:component-scan base-package="co.vrings" />
+	<context:component-scan base-package="se.tipspromenad" />
 	<!-- END! dependency injection -->
 	
 	<!-- model-view-controller -->

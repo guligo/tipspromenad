@@ -1,4 +1,4 @@
-<%@ page import="co.vrings.globals.Constants" %>
+<%@ page import="se.tipspromenad.globals.Constants" %>
 
 <!-- scripts -->
 <script type="text/javascript" src="local/js/user-profile.js"></script>
