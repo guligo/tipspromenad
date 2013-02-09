@@ -24,8 +24,6 @@ public class UserProfileImpl extends EntityImpl implements UserProfile {
 	private String firstName;
 	@Column(length = MAX_LAST_NAME_LENGTH)
 	private String lastName;
-	@Column(nullable = true)
-	private String image;
 	@Column(nullable = false)
 	private Gender gender;
 	
@@ -59,16 +57,6 @@ public class UserProfileImpl extends EntityImpl implements UserProfile {
 		this.lastName = lastName;
 	}
 	
-	@Override
-	public String getImage() {
-		return image;
-	}
-	
-	@Override
-	public void setImage(String image) {
-		this.image = image;
-	}
-
 	@Override
 	public Gender getGender() {
 		return gender;

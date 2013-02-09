@@ -15,7 +15,7 @@
 		loginController.init(
 			'${pageContext.request.contextPath}/j_spring_security_check',
 			'<%= Constants.URL.USER_REGISTRATION_ACTION %>',
-			'<%= Constants.URL.CALENDAR_PAGE %>'
+			'<%= Constants.URL.HOME_PAGE %>'
 		);				
 	});	
 </script>
@@ -48,7 +48,7 @@
 			</div>
 		</form>
 		<form class="form-horizontal" style="border-radius: 10px; background-color: #F5F5F5; padding: 20px;">
-			<legend>New to 5rings? Sign up</legend>
+			<legend>New to tipspromenad.se? Sign up</legend>
 			<div id="emailControlGroup" class="control-group">
 			    <label class="control-label" for="emailInput">Email</label>
 			    <div class="controls">

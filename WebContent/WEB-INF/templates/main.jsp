@@ -9,8 +9,8 @@
 		
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="Training diary">
-		<meta name="author" content="Igors Gulbinskis">
+		<meta name="description" content="tipspromenad.se">
+		<meta name="author" content="diky pig">
 		
 		<!-- styles -->
 		<link href="3p/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -53,7 +53,7 @@
 							<span class="icon-bar"></span>
 						</a>
 						<a class="brand" href="#">
-							<img src="local/img/rings.jpg" style="height: 25px;">&nbsp;5rings
+							tipspromenad.se
 						</a>
 						<div class="nav-collapse collapse">
 							<c:set var="tab">
@@ -62,23 +62,23 @@
 							<ul class="nav">
 								<li class="${tab == 1 ? 'active': ''}">
 									<a data-toggle="dropdown" href="#">
-										Training Log
+										Home
 									</a>
 									<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
     									<li>
-    										<a tabindex="-1" href="entries">
-    											Today's records
+    										<a tabindex="-1">
+    											Something
     										</a>
     									</li>
     									<li>
-    										<a tabindex="-1" href="calendar">
-    											Calendar
+    										<a tabindex="-1">
+    											Something
     										</a>
     									</li>
     									<li class="divider"></li>
     									<li>
-    										<a tabindex="-1" href="calendar">
-    											People's records
+    										<a tabindex="-1">
+    											Something
     										</a>
     									</li>
     								</ul>

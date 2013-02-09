@@ -9,20 +9,14 @@
     
 	<!-- views -->
 	<definition name="login" extends="main-template">
-		<put-attribute name="title" value="5rings | Login" />
+		<put-attribute name="title" value="Tipspromenad | Login" />
 		<put-attribute name="content" value="/WEB-INF/views/login.jsp" />		
 	</definition>
 	
-	<definition name="entries" extends="main-template">
+	<definition name="home" extends="main-template">
 		<put-attribute name="tab" value="1" />
-		<put-attribute name="title" value="5rings | Entries" />
-		<put-attribute name="content" value="/WEB-INF/views/entries.jsp" />
-	</definition>
-	
-	<definition name="calendar" extends="main-template">
-		<put-attribute name="tab" value="1" />
-		<put-attribute name="title" value="5rings | Calendar" />
-		<put-attribute name="content" value="/WEB-INF/views/calendar.jsp" />
+		<put-attribute name="title" value="Tipspromenad | Home" />
+		<put-attribute name="content" value="/WEB-INF/views/home.jsp" />
 	</definition>
 	<!-- END! views -->
 	

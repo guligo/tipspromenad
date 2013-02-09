@@ -8,20 +8,18 @@ import co.vrings.controllers.UserController;
  * @author guligo
  */
 public class UserProfileBean extends DataTransferBean {
-		
+	
 	private String firstName;
 	private String lastName;
-	private String image;
 	private String gender;
 	
 	public UserProfileBean() {
 		// used for serialization purposes only
 	}
 	
-	public UserProfileBean(String firstName, String lastName, String image, String gender) {		
+	public UserProfileBean(String firstName, String lastName, String gender) {		
 		this.firstName = firstName;
 		this.lastName  = lastName;
-		this.image     = image;
 		this.gender    = gender;
 	}
 	
@@ -39,14 +37,6 @@ public class UserProfileBean extends DataTransferBean {
 	
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-	
-	public String getImage() {
-		return image;
-	}
-	
-	public void setImage(String image) {
-		this.image = image;
 	}
 	
 	public String getGender() {

@@ -1,1 +1,1 @@
-This is repository for Tipspromenad project.
+Tipspromenad server-side project.

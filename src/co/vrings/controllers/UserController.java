@@ -27,6 +27,7 @@ import co.vrings.utils.ValidationUtils;
 @Controller
 public class UserController {
 	
+	@SuppressWarnings("unused")
 	private final static Logger logger = Logger.getLogger(UserController.class);
 	
 	@Autowired
@@ -76,7 +77,6 @@ public class UserController {
 			DataTransferBean userProfileBean = new UserProfileBean(
 				userProfile.getFirstName(),
 				userProfile.getLastName(),
-				userProfile.getImage(),
 				userProfile.getGender().toString()
 			);
 			return userProfileBean;
@@ -88,8 +88,8 @@ public class UserController {
 	 * Action responsible for updating user profile.
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.USER_PROFILE_UPDATE_ACTION)
-	public @ResponseBody DataTransferBean doUpdateUserProfile(String firstName, String lastName, String image, String gender) {
-		UserProfileBean userProfileBean = new UserProfileBean(firstName, lastName, image, gender);
+	public @ResponseBody DataTransferBean doUpdateUserProfile(String firstName, String lastName, String gender) {
+		UserProfileBean userProfileBean = new UserProfileBean(firstName, lastName, gender);
 		
 		// validation
 		ValidationUtils.validate(userProfileBean, "firstName", "First name", userProfileBean.getFirstName(), UserProfile.MIN_FIRST_NAME_LENGTH, UserProfile.MAX_FIRST_NAME_LENGTH);
@@ -103,7 +103,7 @@ public class UserController {
 		// actions
 		if (userProfileBean.getStatus() == DataTransferBean.STATUS_OK) {
 			String username = ((UserWrapper) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-			userService.updateUserProfile(username, firstName, lastName, image, Gender.valueOf(gender.toUpperCase()));
+			userService.updateUserProfile(username, firstName, lastName, Gender.valueOf(gender.toUpperCase()));
 		}
 		return userProfileBean;
 	}

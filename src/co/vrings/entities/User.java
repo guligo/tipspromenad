@@ -1,7 +1,5 @@
 package co.vrings.entities;
 
-import java.util.Set;
-
 import co.vrings.entities.enums.UserRole;
 
 /**
@@ -21,10 +19,6 @@ public interface User extends Entity {
 	public UserProfile getUserProfile();
 	
 	public void setUserProfile(UserProfile userProfile);
-	
-	public Set<? extends Entry> getEntries();
-	
-	public void setEntries(Set<? extends Entry> entries);
 	
 	public String getEmail();
 	

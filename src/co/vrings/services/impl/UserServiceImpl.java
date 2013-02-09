@@ -22,27 +22,27 @@ import co.vrings.services.dao.UserDao;
 @Component
 @Transactional
 public class UserServiceImpl implements UserService {
-	
+
 	private final static Logger logger = Logger.getLogger(UserServiceImpl.class);
-	
+
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Override
 	public User getUserByUsername(String username) {
 		return userDao.getUserByUsername(username);
 	}
-	
+
 	@Override
 	public User getUserByEmail(String email) {
 		return userDao.getUserByEmail(email);
 	}
-	
+
 	@Override
 	public UserProfile getUserProfileByUsername(String username) {
 		return userDao.getUserProfileByUsername(username);
 	}
-	
+
 	@Override
 	public void createUser(String email, String username, String password) {
 		UserImpl user = new UserImpl();
@@ -52,32 +52,32 @@ public class UserServiceImpl implements UserService {
 		user.setRole(UserRole.ROLE_SIMPLE_USER);
 		user.setEnabled(true);
 		userDao.createUser(user);
+
+		logger.debug("New user was successfully created (email = '" + email + "', username = '" + username + "', password = '" + password + "')");
 	}
-	
+
 	@Override
-	public void updateUserProfile(String username, String firstName, String lastName, String image, Gender gender) {
-		UserProfile userProfile = userDao.getUserProfileByUsername(username) ;
+	public void updateUserProfile(String username, String firstName, String lastName, Gender gender) {
+		UserProfile userProfile = userDao.getUserProfileByUsername(username);
 		if (userProfile == null) {
 			userProfile = new UserProfileImpl();
-			userProfile.setUser(userDao.getUserByUsername(username));			
+			userProfile.setUser(userDao.getUserByUsername(username));
 			userProfile.setFirstName(firstName);
 			userProfile.setLastName(lastName);
-			userProfile.setImage(image);
 			userProfile.setGender(gender);
 			userDao.createUserProfile(userProfile);
 		} else {
-			userProfile.setUser(userDao.getUserByUsername(username));			
+			userProfile.setUser(userDao.getUserByUsername(username));
 			userProfile.setFirstName(firstName);
 			userProfile.setLastName(lastName);
-			userProfile.setImage(image);
 			userProfile.setGender(gender);
 			userDao.updateUserProfile(userProfile);
 		}
 	}
-	
+
 	@Override
 	public void removeUser(Long id) {
 		userDao.removeUser(id);
 	}
-	
+
 }

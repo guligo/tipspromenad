@@ -26,10 +26,6 @@ public interface UserProfile extends Entity {
 	
 	public void setLastName(String lastName);
 	
-	public String getImage();
-	
-	public void setImage(String image);
-	
 	public Gender getGender();
 	
 	public void setGender(Gender gender);
