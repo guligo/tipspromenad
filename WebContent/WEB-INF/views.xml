@@ -1,0 +1,29 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+    "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	
+    <!-- templates -->
+    <definition name="main-template" template="/WEB-INF/templates/main.jsp" />
+    <!-- END! templates -->
+    
+	<!-- views -->
+	<definition name="login" extends="main-template">
+		<put-attribute name="title" value="5rings | Login" />
+		<put-attribute name="content" value="/WEB-INF/views/login.jsp" />		
+	</definition>
+	
+	<definition name="entries" extends="main-template">
+		<put-attribute name="tab" value="1" />
+		<put-attribute name="title" value="5rings | Entries" />
+		<put-attribute name="content" value="/WEB-INF/views/entries.jsp" />
+	</definition>
+	
+	<definition name="calendar" extends="main-template">
+		<put-attribute name="tab" value="1" />
+		<put-attribute name="title" value="5rings | Calendar" />
+		<put-attribute name="content" value="/WEB-INF/views/calendar.jsp" />
+	</definition>
+	<!-- END! views -->
+	
+</tiles-definitions>
