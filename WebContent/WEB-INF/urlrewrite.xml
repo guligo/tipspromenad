@@ -10,6 +10,10 @@
 		<to>/local/$1</to>
 	</rule>
 	<rule>
+		<from>/ws/**</from>
+		<to>/ws/$1</to>
+	</rule>
+	<rule>
 		<from>/**</from>
 		<to>/app/$1</to>
 	</rule>
