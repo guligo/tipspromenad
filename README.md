@@ -1,1 +1,1 @@
-Tipspromenad server-side project. Diky pig!
+Tipspromenad server-side project.
