@@ -62,8 +62,8 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	@Override
-	public void createUser(User user) {
-		commonDao.createEntity(user);
+	public Long createUser(User user) {
+		return commonDao.createEntity(user);
 	}
 	
 	@Override

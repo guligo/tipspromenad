@@ -19,7 +19,7 @@ public interface UserService {
 
 	public UserProfile getUserProfileByUsername(String username);
 
-	public void createUser(String email, String username, String password) throws ValidationException;
+	public Long createUser(String email, String username, String password) throws ValidationException;
 
 	public void updateUserProfile(String username, String firstName, String lastName, Gender gender);
 

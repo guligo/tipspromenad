@@ -1,11 +1,16 @@
 package se.tipspromenad.ws.beans;
 
-import java.io.Serializable;
+import se.tipspromenad.ws.UserWebService;
 
-public class UserRegistrationRequestBean implements Serializable {
-	
+/**
+ * See {@link UserWebService#register(UserRegistrationRequestBean, javax.servlet.http.HttpServletRequest)}.
+ * 
+ * @author eigogul
+ */
+public class UserRegistrationRequestBean extends RequestBean {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private String username;
 	private String email;
 	private String password;

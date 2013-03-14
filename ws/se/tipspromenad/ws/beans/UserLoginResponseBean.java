@@ -6,7 +6,7 @@ public class UserLoginResponseBean extends ResponseBean {
 	public final static int STATUS_NOK = 1;
 
 	private int status;
-	private int userId;
+	private Long userId;
 
 	public int getStatus() {
 		return status;
@@ -16,11 +16,11 @@ public class UserLoginResponseBean extends ResponseBean {
 		this.status = status;
 	}
 
-	public int getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 

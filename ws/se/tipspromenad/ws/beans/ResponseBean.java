@@ -1,6 +1,15 @@
 package se.tipspromenad.ws.beans;
 
-public class ResponseBean {
+import java.io.Serializable;
+
+/**
+ * Represents response entity for WS call.
+ * 
+ * @author eigogul
+ */
+public class ResponseBean implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private String errorCode;
 	private String errorMessage;

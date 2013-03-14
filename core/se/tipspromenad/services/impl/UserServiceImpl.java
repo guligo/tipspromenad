@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void createUser(String email, String username, String password) throws ValidationException {
+	public Long createUser(String email, String username, String password) throws ValidationException {
 		ValidationException errors = new ValidationException();
 		ValidationUtils.validate("email", email, true, User.MIN_EMAIL_LENGTH, User.MAX_EMAIL_LENGTH, errors);
 		ValidationUtils.validate("username", username, true, User.MIN_USERNAME_LENGTH, User.MAX_USERNAME_LENGTH, errors);
@@ -62,9 +62,7 @@ public class UserServiceImpl implements UserService {
 		user.setPassword(password);
 		user.setRole(UserRole.ROLE_SIMPLE_USER);
 		user.setEnabled(true);
-		userDao.createUser(user);
-		
-		logger.debug("New user was successfully created (email = '" + email + "', username = '" + username + "', password = '" + password + "')");
+		return userDao.createUser(user);
 	}
 
 	@Override

@@ -1,6 +1,15 @@
 package se.tipspromenad.ws.beans;
 
-public class RequestBean {
+import java.io.Serializable;
+
+/**
+ * Represents request entity for WS call.
+ * 
+ * @author eigogul
+ */
+public class RequestBean implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private long sessionId;
 

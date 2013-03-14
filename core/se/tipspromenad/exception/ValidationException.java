@@ -18,7 +18,7 @@ public class ValidationException extends Exception {
 	}
 	
 	public boolean persent() {
-		return errors.isEmpty();
+		return !errors.isEmpty();
 	}
 	
 	@Override

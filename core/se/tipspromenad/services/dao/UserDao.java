@@ -16,7 +16,7 @@ public interface UserDao {
 	
 	public UserProfile getUserProfileByUsername(String username);
 	
-	public void createUser(User user);
+	public Long createUser(User user);
 	
 	public void createUserProfile(UserProfile userProfile);
 	
