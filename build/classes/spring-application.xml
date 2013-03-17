@@ -46,19 +46,20 @@
 	<!-- security -->
 	<security:http auto-config="true">
 		<security:intercept-url pattern="/**" access="ROLE_SIMPLE_USER" />
+		<security:intercept-url pattern="/ws/**" filters="none" />
 		<security:intercept-url pattern="/3p/**" filters="none" />
 		<security:intercept-url pattern="/local/**" filters="none" />
 		<security:intercept-url pattern="/user/register" filters="none" />
 		<security:intercept-url pattern="/login" filters="none" />
 		<security:intercept-url pattern="/login/success" filters="none" />
-		<security:intercept-url pattern="/login/fail" filters="none" />						
+		<security:intercept-url pattern="/login/fail" filters="none" />
 		<security:form-login login-page="/login"
 			default-target-url="/login/success"
 			authentication-failure-url="/login/fail"
 			always-use-default-target="true" />
 	</security:http>
 	
-	<security:authentication-manager>
+	<security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider user-service-ref="userDetailsService">
 			<security:password-encoder hash="md5" base64="true" />
 		</security:authentication-provider>
