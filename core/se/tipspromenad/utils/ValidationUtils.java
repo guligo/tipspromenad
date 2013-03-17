@@ -1,7 +1,8 @@
 package se.tipspromenad.utils;
 
+import java.util.List;
+
 import se.tipspromenad.beans.DataTransferBean;
-import se.tipspromenad.exception.ValidationException;
 
 /**
  * Utils for data validation.
@@ -10,13 +11,14 @@ import se.tipspromenad.exception.ValidationException;
  */
 public class ValidationUtils {
 	
-	public static void validate(String field, String value, boolean mandatory, int min, int max, ValidationException exception) {
+	public static void validate(String value, int min, int max,
+			List<String> errorCodes, String errorCodeEmpty, String errorCodeTooShort, String errorCodeTooLong) {
 		if (value == null || value.isEmpty()) {
-			exception.rejectField(field, String.format("%s may not be empty", field));
+			errorCodes.add(errorCodeEmpty);
 		} else if (value.length() < min) {
-			exception.rejectField(field, String.format("%s must be at least %s symbols long", field, min));
+			errorCodes.add(errorCodeTooShort);
 		} else if (value.length() > max) {
-			exception.rejectField(field, String.format("%s must be not more than %s symbols long", field, max));
+			errorCodes.add(errorCodeTooLong);
 		}
 	}
 	

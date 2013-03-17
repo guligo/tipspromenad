@@ -23,7 +23,7 @@ public class SerializationUtils {
 	 * FIXME: Get rid of this method as soon as Spring configurations are fixed!
 	 */
 	public static <T> T deserialize(Reader src, Class<T> clazz) {
-		return deserialize(src, clazz);
+		return deserialize(TYPE_JSON, src, clazz);
 	}
 	
 	public static <T> T deserialize(String type, Reader src, Class<T> clazz) {

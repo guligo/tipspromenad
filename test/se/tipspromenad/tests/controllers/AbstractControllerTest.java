@@ -2,8 +2,9 @@ package se.tipspromenad.tests.controllers;
 
 import javax.servlet.ServletContext;
 
-import org.junit.runner.RunWith;
+import org.codehaus.jackson.map.ObjectMapper;
 
+import org.junit.runner.RunWith;
 import junit.framework.TestCase;
 
 import org.springframework.beans.BeansException;
@@ -29,6 +30,7 @@ import se.tipspromenad.tests.utils.OrderedRunner;
 public abstract class AbstractControllerTest extends TestCase {
 	
 	protected DispatcherServlet dispatcher;	
+	protected ObjectMapper objectMapper;
 	
 	@Autowired
 	private ApplicationContext applicationContext;	
@@ -47,6 +49,7 @@ public abstract class AbstractControllerTest extends TestCase {
 			}
 		};
 		dispatcher.init(new MockServletConfig(servletContext));
+		objectMapper = new ObjectMapper();
 	};
 	
 }

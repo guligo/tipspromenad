@@ -1,5 +1,8 @@
 package se.tipspromenad.services.impl;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,11 +14,9 @@ import se.tipspromenad.entities.enums.Gender;
 import se.tipspromenad.entities.enums.UserRole;
 import se.tipspromenad.entities.impl.UserImpl;
 import se.tipspromenad.entities.impl.UserProfileImpl;
-import se.tipspromenad.exception.ValidationException;
 import se.tipspromenad.services.UserService;
 import se.tipspromenad.services.dao.UserDao;
-import se.tipspromenad.utils.ValidationUtils;
-
+import se.tipspromenad.utils.SecurityUtils;
 
 /**
  * See {@link UserService}.
@@ -26,6 +27,7 @@ import se.tipspromenad.utils.ValidationUtils;
 @Transactional
 public class UserServiceImpl implements UserService {
 
+	@SuppressWarnings("unused")
 	private final static Logger logger = Logger.getLogger(UserServiceImpl.class);
 
 	@Autowired
@@ -47,19 +49,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Long createUser(String email, String username, String password) throws ValidationException {
-		ValidationException errors = new ValidationException();
-		ValidationUtils.validate("email", email, true, User.MIN_EMAIL_LENGTH, User.MAX_EMAIL_LENGTH, errors);
-		ValidationUtils.validate("username", username, true, User.MIN_USERNAME_LENGTH, User.MAX_USERNAME_LENGTH, errors);
-		ValidationUtils.validate("password", password, true, User.MIN_PASSWORD_LENGTH, User.MAX_PASSWORD_LENGTH, errors);
-		if (errors.persent()) {
-			throw errors;
-		}
-		
+	public Long createUser(String email, String username, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		UserImpl user = new UserImpl();
 		user.setEmail(email);
 		user.setUsername(username);
-		user.setPassword(password);
+		user.setPassword(SecurityUtils.toBase64(SecurityUtils.toMD5(password)));
 		user.setRole(UserRole.ROLE_SIMPLE_USER);
 		user.setEnabled(true);
 		return userDao.createUser(user);

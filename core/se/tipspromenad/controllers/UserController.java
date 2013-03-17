@@ -1,5 +1,8 @@
 package se.tipspromenad.controllers;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,12 +17,10 @@ import se.tipspromenad.beans.UserRegistrationBean;
 import se.tipspromenad.entities.User;
 import se.tipspromenad.entities.UserProfile;
 import se.tipspromenad.entities.enums.Gender;
-import se.tipspromenad.exception.ValidationException;
 import se.tipspromenad.globals.Constants;
 import se.tipspromenad.security.UserWrapper;
 import se.tipspromenad.services.UserService;
 import se.tipspromenad.utils.ValidationUtils;
-
 
 /**
  * Controller of MVC paradigm that is responsible for {@link User} related actions.
@@ -37,10 +38,9 @@ public class UserController {
 	
 	/**
 	 * Action responsible for performing registration of a new user.
-	 * @throws ValidationException 
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.USER_REGISTRATION_ACTION)
-	public @ResponseBody DataTransferBean doRegistration(String email, String username, String password, String confirm) throws ValidationException {
+	public @ResponseBody DataTransferBean doRegistration(String email, String username, String password, String confirm) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		UserRegistrationBean registrationBean = new UserRegistrationBean(email, username, password, confirm);
 		
 		// validation

@@ -1,27 +1,31 @@
 package se.tipspromenad.ws.beans;
 
+import org.codehaus.jackson.annotate.JsonWriteNullProperties;
+
+import se.tipspromenad.ws.UserWebService;
+
+/**
+ * See {@link UserWebService#login(UserLoginRequestBean, javax.servlet.http.HttpServletRequest)}.
+ * 
+ * @author eigogul
+ */
+@SuppressWarnings("deprecation")
+@JsonWriteNullProperties(value = false)
 public class UserLoginResponseBean extends ResponseBean {
 
-	public final static int STATUS_OK = 0;
-	public final static int STATUS_NOK = 1;
+	private static final long serialVersionUID = 1L;
 
-	private int status;
-	private Long userId;
+	public static final int ERROR_CODE_WRONG_EMAIL = 1;
+	public static final int ERROR_CODE_WRONG_PASSWORD = 2;
 
-	public int getStatus() {
-		return status;
+	private Long sessionId;
+
+	public Long getSessionId() {
+		return sessionId;
 	}
 
-	public void setStatus(int status) {
-		this.status = status;
-	}
-
-	public Long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setSessionId(Long userId) {
+		this.sessionId = userId;
 	}
 
 }
