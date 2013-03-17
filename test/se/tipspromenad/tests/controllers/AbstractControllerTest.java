@@ -26,7 +26,7 @@ import se.tipspromenad.tests.utils.OrderedRunner;
  * @author guligo
  */
 @RunWith(OrderedRunner.class)
-@ContextConfiguration(locations = { "classpath:application.xml" })
+@ContextConfiguration(locations = { "classpath:spring-application.xml" })
 public abstract class AbstractControllerTest extends TestCase {
 	
 	protected DispatcherServlet dispatcher;	

@@ -33,8 +33,6 @@ public class UserWebServiceTest extends AbstractControllerTest {
 	
 	private final static Logger logger = Logger.getLogger(UserWebServiceTest.class);
 	
-	private final static String HOST_TAG = "http://localhost:38080/tipspromenad";
-	
 	private final static String TEST_USER_USERNAME = "foobar";
 	private final static String TEST_USER_EMAIL = "foo.bar@qwer.ty";
 	private final static String TEST_USER_PASSWORD = "qwerty123";
@@ -58,10 +56,10 @@ public class UserWebServiceTest extends AbstractControllerTest {
 		String content = ("{'username':'" + TEST_USER_WRONG_USERNAME + "','email':'" + TEST_USER_WRONG_EMAIL + "','password':'" + TEST_USER_PASSWORD + "'}").replaceAll("'", "\"");
 		request.setContent(content.getBytes());
 		
-		logger.info(content + " -> " + HOST_TAG + Constants.WS.USER_REGISTER);
+		logger.info(content + " -> " + Constants.WS.USER_REGISTER);
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		dispatcher.service(request, response);
-		logger.info(HOST_TAG + Constants.WS.USER_REGISTER + " -> " + response.getContentAsString());
+		logger.info(Constants.WS.USER_REGISTER + " -> " + response.getContentAsString());
 		
 		assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 		UserRegistrationResponseBean bean = objectMapper.readValue(response.getContentAsByteArray(), UserRegistrationResponseBean.class);
@@ -85,10 +83,10 @@ public class UserWebServiceTest extends AbstractControllerTest {
 		String content = ("{'username':'" + TEST_USER_USERNAME + "','email':'" + TEST_USER_EMAIL + "','password':'" + TEST_USER_PASSWORD + "'}").replaceAll("'", "\"");
 		request.setContent(content.getBytes());
 		
-		logger.info(content + " -> " + HOST_TAG + Constants.WS.USER_REGISTER);
+		logger.info(content + " -> " + Constants.WS.USER_REGISTER);
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		dispatcher.service(request, response);
-		logger.info(HOST_TAG + Constants.WS.USER_REGISTER + " -> " + response.getContentAsString());
+		logger.info(Constants.WS.USER_REGISTER + " -> " + response.getContentAsString());
 		
 		assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 		UserRegistrationResponseBean bean = objectMapper.readValue(response.getContentAsByteArray(), UserRegistrationResponseBean.class);
@@ -109,10 +107,10 @@ public class UserWebServiceTest extends AbstractControllerTest {
 		String content = ("{'email':'" + TEST_USER_EMAIL + "','password':'" + TEST_USER_PASSWORD + "'}").replaceAll("'", "\"");
 		request.setContent(content.getBytes());
 		
-		logger.info(content + " -> " + HOST_TAG + Constants.WS.USER_LOGIN);
+		logger.info(content + " -> " + Constants.WS.USER_LOGIN);
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		dispatcher.service(request, response);
-		logger.info(HOST_TAG + Constants.WS.USER_LOGIN + " -> " + response.getContentAsString());
+		logger.info(Constants.WS.USER_LOGIN + " -> " + response.getContentAsString());
 		
 		assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 		UserLoginResponseBean bean = objectMapper.readValue(response.getContentAsByteArray(), UserLoginResponseBean.class);
