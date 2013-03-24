@@ -18,6 +18,12 @@
 		<put-attribute name="title" value="Tipspromenad | Home" />
 		<put-attribute name="content" value="/WEB-INF/views/home.jsp" />
 	</definition>
+	
+	<definition name="games" extends="main-template">
+		<put-attribute name="tab" value="1" />
+		<put-attribute name="title" value="Tipspromenad | Games" />
+		<put-attribute name="content" value="/WEB-INF/views/games.jsp" />
+	</definition>
 	<!-- END! views -->
 	
 </tiles-definitions>

@@ -60,6 +60,9 @@
 								<tiles:getAsString name="tab" />
 							</c:set>
 							<ul class="nav">
+								<li class="">
+									<a href="#">Games</a>
+								</li>
 								<li class="${tab == 1 ? 'active': ''}">
 									<a data-toggle="dropdown" href="#">
 										Home
