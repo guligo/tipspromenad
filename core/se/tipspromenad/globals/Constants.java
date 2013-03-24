@@ -22,9 +22,9 @@ public class Constants {
 
 		public final static String HOME_PAGE = "home";
 
-		public final static String GAMES_PAGE = "games";
-		public final static String GAMES_GET_LIST = "games/list";
-
+		public final static String GAME_LIST_PAGE = "games";
+		public final static String GAME_LIST_GET_LIST = "games/list";
+		
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class Constants {
 
 		public final static String HOME = "home";
 
-		public final static String GAMES = "games";
+		public final static String GAME_LIST = "game-list";
 
 	}
 

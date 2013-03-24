@@ -1,13 +1,13 @@
 <%@ page import="se.tipspromenad.globals.Constants" %>
 
 <!-- scripts -->
-<script type="text/javascript" src="local/js/games.js"></script>
+<script type="text/javascript" src="local/js/game-list.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		gamesController.init(
-			'<%= Constants.URL.GAMES_GET_LIST %>',
+		gameListController.init(
+			'<%= Constants.URL.GAME_LIST_GET_LIST %>',
 			$('#gamesTableContainer')
-		)
+		);
 	});
 </script>
 

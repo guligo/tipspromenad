@@ -19,10 +19,10 @@
 		<put-attribute name="content" value="/WEB-INF/views/home.jsp" />
 	</definition>
 	
-	<definition name="games" extends="main-template">
-		<put-attribute name="tab" value="1" />
+	<definition name="game-list" extends="main-template">
+		<put-attribute name="tab" value="2" />
 		<put-attribute name="title" value="Tipspromenad | Games" />
-		<put-attribute name="content" value="/WEB-INF/views/games.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/game-list.jsp" />
 	</definition>
 	<!-- END! views -->
 	

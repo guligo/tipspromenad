@@ -1,12 +1,12 @@
-var gamesController = function() {
+var gameListController = function() {
 	
-	var GAMES_LIST_GET_URL = null;
-	var GAMES_LIST_CONTAINER = null;
+	var GAME_LIST_GET_LIST_URL = null;
+	var GAME_LIST_CONTAINER = null;
 	
-	function _getGamesList(callback) {
+	function _getGameList(callback) {
 		$.ajax({
 			type: 'GET',
-			url: GAMES_LIST_GET_URL,
+			url: GAME_LIST_GET_LIST_URL,
 			success: function(games) {
 				if (callback != null) {
 					callback(games);
@@ -18,7 +18,7 @@ var gamesController = function() {
 		});
 	}
 	
-	function _renderGamesList(games) {
+	function _renderGameList(games) {
 		// construct HTML
 		html = '<table style="width: 100%;" class="table table-bordered table-hover">';
 			html += '<thead>';
@@ -43,14 +43,14 @@ var gamesController = function() {
 		html += '</table>';
 		
 		// render HTML
-		GAMES_LIST_CONTAINER.html(html);
+		GAME_LIST_CONTAINER.html(html);
 	}
 	
 	return {
 		init: function(url1, container) {
-			GAMES_LIST_GET_URL = url1;
-			GAMES_LIST_CONTAINER = container;
-			_getGamesList(_renderGamesList);
+			GAME_LIST_GET_LIST_URL = url1;
+			GAME_LIST_CONTAINER = container;
+			_getGameList(_renderGameList);
 		}
 	};
 	

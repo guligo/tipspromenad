@@ -14,19 +14,19 @@ import se.tipspromenad.entities.impl.GameImpl;
 import se.tipspromenad.globals.Constants;
 
 /**
- * Represents MVC controller responsible for actions on and around games page.
+ * Represents MVC controller responsible for actions on and around game list page.
  * 
  * @author guligo
  */
 @Controller
-public class GamesController {
+public class GameListController {
 
-	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.GAMES_PAGE)
+	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.GAME_LIST_PAGE)
 	public String showGamesPage() {
-		return Constants.Views.GAMES;
+		return Constants.Views.GAME_LIST;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.GAMES_GET_LIST)
+	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.GAME_LIST_GET_LIST)
 	public @ResponseBody List<Game> getGamesList() {
 		List<Game> games = new ArrayList<Game>();
 		
