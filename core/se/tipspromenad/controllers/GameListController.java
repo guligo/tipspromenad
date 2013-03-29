@@ -22,12 +22,12 @@ import se.tipspromenad.globals.Constants;
 public class GameListController {
 
 	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.GAME_LIST_PAGE)
-	public String showGamesPage() {
+	public String showGameListPage() {
 		return Constants.Views.GAME_LIST;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.GAME_LIST_GET_LIST)
-	public @ResponseBody List<Game> getGamesList() {
+	public @ResponseBody List<Game> getGameList() {
 		List<Game> games = new ArrayList<Game>();
 		
 		Game game = new GameImpl();

@@ -6,13 +6,13 @@
 	$(document).ready(function() {
 		gameListController.init(
 			'<%= Constants.URL.GAME_LIST_GET_LIST %>',
-			$('#gamesTableContainer')
+			$('#gameListContainer')
 		);
 	});
 </script>
 
 <!-- html -->
-<button class="btn btn-primary" type="button">New Game</button>
-<br />
-<br />
-<div id="gamesTableContainer"></div>
+<form>
+	<a class="btn btn-primary" href="game">New Game</a>
+</form>
+<div id="gameListContainer"></div>

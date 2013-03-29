@@ -34,7 +34,7 @@ var gameListController = function() {
 					html += '<td>' + games[index].name + '</td>';
 					html += '<td>' + games[index].creationDate + '</td>';
 					html += '<td>';
-						html += '<a href="#"><i class="icon-edit"> </i></a>&nbsp';
+						html += '<a href="game"><i class="icon-edit"> </i></a>&nbsp';
 						html += '<a href="#"><i class="icon-remove"> </i></a>';
 					html += '</td>';
 				html += '</tr>';
