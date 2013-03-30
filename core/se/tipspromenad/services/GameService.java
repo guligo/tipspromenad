@@ -18,5 +18,7 @@ public interface GameService {
 	public List<Game> getGamesByUsername(String username);
 
 	public Long saveGame(Long id, String name, User creator);
-
+	
+	public void removeGame(Long id);
+	
 }

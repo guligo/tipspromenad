@@ -49,5 +49,10 @@ public class GameServiceImpl implements GameService {
 			return id;
 		}
 	}
-
+	
+	@Override
+	public void removeGame(Long id) {
+		gameDao.removeGame(id);
+	}
+	
 }

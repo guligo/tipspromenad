@@ -1,6 +1,7 @@
 var gameController = function() {
 	
-	var GAME_SAVE_URL = null;
+	var GAME_SAVE_ACTION_URL = null;
+	var GAME_LIST_PAGE_URL = null;
 	
 	var map = null;
 	var markers = null;
@@ -56,21 +57,24 @@ var gameController = function() {
 	
 	function _saveGame(id, name) {
 		$.ajax({
-			url: GAME_SAVE_URL,
+			url: GAME_SAVE_ACTION_URL,
 			type: 'POST',
 			data: {
 				id: id,
 				name: name
 			},
-		    success: function(gameBean) {				    	
-				
+		    success: function(response) {				    	
+		    	if (response.errorCodes == null || response.errorCodes.length == 0) {
+		    		window.location = GAME_LIST_PAGE_URL;
+		    	}
 			}
 		});
 	}
 	
 	return {
-		init: function(url1, container) {
-			GAME_SAVE_URL = url1;
+		init: function(url1, url2, container) {
+			GAME_SAVE_ACTION_URL = url1;
+			GAME_LIST_PAGE_URL = url2;
 			_initMap(container);
 		},
 		removeMarker: function(markerId) {

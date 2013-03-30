@@ -7,14 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import se.tipspromenad.beans.DataTransferBean;
-import se.tipspromenad.beans.GameBean;
 import se.tipspromenad.entities.Game;
 import se.tipspromenad.globals.Constants;
 import se.tipspromenad.security.UserWrapper;
 import se.tipspromenad.services.GameService;
 import se.tipspromenad.services.UserService;
 import se.tipspromenad.utils.ValidationUtils;
+import se.tipspromenad.ws.beans.ResponseBean;
 
 /**
  * MVC paradigm controller responsible for actions on game page.
@@ -23,6 +22,14 @@ import se.tipspromenad.utils.ValidationUtils;
  */
 @Controller
 public class GameController {
+
+	public enum ErrorCode {
+		
+		NAME_EMPTY,
+		NAME_TOO_LONG,
+		NAME_TOO_SHORT
+		
+	}
 
 	@Autowired
 	private UserService userService;
@@ -36,21 +43,25 @@ public class GameController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.GAME_GET)
-	public @ResponseBody DataTransferBean getGame(Long id) {
-		Game game = gameService.getGame(id);
-		return new GameBean(game.getId(), game.getName());
+	public @ResponseBody Game getGame(Long id) {
+		return gameService.getGame(id);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.GAME_SAVE)
-	public @ResponseBody DataTransferBean saveGame(Long id, String name) {
+	public @ResponseBody ResponseBean saveGame(Long id, String name) {
 		String username = ((UserWrapper) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();	
 		
-		GameBean gameBean = new GameBean(id, name);
-		ValidationUtils.validate(gameBean, "name", "Name", gameBean.getName(), Game.MIN_NAME_LENGTH, Game.MAX_NAME_LENGTH);
-		if (gameBean.getStatus() == DataTransferBean.STATUS_OK) {
-			gameService.saveGame(gameBean.getId(), gameBean.getName(), userService.getUserByUsername(username));
+		ResponseBean response = new ResponseBean();
+		ValidationUtils.validate(name, Game.MIN_NAME_LENGTH, Game.MAX_NAME_LENGTH, response.getErrorCodes(), ErrorCode.NAME_EMPTY.name(), ErrorCode.NAME_TOO_SHORT.name(), ErrorCode.NAME_TOO_LONG.name());
+		if (!response.hasErrors()) {
+			gameService.saveGame(id, name, userService.getUserByUsername(username));
 		}
-		return gameBean;
+		return response;
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.GAME_REMOVE)
+	public @ResponseBody void removeGame(Long id) {
+		gameService.removeGame(id);
 	}
 
 }

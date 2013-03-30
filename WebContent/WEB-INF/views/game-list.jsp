@@ -6,6 +6,7 @@
 	$(document).ready(function() {
 		gameListController.init(
 			'<%= Constants.URL.GAME_LIST_GET_LIST %>',
+			'<%= Constants.URL.GAME_REMOVE %>',
 			$('#gameListContainer')
 		);
 	});

@@ -19,6 +19,7 @@
 	$(document).ready(function() {
 		gameController.init(
 			'<%= Constants.URL.GAME_SAVE %>',
+			'<%= Constants.URL.GAME_LIST_PAGE %>',
 			$('#mapContainer')[0]
 		);
 	});

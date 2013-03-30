@@ -28,6 +28,7 @@ public class Constants {
 		public final static String GAME_PAGE = "game";
 		public final static String GAME_GET = "game/get";
 		public final static String GAME_SAVE = "game/save";
+		public final static String GAME_REMOVE = "game/remove";
 		
 	}
 

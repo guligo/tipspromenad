@@ -34,6 +34,7 @@
 		<script src="3p/bootstrap/js/jquery-1.8.2.min.js"></script>
 		<script src="3p/bootstrap/js/bootstrap.js"></script>
 		<script src="3p/datepicker/js/bootstrap-datepicker.js"></script>
+		<script src="local/js/commons.js"></script>
 		
 		<!-- fav and touch icons -->
 		<link rel="shortcut icon" href="3p/bootstrap/ico/favicon.ico">
