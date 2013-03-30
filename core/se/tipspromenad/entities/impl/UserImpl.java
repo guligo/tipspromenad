@@ -1,15 +1,11 @@
 package se.tipspromenad.entities.impl;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import se.tipspromenad.entities.Game;
 import se.tipspromenad.entities.User;
 import se.tipspromenad.entities.UserProfile;
 import se.tipspromenad.entities.enums.UserRole;
@@ -25,8 +21,6 @@ public class UserImpl extends EntityImpl implements User {
 
 	@OneToOne(fetch = FetchType.EAGER)
 	private UserProfileImpl userProfile;
-	@OneToMany(mappedBy = "creator")
-	private Set<GameImpl> games;
 	@Column(nullable = false, length = MAX_EMAIL_LENGTH, unique = true)
 	private String email;
 	@Column(nullable = false, length = MAX_USERNAME_LENGTH, unique = true)
@@ -46,17 +40,6 @@ public class UserImpl extends EntityImpl implements User {
 	@Override
 	public void setUserProfile(UserProfile userProfile) {
 		this.userProfile = (UserProfileImpl) userProfile;
-	}
-
-	@Override
-	public Set<? extends Game> getGames() {
-		return games;
-	}
-
-	@Override
-	@SuppressWarnings("unchecked")
-	public void setGames(Set<? extends Game> games) {
-		this.games = (Set<GameImpl>) games;
 	}
 
 	@Override

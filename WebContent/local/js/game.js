@@ -1,7 +1,10 @@
 var gameController = function() {
 	
+	var GAME_SAVE_URL = null;
+	
 	var map = null;
 	var markers = null;
+	var id = null;
 	
 	// initialize Google map
 	function _initMap(container) {
@@ -51,12 +54,30 @@ var gameController = function() {
 		}
 	}
 	
+	function _saveGame(id, name) {
+		$.ajax({
+			url: GAME_SAVE_URL,
+			type: 'POST',
+			data: {
+				id: id,
+				name: name
+			},
+		    success: function(gameBean) {				    	
+				
+			}
+		});
+	}
+	
 	return {
-		init: function(container) {
+		init: function(url1, container) {
+			GAME_SAVE_URL = url1;
 			_initMap(container);
 		},
 		removeMarker: function(markerId) {
 			_removeMarker(markerId);
+		},
+		saveGame: function(name) {
+			_saveGame(id, name);
 		}
 	};
 	

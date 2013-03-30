@@ -26,6 +26,8 @@ public class Constants {
 		public final static String GAME_LIST_GET_LIST = "games/list";
 		
 		public final static String GAME_PAGE = "game";
+		public final static String GAME_GET = "game/get";
+		public final static String GAME_SAVE = "game/save";
 		
 	}
 
@@ -49,8 +51,8 @@ public class Constants {
 	 */
 	public static class WS {
 
-		public final static String USER_LOGIN = "/ws/users/login";
-		public final static String USER_REGISTER = "/ws/users/register";
+		public final static String USER_LOGIN = "ws/users/login";
+		public final static String USER_REGISTER = "ws/users/register";
 
 	}
 

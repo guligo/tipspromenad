@@ -17,13 +17,16 @@
 <script type="text/javascript" src="local/js/game.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		gameController.init($('#mapContainer')[0]);
+		gameController.init(
+			'<%= Constants.URL.GAME_SAVE %>',
+			$('#mapContainer')[0]
+		);
 	});
 </script>
 
 <!-- html -->
 <form class="form-inline">
-	<input type="text" placeholder="Name">
-	<button class="btn btn-primary">Save</button>
+	<input id="gameName" placeholder="Name" type="text">
+	<a href="javascript:gameController.saveGame($('#gameName').val());" class="btn btn-primary">Save</a>
 </form>
 <div id="mapContainer"></div>

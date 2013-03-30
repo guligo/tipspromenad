@@ -1,7 +1,5 @@
 package se.tipspromenad.entities;
 
-import java.util.Set;
-
 import se.tipspromenad.entities.enums.UserRole;
 
 /**
@@ -21,10 +19,6 @@ public interface User extends Entity {
 	public UserProfile getUserProfile();
 
 	public void setUserProfile(UserProfile userProfile);
-
-	public Set<? extends Game> getGames();
-
-	public void setGames(Set<? extends Game> games);
 
 	public String getEmail();
 

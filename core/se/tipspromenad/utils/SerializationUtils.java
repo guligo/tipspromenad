@@ -1,6 +1,7 @@
 package se.tipspromenad.utils;
 
 import java.io.Reader;
+import java.io.StringReader;
 
 import org.apache.log4j.Logger;
 
@@ -24,6 +25,10 @@ public class SerializationUtils {
 	 */
 	public static <T> T deserialize(Reader src, Class<T> clazz) {
 		return deserialize(TYPE_JSON, src, clazz);
+	}
+	
+	public static <T> T deserialize(String type, String src, Class<T> clazz) {
+		return deserialize(type, new StringReader(src),clazz);
 	}
 	
 	public static <T> T deserialize(String type, Reader src, Class<T> clazz) {

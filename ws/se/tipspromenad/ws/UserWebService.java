@@ -45,6 +45,7 @@ public class UserWebService {
 		PASSWORD_TOO_SHORT,
 		PASSWORD_TOO_LONG,
 		PASSWORD_WRONG,
+		DUBLICATED_USER,
 		UNEXPECTED_ERROR
 		
 	}
@@ -58,14 +59,18 @@ public class UserWebService {
 	public @ResponseBody UserRegistrationResponseBean register(UserRegistrationRequestBean request, HttpServletRequest http) throws IOException {
 		UserRegistrationResponseBean response = new UserRegistrationResponseBean();
 		try {
-			request = SerializationUtils.deserialize(http.getContentType(), http.getReader(), UserRegistrationRequestBean.class);
+			request = SerializationUtils.deserialize(http.getContentType(), http.getReader().readLine(), UserRegistrationRequestBean.class);
 			
 			// processing
 			ValidationUtils.validate(request.getUsername(), User.MIN_USERNAME_LENGTH, User.MAX_USERNAME_LENGTH, response.getErrorCodes(), ErrorCode.USERNAME_EMPTY.name(), ErrorCode.USERNAME_TOO_SHORT.name(), ErrorCode.USERNAME_TOO_LONG.name());
 			ValidationUtils.validate(request.getEmail(), User.MIN_EMAIL_LENGTH, User.MAX_EMAIL_LENGTH, response.getErrorCodes(), ErrorCode.EMAIL_EMPTY.name(), ErrorCode.EMAIL_TOO_SHORT.name(), ErrorCode.EMAIL_TOO_LONG.name());
 			ValidationUtils.validate(request.getPassword(), User.MIN_PASSWORD_LENGTH, User.MAX_PASSWORD_LENGTH, response.getErrorCodes(), ErrorCode.PASSWORD_EMPTY.name(), ErrorCode.PASSWORD_TOO_SHORT.name(), ErrorCode.PASSWORD_TOO_LONG.name());
 			if (!response.hasErrors()) {
-				response.setUserId(userService.createUser(request.getEmail(), request.getUsername(), request.getPassword()));
+				if (userService.getUserByUsername(request.getUsername()) != null || userService.getUserByEmail(request.getEmail()) != null) {
+					response.addErrorCode(ErrorCode.DUBLICATED_USER.name());
+				} else {
+					response.setUserId(userService.createUser(request.getEmail(), request.getUsername(), request.getPassword()));
+				}
 			}
 		} catch (Exception e) {
 			response.addErrorCode(ErrorCode.UNEXPECTED_ERROR.name());
@@ -79,7 +84,7 @@ public class UserWebService {
 	public @ResponseBody UserLoginResponseBean login(UserLoginRequestBean request, HttpServletRequest http) throws IOException {
 		UserLoginResponseBean response = new UserLoginResponseBean();
 		try {
-			request = SerializationUtils.deserialize(http.getContentType(), http.getReader(), UserLoginRequestBean.class);
+			request = SerializationUtils.deserialize(http.getContentType(), http.getReader().readLine(), UserLoginRequestBean.class);
 			
 			// processing
 			User user = userService.getUserByEmail(request.getEmail());

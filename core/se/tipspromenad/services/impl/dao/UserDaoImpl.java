@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import se.tipspromenad.entities.User;
 import se.tipspromenad.entities.UserProfile;
@@ -17,6 +18,7 @@ import se.tipspromenad.services.dao.UserDao;
  * @author guligo
  */
 @Component
+@Transactional
 public class UserDaoImpl implements UserDao {
 	
 	@Autowired
