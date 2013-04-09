@@ -1,4 +1,4 @@
-package se.tipspromenad.services.impl.dao;
+package se.tipspromenad.services.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

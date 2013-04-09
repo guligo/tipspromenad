@@ -2,23 +2,46 @@ package se.tipspromenad.services.dao;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
 import se.tipspromenad.entities.Game;
+import se.tipspromenad.services.dao.GameDao;
 
 /**
- * Interface of data-access-object layer component for {@link Game}.
+ * See {@link GameDao}.
  * 
  * @author guligo
  */
-public interface GameDao {
+@Component
+@Transactional
+public class GameDao {
 
-	public Game getGame(Long id);
+	@Autowired
+	private CommonDao commonDao;
 
-	public List<? extends Game> getGamesByUsername(String username);
+	public Game getGame(Long id) {
+		return (Game) commonDao.getEntity(Game.class, id);
+	}
 
-	public Long createGame(Game game);
+	@SuppressWarnings("unchecked")
+	public List<Game> getGamesByUsername(String username) {
+		return commonDao.getEntityManager().createQuery("from Game g where g.creator.username = :username")
+			.setParameter("username", username)
+			.getResultList();
+	}
 
-	public void updateGame(Game game);
+	public Long createGame(Game game) {
+		return commonDao.createEntity(game);
+	}
 
-	public void removeGame(Long id);
+	public void updateGame(Game game) {
+		commonDao.updateEntity(game);
+	}
+
+	public void removeGame(Long id) {
+		commonDao.removeEntity(Game.class, id);
+	}
 
 }

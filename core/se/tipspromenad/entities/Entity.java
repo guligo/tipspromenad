@@ -1,14 +1,29 @@
 package se.tipspromenad.entities;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+import se.tipspromenad.entities.Entity;
+
 /**
- * Represents entity.
+ * Represents database entity.
  * 
  * @author guligo
  */
-public interface Entity {
+@MappedSuperclass
+public abstract class Entity {
 	
-	public Long getId();
+	@Id
+	@GeneratedValue
+	private Long id;
 	
-	public void setId(Long id);
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 }

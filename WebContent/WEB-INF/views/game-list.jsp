@@ -5,8 +5,8 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		gameListController.init(
-			'<%= Constants.URL.GAME_LIST_GET_LIST %>',
-			'<%= Constants.URL.GAME_REMOVE %>',
+			'<%= Constants.URL.GAME_LIST_ACTION %>',
+			'<%= Constants.URL.GAME_REMOVE_ACTION %>',
 			$('#gameListContainer')
 		);
 	});

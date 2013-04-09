@@ -23,13 +23,19 @@ public class Constants {
 		public final static String HOME_PAGE = "home";
 
 		public final static String GAME_LIST_PAGE = "games";
-		public final static String GAME_LIST_GET_LIST = "games/list";
-		
-		public final static String GAME_PAGE = "game";
-		public final static String GAME_GET = "game/get";
-		public final static String GAME_SAVE = "game/save";
-		public final static String GAME_REMOVE = "game/remove";
-		
+
+		public final static String GAME_PAGE          = "game";
+		public final static String GAME_GET_ACTION    = "game/get/{id}";
+		public final static String GAME_LIST_ACTION   = "game/list";
+		public final static String GAME_SAVE_ACTION   = "game/save";
+		public final static String GAME_REMOVE_ACTION = "game/remove/{id}";
+
+		public final static String QUESTION_LIST_PAGE     = "questions";
+		public final static String QUESTION_GET_ACTION    = "question/get/{id}";
+		public final static String QUESTION_LIST_ACTION   = "question/list";
+		public final static String QUESTION_SAVE_ACTION   = "question/save";
+		public final static String QUESTION_REMOVE_ACTION = "question/remove/{id}";
+
 	}
 
 	/**
@@ -44,6 +50,8 @@ public class Constants {
 		public final static String GAME_LIST = "game-list";
 		
 		public final static String GAME = "game";
+		
+		public final static String QUESTION_LIST = "question-list";
 		
 	}
 

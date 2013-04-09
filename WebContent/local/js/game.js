@@ -3,9 +3,9 @@ var gameController = function() {
 	var GAME_SAVE_ACTION_URL = null;
 	var GAME_LIST_PAGE_URL = null;
 	
-	var map = null;
-	var markers = null;
-	var id = null;
+	var _map = null;
+	var _markers = null;
+	var _id = null;
 	
 	// initialize Google map
 	function _initMap(container) {
@@ -14,10 +14,10 @@ var gameController = function() {
 			zoom: 8,
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		};
-		map = new google.maps.Map(container, options);
-		markers = [];
+		_map = new google.maps.Map(container, options);
+		_markers = [];
 		
-		google.maps.event.addListener(map, 'click', function(event) {
+		google.maps.event.addListener(_map, 'click', function(event) {
 			_placeMarker(event.latLng);
 		});
 	}
@@ -44,44 +44,64 @@ var gameController = function() {
 		google.maps.event.addListener(marker, 'click', function() {
 			infoWin.open(map, marker);
 		});
-		markers.push(marker);
-		marker.setMap(map);
+		_markers.push(marker);
+		marker.setMap(_map);
 	}
 	
 	// removes marker from Google map
 	function _removeMarker(markerId) {
-		if (markerId < markers.length) {
-			markers[markerId].setMap(null);
+		if (markerId < _markers.length) {
+			_markers[markerId].setMap(null);
 		}
 	}
 	
-	function _saveGame(id, name) {
+	function _saveGame() {
+		commonUtils.hideError($('#gameName'));
+		commonUtils.hideError($('#gameDate'));
 		$.ajax({
 			url: GAME_SAVE_ACTION_URL,
-			type: 'POST',
-			data: {
-				id: id,
-				name: name
-			},
-		    success: function(response) {				    	
-		    	if (response.errorCodes == null || response.errorCodes.length == 0) {
+			type: 'post',
+		    contentType: 'application/json',
+		    dataType: 'json',
+			data: JSON.stringify({
+				id: _id,
+				name: $('#gameName').val(),
+				date: $('#gameDate').val()
+			}),
+		    success: function(response) {
+		    	if (response.errors == null || response.errors.length == 0) {
 		    		window.location = GAME_LIST_PAGE_URL;
+		    	} else {
+		    		if ($.inArray('NAME_EMPTY', response.errors) > -1) {
+		    			commonUtils.showError($('#gameName'), 'Name empty');
+		    		} if ($.inArray('NAME_TOO_SHORT', response.errors) > -1) {
+		    			commonUtils.showError($('#gameName'), 'Name too short');
+		    		} else if ($.inArray('NAME_TOO_LONG', response.errors) > -1) {
+		    			commonUtils.showError($('#gameName'), 'Name too long');
+		    		}
+		    		
+		    		if ($.inArray('DATE_EMPTY', response.errors) > -1) {
+		    			commonUtils.showError($('#gameDate'), 'Date may not be empty');
+		    		} else if ($.inArray('DATE_WRONG_FORMAT', response.errors) > -1) {
+		    			commonUtils.showError($('#gameDate'), 'Date in wrong format');
+		    		}
 		    	}
 			}
 		});
 	}
 	
 	return {
-		init: function(url1, url2, container) {
+		init: function(url1, url2) {
 			GAME_SAVE_ACTION_URL = url1;
 			GAME_LIST_PAGE_URL = url2;
-			_initMap(container);
+			$('#gameDate').datepicker();
+			_initMap($('#mapContainer')[0]);
 		},
 		removeMarker: function(markerId) {
 			_removeMarker(markerId);
 		},
-		saveGame: function(name) {
-			_saveGame(id, name);
+		saveGame: function() {
+			_saveGame(_id);
 		}
 	};
 	

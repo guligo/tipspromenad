@@ -33,7 +33,7 @@ public class SerializationUtils {
 	
 	public static <T> T deserialize(String type, Reader src, Class<T> clazz) {
 		try {
-			if (TYPE_JSON.equals(type)) {
+			if (type.contains(TYPE_JSON)) {
 				return mapper.readValue(src, clazz);
 			}
 		} catch (Exception e) {

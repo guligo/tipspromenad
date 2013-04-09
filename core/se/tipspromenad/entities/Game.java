@@ -1,31 +1,80 @@
 package se.tipspromenad.entities;
 
 import java.util.Date;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+import javax.persistence.Table;
+
+import se.tipspromenad.entities.Game;
+import se.tipspromenad.entities.User;
 
 /**
- * Represents game.
+ * Database entity for {@link Game}.
  * 
  * @author guligo
  */
-public interface Game extends Entity {
+@Entity
+@Table(name = "games")
+public class Game extends se.tipspromenad.entities.Entity {
 
-	public final static int MIN_NAME_LENGTH = 5;
-	public final static int MAX_NAME_LENGTH = 50;
+	public static final int MIN_NAME_LENGTH = 5;
+	public static final int MAX_NAME_LENGTH = 50;
 
-	public User getCreator();
+	@ManyToOne
+	private User creator;
+	@Column(nullable = false)
+	private Date creationDate;
+	@Column(nullable = false, length = MAX_NAME_LENGTH)
+	private String name;
+	@Column(nullable = false)
+	private Date date;
+	@OrderBy("id")
+	@OneToMany(mappedBy = "game")
+	private Set<Question> questions;
 
-	public void setCreator(User user);
+	public User getCreator() {
+		return creator;
+	}
 
-	public String getName();
+	public void setCreator(User creator) {
+		this.creator = (User) creator;
+	}
 
-	public void setName(String name);
+	public Date getCreationDate() {
+		return creationDate;
+	}
 
-	public Date getCreationDate();
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
 
-	public void setCreationDate(Date date);
+	public String getName() {
+		return name;
+	}
 
-	// public Set<? extends Point> getPoints();
+	public void setName(String name) {
+		this.name = name;
+	}
 
-	// public void setPoints(Set<? extends Point> points);
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public Set<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(Set<Question> questions) {
+		this.questions = questions;
+	}
 
 }

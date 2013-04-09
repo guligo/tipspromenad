@@ -3,28 +3,76 @@ package se.tipspromenad.services;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
 import se.tipspromenad.entities.User;
 import se.tipspromenad.entities.UserProfile;
 import se.tipspromenad.entities.enums.Gender;
+import se.tipspromenad.entities.enums.UserRole;
+import se.tipspromenad.services.UserService;
+import se.tipspromenad.services.dao.UserDao;
+import se.tipspromenad.utils.SecurityUtils;
 
 /**
- * Interface of service layer component that provides business logic for
- * {@link User} and {@link UserProfile}.
+ * See {@link UserService}.
  * 
  * @author guligo
  */
-public interface UserService {
+@Component
+@Transactional
+public class UserService {
 
-	public User getUserByUsername(String username);
+	@SuppressWarnings("unused")
+	private final static Logger logger = Logger.getLogger(UserService.class);
 
-	public User getUserByEmail(String email);
+	@Autowired
+	private UserDao userDao;
 
-	public UserProfile getUserProfileByUsername(String username);
+	public User getUserByUsername(String username) {
+		return userDao.getUserByUsername(username);
+	}
 
-	public Long createUser(String email, String username, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException;
+	public User getUserByEmail(String email) {
+		return userDao.getUserByEmail(email);
+	}
 
-	public void updateUserProfile(String username, String firstName, String lastName, Gender gender);
+	public UserProfile getUserProfileByUsername(String username) {
+		return userDao.getUserProfileByUsername(username);
+	}
 
-	public void removeUser(Long id);
+	public Long createUser(String email, String username, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		User user = new User();
+		user.setEmail(email);
+		user.setUsername(username);
+		user.setPassword(SecurityUtils.toBase64(SecurityUtils.toMD5(password)));
+		user.setRole(UserRole.ROLE_SIMPLE_USER);
+		user.setEnabled(true);
+		return userDao.createUser(user);
+	}
+
+	public void updateUserProfile(String username, String firstName, String lastName, Gender gender) {
+		UserProfile userProfile = userDao.getUserProfileByUsername(username);
+		if (userProfile == null) {
+			userProfile = new UserProfile();
+			userProfile.setUser(userDao.getUserByUsername(username));
+			userProfile.setFirstName(firstName);
+			userProfile.setLastName(lastName);
+			userProfile.setGender(gender);
+			userDao.createUserProfile(userProfile);
+		} else {
+			userProfile.setUser(userDao.getUserByUsername(username));
+			userProfile.setFirstName(firstName);
+			userProfile.setLastName(lastName);
+			userProfile.setGender(gender);
+			userDao.updateUserProfile(userProfile);
+		}
+	}
+
+	public void removeUser(Long id) {
+		userDao.removeUser(id);
+	}
 
 }

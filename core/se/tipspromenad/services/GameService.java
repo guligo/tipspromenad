@@ -1,24 +1,55 @@
 package se.tipspromenad.services;
 
+import java.util.Date;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import se.tipspromenad.entities.Game;
 import se.tipspromenad.entities.User;
+import se.tipspromenad.services.GameService;
+import se.tipspromenad.services.dao.GameDao;
 
 /**
- * Interface of service layer component that provides business logic for
- * {@link Game}.
+ * See {@link GameService}.
  * 
  * @author guligo
  */
-public interface GameService {
+@Component
+public class GameService {
 
-	public Game getGame(Long id);
+	@Autowired
+	private GameDao gameDao;
 
-	public List<Game> getGamesByUsername(String username);
+	public Game getGame(Long id) {
+		return gameDao.getGame(id);
+	}
 
-	public Long saveGame(Long id, String name, User creator);
+	@SuppressWarnings("unchecked")
+	public List<Game> getGamesByUsername(String username) {
+		return (List<Game>) gameDao.getGamesByUsername(username);
+	}
+
+	public Long saveGame(Long id, User creator, String name, Date date) {
+		if (id == null) {
+			Game game = new Game();
+			game.setCreator(creator);
+			game.setCreationDate(new Date());
+			game.setName(name);
+			game.setDate(date);
+			return gameDao.createGame(game);
+		} else {
+			Game game = gameDao.getGame(id);
+			game.setName(name);
+			game.setDate(date);
+			gameDao.updateGame(game);
+			return id;
+		}
+	}
 	
-	public void removeGame(Long id);
+	public void removeGame(Long id) {
+		gameDao.removeGame(id);
+	}
 	
 }

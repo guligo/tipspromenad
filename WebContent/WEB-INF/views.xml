@@ -25,9 +25,15 @@
 		<put-attribute name="content" value="/WEB-INF/views/game-list.jsp" />
 	</definition>
 	
+	<definition name="question-list" extends="main-template">
+		<put-attribute name="tab" value="2" />
+		<put-attribute name="title" value="Tipspromenad | Game | Define Questions" />
+		<put-attribute name="content" value="/WEB-INF/views/question-list.jsp" />
+	</definition>
+	
 	<definition name="game" extends="main-template">
 		<put-attribute name="tab" value="2" />
-		<put-attribute name="title" value="Tipspromenad | Game" />
+		<put-attribute name="title" value="Tipspromenad | Game | Define Game" />
 		<put-attribute name="content" value="/WEB-INF/views/game.jsp" />
 	</definition>
 	<!-- END! views -->

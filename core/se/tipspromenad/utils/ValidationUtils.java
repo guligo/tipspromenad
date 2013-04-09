@@ -1,5 +1,6 @@
 package se.tipspromenad.utils;
 
+
 import java.util.List;
 
 import se.tipspromenad.beans.DataTransferBean;
@@ -21,6 +22,7 @@ public class ValidationUtils {
 			errorCodes.add(errorCodeTooLong);
 		}
 	}
+	
 	
 	/**
 	 * Performs some basic string validation on field of

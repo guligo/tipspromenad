@@ -25,7 +25,7 @@ var gameListController = function() {
 			html += '<thead>';
 				html += '<tr>';
 					html += '<th>Name</th>';
-					html += '<th>Creation date</th>';
+					html += '<th>Date</th>';
 					html += '<th>Action</th>';
 				html += '</tr>';
 			html += '</thead>';
@@ -33,7 +33,7 @@ var gameListController = function() {
 			for (index in games) {
 				html += '<tr>'; 
 					html += '<td>' + games[index].name + '</td>';
-					html += '<td>' + commonUtils.formatDate(games[index].creationDate) + '</td>';
+					html += '<td>' + commonUtils.formatDateShort(games[index].date) + '</td>';
 					html += '<td>';
 						html += '<a href="game"><i class="icon-edit"> </i></a>&nbsp';
 						html += '<a href="javascript:gameListController.removeGame(' + games[index].id + ');"><i class="icon-remove"> </i></a>';
@@ -49,11 +49,8 @@ var gameListController = function() {
 	
 	function _removeGame(id, callback) {
 		$.ajax({
-			type: 'POST',
-			url: GAME_LIST_REMOVE_ACTION_URL,
-			data: {
-				id: id
-			},
+			type: 'DELETE',
+			url: GAME_LIST_REMOVE_ACTION_URL.replace('{id}', id),
 			success: function() {
 				if (callback != null) {
 					callback();
