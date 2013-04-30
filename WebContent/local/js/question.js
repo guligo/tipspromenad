@@ -3,12 +3,19 @@
  */
 var questionController = function() {
 	
+	var QUESTION_SAVE_LIST_ACTION = null;
+	
 	var _questions = null;
 	
 	function _addQuestion(callback) {
-		_questions.push({text: 'Abrakadabra?'});
-		if (callback != null) {
-			callback();
+		commonUtils.hideError($('#questionText'));
+		if ($('#questionText').val() == null || $('#questionText').val() == '') {
+			commonUtils.showError($('#questionText'), 'Question may not be empty');
+		} else {
+			_questions.push({text: $('#questionText').val()});
+			if (callback != null) {
+				callback();
+			}
 		}
 	}
 	
@@ -24,25 +31,48 @@ var questionController = function() {
 		if (_questions != null) {
 			for (var i = 0; i < _questions.length; i++) {
 				html = '<div>';
-					html += i + ' ' + _questions[i].text + ' <a href="javascript:questionController.removeQuestion(' + i + ');">[-]</a>';
+					html += '<a href="javascript:questionController.removeQuestion(' + i + ');">[-]</a> ' + (i + 1) + '. ' + _questions[i].text;
 				html += '<div>';
 				$('#questionContainer').append(html);
 			}
 		}
 	}
 	
+	function _saveQuestions(gameId, questions) {
+		if (gameId != null) {
+			$.ajax({
+				url: QUESTION_SAVE_LIST_ACTION,
+				type: 'post',
+			    contentType: 'application/json',
+			    dataType: 'json',
+				data: JSON.stringify({
+					gameId: gameId,
+					questions: questions
+				}),
+			    success: function(response) {
+			    	alert(response);
+				}
+			});
+		}
+	}
+	
 	return {
-		init: function() {
+		init: function(url1) {
+			QUESTION_SAVE_LIST_ACTION = url1;
 			_questions = [];
 		},
 		addQuestion: function() {
-			_addQuestion(_renderQuestions);
+			var callback = function() {
+				$('#questionText').val('');
+				_renderQuestions();
+			};
+			_addQuestion(callback);
 		},
 		removeQuestion: function(index) {
 			_removeQuestion(index, _renderQuestions);
 		},
-		saveQuestions: function() {
-			alert('Save questions!');
+		saveQuestions: function(gameId) {
+			_saveQuestions(gameId, _questions);
 		}
 	};
 	

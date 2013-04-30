@@ -70,7 +70,7 @@ var gameController = function() {
 			}),
 		    success: function(response) {
 		    	if (response.errors == null || response.errors.length == 0) {
-		    		window.location = GAME_LIST_PAGE_URL;
+		    		_id = response.id;
 		    	} else {
 		    		if ($.inArray('NAME_EMPTY', response.errors) > -1) {
 		    			commonUtils.showError($('#gameName'), 'Name empty');
@@ -102,6 +102,9 @@ var gameController = function() {
 		},
 		saveGame: function() {
 			_saveGame(_id);
+		},
+		getGameId: function() {
+			return _id;
 		}
 	};
 	

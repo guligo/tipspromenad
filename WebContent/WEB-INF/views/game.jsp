@@ -22,7 +22,9 @@
 			'<%= Constants.URL.GAME_SAVE_ACTION %>',
 			'<%= Constants.URL.GAME_LIST_PAGE %>'
 		);
-		questionController.init();
+		questionController.init(
+			'<%= Constants.URL.QUESTION_SAVE_LIST_ACTION %>'
+		);
 	});
 </script>
 
@@ -49,14 +51,19 @@
 
 <form id="questionForm" class="form-horizontal">
 	<div class="control-group">
+		<label for="questionText" class="control-label">Question</label>
+		<div class="controls">
+			<textarea id="questionText" placeholder="Enter question here..."></textarea>
+		</div>
+	</div>
+	<div class="control-group">
 		<div id="questionContainer" class="controls">
-			
 		</div>
 	</div>
 	<div class="control-group">
 		<div class="controls">
 			<a href="javascript:questionController.addQuestion();" class="btn">Add Question</a>
-			<a href="javascript:questionController.saveQuestions();" class="btn">Save</a>
+			<a href="javascript:questionController.saveQuestions(gameController.getGameId());" class="btn">Save</a>
 		</div>
 	</div>
 </form>
