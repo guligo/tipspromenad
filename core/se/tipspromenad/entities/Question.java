@@ -21,7 +21,15 @@ public class Question extends se.tipspromenad.entities.Entity {
 	private Game game;
 	@Column(nullable = false, length = MAX_TEXT_LENGTH)
 	private String text;
-
+	
+	public Question() {
+		// for serialization purpose
+	}
+	
+	public Question(Long id) {
+		setId(id);
+	}
+	
 	public Game getGame() {
 		return game;
 	}

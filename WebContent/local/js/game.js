@@ -55,7 +55,7 @@ var gameController = function() {
 		}
 	}
 	
-	function _saveGame() {
+	function _saveGame(callback) {
 		commonUtils.hideError($('#gameName'));
 		commonUtils.hideError($('#gameDate'));
 		$.ajax({
@@ -71,6 +71,9 @@ var gameController = function() {
 		    success: function(response) {
 		    	if (response.errors == null || response.errors.length == 0) {
 		    		_id = response.id;
+		    		if (callback != null) {
+		    			callback();
+		    		}
 		    	} else {
 		    		if ($.inArray('NAME_EMPTY', response.errors) > -1) {
 		    			commonUtils.showError($('#gameName'), 'Name empty');
@@ -95,13 +98,15 @@ var gameController = function() {
 			GAME_SAVE_ACTION_URL = url1;
 			GAME_LIST_PAGE_URL = url2;
 			$('#gameDate').datepicker();
+		},
+		initMap: function() {
 			_initMap($('#mapContainer')[0]);
 		},
 		removeMarker: function(markerId) {
 			_removeMarker(markerId);
 		},
-		saveGame: function() {
-			_saveGame(_id);
+		saveGame: function(callback) {
+			_saveGame(_id, callback);
 		},
 		getGameId: function() {
 			return _id;

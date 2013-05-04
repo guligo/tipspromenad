@@ -31,7 +31,7 @@ public class GameDao {
 			.setParameter("username", username)
 			.getResultList();
 	}
-
+	
 	public Long createGame(Game game) {
 		return commonDao.createEntity(game);
 	}

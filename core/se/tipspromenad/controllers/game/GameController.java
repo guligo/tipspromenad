@@ -52,9 +52,14 @@ public class GameController {
 		gameDateValidator = new BasicDateValidator(DATE_FORMATTER, GameError.DATE_EMPTY, GameError.DATE_WRONG_FORMAT);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.GAME_PAGE)
-	public String showGamePage() {
-		return Constants.Views.GAME;
+	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.GAME_LIST_PAGE)
+	public String showGameListPage() {
+		return Constants.Views.GAME_LIST;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.GAME_SAVE_PAGE)
+	public String showGameSavePage() {
+		return Constants.Views.GAME_SAVE;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.GAME_GET_ACTION)

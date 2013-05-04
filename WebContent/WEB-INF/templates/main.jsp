@@ -1,3 +1,4 @@
+<%@page import="se.tipspromenad.globals.Constants"%>
 <%@ include file="../commons/commons.jsp" %>
 
 <!DOCTYPE html>
@@ -8,7 +9,7 @@
 		</title>
 		
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 		<meta name="description" content="tipspromenad.se">
 		<meta name="author" content="diky pig">
 		
@@ -61,31 +62,42 @@
 								<tiles:getAsString name="tab" />
 							</c:set>
 							<ul class="nav">
-								<li class="${tab == 2 ? 'active': ''}">
-									<a href="games">Games</a>
-								</li>
 								<li class="${tab == 1 ? 'active': ''}">
-									<a data-toggle="dropdown" href="#">
-										Home
+									<a href="<%= Constants.URL.HOME_PAGE %>">Home</a>
+								</li>
+								<li>
+									<a href="#">Community</a>
+								</li>
+								<li>
+									<a href="#">Game</a>
+								</li>
+								<li class="dropdown ${tab == 2 ? 'active': ''}">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+										My Tipspromenad <b class="caret"></b>
 									</a>
-									<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+									<ul class="dropdown-menu">
     									<li>
-    										<a tabindex="-1">
-    											Something
+    										<a href="#">
+    											User Profile
     										</a>
     									</li>
     									<li>
-    										<a tabindex="-1">
-    											Something
+    										<a href="#">
+    											Event Hub
     										</a>
     									</li>
-    									<li class="divider"></li>
     									<li>
-    										<a tabindex="-1">
-    											Something
+    										<a href="<%= Constants.URL.GAME_LIST_PAGE %>">
+    											Join, Edit & Create
     										</a>
     									</li>
     								</ul>
+								</li>
+								<li>
+									<a href="#">Store</a>
+								</li>
+								<li>
+									<a href="#">Download Mobile App</a>
 								</li>
 							</ul>
 							<ul class="nav" style="float: right">

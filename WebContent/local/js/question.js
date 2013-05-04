@@ -4,6 +4,7 @@
 var questionController = function() {
 	
 	var QUESTION_SAVE_LIST_ACTION = null;
+	var QUESTION_GET_LIST_ACTION = null;
 	
 	var _questions = null;
 	
@@ -50,15 +51,33 @@ var questionController = function() {
 					questions: questions
 				}),
 			    success: function(response) {
-			    	alert(response);
+			    	alert('Questions successfully saved');
+				}
+			});
+		}
+	}
+	
+	function _getQuestions(gameId) {
+		if (gameId != null) {
+			$.ajax({
+				url: QUESTION_GET_LIST_ACTION,
+				type: 'get',
+			    contentType: 'application/json',
+			    dataType: 'json',
+				data: {
+					gameId: _gameId,
+				},
+			    success: function(response) {
+			    	
 				}
 			});
 		}
 	}
 	
 	return {
-		init: function(url1) {
+		init: function(url1, url2) {
 			QUESTION_SAVE_LIST_ACTION = url1;
+			QUESTION_GET_LIST_ACTION = url2;
 			_questions = [];
 		},
 		addQuestion: function() {
@@ -73,6 +92,9 @@ var questionController = function() {
 		},
 		saveQuestions: function(gameId) {
 			_saveQuestions(gameId, _questions);
+		},
+		getQuestions: function(gameId) {
+			return _getQuestions(gameId);
 		}
 	};
 	

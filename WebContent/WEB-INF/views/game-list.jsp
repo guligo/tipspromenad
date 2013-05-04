@@ -14,6 +14,6 @@
 
 <!-- html -->
 <form>
-	<a class="btn btn-primary" href="game">New Game</a>
+	<a class="btn btn-primary" href="<%= Constants.URL.GAME_SAVE_PAGE %>">New Game</a>
 </form>
 <div id="gameListContainer"></div>
