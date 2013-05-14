@@ -14,8 +14,6 @@
 
 <!-- scripts -->
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaLIt-WZIIb1WHNklEUjC6wOMUBXPwDOQ&sensor=true"></script>
-<script type="text/javascript" src="local/js/game.js"></script>
-<script type="text/javascript" src="local/js/question.js"></script>
 <script type="text/javascript">
 	var tabs  = ['questionsTab', 'mapTab', 'friendsTab', 'finishTab'];
 	var panes = ['questionsTabContainer', 'mapTabContainer', 'friendsTabContainer', 'finishTabContainer'];
@@ -46,17 +44,14 @@
 			'<%= Constants.URL.GAME_SAVE_ACTION %>',
 			'<%= Constants.URL.GAME_LIST_PAGE %>'
 		);
-		questionController.init(
-			'<%= Constants.URL.QUESTION_SAVE_LIST_ACTION %>'
-		);
 		
 		lockTabs();
 		var mapInitialized = false;
 		$('#mapTab a').bind('click', function (e) {
-			if (!mapInitialized) {
-				gameController.initMap();
-				mapInitialized = true;
-			}
+			mapController.initMap();
+			questionController.getQuestions(gameController.getGameId(), function(questions) {
+				mapController.renderQuestions(questions);
+			});
 		});
 	});
 </script>
@@ -86,7 +81,8 @@
 	</ul>
 	<div class="tab-content">
 		<div id="questionsTabContainer" class="tab-pane active">
-			<%@ include file="../partials/game-save/info.jsp" %>
+			<%@ include file="../partials/game-save/game.jsp" %>
+			<%@ include file="../partials/game-save/questions.jsp" %>
 		</div>
 		<div id="mapTabContainer" class="tab-pane">
 			<%@ include file="../partials/game-save/map.jsp" %>
@@ -99,4 +95,6 @@
 		</div>
 	</div>
 </div>
+<!--
 <a href="javascript:unlockNextTab();" class="btn">Next</a>
+-->

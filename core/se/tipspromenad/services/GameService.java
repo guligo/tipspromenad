@@ -3,6 +3,7 @@ package se.tipspromenad.services;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +22,9 @@ import se.tipspromenad.services.dao.PlacemarkDao;
  */
 @Component
 public class GameService {
-
+	
+	private static Logger logger = Logger.getLogger(GameService.class);
+	
 	@Autowired
 	private GameDao gameDao;
 	@Autowired
@@ -36,6 +39,8 @@ public class GameService {
 	}
 
 	public Long saveGame(Long id, User creator, String name, Date date) {
+		logger.debug("Saving game with id = " + id);
+		
 		if (id == null) {
 			Game game = new Game();
 			game.setCreator(creator);

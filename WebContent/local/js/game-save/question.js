@@ -39,7 +39,7 @@ var questionController = function() {
 		}
 	}
 	
-	function _saveQuestions(gameId, questions) {
+	function _saveQuestions(gameId, callback) {
 		if (gameId != null) {
 			$.ajax({
 				url: QUESTION_SAVE_LIST_ACTION,
@@ -48,27 +48,31 @@ var questionController = function() {
 			    dataType: 'json',
 				data: JSON.stringify({
 					gameId: gameId,
-					questions: questions
+					questions: _questions
 				}),
 			    success: function(response) {
-			    	alert('Questions successfully saved');
+			    	if (response != null) {
+			    		_questions = response;
+			    	}
+			    	if (callback != null) {
+			    		callback();
+			    	}
 				}
 			});
 		}
 	}
 	
-	function _getQuestions(gameId) {
+	function _getQuestions(gameId, callback) {
 		if (gameId != null) {
 			$.ajax({
-				url: QUESTION_GET_LIST_ACTION,
+				url: QUESTION_GET_LIST_ACTION.replace('{gameId}', gameId),
 				type: 'get',
 			    contentType: 'application/json',
 			    dataType: 'json',
-				data: {
-					gameId: _gameId,
-				},
 			    success: function(response) {
-			    	
+			    	if (callback != null) {
+			    		callback(response);
+			    	}
 				}
 			});
 		}
@@ -90,11 +94,11 @@ var questionController = function() {
 		removeQuestion: function(index) {
 			_removeQuestion(index, _renderQuestions);
 		},
-		saveQuestions: function(gameId) {
-			_saveQuestions(gameId, _questions);
+		saveQuestions: function(gameId, callback) {
+			_saveQuestions(gameId, callback);
 		},
-		getQuestions: function(gameId) {
-			return _getQuestions(gameId);
+		getQuestions: function(gameId, callback) {
+			return _getQuestions(gameId, callback);
 		}
 	};
 	

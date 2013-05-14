@@ -1,15 +1,19 @@
-package se.tipspromenad.ws.beans;
+package se.tipspromenad.controllers.user;
 
-public class UserLoginRequestBean {
+import se.tipspromenad.controllers.RequestBean;
+
+public class UserLoginRequest extends RequestBean {
+
+	private static final long serialVersionUID = 1L;
 
 	private String email;
 	private String password;
 
-	public UserLoginRequestBean() {
+	public UserLoginRequest() {
 		// empty
 	}
 
-	public UserLoginRequestBean(String email, String password) {
+	public UserLoginRequest(String email, String password) {
 		this.email = email;
 		this.password = password;
 	}

@@ -16,6 +16,7 @@ public class Constants {
 		public final static String LOGIN_GET_SUCCESS_RESULT_ACTION = "login/success";
 		public final static String LOGIN_GET_FAIL_RESULT_ACTION = "login/fail";
 		
+		public final static String USER_LOGIN_ACTION = "user/login";
 		public final static String USER_REGISTRATION_ACTION = "user/register";
 		public final static String USER_PROFILE_GET_ACTION = "user/get-profile";
 		public final static String USER_PROFILE_UPDATE_ACTION = "user/update-profile";
@@ -29,11 +30,12 @@ public class Constants {
 		public final static String GAME_SAVE_ACTION   = "game/save";
 		public final static String GAME_REMOVE_ACTION = "game/remove/{id}";
 		
-		public final static String QUESTION_GET_ACTION       = "question/get/{id}";
-		public final static String QUESTION_LIST_ACTION      = "question/list";
+		public final static String QUESTION_LIST_ACTION      = "question/list/{gameId}";
 		public final static String QUESTION_SAVE_ACTION      = "question/save";
 		public final static String QUESTION_SAVE_LIST_ACTION = "question/savelist";
 		public final static String QUESTION_REMOVE_ACTION    = "question/remove/{id}";
+		
+		public final static String PLACEMARK_SAVE_ACTION     = "placemark/save";
 		
 	}
 	
@@ -57,7 +59,6 @@ public class Constants {
 	 */
 	public static class WS {
 		
-		public final static String USER_LOGIN = "ws/users/login";
 		public final static String USER_REGISTER = "ws/users/register";
 		
 	}

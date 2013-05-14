@@ -1,8 +1,8 @@
-package se.tipspromenad.ws.beans;
+package se.tipspromenad.controllers.user;
 
 import org.codehaus.jackson.annotate.JsonWriteNullProperties;
 
-import se.tipspromenad.ws.UserWebService;
+import se.tipspromenad.controllers.ResponseBean;
 
 /**
  * See {@link UserWebService#register(UserRegistrationRequestBean, javax.servlet.http.HttpServletRequest)}.

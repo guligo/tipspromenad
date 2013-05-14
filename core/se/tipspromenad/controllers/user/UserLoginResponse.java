@@ -1,8 +1,8 @@
-package se.tipspromenad.ws.beans;
+package se.tipspromenad.controllers.user;
 
 import org.codehaus.jackson.annotate.JsonWriteNullProperties;
 
-import se.tipspromenad.ws.UserWebService;
+import se.tipspromenad.controllers.ResponseBean;
 
 /**
  * See {@link UserWebService#login(UserLoginRequestBean, javax.servlet.http.HttpServletRequest)}.
@@ -11,7 +11,7 @@ import se.tipspromenad.ws.UserWebService;
  */
 @SuppressWarnings("deprecation")
 @JsonWriteNullProperties(value = false)
-public class UserLoginResponseBean extends ResponseBean {
+public class UserLoginResponse extends ResponseBean {
 
 	private static final long serialVersionUID = 1L;
 

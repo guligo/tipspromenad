@@ -1,5 +1,7 @@
 package se.tipspromenad.controllers;
 
+import org.apache.log4j.Logger;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -8,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import se.tipspromenad.beans.DataTransferBean;
 import se.tipspromenad.globals.Constants;
 
-
 /**
  * MVC controller responsible for actions around authentication and authorization mechanisms.
  * 
@@ -16,6 +17,9 @@ import se.tipspromenad.globals.Constants;
  */
 @Controller
 public class LoginController {
+	
+	@SuppressWarnings("unused")
+	private final static Logger logger = Logger.getLogger(LoginController.class);
 	
 	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.LOGIN_PAGE)
 	public String showLoginPage() {

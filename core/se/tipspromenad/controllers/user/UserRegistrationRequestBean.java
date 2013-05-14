@@ -1,6 +1,6 @@
-package se.tipspromenad.ws.beans;
+package se.tipspromenad.controllers.user;
 
-import se.tipspromenad.ws.UserWebService;
+import se.tipspromenad.controllers.RequestBean;
 
 /**
  * See {@link UserWebService#register(UserRegistrationRequestBean, javax.servlet.http.HttpServletRequest)}.

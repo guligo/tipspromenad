@@ -5,10 +5,14 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 import se.tipspromenad.entities.Game;
 import se.tipspromenad.entities.User;
@@ -33,10 +37,19 @@ public class Game extends se.tipspromenad.entities.Entity {
 	private String name;
 	@Column(nullable = false)
 	private Date date;
+	@JsonIgnore
 	@OrderBy("id")
-	@OneToMany(mappedBy = "game")
+	@ManyToMany
 	private Set<Question> questions;
-
+	
+	public Game() {
+		// for serialization purpose
+	}
+	
+	public Game(Long id) {
+		setId(id);
+	}
+	
 	public User getCreator() {
 		return creator;
 	}

@@ -1,9 +1,14 @@
 package se.tipspromenad.entities;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  * Represents entity for questions.
@@ -13,12 +18,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "questions")
 public class Question extends se.tipspromenad.entities.Entity {
-
+	
 	public static final int MIN_TEXT_LENGTH = 5;
 	public static final int MAX_TEXT_LENGTH = 500;
-
-	@ManyToOne
-	private Game game;
+	
+	@JsonIgnore
+	@ManyToMany
+	private Set<Game> games;
 	@Column(nullable = false, length = MAX_TEXT_LENGTH)
 	private String text;
 	
@@ -30,20 +36,20 @@ public class Question extends se.tipspromenad.entities.Entity {
 		setId(id);
 	}
 	
-	public Game getGame() {
-		return game;
+	public Set<Game> getGames() {
+		return games;
 	}
-
-	public void setGame(Game game) {
-		this.game = game;
+	
+	public void setGames(Set<Game> games) {
+		this.games = games;
 	}
-
+	
 	public String getText() {
 		return text;
 	}
-
+	
 	public void setText(String text) {
 		this.text = text;
 	}
-
+	
 }

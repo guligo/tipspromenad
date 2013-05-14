@@ -18,6 +18,10 @@ public class PlacemarkDao {
 	@Autowired
 	private CommonDao commonDao;
 	
+	public Placemark getPlacemark(Long id) {
+		return (Placemark) commonDao.getEntity(Placemark.class, id);
+	}
+	
 	public void createPlacemark(Placemark placemark) {
 		commonDao.createEntity(placemark);
 	}

@@ -15,12 +15,22 @@ import javax.persistence.Table;
 public class Placemark extends se.tipspromenad.entities.Entity {
 	
 	@OneToOne
-	private Question question; 
+	private Game game;
+	@OneToOne
+	private Question question;
 	@Column(nullable = false)
 	private Double latitude;
 	@Column(nullable = false)
 	private Double longitude;
 	
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
 	public Question getQuestion() {
 		return question;
 	}

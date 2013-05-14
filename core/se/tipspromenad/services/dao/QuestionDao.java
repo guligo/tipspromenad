@@ -24,13 +24,21 @@ public class QuestionDao {
 		commonDao.createEntity(question);
 	}
 	
+	public Question getQuestion(Long id) {
+		return (Question) commonDao.getEntity(Question.class, id);
+	}
+	
+	public void updateQuestion(Question question) {
+		commonDao.updateEntity(question);
+	}
+	
 	public void removeQuestion(Long id) {
 		commonDao.removeEntity(Question.class, id);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Question> getQuestionsByGameId(Long gameId) {
-		return commonDao.getEntityManager().createQuery("from Question q where q.game.id = :gameId")
+		return commonDao.getEntityManager().createQuery("from Question q join q.games qg where qg.id = :gameId")
 			.setParameter("gameId", gameId)
 			.getResultList();
 	}

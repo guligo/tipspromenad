@@ -15,14 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
+import se.tipspromenad.controllers.user.UserRegistrationResponseBean;
 import se.tipspromenad.entities.User;
 import se.tipspromenad.globals.Constants;
 import se.tipspromenad.services.UserService;
 import se.tipspromenad.tests.controllers.AbstractControllerTest;
 import se.tipspromenad.tests.utils.Order;
-import se.tipspromenad.ws.UserWebService;
-import se.tipspromenad.ws.beans.UserLoginResponseBean;
-import se.tipspromenad.ws.beans.UserRegistrationResponseBean;
 
 /**
  * Tests {@link UserWebService}.

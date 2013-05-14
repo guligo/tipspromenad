@@ -1,12 +1,15 @@
-package se.tipspromenad.controllers;
+package se.tipspromenad.controllers.user;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,7 +23,9 @@ import se.tipspromenad.entities.enums.Gender;
 import se.tipspromenad.globals.Constants;
 import se.tipspromenad.security.UserWrapper;
 import se.tipspromenad.services.UserService;
+import se.tipspromenad.utils.SecurityUtils;
 import se.tipspromenad.utils.ValidationUtils;
+import se.tipspromenad.validation.BasicStringValidator;
 
 /**
  * Controller of MVC paradigm that is responsible for {@link User} related actions.
@@ -30,11 +35,22 @@ import se.tipspromenad.utils.ValidationUtils;
 @Controller
 public class UserController {
 	
-	@SuppressWarnings("unused")
 	private final static Logger logger = Logger.getLogger(UserController.class);
 	
+	// services
 	@Autowired
 	private UserService userService;
+	
+	// validators
+	private BasicStringValidator userNameValidator;
+	private BasicStringValidator userEmailValidator;
+	private BasicStringValidator userPasswordValidator;
+	
+	public UserController() {
+		userNameValidator     = new BasicStringValidator(User.MIN_USERNAME_LENGTH, User.MAX_USERNAME_LENGTH, UserError.USERNAME_EMPTY, UserError.USERNAME_TOO_SHORT, UserError.USERNAME_TOO_LONG);
+		userEmailValidator    = new BasicStringValidator(User.MIN_EMAIL_LENGTH, User.MAX_EMAIL_LENGTH, UserError.EMAIL_EMPTY, UserError.EMAIL_TOO_SHORT, UserError.EMAIL_TOO_LONG);
+		userPasswordValidator = new BasicStringValidator(User.MIN_PASSWORD_LENGTH, User.MAX_PASSWORD_LENGTH, UserError.PASSWORD_EMPTY, UserError.PASSWORD_TOO_SHORT, UserError.PASSWORD_TOO_LONG);
+	}
 	
 	/**
 	 * Action responsible for performing registration of a new user.
@@ -109,6 +125,52 @@ public class UserController {
 			userService.updateUserProfile(username, firstName, lastName, Gender.valueOf(gender.toUpperCase()));
 		}
 		return userProfileBean;
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.USER_LOGIN_ACTION)
+	public @ResponseBody UserLoginResponse login(@RequestBody UserLoginRequest request) throws IOException {
+		UserLoginResponse response = new UserLoginResponse();
+		try {
+			// processing
+			User user = userService.getUserByEmail(request.getEmail());
+			if (user != null) {
+				if (user.getPassword().equals(SecurityUtils.toBase64(SecurityUtils.toMD5(request.getPassword())))) {
+					response.setSessionId(new Random().nextLong());
+				} else {
+					response.addError(UserError.PASSWORD_WRONG);
+				}
+			} else {
+				response.addError(UserError.USERNAME_DOES_NOT_EXIST);
+			}
+		} catch (Exception e) {
+			response.addError(UserError.UNEXPECTED_ERROR);
+			logger.error("Unexpected error in WS on user login", e);
+		}
+		response.normalize();
+		return response;
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = Constants.WS.USER_REGISTER)
+	public @ResponseBody UserRegistrationResponseBean register(@RequestBody UserRegistrationRequestBean request) throws IOException {
+		UserRegistrationResponseBean response = new UserRegistrationResponseBean();
+		try {
+			// processing
+			userNameValidator.validate(request.getUsername(), response.getErrors());
+			userEmailValidator.validate(request.getEmail(), response.getErrors());
+			userPasswordValidator.validate(request.getPassword(), response.getErrors());
+			if (!response.hasErrors()) {
+				if (userService.getUserByUsername(request.getUsername()) != null || userService.getUserByEmail(request.getEmail()) != null) {
+					response.addError(UserError.DUBLICATED_USER);
+				} else {
+					response.setUserId(userService.createUser(request.getEmail(), request.getUsername(), request.getPassword()));
+				}
+			}
+		} catch (Exception e) {
+			response.addError(UserError.UNEXPECTED_ERROR);
+			logger.error("Unexpected error in WS on user registration", e);
+		}
+		response.normalize();
+		return response;
 	}
 	
 }

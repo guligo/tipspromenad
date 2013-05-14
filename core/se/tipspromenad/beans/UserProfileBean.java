@@ -1,6 +1,6 @@
 package se.tipspromenad.beans;
 
-import se.tipspromenad.controllers.UserController;
+import se.tipspromenad.controllers.user.UserController;
 
 /**
  * Data transfer bean between {@link UserController#doUpdateUserProfile(String, String, String)} and view.
