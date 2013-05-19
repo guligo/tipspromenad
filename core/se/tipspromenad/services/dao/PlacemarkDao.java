@@ -1,5 +1,7 @@
 package se.tipspromenad.services.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,13 @@ public class PlacemarkDao {
 	
 	public Placemark getPlacemark(Long id) {
 		return (Placemark) commonDao.getEntity(Placemark.class, id);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Placemark> getPlacemarksByGameId(Long gameId) {
+		return commonDao.getEntityManager().createQuery("from Placemark p where p.game.id = :gameId")
+			.setParameter("gameId", gameId)
+			.getResultList();
 	}
 	
 	public void createPlacemark(Placemark placemark) {

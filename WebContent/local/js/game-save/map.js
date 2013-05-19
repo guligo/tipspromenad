@@ -1,9 +1,10 @@
 var mapController = function() {
 	
+	var PLACEMARK_LIST_ACTION_URL = null;
+	var PLACEMARK_SAVE_ACTION_URL = null;
+	
 	var _initialized = null;
-	var _placemarks = null;
 	var _map = null;
-	var _markers = null;
 	var _questions = null;
 	
 	// initialize Google map
@@ -15,76 +16,188 @@ var mapController = function() {
 				mapTypeId: google.maps.MapTypeId.ROADMAP
 			};
 			_map = new google.maps.Map(container, options);
-			_markers = [];
 			
 			google.maps.event.addListener(_map, 'click', function(event) {
-				_placeMarker(event.latLng);
+				if (_questions != null && _questions.length > 0) {
+					var question = _getCurrentQuestion();
+					if (question != null) {
+						_removePlacemarks();
+						_savePlacemark(gameController.getGameId(), question, event.latLng.lat(), event.latLng.lng(), function (placemark) {
+							_getPlacemarks(gameController.getGameId(), function(placemarks) {
+								_assignPlacemarksToQuestions(placemarks);
+								_renderQuestions();
+							});
+						});
+					}
+				}
 			});
 			_initialized = true;
 		}
 	}
 	
-	// places marker on the Google map
-	function _placeMarker(latLng) {
-		if (_questions != null && _questions.length > 0) {
-			var marker = new google.maps.Marker({
-				draggable: true,
-			    position: latLng,
-			    title: "Hello World!"
+	function _getPlacemarks(gameId, callback) {
+		if (gameId != null) {
+			$.ajax({
+				url: PLACEMARK_LIST_ACTION_URL.replace('{gameId}', gameId),
+				type: 'get',
+			    contentType: 'application/json',
+			    dataType: 'json',
+			    success: function(placemarks) {
+			    	if (callback != null) {
+			    		callback(placemarks);
+			    	}
+				}
 			});
-			
-			var infoWin = new google.maps.InfoWindow({
-			    content: _questions.pop().text
-			});
-			google.maps.event.addListener(marker, 'click', function() {
-				infoWin.open(_map, marker);
-			});
-			marker.setMap(_map);
-			
-			_markers.push(marker);
-			_renderQuestions();
 		}
 	}
 	
-	function _renderPlacemarks(placemarks) {
-		if (pacemarks != null) {
-			for (var i = 0; i < placemarks.length; i++) {
-				var marker = new google.maps.Marker({
-					draggable: true,
-				    position: latLng,
-				    title: "Question"
-				});
-				marker.setMap(_map);
+	function _savePlacemark(gameId, question, latitude, longitude, callback) {
+		if (question != null) {
+			var id = null;
+			if (question != null && question.placemark != null) {
+				id = question.placemark.id;
+			}
+			
+			$.ajax({
+				url: PLACEMARK_SAVE_ACTION_URL,
+				type: 'post',
+			    contentType: 'application/json',
+			    dataType: 'json',
+				data: JSON.stringify({
+					id: id,
+					gameId: gameId,
+					questionId: question.id,
+					latitude: latitude,
+					longitude: longitude
+				}),
+			    success: function(placemark) {
+			    	if (callback != null) {
+			    		callback(placemark);
+			    	}
+				}
+			});
+		}
+	}
+	
+	function _putPlacemark(question) {
+		if (question != null && question.placemark != null) {
+			var marker = new google.maps.Marker({
+				draggable: true,
+			    position: new google.maps.LatLng(question.placemark.latitude, question.placemark.longitude),
+			    title: "Question"
+			});
+			
+			var window = new google.maps.InfoWindow({
+			    content: question.text
+			});
+			
+			google.maps.event.addListener(marker, 'click', function(event) {
+				window.open(_map, marker);
+			});
+			google.maps.event.addListener(marker, 'dragend', function(event) {
+				_savePlacemark(gameController.getGameId(), marker.question, event.latLng.lat(), event.latLng.lng());
+			});
+			question.placemark.marker = marker;
+			marker.question = question;
+			marker.setMap(_map);
+		}
+	}
+
+	function _removePlacemark(question) {
+		if (question != null
+				&& question.placemark != null
+				&& question.placemark.marker != null) {
+			question.placemark.marker.setMap(null);
+		}
+	}
+	
+	function _removePlacemarks() {
+		if (_questions != null) {
+			for (var i = 0; i < _questions.length; i++) {
+				_removePlacemark(_questions[i]);
 			}
 		}
 	}
 	
+	function _assignPlacemarksToQuestions(placemarks) {
+		if (placemarks != null) {
+			for (var i = 0; i < placemarks.length; i++) {
+				question = _getQuestion(placemarks[i].question.id);
+				if (question != null) {
+					question.placemark = placemarks[i];
+				}
+			}
+		}
+	}
+	
+	function _getQuestion(id) {
+		if (_questions != null) {
+			for (var i = 0; i < _questions.length; i++) {
+				if (_questions[i].id == id) {
+					return _questions[i];
+				}
+			}
+		}
+		return null;
+	}
+	
+	function _getCurrentQuestion() {
+		var question = null;
+		if (_questions != null) {
+			for (var i = 0; i < _questions.length; i++) {
+				if (_questions[i].placemark == null) {
+					question = _questions[i];
+					break;
+				}
+			}
+		}
+		return question;
+	}
+
 	function _renderQuestions() {
 		var html = '';
-		for (var i = 0; i < _questions.length; i++) {
-			html += '<div class="hero-unit">';
-				// FIXME: JSON serialization problem here!
-				html += _questions[i].text;
-			html += '</div>';
+		if (_questions != null) {
+			for (var i = 0; i < _questions.length; i++) {
+				if (_questions[i].placemark == null) {
+					html += '<div class="hero-unit">';
+						// FIXME: JSON serialization problem here!
+						html += _questions[i].text;
+					html += '</div>';
+				} else {
+					_putPlacemark(_questions[i]);
+				}
+			}
 		}
 		$('#questionsContainer').html(html);
 	}
 	
 	return {
-		init: function() {
+		init: function(url1, url2) {
+			PLACEMARK_LIST_ACTION_URL = url1;
+			PLACEMARK_SAVE_ACTION_URL = url2;
 			_initialized = false;
 			_placemarks = [];
 		},
 		initMap: function() {
 			_initMap($('#mapContainer')[0]);
 		},
-		renderQuestions: function(questions) {
-			_questions = [];
-			// FIXME: JSON serialization problem here!
-			for (var i = 0; i < questions.length; i++) {
-				_questions.push(questions[i][0]);
-			}
-			_renderQuestions();
+		initData: function() {
+			_removePlacemarks();
+			questionController.getQuestions(gameController.getGameId(), function(questions) {
+				if (questions != null) {
+					// FIXME: JSON serialization problem here!
+					_questions = [];
+					for (var i = 0; i < questions.length; i++) {
+						var question = questions[i][0];
+						_questions.push(question);
+					}
+				}
+				
+				_getPlacemarks(gameController.getGameId(), function(placemarks) {
+					_assignPlacemarksToQuestions(placemarks);
+					_renderQuestions();
+				});
+			});
 		}
 	};
 	

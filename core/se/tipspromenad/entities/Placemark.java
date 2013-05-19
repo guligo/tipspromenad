@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 /**
  * Represents entity for question placemark.
  * 
@@ -14,6 +16,7 @@ import javax.persistence.Table;
 @Table(name = "placemarks")
 public class Placemark extends se.tipspromenad.entities.Entity {
 	
+	@JsonIgnore
 	@OneToOne
 	private Game game;
 	@OneToOne

@@ -4,7 +4,10 @@
 <script type="text/javascript" src="local/js/game-save/map.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		mapController.init();
+		mapController.init(
+			'<%= Constants.URL.PLACEMARK_LIST_ACTION %>',
+			'<%= Constants.URL.PLACEMARK_SAVE_ACTION %>'
+		);
 	});
 </script>
 

@@ -49,9 +49,7 @@
 		var mapInitialized = false;
 		$('#mapTab a').bind('click', function (e) {
 			mapController.initMap();
-			questionController.getQuestions(gameController.getGameId(), function(questions) {
-				mapController.renderQuestions(questions);
-			});
+			mapController.initData();
 		});
 	});
 </script>

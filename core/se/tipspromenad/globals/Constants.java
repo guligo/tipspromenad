@@ -35,7 +35,9 @@ public class Constants {
 		public final static String QUESTION_SAVE_LIST_ACTION = "question/savelist";
 		public final static String QUESTION_REMOVE_ACTION    = "question/remove/{id}";
 		
-		public final static String PLACEMARK_SAVE_ACTION     = "placemark/save";
+		public final static String PLACEMARK_GET_ACION   = "placemark/get/{gameId}/{questionId}";
+		public final static String PLACEMARK_LIST_ACTION = "placemark/list/{gameId}";
+		public final static String PLACEMARK_SAVE_ACTION = "placemark/save";
 		
 	}
 	
