@@ -15,3 +15,4 @@
 <div id="mapContainer"></div>
 <br />
 <div id="questionsContainer"></div>
+<a href="#" class="btn">Next</a>

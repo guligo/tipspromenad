@@ -84,7 +84,8 @@ var mapController = function() {
 			var marker = new google.maps.Marker({
 				draggable: true,
 			    position: new google.maps.LatLng(question.placemark.latitude, question.placemark.longitude),
-			    title: "Question"
+			    title: "Question",
+			    icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + question.placemark.id + '|FF0000|000000'
 			});
 			
 			var window = new google.maps.InfoWindow({

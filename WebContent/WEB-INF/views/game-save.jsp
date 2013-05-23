@@ -86,13 +86,10 @@
 			<%@ include file="../partials/game-save/map.jsp" %>
 		</div>
 		<div id="friendsTabContainer" class="tab-pane">
-			<%@ include file="mock.jsp" %>
+			<%@ include file="../partials/game-save/friends.jsp" %>
 		</div>
 		<div id="finishTabContainer" class="tab-pane">
-			<%@ include file="mock.jsp" %>
+			<%@ include file="../partials/game-save/finish.jsp" %>
 		</div>
 	</div>
 </div>
-<!--
-<a href="javascript:unlockNextTab();" class="btn">Next</a>
--->

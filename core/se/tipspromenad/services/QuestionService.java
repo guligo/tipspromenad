@@ -67,6 +67,13 @@ public class QuestionService {
 		return questions;
 	}
 	
+	public Placemark getPlacemarkByGameAndQuestionId(Long gameId, Long questionId) {
+		logger.debug("Retrieving placemarks for game with id = " + gameId + " and question with id = " + questionId);
+		
+		Placemark placemark = placemarkDao.getPlacemarkByGameAndQuestionId(gameId, questionId);
+		return placemark;
+	}
+	
 	public List<Placemark> getPlacemarksByGameId(Long gameId) {
 		logger.debug("Retrieving placemark list for game with id = " + gameId);
 		
