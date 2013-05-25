@@ -38,9 +38,34 @@ public class QuestionDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Question> getQuestionsByGameId(Long gameId) {
-		return commonDao.getEntityManager().createQuery("from Question q join q.games qg where qg.id = :gameId")
+		return commonDao.getEntityManager()
+			.createQuery("from Question q join q.games qg where qg.id = :gameId")
 			.setParameter("gameId", gameId)
 			.getResultList();
+	} 
+	
+	@SuppressWarnings("unchecked")
+	public boolean sequenceColumnExist() {
+		List<String> result = commonDao.getEntityManager()
+			.createNativeQuery("select table_catalog from information_schema.columns where table_schema = 'tipspromenad' and table_name = 'games_questions' and column_name = 'sequence'")
+			.getResultList();
+		if (result == null || result.size() == 0) {
+			return false;
+		}
+		return true;
+	}
+	
+	public void createSequenceColumn() {
+		// ALTER TABLE `prefix_topic` ADD `topic_last_update` DATETIME NOT NULL;
+	}
+	
+	public void setSequence(Long gameId, Long questionId, Long sequence) {
+		commonDao.getEntityManager()
+			.createNativeQuery("update games_questions set sequence = :sequence where games_id = :gameId and questions_id = :questionId")
+			.setParameter("gameId", gameId)
+			.setParameter("questionId", questionId)
+			.setParameter("sequence", sequence)
+			.executeUpdate();
 	}
 	
 }

@@ -52,6 +52,11 @@ public class QuestionService {
 					
 					question.setGames(games);
 					questionDao.createQuestion(question);
+					if (questionDao.sequenceColumnExist()) {
+						questionDao.setSequence(gameId, question.getId(), 1L);
+					} else {
+						questionDao.createSequenceColumn();
+					}
 					result.add(question);
 				}
 			}
