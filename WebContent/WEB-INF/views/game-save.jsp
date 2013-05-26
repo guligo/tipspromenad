@@ -40,11 +40,6 @@
 	};
 	
 	$(document).ready(function() {
-		gameController.init(
-			'<%= Constants.URL.GAME_SAVE_ACTION %>',
-			'<%= Constants.URL.GAME_LIST_PAGE %>'
-		);
-		
 		lockTabs();
 		var mapInitialized = false;
 		$('#mapTab a').bind('click', function (e) {

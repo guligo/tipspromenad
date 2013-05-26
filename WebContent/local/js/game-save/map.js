@@ -161,7 +161,6 @@ var mapController = function() {
 			for (var i = 0; i < _questions.length; i++) {
 				if (_questions[i].placemark == null) {
 					html += '<div class="hero-unit">';
-						// FIXME: JSON serialization problem here!
 						html += _questions[i].text;
 					html += '</div>';
 				} else {
@@ -186,11 +185,9 @@ var mapController = function() {
 			_removePlacemarks();
 			questionController.getQuestions(gameController.getGameId(), function(questions) {
 				if (questions != null) {
-					// FIXME: JSON serialization problem here!
 					_questions = [];
 					for (var i = 0; i < questions.length; i++) {
-						var question = questions[i][0];
-						_questions.push(question);
+						_questions.push(questions[i]);
 					}
 				}
 				

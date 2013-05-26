@@ -13,6 +13,7 @@
 	
 	$(document).ready(function() {
 		questionController.init(
+			<%= request.getParameter("id") %>,
 			'<%= Constants.URL.QUESTION_SAVE_LIST_ACTION %>',
 			'<%= Constants.URL.QUESTION_LIST_ACTION %>'
 		);

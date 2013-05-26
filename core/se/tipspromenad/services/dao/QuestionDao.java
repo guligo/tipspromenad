@@ -39,7 +39,7 @@ public class QuestionDao {
 	@SuppressWarnings("unchecked")
 	public List<Question> getQuestionsByGameId(Long gameId) {
 		return commonDao.getEntityManager()
-			.createQuery("from Question q join q.games qg where qg.id = :gameId")
+			.createQuery("select q from Game g join g.questions as q where g.id = :gameId")
 			.setParameter("gameId", gameId)
 			.getResultList();
 	} 
@@ -56,7 +56,26 @@ public class QuestionDao {
 	}
 	
 	public void createSequenceColumn() {
-		// ALTER TABLE `prefix_topic` ADD `topic_last_update` DATETIME NOT NULL;
+		commonDao.getEntityManager()
+			.createNativeQuery("alter table games_questions add sequence int null")
+			.executeUpdate();
+	}
+	
+	public Integer getSequence(Long gameId, Long questionId) {
+		return Integer.parseInt(
+			(String) commonDao.getEntityManager()
+				.createNativeQuery("select sequence from games_questions where games_id = :gameId and questions_id = :questionId")
+				.setParameter("gameId", gameId)
+				.setParameter("questionId", questionId)
+				.getSingleResult()
+		);
+	}
+	
+	public Integer getSequence(Long gameId) {
+		return (Integer) commonDao.getEntityManager()
+			.createNativeQuery("select max(sequence) from games_questions where games_id = :gameId")
+			.setParameter("gameId", gameId)
+			.getSingleResult();
 	}
 	
 	public void setSequence(Long gameId, Long questionId, Long sequence) {

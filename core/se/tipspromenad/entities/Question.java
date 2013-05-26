@@ -22,9 +22,6 @@ public class Question extends se.tipspromenad.entities.Entity {
 	public static final int MIN_TEXT_LENGTH = 5;
 	public static final int MAX_TEXT_LENGTH = 500;
 	
-	@JsonIgnore
-	@ManyToMany
-	private Set<Game> games;
 	@Column(nullable = false, length = MAX_TEXT_LENGTH)
 	private String text;
 	
@@ -34,14 +31,6 @@ public class Question extends se.tipspromenad.entities.Entity {
 	
 	public Question(Long id) {
 		setId(id);
-	}
-	
-	public Set<Game> getGames() {
-		return games;
-	}
-	
-	public void setGames(Set<Game> games) {
-		this.games = games;
 	}
 	
 	public String getText() {

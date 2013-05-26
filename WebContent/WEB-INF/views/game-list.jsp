@@ -5,6 +5,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		gameListController.init(
+			'<%= Constants.URL.GAME_SAVE_PAGE %>',
 			'<%= Constants.URL.GAME_LIST_ACTION %>',
 			'<%= Constants.URL.GAME_REMOVE_ACTION %>',
 			$('#gameListContainer')

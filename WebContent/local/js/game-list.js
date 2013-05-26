@@ -1,5 +1,6 @@
 var gameListController = function() {
 	
+	var GAME_SAVE_PAGE_URL = null;
 	var GAME_LIST_GET_LIST_ACTION_URL = null;
 	var GAME_LIST_REMOVE_ACTION_URL = null;
 	var GAME_LIST_CONTAINER = null;
@@ -35,7 +36,7 @@ var gameListController = function() {
 					html += '<td>' + games[index].name + '</td>';
 					html += '<td>' + commonUtils.formatDateShort(games[index].date) + '</td>';
 					html += '<td>';
-						html += '<a href="game"><i class="icon-edit"> </i></a>&nbsp';
+						html += '<a href="' + GAME_SAVE_PAGE_URL + '?id=' + games[index].id + '"><i class="icon-edit"> </i></a>&nbsp';
 						html += '<a href="javascript:gameListController.removeGame(' + games[index].id + ');"><i class="icon-remove"> </i></a>';
 					html += '</td>';
 				html += '</tr>';
@@ -63,9 +64,10 @@ var gameListController = function() {
 	}
 	
 	return {
-		init: function(url1, url2, container) {
-			GAME_LIST_GET_LIST_ACTION_URL = url1;
-			GAME_LIST_REMOVE_ACTION_URL = url2;
+		init: function(url1, url2, url3, container) {
+			GAME_SAVE_PAGE_URL = url1;
+			GAME_LIST_GET_LIST_ACTION_URL = url2;
+			GAME_LIST_REMOVE_ACTION_URL = url3;
 			GAME_LIST_CONTAINER = container;
 			_getGameList(_renderGameList);
 		},

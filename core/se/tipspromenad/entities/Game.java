@@ -39,7 +39,7 @@ public class Game extends se.tipspromenad.entities.Entity {
 	private Date date;
 	@JsonIgnore
 	@OrderBy("id")
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Question> questions;
 	
 	public Game() {

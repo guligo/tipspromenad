@@ -32,7 +32,11 @@ var questionController = function() {
 		if (_questions != null) {
 			for (var i = 0; i < _questions.length; i++) {
 				html = '<div>';
-					html += '<a href="javascript:questionController.removeQuestion(' + i + ');">[-]</a> ' + (i + 1) + '. ' + _questions[i].text;
+					html += '<a href="javascript:questionController.editQuestion(' + i + ');"><i class="icon-edit"> </i></a> ';
+					html += '<a href="javascript:questionController.removeQuestion(' + i + ');"><i class="icon-remove"> </i></a> ';
+					html += '<a href="javascript:questionController.moveUp(' + i + ');"><i class="icon-arrow-up"> </i></a> ';
+					html += '<a href="javascript:questionController.moveDown(' + i + ');"><i class="icon-arrow-down"> </i></a> ';
+					html += (i + 1) + '. ' + _questions[i].text;
 				html += '<div>';
 				$('#questionContainer').append(html);
 			}
@@ -69,9 +73,9 @@ var questionController = function() {
 				type: 'get',
 			    contentType: 'application/json',
 			    dataType: 'json',
-			    success: function(response) {
+			    success: function(questions) {
 			    	if (callback != null) {
-			    		callback(response);
+			    		callback(questions);
 			    	}
 				}
 			});
@@ -79,10 +83,18 @@ var questionController = function() {
 	}
 	
 	return {
-		init: function(url1, url2) {
+		init: function(gameId, url1, url2) {
 			QUESTION_SAVE_LIST_ACTION = url1;
 			QUESTION_GET_LIST_ACTION = url2;
-			_questions = [];
+			
+			if (gameId == null) {
+				_questions = [];
+			} else {
+				_getQuestions(gameId, function(questions) {
+					_questions = questions;
+					_renderQuestions();
+				});
+			}
 		},
 		addQuestion: function() {
 			var callback = function() {

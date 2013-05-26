@@ -39,7 +39,6 @@ public class QuestionService {
 		List<Question> result = new ArrayList<Question>();
 		if (gameId != null && questions != null) {
 			for (Question question : questions) {
-				
 				// avoiding detached entity
 				if (question.getId() != null) {
 					Question questionInDb = questionDao.getQuestion(question.getId());
@@ -47,17 +46,23 @@ public class QuestionService {
 					questionDao.updateQuestion(questionInDb);
 					result.add(questionInDb);
 				} else {
-					Set<Game> games = new HashSet<Game>();
-					games.add(new Game(gameId));
-					
-					question.setGames(games);
 					questionDao.createQuestion(question);
-					if (questionDao.sequenceColumnExist()) {
-						questionDao.setSequence(gameId, question.getId(), 1L);
-					} else {
+					Game game = gameDao.getGame(gameId);
+					game.getQuestions().add(question);
+					gameDao.updateGame(game);
+					result.add(question);
+					
+					// FIXME: So f*****g ugly!
+					if (!questionDao.sequenceColumnExist()) {
 						questionDao.createSequenceColumn();
 					}
-					result.add(question);
+					
+					Integer sequence = questionDao.getSequence(gameId);
+					if (sequence != null) {
+						questionDao.setSequence(gameId, question.getId(), sequence + 1L);
+					} else {
+						questionDao.setSequence(gameId, question.getId(), 1L);
+					}
 				}
 			}
 		}

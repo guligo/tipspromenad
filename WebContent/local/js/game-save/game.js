@@ -1,10 +1,9 @@
 var gameController = function() {
 	
+	var GAME_GET_ACTION_URL = null;
 	var GAME_SAVE_ACTION_URL = null;
 	var GAME_LIST_PAGE_URL = null;
 	
-	var _map = null;
-	var _markers = null;
 	var _id = null;
 	
 	function _saveGame(callback) {
@@ -45,11 +44,34 @@ var gameController = function() {
 		});
 	}
 	
+	function _getGame(callback) {
+		$.ajax({
+			url: GAME_GET_ACTION_URL.replace('{id}', _id),
+			type: 'get',
+			contentType: 'application/json',
+			dataType: 'json',
+			success: function(game) {
+				$('#gameName').val(game.name);
+				$('#gameDate').datepicker("setValue", game.date);
+				if (callback != null) {
+					callback(game);
+				}
+			}
+		});
+	}
+	
 	return {
-		init: function(url1, url2) {
-			GAME_SAVE_ACTION_URL = url1;
-			GAME_LIST_PAGE_URL = url2;
-			$('#gameDate').datepicker();
+		init: function(id, url1, url2, url3) {
+			GAME_GET_ACTION_URL = url1;
+			GAME_SAVE_ACTION_URL = url2;
+			GAME_LIST_PAGE_URL = url3;
+			
+			if (id != null) {
+				_id = id;
+				_getGame();
+			} else {
+				$('#gameDate').datepicker();
+			}
 		},
 		initMap: function() {
 			_initMap($('#mapContainer')[0]);
