@@ -10,14 +10,20 @@
 </style>
 
 <!-- scripts -->
+<script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
 <script type="text/javascript" src="local/js/login.js"></script>
 <script type="text/javascript">		
 	$(document).ready(function() {
+		Recaptcha.create("6LeC6eESAAAAAAGbjL53AJyBEGyNIVlPl9tTbr2D", "captcha", {
+			theme: "red",
+			callback: Recaptcha.focus_response_field
+		});
+		
 		loginController.init(
 			'${pageContext.request.contextPath}/j_spring_security_check',
 			'<%= Constants.URL.USER_REGISTRATION_ACTION %>',
 			'<%= Constants.URL.HOME_PAGE %>'
-		);				
+		);
 	});	
 </script>
 
@@ -73,6 +79,10 @@
 			    <label class="control-label" for="confirmInput">Confirm</label>
 			    <div class="controls">
 			    	<input type="password" id="confirmInput" placeholder="Confirm password">
+			    </div>
+    		</div>
+			<div class="control-group">
+			    <div id="captcha" class="controls">
 			    </div>
     		</div>
     		<div class="control-group">
