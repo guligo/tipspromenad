@@ -1,3 +1,4 @@
+<%@ include file="../../commons/commons.jsp" %>
 <%@ page import="se.tipspromenad.globals.Constants" %>
 
 <!-- scripts -->
@@ -15,4 +16,6 @@
 <div id="mapContainer"></div>
 <br />
 <div id="questionsContainer"></div>
-<a href="#" class="btn">Next</a>
+<c:if test="${empty param.id}">
+	<a href="javascript:unlockNextTab();" class="btn">Next</a>
+</c:if>

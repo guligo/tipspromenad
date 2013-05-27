@@ -1,3 +1,4 @@
+<%@ include file="../../commons/commons.jsp" %>
 <%@ page import="se.tipspromenad.globals.Constants" %>
 
 <!-- scripts -->
@@ -39,4 +40,6 @@
 		</div>
 	</div>
 </form>
-<a href="javascript:saveGameAndQuestions();" class="btn">Next</a>
+<c:if test="${empty param.id}">
+	<a href="javascript:saveGameAndQuestions();" class="btn">Next</a>
+</c:if>

@@ -1,3 +1,4 @@
+<%@ include file="../commons/commons.jsp" %>
 <%@ page import="se.tipspromenad.globals.Constants" %>
 
 <!-- styles -->
@@ -40,8 +41,9 @@
 	};
 	
 	$(document).ready(function() {
-		lockTabs();
-		var mapInitialized = false;
+		<c:if test="${param.id == null}">
+			lockTabs();
+		</c:if>
 		$('#mapTab a').bind('click', function (e) {
 			mapController.initMap();
 			mapController.initData();
