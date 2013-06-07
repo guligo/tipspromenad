@@ -30,6 +30,11 @@ public class QuestionController {
 	@Autowired
 	private QuestionService questionService;
 	
+	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.QUESTION_SAVE_ACTION)
+	public @ResponseBody void saveQuestion(@RequestBody QuestionSaveRequest request) {
+		questionService.saveQuestion(request.getGameId(), request.getQuestion());
+	}
+	
 	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.QUESTION_SAVE_LIST_ACTION)
 	public @ResponseBody List<Question> saveQuestions(@RequestBody QuestionListSaveRequest request) {
 		return questionService.saveQuestions(request.getGameId(), request.getQuestions());
@@ -48,6 +53,11 @@ public class QuestionController {
 	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.PLACEMARK_SAVE_ACTION)
 	public @ResponseBody Placemark savePlacemark(@RequestBody PlacemarkSaveRequest request) {
 		return questionService.savePlacemark(request.getId(), request.getGameId(), request.getQuestionId(), request.getLatitude(), request.getLongitude());
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.PLACEMARK_REMOVE_ACTION)
+	public @ResponseBody void removePlacemark(@PathVariable Long id) {
+		questionService.removePlacemark(id);
 	}
 	
 }

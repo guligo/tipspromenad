@@ -24,13 +24,13 @@ import se.tipspromenad.entities.User;
 @Entity
 @Table(name = "games")
 public class Game extends se.tipspromenad.entities.Entity {
-
+	
 	public static final int MIN_NAME_LENGTH = 5;
 	public static final int MAX_NAME_LENGTH = 50;
-
+	
 	@ManyToOne
 	private User creator;
-	@Column(nullable = false)
+	@Column(name = "creation_date", nullable = false)
 	private Date creationDate;
 	@Column(nullable = false, length = MAX_NAME_LENGTH)
 	private String name;

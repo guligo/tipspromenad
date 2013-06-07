@@ -15,7 +15,7 @@
 	$(document).ready(function() {
 		questionController.init(
 			<%= request.getParameter("id") %>,
-			'<%= Constants.URL.QUESTION_SAVE_LIST_ACTION %>',
+			'<%= Constants.URL.QUESTION_SAVE_ACTION %>',
 			'<%= Constants.URL.QUESTION_LIST_ACTION %>'
 		);
 	});
@@ -23,23 +23,63 @@
 
 <!-- html -->
 <form id="questionForm" class="form-horizontal">
-		<div class="control-group">
-			<label for="questionText" class="control-label">Question</label>
-			<div class="controls">
-				<textarea id="questionText" placeholder="Enter question here..."></textarea>
-			</div>
+	<div class="control-group">
+		<div id="questionContainer" class="controls">
+			No questions.
 		</div>
-		<div class="control-group">
-			<div id="questionContainer" class="controls">
-				No questions.
-			</div>
-		</div>
-		<div class="control-group">
+	</div>
+	<div class="control-group">
 		<div class="controls">
-			<a href="javascript:questionController.addQuestion();" class="btn">Add Question</a>
+			<a href="javascript:questionController.showDialog();" role="button" class="btn">
+				Add Question
+			</a>
 		</div>
 	</div>
 </form>
 <c:if test="${empty param.id}">
 	<a href="javascript:saveGameAndQuestions();" class="btn">Next</a>
 </c:if>
+
+<!-- dialog -->
+<div id="addQuestionModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addQuestionModalLabel" aria-hidden="true">
+  	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel">Save Question</h3>
+	</div>
+	<div class="modal-body form-horizontal">
+		<div class="control-group">
+			<label for="questionText" class="control-label">Question</label>
+			<div class="controls">
+				<textarea id="questionText" placeholder="Enter question..."></textarea>
+			</div>
+		</div>
+		<div class="control-group">
+			<label for="answer1Text" class="control-label radio">
+				<input id="answer1Correct" name="answerCorrect" type="radio" checked="checked" />1.&nbsp;
+			</label>
+			<div class="controls">
+				<input type="text" id="answer1Text" placeholder="Enter answer..."></input>
+			</div>
+		</div>
+		<div class="control-group">
+			<label for="answer2Text" class="control-label radio">
+				<input id="answer2Correct" name="answerCorrect" type="radio" />X.&nbsp;
+			</label>
+			<div class="controls">
+				<input type="text" id="answer2Text" placeholder="Enter answer..."></input>
+			</div>
+		</div>
+		<div class="control-group">
+			<label for="answer3Text" class="control-label radio">
+				<input id="answer3Correct" name="answerCorrect" type="radio" />2.&nbsp;
+			</label>
+			<div class="controls">
+				<input type="text" id="answer3Text" placeholder="Enter answer..."></input>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a href="javascript:questionController.saveQuestion(gameController.getGameId());" class="btn btn-primary">Save</a>
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	</div>
+</div>

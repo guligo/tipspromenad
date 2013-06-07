@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import se.tipspromenad.entities.Answer;
 import se.tipspromenad.entities.Game;
 import se.tipspromenad.entities.Placemark;
 import se.tipspromenad.entities.Question;
@@ -31,37 +32,56 @@ public class QuestionService {
 	@Autowired
 	private PlacemarkDao placemarkDao;
 	
+	public Question saveQuestion(Long gameId, Question question) {
+		// avoiding detached entity
+		if (question.getId() != null) {
+			Question questionInDb = questionDao.getQuestion(question.getId());
+			if (question.getAnswers() != null
+				&& questionInDb.getAnswers() != null) {
+				for (int i = 0; i < questionInDb.getAnswers().size(); i++) {
+					Answer answer = question.getAnswers().get(i);
+					Answer answerInDb = questionInDb.getAnswers().get(i);
+					answerInDb.setText(answer.getText());
+					answerInDb.setCorret(answer.getCorrect());
+					questionDao.updateAnswer(answerInDb);
+				}
+			}
+			questionInDb.setText(question.getText());
+			questionDao.updateQuestion(questionInDb);
+			return questionInDb;
+		} else {
+			if (question.getAnswers() != null) {
+				for (int i = 0; i < question.getAnswers().size(); i++) {
+					questionDao.createAnswer(question.getAnswers().get(i));
+				}
+			}
+			questionDao.createQuestion(question);
+			Game game = gameDao.getGame(gameId);
+			game.getQuestions().add(question);
+			gameDao.updateGame(game);
+			
+			// FIXME: So f*****g ugly!
+			if (!questionDao.sequenceColumnExist()) {
+				questionDao.createSequenceColumn();
+			}
+			
+			Integer sequence = questionDao.getSequence(gameId);
+			if (sequence != null) {
+				questionDao.setSequence(gameId, question.getId(), sequence + 1L);
+			} else {
+				questionDao.setSequence(gameId, question.getId(), 1L);
+			}
+			return question;
+		}
+	}
+	
 	public List<Question> saveQuestions(Long gameId, Question[] questions) {
 		logger.debug("Saving questions for game with id = " + gameId);
 		
 		List<Question> result = new ArrayList<Question>();
 		if (gameId != null && questions != null) {
 			for (Question question : questions) {
-				// avoiding detached entity
-				if (question.getId() != null) {
-					Question questionInDb = questionDao.getQuestion(question.getId());
-					questionInDb.setText(question.getText());
-					questionDao.updateQuestion(questionInDb);
-					result.add(questionInDb);
-				} else {
-					questionDao.createQuestion(question);
-					Game game = gameDao.getGame(gameId);
-					game.getQuestions().add(question);
-					gameDao.updateGame(game);
-					result.add(question);
-					
-					// FIXME: So f*****g ugly!
-					if (!questionDao.sequenceColumnExist()) {
-						questionDao.createSequenceColumn();
-					}
-					
-					Integer sequence = questionDao.getSequence(gameId);
-					if (sequence != null) {
-						questionDao.setSequence(gameId, question.getId(), sequence + 1L);
-					} else {
-						questionDao.setSequence(gameId, question.getId(), 1L);
-					}
-				}
+				result.add(saveQuestion(gameId, question));
 			}
 		}
 		return result;
@@ -108,6 +128,11 @@ public class QuestionService {
 			placemarkDao.updatePlacemark(placemark);
 		}
 		return placemark;
+	}
+	
+	public void removePlacemark(Long id) {
+		logger.debug("Removing placemark with id = " + id);
+		placemarkDao.removePlacemark(id);
 	}
 	
 }

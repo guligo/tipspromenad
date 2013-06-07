@@ -1,7 +1,8 @@
 var mapController = function() {
 	
-	var PLACEMARK_LIST_ACTION_URL = null;
-	var PLACEMARK_SAVE_ACTION_URL = null;
+	var PLACEMARK_LIST_ACTION_URL   = null;
+	var PLACEMARK_SAVE_ACTION_URL   = null;
+	var PLACEMARK_REMOVE_ACTION_URL = null;
 	
 	var _initialized = null;
 	var _map = null;
@@ -90,6 +91,11 @@ var mapController = function() {
 			
 			var window = new google.maps.InfoWindow({
 			    content: question.text
+			    	+ '<br />'
+			    	+ '<br />'
+			    	+ '<a href="javascript:$(\'#myModalButton\').click();" class="btn btn-primary">Edit</a>'
+			    	+ '&nbsp;'
+			    	+ '<a href="javascript:mapController.removePlacemarkFromDatabase(' + question.placemark.id + ');" class="btn">Remove placemark</a>'
 			});
 			
 			google.maps.event.addListener(marker, 'click', function(event) {
@@ -118,6 +124,20 @@ var mapController = function() {
 				_removePlacemark(_questions[i]);
 			}
 		}
+	}
+	
+	function _removePlacemarkFromDatabase(placemarkId, callback) {
+		$.ajax({
+			url: PLACEMARK_REMOVE_ACTION_URL.replace("{id}", placemarkId),
+			type: 'post',
+		    contentType: 'application/json',
+		    dataType: 'json',
+		    success: function() {
+		    	if (callback != null) {
+		    		callback();
+		    	}
+			}
+		});
 	}
 	
 	function _assignPlacemarksToQuestions(placemarks) {
@@ -171,10 +191,28 @@ var mapController = function() {
 		$('#questionsContainer').html(html);
 	}
 	
+	function _initData() {
+		_removePlacemarks();
+		questionController.getQuestions(gameController.getGameId(), function(questions) {
+			if (questions != null) {
+				_questions = [];
+				for (var i = 0; i < questions.length; i++) {
+					_questions.push(questions[i]);
+				}
+			}
+			
+			_getPlacemarks(gameController.getGameId(), function(placemarks) {
+				_assignPlacemarksToQuestions(placemarks);
+				_renderQuestions();
+			});
+		});
+	}
+	
 	return {
-		init: function(url1, url2) {
+		init: function(url1, url2, url3) {
 			PLACEMARK_LIST_ACTION_URL = url1;
 			PLACEMARK_SAVE_ACTION_URL = url2;
+			PLACEMARK_REMOVE_ACTION_URL = url3;
 			_initialized = false;
 			_placemarks = [];
 		},
@@ -182,19 +220,11 @@ var mapController = function() {
 			_initMap($('#mapContainer')[0]);
 		},
 		initData: function() {
-			_removePlacemarks();
-			questionController.getQuestions(gameController.getGameId(), function(questions) {
-				if (questions != null) {
-					_questions = [];
-					for (var i = 0; i < questions.length; i++) {
-						_questions.push(questions[i]);
-					}
-				}
-				
-				_getPlacemarks(gameController.getGameId(), function(placemarks) {
-					_assignPlacemarksToQuestions(placemarks);
-					_renderQuestions();
-				});
+			_initData();
+		},
+		removePlacemarkFromDatabase: function(placemarkId) {
+			_removePlacemarkFromDatabase(placemarkId, function() {
+				_initData();
 			});
 		}
 	};

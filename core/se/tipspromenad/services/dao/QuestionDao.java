@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import se.tipspromenad.entities.Answer;
 import se.tipspromenad.entities.Question;
 
 /**
@@ -34,6 +35,14 @@ public class QuestionDao {
 	
 	public void removeQuestion(Long id) {
 		commonDao.removeEntity(Question.class, id);
+	}
+	
+	public void createAnswer(Answer answer) {
+		commonDao.createEntity(answer);
+	}
+	
+	public void updateAnswer(Answer answer) {
+		commonDao.updateEntity(answer);
 	}
 	
 	@SuppressWarnings("unchecked")
