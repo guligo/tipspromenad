@@ -1,13 +1,16 @@
 package se.tipspromenad.services.dao;
 
+import java.math.BigInteger;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import se.tipspromenad.entities.Answer;
 import se.tipspromenad.entities.Question;
+import se.tipspromenad.services.QuestionService;
 
 /**
  * Link between business logic and database.
@@ -17,6 +20,8 @@ import se.tipspromenad.entities.Question;
 @Component
 @Transactional
 public class QuestionDao {
+	
+	private static Logger logger = Logger.getLogger(QuestionDao.class);
 	
 	@Autowired
 	private CommonDao commonDao;
@@ -34,7 +39,15 @@ public class QuestionDao {
 	}
 	
 	public void removeQuestion(Long id) {
-		commonDao.removeEntity(Question.class, id);
+		// FIXME: Query is wrong! It would require gameId as well.
+		int status = commonDao.getEntityManager()
+			.createNativeQuery("delete from games_questions where questions_id = :id")
+			.setParameter("id", id)
+			.executeUpdate();
+		logger.info("Status of removal = " + status);
+		if (status == 1) {
+			commonDao.removeEntity(Question.class, id);
+		}
 	}
 	
 	public void createAnswer(Answer answer) {
@@ -53,31 +66,12 @@ public class QuestionDao {
 			.getResultList();
 	} 
 	
-	@SuppressWarnings("unchecked")
-	public boolean sequenceColumnExist() {
-		List<String> result = commonDao.getEntityManager()
-			.createNativeQuery("select table_catalog from information_schema.columns where table_schema = 'tipspromenad' and table_name = 'games_questions' and column_name = 'sequence'")
-			.getResultList();
-		if (result == null || result.size() == 0) {
-			return false;
-		}
-		return true;
-	}
-	
-	public void createSequenceColumn() {
-		commonDao.getEntityManager()
-			.createNativeQuery("alter table games_questions add sequence int null")
-			.executeUpdate();
-	}
-	
 	public Integer getSequence(Long gameId, Long questionId) {
-		return Integer.parseInt(
-			(String) commonDao.getEntityManager()
-				.createNativeQuery("select sequence from games_questions where games_id = :gameId and questions_id = :questionId")
-				.setParameter("gameId", gameId)
-				.setParameter("questionId", questionId)
-				.getSingleResult()
-		);
+		return (Integer) commonDao.getEntityManager()
+			.createNativeQuery("select sequence from games_questions where games_id = :gameId and questions_id = :questionId")
+			.setParameter("gameId", gameId)
+			.setParameter("questionId", questionId)
+			.getSingleResult();
 	}
 	
 	public Integer getSequence(Long gameId) {
@@ -87,13 +81,57 @@ public class QuestionDao {
 			.getSingleResult();
 	}
 	
-	public void setSequence(Long gameId, Long questionId, Long sequence) {
+	public void setSequence(Long gameId, Long questionId, Integer sequence) {
 		commonDao.getEntityManager()
 			.createNativeQuery("update games_questions set sequence = :sequence where games_id = :gameId and questions_id = :questionId")
 			.setParameter("gameId", gameId)
 			.setParameter("questionId", questionId)
 			.setParameter("sequence", sequence)
 			.executeUpdate();
+	}
+	
+	public void moveUp(Long gameId, Long questionId) {
+		// get current sequence
+		Integer currentSeq = getSequence(gameId, questionId);
+		
+		// get new sequence and corresponding question id
+		Integer targetSeq = (Integer) commonDao.getEntityManager()
+			.createNativeQuery("select max(sequence) from games_questions where sequence < :sequence")
+			.setParameter("sequence", currentSeq)
+			.getSingleResult();
+		Long targetQuestionId = ((BigInteger) commonDao.getEntityManager()
+			.createNativeQuery("select questions_id from games_questions where games_id = :gameId and sequence = :sequence")
+			.setParameter("gameId", gameId)
+			.setParameter("sequence", targetSeq)
+			.getSingleResult())
+			.longValue();
+		
+		if (targetSeq != null && targetQuestionId != null) {
+			setSequence(gameId, questionId, targetSeq);
+			setSequence(gameId, targetQuestionId, currentSeq);
+		}
+	}
+	
+	public void moveDown(Long gameId, Long questionId) {
+		// get current sequence
+		Integer currentSeq = getSequence(gameId, questionId);
+		
+		// get new sequence and corresponding question id
+		Integer targetSeq = (Integer) commonDao.getEntityManager()
+			.createNativeQuery("select min(sequence) from games_questions where sequence > :sequence")
+			.setParameter("sequence", currentSeq)
+			.getSingleResult();
+		Long targetQuestionId = ((BigInteger) commonDao.getEntityManager()
+			.createNativeQuery("select questions_id from games_questions where games_id = :gameId and sequence = :sequence")
+			.setParameter("gameId", gameId)
+			.setParameter("sequence", targetSeq)
+			.getSingleResult())
+			.longValue();
+		
+		if (targetSeq != null && targetQuestionId != null) {
+			setSequence(gameId, questionId, targetSeq);
+			setSequence(gameId, targetQuestionId, currentSeq);
+		}
 	}
 	
 }

@@ -32,6 +32,10 @@ public class QuestionService {
 	@Autowired
 	private PlacemarkDao placemarkDao;
 	
+	public Question getQuestion(Long id) {
+		return questionDao.getQuestion(id);
+	}
+	
 	public Question saveQuestion(Long gameId, Question question) {
 		// avoiding detached entity
 		if (question.getId() != null) {
@@ -60,16 +64,11 @@ public class QuestionService {
 			game.getQuestions().add(question);
 			gameDao.updateGame(game);
 			
-			// FIXME: So f*****g ugly!
-			if (!questionDao.sequenceColumnExist()) {
-				questionDao.createSequenceColumn();
-			}
-			
 			Integer sequence = questionDao.getSequence(gameId);
 			if (sequence != null) {
-				questionDao.setSequence(gameId, question.getId(), sequence + 1L);
+				questionDao.setSequence(gameId, question.getId(), sequence + 1);
 			} else {
-				questionDao.setSequence(gameId, question.getId(), 1L);
+				questionDao.setSequence(gameId, question.getId(), 1);
 			}
 			return question;
 		}
@@ -93,6 +92,11 @@ public class QuestionService {
 		List<Question> questions = questionDao.getQuestionsByGameId(gameId);
 		logger.debug("Totally " + questions.size() + " questions retrieved");
 		return questions;
+	}
+	
+	public void removeQuestion(Long id) {
+		logger.debug("Removing question with id = " + id);
+		questionDao.removeQuestion(id);
 	}
 	
 	public Placemark getPlacemarkByGameAndQuestionId(Long gameId, Long questionId) {
@@ -133,6 +137,19 @@ public class QuestionService {
 	public void removePlacemark(Long id) {
 		logger.debug("Removing placemark with id = " + id);
 		placemarkDao.removePlacemark(id);
+	}
+
+	public Integer getSequence(Long gameId, Long questionId) {
+		logger.info("Getting sequence for game with id = " + gameId + " and question with id = " + questionId);
+		return questionDao.getSequence(gameId, questionId);
+	}
+	
+	public void moveUp(Long gameId, Long questionId) {
+		questionDao.moveUp(gameId, questionId);
+	}
+	
+	public void moveDown(Long gameId, Long questionId) {
+		questionDao.moveDown(gameId, questionId);
 	}
 	
 }

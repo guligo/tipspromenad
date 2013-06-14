@@ -15,8 +15,12 @@
 	$(document).ready(function() {
 		questionController.init(
 			<%= request.getParameter("id") %>,
+			'<%= Constants.URL.QUESTION_GET_ACTION %>',
 			'<%= Constants.URL.QUESTION_SAVE_ACTION %>',
-			'<%= Constants.URL.QUESTION_LIST_ACTION %>'
+			'<%= Constants.URL.QUESTION_LIST_ACTION %>',
+			'<%= Constants.URL.QUESTION_REMOVE_ACTION %>',
+			'<%= Constants.URL.QUESTION_MOVEUP_ACTION %>',
+			'<%= Constants.URL.QUESTION_MOVEDOWN_ACTION %>'
 		);
 	});
 </script>
@@ -48,12 +52,14 @@
 	</div>
 	<div class="modal-body form-horizontal">
 		<div class="control-group">
+			<input id="questionId" type="hidden" />
 			<label for="questionText" class="control-label">Question</label>
 			<div class="controls">
 				<textarea id="questionText" placeholder="Enter question..."></textarea>
 			</div>
 		</div>
 		<div class="control-group">
+			<input id="answer1Id" type="hidden" />
 			<label for="answer1Text" class="control-label radio">
 				<input id="answer1Correct" name="answerCorrect" type="radio" checked="checked" />1.&nbsp;
 			</label>
@@ -62,6 +68,7 @@
 			</div>
 		</div>
 		<div class="control-group">
+			<input id="answer2Id" type="hidden" />
 			<label for="answer2Text" class="control-label radio">
 				<input id="answer2Correct" name="answerCorrect" type="radio" />X.&nbsp;
 			</label>
@@ -70,6 +77,7 @@
 			</div>
 		</div>
 		<div class="control-group">
+			<input id="answer3Id" type="hidden" />
 			<label for="answer3Text" class="control-label radio">
 				<input id="answer3Correct" name="answerCorrect" type="radio" />2.&nbsp;
 			</label>

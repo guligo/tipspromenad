@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Represents entity for questions.
@@ -26,6 +27,8 @@ public class Question extends se.tipspromenad.entities.Entity {
 	private String text;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<Answer> answers;
+	@Transient
+	private Integer sequence;
 	
 	public Question() {
 		// for serialization purpose
@@ -49,6 +52,14 @@ public class Question extends se.tipspromenad.entities.Entity {
 	
 	public void setAnswers(List<Answer> answers) {
 		this.answers = answers;
+	}
+	
+	public Integer getSequence() {
+		return sequence;
+	}
+	
+	public void setSequence(Integer sequence) {
+		this.sequence = sequence;
 	}
 	
 }

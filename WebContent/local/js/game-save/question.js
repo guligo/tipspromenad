@@ -3,15 +3,35 @@
  */
 var questionController = function() {
 	
+	var DIRECTION_UP = 0;
+	var DIRECTION_DOWN = 1;
+	
+	var QUESTION_GET_ACTION = null;
 	var QUESTION_SAVE_ACTION = null;
 	var QUESTION_GET_LIST_ACTION = null;
+	var QUESTION_REMOVE_ACTION = null;
+	var QUESTION_MOVEUP_ACTION = null;
+	var QUESTION_MOVEDOWN_ACTION = null;
+	
+	function _getQuestion(questionId, callback) {
+		$.ajax({
+			url: QUESTION_GET_ACTION.replace('{id}', questionId),
+			type: 'get',
+		    contentType: 'application/json',
+		    dataType: 'json',
+		    success: function(question) {
+		    	if (callback != null) {
+		    		callback(question);
+		    	}
+			}
+		});
+	}
 	
 	function _addQuestion(callback) {
 		commonUtils.hideError($('#questionText'));
 		if ($('#questionText').val() == null || $('#questionText').val() == '') {
 			commonUtils.showError($('#questionText'), 'Question may not be empty');
 		} else {
-			
 			_questions.push({text: $('#questionText').val()});
 			if (callback != null) {
 				callback();
@@ -19,11 +39,18 @@ var questionController = function() {
 		}
 	}
 	
-	function _removeQuestion(index, callback) {
-		_questions.splice(index, 1);
-		if (callback != null) {
-			callback();
-		}
+	function _removeQuestion(id, callback) {
+		$.ajax({
+			url: QUESTION_REMOVE_ACTION.replace('{id}', id),
+			type: 'post',
+		    contentType: 'application/json',
+		    dataType: 'json',
+		    success: function() {
+		    	if (callback != null) {
+		    		callback();
+		    	}
+			}
+		});
 	}
 	
 	function _renderQuestions() {
@@ -31,11 +58,11 @@ var questionController = function() {
 		if (_questions != null) {
 			for (var i = 0; i < _questions.length; i++) {
 				html = '<div>';
-					html += '<a href="javascript:questionController.editQuestion(' + i + ');"><i class="icon-edit"> </i></a> ';
-					html += '<a href="javascript:questionController.removeQuestion(' + i + ');"><i class="icon-remove"> </i></a> ';
-					html += '<a href="javascript:questionController.moveUp(' + i + ');"><i class="icon-arrow-up"> </i></a> ';
-					html += '<a href="javascript:questionController.moveDown(' + i + ');"><i class="icon-arrow-down"> </i></a> ';
-					html += (i + 1) + '. ' + _questions[i].text;
+					html += '<a href="javascript:questionController.showDialog(' + _questions[i].id + ');"><i class="icon-edit"> </i></a> ';
+					html += '<a href="javascript:questionController.removeQuestion(' + _questions[i].id + ');"><i class="icon-remove"> </i></a> ';
+					html += '<a href="javascript:questionController.moveUpQuestion(' + gameController.getGameId() + ', ' + _questions[i].id + ');"><i class="icon-arrow-up"> </i></a> ';
+					html += '<a href="javascript:questionController.moveDownQuestion(' + gameController.getGameId() + ', ' + _questions[i].id + ');"><i class="icon-arrow-down"> </i></a> ';
+					html += '#' + _questions[i].sequence + '. ' + _questions[i].text;
 					if (_questions[i].answers != null) {
 						html += '<ol>';
 						for (var j = 0; j < _questions[i].answers.length; j++) {
@@ -52,11 +79,12 @@ var questionController = function() {
 	function _saveQuestion(gameId, callback) {
 		if (gameId != null) {
 			var question = {
+				id: $('#questionId').val(),
 				text: $('#questionText').val(),
 				answers: [
-				    {text: $('#answer1Text').val(), correct: $('#answer1Correct').is(':checked')},
-				    {text: $('#answer2Text').val(), correct: $('#answer2Correct').is(':checked')},
-				    {text: $('#answer3Text').val(), correct: $('#answer3Correct').is(':checked')}
+				    {id: $('#answer1Id').val(), text: $('#answer1Text').val(), correct: $('#answer1Correct').is(':checked')},
+				    {id: $('#answer2Id').val(), text: $('#answer2Text').val(), correct: $('#answer2Correct').is(':checked')},
+				    {id: $('#answer3Id').val(), text: $('#answer3Text').val(), correct: $('#answer3Correct').is(':checked')}
 				]};
 			
 			$.ajax({
@@ -93,6 +121,31 @@ var questionController = function() {
 		}
 	}
 	
+	function _moveQuestion(gameId, questionId, direction, callback) {
+		if (gameId != null && questionId != null) {
+			var url = null;
+			if (direction == DIRECTION_UP) {
+				url = QUESTION_MOVEUP_ACTION;
+			} else if (direction == DIRECTION_DOWN) {
+				url = QUESTION_MOVEDOWN_ACTION;
+			}
+			
+			if (url != null) {
+				$.ajax({
+					url: url.replace('{gameId}', gameId).replace('{questionId}', questionId),
+					type: 'post',
+				    contentType: 'application/json',
+				    dataType: 'json',
+				    success: function() {
+				    	if (callback != null) {
+				    		callback();
+				    	}
+					}
+				});
+			}
+		}
+	}
+	
 	function _initGUI() {
 		$('#addQuestionModal').modal({
 			show: false
@@ -100,9 +153,13 @@ var questionController = function() {
 	}
 	
 	return {
-		init: function(gameId, url1, url2) {
-			QUESTION_SAVE_ACTION = url1;
-			QUESTION_GET_LIST_ACTION = url2;
+		init: function(gameId, url1, url2, url3, url4, url5, url6) {
+			QUESTION_GET_ACTION = url1;
+			QUESTION_SAVE_ACTION = url2;
+			QUESTION_GET_LIST_ACTION = url3;
+			QUESTION_REMOVE_ACTION = url4;
+			QUESTION_MOVEUP_ACTION = url5;
+			QUESTION_MOVEDOWN_ACTION = url6;
 			
 			_initGUI();
 			if (gameId == null) {
@@ -114,11 +171,26 @@ var questionController = function() {
 				});
 			}
 		},
-		showDialog: function() {
-			if (gameController.getGameId() != null) {
-				$('#addQuestionModal').modal('show');
+		showDialog: function(questionId) {
+			if (questionId == null) {
+				if (gameController.getGameId() != null) {
+					$('#addQuestionModal').modal('show');
+				} else {
+					gameController.saveGame(function() {
+						$('#addQuestionModal').modal('show');
+					});
+				}
 			} else {
-				gameController.saveGame(function() {
+				_getQuestion(questionId, function(question) {
+					$('#questionId').val(question.id);
+					$('#questionText').val(question.text);
+					if (question.answers != null) {
+						for (var i = 0; i < question.answers.length; i++) {
+							$('#answer' + (i + 1) + 'Id').val(question.answers[i].id);
+							$('#answer' + (i + 1) + 'Text').val(question.answers[i].text);
+							$('#answer' + (i + 1) + 'Correct').attr('checked', question.answers[i].correct);
+						}
+					}
 					$('#addQuestionModal').modal('show');
 				});
 			}
@@ -129,8 +201,13 @@ var questionController = function() {
 		getQuestions: function(gameId, callback) {
 			_getQuestions(gameId, callback);
 		},
-		removeQuestion: function(index) {
-			_removeQuestion(index, _renderQuestions);
+		removeQuestion: function(id) {
+			_removeQuestion(id, function() {
+				_getQuestions(gameController.getGameId(), function(questions) {
+					_questions = questions;
+					_renderQuestions();
+				});
+			});
 		},
 		saveQuestion: function() {
 			_saveQuestion(gameController.getGameId(), function() {
@@ -138,6 +215,22 @@ var questionController = function() {
 					_questions = questions;
 					_renderQuestions();
 					questionController.hideDialog();
+				});
+			});
+		},
+		moveUpQuestion: function(gameId, questionId) {
+			_moveQuestion(gameId, questionId, DIRECTION_UP, function() {
+				_getQuestions(gameId, function(questions) {
+					_questions = questions;
+					_renderQuestions();
+				});
+			});
+		},
+		moveDownQuestion: function(gameId, questionId) {
+			_moveQuestion(gameId, questionId, DIRECTION_DOWN, function() {
+				_getQuestions(gameId, function(questions) {
+					_questions = questions;
+					_renderQuestions();
 				});
 			});
 		}

@@ -30,10 +30,13 @@ public class Constants {
 		public final static String GAME_SAVE_ACTION   = "game/save";
 		public final static String GAME_REMOVE_ACTION = "game/remove/{id}";
 		
+		public final static String QUESTION_GET_ACTION       = "question/get/{id}";
 		public final static String QUESTION_LIST_ACTION      = "question/list/{gameId}";
 		public final static String QUESTION_SAVE_ACTION      = "question/save";
 		public final static String QUESTION_SAVE_LIST_ACTION = "question/savelist";
 		public final static String QUESTION_REMOVE_ACTION    = "question/remove/{id}";
+		public final static String QUESTION_MOVEUP_ACTION    = "question/moveup/{gameId}/{questionId}";
+		public final static String QUESTION_MOVEDOWN_ACTION  = "question/movedown/{gameId}/{questionId}";
 		
 		public final static String PLACEMARK_GET_ACION     = "placemark/get/{gameId}/{questionId}";
 		public final static String PLACEMARK_LIST_ACTION   = "placemark/list/{gameId}";

@@ -10,14 +10,18 @@
 </style>
 
 <!-- scripts -->
+<!--
 <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+-->
 <script type="text/javascript" src="local/js/login.js"></script>
 <script type="text/javascript">		
 	$(document).ready(function() {
+		/*
 		Recaptcha.create("6LeC6eESAAAAAAGbjL53AJyBEGyNIVlPl9tTbr2D", "captcha", {
 			theme: "red",
 			callback: Recaptcha.focus_response_field
 		});
+		*/
 		
 		loginController.init(
 			'${pageContext.request.contextPath}/j_spring_security_check',
