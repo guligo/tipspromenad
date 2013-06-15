@@ -5,6 +5,7 @@
 	
     <!-- templates -->
     <definition name="main-template" template="/WEB-INF/templates/main.jsp" />
+    <definition name="error" template="/WEB-INF/views/error.jsp" />
     <definition name="mock" template="/WEB-INF/views/mock.jsp" />
     <!-- END! mock views -->
     

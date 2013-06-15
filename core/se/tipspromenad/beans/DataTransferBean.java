@@ -11,10 +11,10 @@ import java.util.Map;
  */
 public abstract class DataTransferBean {
 
-	public final static int STATUS_OK = 0;
-	public final static int STATUS_NOK = 1;
+	public final static int     STATUS_OK  = 0;
+	public final static int     STATUS_NOK = 1;
 
-	private int status;
+	private int                 status;
 	private Map<String, String> errors;
 
 	public DataTransferBean() {
@@ -37,14 +37,14 @@ public abstract class DataTransferBean {
 	public void setErrors(Map<String, String> errors) {
 		this.errors = errors;
 	}
-	
+
 	public void reject(String field, String message) {
 		setStatus(STATUS_NOK);
 		errors.put(field, message);
 	}
-	
+
 	public boolean isRejected(String field) {
 		return errors.get(field) != null;
 	}
-	
+
 }

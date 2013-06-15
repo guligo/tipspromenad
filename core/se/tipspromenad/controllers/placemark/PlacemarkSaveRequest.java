@@ -1,4 +1,4 @@
-package se.tipspromenad.controllers.question;
+package se.tipspromenad.controllers.placemark;
 
 import se.tipspromenad.controllers.RequestBean;
 

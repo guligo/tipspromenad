@@ -56,23 +56,38 @@ var questionController = function() {
 	function _renderQuestions() {
 		$('#questionContainer').html('');
 		if (_questions != null) {
+			var html = '';
+			html += '<table style="width: 100%;" class="table table-bordered table-hover">';
 			for (var i = 0; i < _questions.length; i++) {
-				html = '<div>';
-					html += '<a href="javascript:questionController.showDialog(' + _questions[i].id + ');"><i class="icon-edit"> </i></a> ';
-					html += '<a href="javascript:questionController.removeQuestion(' + _questions[i].id + ');"><i class="icon-remove"> </i></a> ';
-					html += '<a href="javascript:questionController.moveUpQuestion(' + gameController.getGameId() + ', ' + _questions[i].id + ');"><i class="icon-arrow-up"> </i></a> ';
-					html += '<a href="javascript:questionController.moveDownQuestion(' + gameController.getGameId() + ', ' + _questions[i].id + ');"><i class="icon-arrow-down"> </i></a> ';
-					html += '#' + _questions[i].sequence + '. ' + _questions[i].text;
-					if (_questions[i].answers != null) {
-						html += '<ol>';
-						for (var j = 0; j < _questions[i].answers.length; j++) {
-							html += '<li>' + _questions[i].answers[j].text + ',' + _questions[i].answers[j].correct + '</li>';
+				html += '<tr>';
+					html += '<td style="text-align: center;">';
+						html += _questions[i].sequence + '.';
+					html += '</td>';
+					html += '<td style="width: 750px;">';
+						html += _questions[i].text;
+						if (_questions[i].answers != null) {
+							html += '<ol>';
+							for (var j = 0; j < _questions[i].answers.length; j++) {
+								if (_questions[i].answers[j].correct == true) {
+									// html += '<li>' + _questions[i].answers[j].text + '&nbsp;<i class="icon-ok">&nbsp;</i></li>';
+									html += '<li><b>' + _questions[i].answers[j].text + '</b></li>';
+								} else {
+									html += '<li>' + _questions[i].answers[j].text + '</li>';
+								}
+							}
+							html += '</ol>';
 						}
-						html += '</ol>';
-					}
-				html += '<div>';
-				$('#questionContainer').append(html);
+					html += '</td>';
+					html += '<td>';
+						html += '<a href="javascript:questionController.showDialog(' + _questions[i].id + ');"><i class="icon-edit"> </i></a> ';
+						html += '<a href="javascript:questionController.removeQuestion(' + _questions[i].id + ');"><i class="icon-remove"> </i></a> ';
+						html += '<a href="javascript:questionController.moveUpQuestion(' + gameController.getGameId() + ', ' + _questions[i].id + ');"><i class="icon-arrow-up"> </i></a> ';
+						html += '<a href="javascript:questionController.moveDownQuestion(' + gameController.getGameId() + ', ' + _questions[i].id + ');"><i class="icon-arrow-down"> </i></a> ';
+					html += '</td>';
+				html += '</tr>';
 			}
+			html += '</table>';
+			$('#questionContainer').html(html);
 		}
 	}
 	

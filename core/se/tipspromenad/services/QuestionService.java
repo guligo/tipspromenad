@@ -9,10 +9,8 @@ import org.springframework.stereotype.Component;
 
 import se.tipspromenad.entities.Answer;
 import se.tipspromenad.entities.Game;
-import se.tipspromenad.entities.Placemark;
 import se.tipspromenad.entities.Question;
 import se.tipspromenad.services.dao.GameDao;
-import se.tipspromenad.services.dao.PlacemarkDao;
 import se.tipspromenad.services.dao.QuestionDao;
 
 /**
@@ -28,9 +26,6 @@ public class QuestionService {
 	
 	@Autowired
 	private QuestionDao questionDao;
-	
-	@Autowired
-	private PlacemarkDao placemarkDao;
 	
 	public Question getQuestion(Long id) {
 		return questionDao.getQuestion(id);
@@ -97,46 +92,6 @@ public class QuestionService {
 	public void removeQuestion(Long id) {
 		logger.debug("Removing question with id = " + id);
 		questionDao.removeQuestion(id);
-	}
-	
-	public Placemark getPlacemarkByGameAndQuestionId(Long gameId, Long questionId) {
-		logger.debug("Retrieving placemarks for game with id = " + gameId + " and question with id = " + questionId);
-		
-		Placemark placemark = placemarkDao.getPlacemarkByGameAndQuestionId(gameId, questionId);
-		return placemark;
-	}
-	
-	public List<Placemark> getPlacemarksByGameId(Long gameId) {
-		logger.debug("Retrieving placemark list for game with id = " + gameId);
-		
-		List<Placemark> placemarks = placemarkDao.getPlacemarksByGameId(gameId);
-		logger.debug("Totally " + placemarks.size() + " placemarks retrieved");
-		return placemarks;
-	}
-	
-	public Placemark savePlacemark(Long id, Long gameId, Long questionId, Double latitude, Double longitude) {
-		logger.debug("Saving placemark with id = " + id + ", gameId = " + gameId + ", questionId = " + questionId + ", latitude = " + latitude + " and longitude = " + longitude);
-		
-		Placemark placemark;
-		if (id == null) {
-			placemark = new Placemark();
-			placemark.setQuestion(new Question(questionId));
-			placemark.setGame(new Game(gameId));
-			placemark.setLatitude(latitude);
-			placemark.setLongitude(longitude);
-			placemarkDao.createPlacemark(placemark);
-		} else {
-			placemark = placemarkDao.getPlacemark(id);
-			placemark.setLatitude(latitude);
-			placemark.setLongitude(longitude);
-			placemarkDao.updatePlacemark(placemark);
-		}
-		return placemark;
-	}
-	
-	public void removePlacemark(Long id) {
-		logger.debug("Removing placemark with id = " + id);
-		placemarkDao.removePlacemark(id);
 	}
 
 	public Integer getSequence(Long gameId, Long questionId) {

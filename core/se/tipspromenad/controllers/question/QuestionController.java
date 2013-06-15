@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import se.tipspromenad.entities.Placemark;
 import se.tipspromenad.entities.Question;
 import se.tipspromenad.globals.Constants;
 import se.tipspromenad.services.QuestionService;
@@ -83,21 +82,6 @@ public class QuestionController {
 	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.QUESTION_REMOVE_ACTION)
 	public @ResponseBody void removeQuestion(@PathVariable Long id) {
 		questionService.removeQuestion(id);
-	}
-	
-	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.PLACEMARK_LIST_ACTION)
-	public @ResponseBody List<Placemark> getPlacemarks(@PathVariable Long gameId) {
-		return questionService.getPlacemarksByGameId(gameId);
-	}
-	
-	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.PLACEMARK_SAVE_ACTION)
-	public @ResponseBody Placemark savePlacemark(@RequestBody PlacemarkSaveRequest request) {
-		return questionService.savePlacemark(request.getId(), request.getGameId(), request.getQuestionId(), request.getLatitude(), request.getLongitude());
-	}
-	
-	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.PLACEMARK_REMOVE_ACTION)
-	public @ResponseBody void removePlacemark(@PathVariable Long id) {
-		questionService.removePlacemark(id);
 	}
 	
 }

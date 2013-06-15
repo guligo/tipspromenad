@@ -1,5 +1,6 @@
 <!-- styles -->
 <style>
+	/* http://www.catswhocode.com/blog/how-to-create-a-bsod-like-404-page */
 	#errorDialog {
 		display: none;
 	}

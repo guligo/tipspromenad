@@ -49,11 +49,13 @@ public class Constants {
 	 * Holds view names.
 	 */
 	public static class Views {
-		
+
+		public final static String ERROR = "error";
+				
 		public final static String LOGIN = "login";
 		
 		public final static String HOME = "home";
-		
+
 		public final static String GAME_LIST = "game-list";
 		
 		public final static String GAME_SAVE = "game-save";
