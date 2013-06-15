@@ -44,7 +44,7 @@
 	<a href="javascript:saveGameAndQuestions();" class="btn">Next</a>
 </c:if>
 
-<!-- dialog -->
+<!-- dialogs -->
 <div id="addQuestionModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addQuestionModalLabel" aria-hidden="true">
   	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -87,7 +87,7 @@
 		</div>
 	</div>
 	<div class="modal-footer">
-		<a href="javascript:questionController.saveQuestion(gameController.getGameId());" class="btn btn-primary">Save</a>
+		<a href="javascript:questionController.saveQuestion();" class="btn btn-primary">Save</a>
 		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 	</div>
 </div>

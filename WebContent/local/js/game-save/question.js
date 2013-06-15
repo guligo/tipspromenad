@@ -171,7 +171,7 @@ var questionController = function() {
 				});
 			}
 		},
-		showDialog: function(questionId) {
+		showDialog: function(questionId, onhide) {
 			if (questionId == null) {
 				if (gameController.getGameId() != null) {
 					$('#addQuestionModal').modal('show');

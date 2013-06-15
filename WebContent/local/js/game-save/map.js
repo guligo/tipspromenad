@@ -80,6 +80,23 @@ var mapController = function() {
 		}
 	}
 	
+	function _getQuestionWindow(question) {
+		var html = '';
+		html += '<div>';
+			html += question.text;
+			html += '<br />';
+			html += '<br />';
+			if (question.answers != null) {
+				html += '<ol>';
+				for (var i = 0; i < question.answers.length; i++) {
+					html += '<li>' + question.answers[i].text + ',' + question.answers[i].correct + '</li>';
+				}
+				html += '</ol>';
+			}
+		html += '</div>';
+		return html;
+	}
+	
 	function _putPlacemark(question) {
 		if (question != null && question.placemark != null) {
 			var marker = new google.maps.Marker({
@@ -90,12 +107,7 @@ var mapController = function() {
 			});
 			
 			var window = new google.maps.InfoWindow({
-			    content: question.text
-			    	+ '<br />'
-			    	+ '<br />'
-			    	+ '<a href="javascript:$(\'#myModalButton\').click();" class="btn btn-primary">Edit</a>'
-			    	+ '&nbsp;'
-			    	+ '<a href="javascript:mapController.removePlacemarkFromDatabase(' + question.placemark.id + ');" class="btn">Remove placemark</a>'
+			    content: _getQuestionWindow(question)
 			});
 			
 			google.maps.event.addListener(marker, 'click', function(event) {

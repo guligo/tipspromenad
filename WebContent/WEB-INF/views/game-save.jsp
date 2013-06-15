@@ -1,5 +1,6 @@
 <%@ include file="../commons/commons.jsp" %>
 <%@ page import="se.tipspromenad.globals.Constants" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
 <!-- styles -->
 <style>

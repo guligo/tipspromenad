@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import se.tipspromenad.entities.Answer;
 import se.tipspromenad.entities.Question;
-import se.tipspromenad.services.QuestionService;
 
 /**
  * Link between business logic and database.
