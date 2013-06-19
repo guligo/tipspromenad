@@ -55,13 +55,13 @@
 			<input id="questionId" type="hidden" />
 			<label for="questionText" class="control-label">Question</label>
 			<div class="controls">
-				<textarea id="questionText" placeholder="Enter question..."></textarea>
+				<textarea id="questionText" placeholder="Enter question..." style="width: 300px; height: 100px;"></textarea>
 			</div>
 		</div>
 		<div class="control-group">
 			<input id="answer1Id" type="hidden" />
 			<label for="answer1Text" class="control-label radio">
-				<input id="answer1Correct" name="answerCorrect" type="radio" checked="checked" />1.&nbsp;
+				<input id="answer1Correct" name="answerCorrect" type="radio" style="margin-left: 125px;" />1.&nbsp;
 			</label>
 			<div class="controls">
 				<input type="text" id="answer1Text" placeholder="Enter answer..."></input>
@@ -70,7 +70,7 @@
 		<div class="control-group">
 			<input id="answer2Id" type="hidden" />
 			<label for="answer2Text" class="control-label radio">
-				<input id="answer2Correct" name="answerCorrect" type="radio" />X.&nbsp;
+				<input id="answer2Correct" name="answerCorrect" type="radio" style="margin-left: 125px;" />X.&nbsp;
 			</label>
 			<div class="controls">
 				<input type="text" id="answer2Text" placeholder="Enter answer..."></input>
@@ -79,7 +79,7 @@
 		<div class="control-group">
 			<input id="answer3Id" type="hidden" />
 			<label for="answer3Text" class="control-label radio">
-				<input id="answer3Correct" name="answerCorrect" type="radio" />2.&nbsp;
+				<input id="answer3Correct" name="answerCorrect" type="radio" style="margin-left: 125px;" />2.&nbsp;
 			</label>
 			<div class="controls">
 				<input type="text" id="answer3Text" placeholder="Enter answer..."></input>

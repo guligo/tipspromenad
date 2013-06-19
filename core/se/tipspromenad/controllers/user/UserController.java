@@ -151,8 +151,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = Constants.WS.USER_REGISTER)
-	public @ResponseBody UserRegistrationResponseBean register(@RequestBody UserRegistrationRequestBean request) throws IOException {
-		UserRegistrationResponseBean response = new UserRegistrationResponseBean();
+	public @ResponseBody UserRegistrationResponse register(@RequestBody UserRegistrationRequest request) throws IOException {
+		UserRegistrationResponse response = new UserRegistrationResponse();
 		try {
 			// processing
 			userNameValidator.validate(request.getUsername(), response.getErrors());
@@ -170,6 +170,7 @@ public class UserController {
 			logger.error("Unexpected error in WS on user registration", e);
 		}
 		response.normalize();
+		logger.info("### " + response.getUserId() + " ###");
 		return response;
 	}
 	

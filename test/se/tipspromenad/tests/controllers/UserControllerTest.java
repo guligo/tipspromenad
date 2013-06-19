@@ -1,4 +1,4 @@
-package se.tipspromenad.tests.ws;
+package se.tipspromenad.tests.controllers;
 
 import java.io.IOException;
 
@@ -14,12 +14,14 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter;
 
-import se.tipspromenad.controllers.user.UserRegistrationResponseBean;
+import se.tipspromenad.controllers.user.UserController;
+import se.tipspromenad.controllers.user.UserLoginResponse;
+import se.tipspromenad.controllers.user.UserRegistrationResponse;
 import se.tipspromenad.entities.User;
 import se.tipspromenad.globals.Constants;
 import se.tipspromenad.services.UserService;
-import se.tipspromenad.tests.controllers.AbstractControllerTest;
 import se.tipspromenad.tests.utils.Order;
 
 /**
@@ -27,9 +29,9 @@ import se.tipspromenad.tests.utils.Order;
  * 
  * @author eigogul
  */
-public class UserWebServiceTest extends AbstractControllerTest {
+public class UserControllerTest extends AbstractControllerTest {
 	
-	private final static Logger logger = Logger.getLogger(UserWebServiceTest.class);
+	private final static Logger logger = Logger.getLogger(UserControllerTest.class);
 	
 	private final static String TEST_USER_USERNAME = "foobar";
 	private final static String TEST_USER_EMAIL = "foo.bar@qwer.ty";
@@ -41,6 +43,9 @@ public class UserWebServiceTest extends AbstractControllerTest {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private UserController userController;
+	
 	@Before
 	public void init() throws Exception {
 		super.init();
@@ -49,25 +54,26 @@ public class UserWebServiceTest extends AbstractControllerTest {
 	@Test
 	@Order(order = 1)
 	public void unsuccessfulRegistrationTest() throws ServletException, IOException {
-		MockHttpServletRequest request = new MockHttpServletRequest("POST", Constants.WS.USER_REGISTER);
+		MockHttpServletRequest request = new MockHttpServletRequest("POST", Constants.URL.USER_LOGIN_ACTION);
 		request.setContentType("application/json");
 		String content = ("{'username':'" + TEST_USER_WRONG_USERNAME + "','email':'" + TEST_USER_WRONG_EMAIL + "','password':'" + TEST_USER_PASSWORD + "'}").replaceAll("'", "\"");
 		request.setContent(content.getBytes());
 		
-		logger.info(content + " -> " + Constants.WS.USER_REGISTER);
+		logger.info(content + " -> " + Constants.URL.USER_LOGIN_ACTION);
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		dispatcher.service(request, response);
-		logger.info(Constants.WS.USER_REGISTER + " -> " + response.getContentAsString());
+		logger.info(Constants.URL.USER_LOGIN_ACTION + " -> " + response.getContentAsString());
 		
 		assertEquals(HttpServletResponse.SC_OK, response.getStatus());
-		UserRegistrationResponseBean bean = objectMapper.readValue(response.getContentAsByteArray(), UserRegistrationResponseBean.class);
-		assertNotNull(bean.getErrorCodes());
+		UserRegistrationResponse bean = objectMapper.readValue(response.getContentAsByteArray(), UserRegistrationResponse.class);
+		assertNotNull(bean.getErrors());
+		assertTrue(bean.getErrors().size() > 0);
 		assertNull(bean.getUserId());
 	}
 	
 	@Test
 	@Order(order = 2)
-	public void successfulRegistrationTest() throws JsonGenerationException, JsonMappingException, IOException, ServletException {
+	public void successfulRegistrationTest() throws Exception {
 		// make sure that there is no such user in DB
 		User user = userService.getUserByEmail(TEST_USER_EMAIL);
 		if (user != null) {
@@ -75,20 +81,14 @@ public class UserWebServiceTest extends AbstractControllerTest {
 		}
 		assertNull(userService.getUserByEmail(TEST_USER_EMAIL));
 		
-		// do the actual testing
-		MockHttpServletRequest request = new MockHttpServletRequest("POST", Constants.WS.USER_REGISTER);
-		request.setContentType("application/json");
-		String content = ("{'username':'" + TEST_USER_USERNAME + "','email':'" + TEST_USER_EMAIL + "','password':'" + TEST_USER_PASSWORD + "'}").replaceAll("'", "\"");
-		request.setContent(content.getBytes());
+		UserRegistrationResponse bean = postJSON(
+			UserRegistrationResponse.class,
+			userController,
+			"/" + Constants.WS.USER_REGISTER,
+			"{'username':'" + TEST_USER_USERNAME + "','email':'" + TEST_USER_EMAIL + "','password':'" + TEST_USER_PASSWORD + "'}"
+		);
 		
-		logger.info(content + " -> " + Constants.WS.USER_REGISTER);
-		MockHttpServletResponse response = new MockHttpServletResponse();
-		dispatcher.service(request, response);
-		logger.info(Constants.WS.USER_REGISTER + " -> " + response.getContentAsString());
-		
-		assertEquals(HttpServletResponse.SC_OK, response.getStatus());
-		UserRegistrationResponseBean bean = objectMapper.readValue(response.getContentAsByteArray(), UserRegistrationResponseBean.class);
-		assertEquals(0, bean.getErrorCodes().size());
+		assertEquals(0, bean.getErrors().size());
 		assertNotNull(bean.getUserId());
 		
 		user = userService.getUserByEmail(TEST_USER_EMAIL);
@@ -100,19 +100,19 @@ public class UserWebServiceTest extends AbstractControllerTest {
 	@Test
 	@Order(order = 3)
 	public void successfulLoginTest() throws ServletException, IOException {
-		MockHttpServletRequest request = new MockHttpServletRequest("POST", Constants.WS.USER_LOGIN);
+		MockHttpServletRequest request = new MockHttpServletRequest("POST", Constants.WS.USER_REGISTER);
 		request.setContentType("application/json");
 		String content = ("{'email':'" + TEST_USER_EMAIL + "','password':'" + TEST_USER_PASSWORD + "'}").replaceAll("'", "\"");
 		request.setContent(content.getBytes());
 		
-		logger.info(content + " -> " + Constants.WS.USER_LOGIN);
+		logger.info(content + " -> " + Constants.WS.USER_REGISTER);
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		dispatcher.service(request, response);
-		logger.info(Constants.WS.USER_LOGIN + " -> " + response.getContentAsString());
+		logger.info(Constants.WS.USER_REGISTER + " -> " + response.getContentAsString());
 		
 		assertEquals(HttpServletResponse.SC_OK, response.getStatus());
-		UserLoginResponseBean bean = objectMapper.readValue(response.getContentAsByteArray(), UserLoginResponseBean.class);
-		assertEquals(0, bean.getErrorCodes().size());
+		UserLoginResponse bean = objectMapper.readValue(response.getContentAsByteArray(), UserLoginResponse.class);
+		// assertEquals(0, bean.getErrorCodes().size());
 		assertNotNull(bean.getSessionId());
 	}
 	

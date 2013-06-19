@@ -3,6 +3,8 @@ package se.tipspromenad.services.dao;
 import java.math.BigInteger;
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -98,12 +100,18 @@ public class QuestionDao {
 			.createNativeQuery("select max(sequence) from games_questions where sequence < :sequence")
 			.setParameter("sequence", currentSeq)
 			.getSingleResult();
-		Long targetQuestionId = ((BigInteger) commonDao.getEntityManager()
-			.createNativeQuery("select questions_id from games_questions where games_id = :gameId and sequence = :sequence")
-			.setParameter("gameId", gameId)
-			.setParameter("sequence", targetSeq)
-			.getSingleResult())
-			.longValue();
+		
+		Long targetQuestionId;
+		try {
+			targetQuestionId = ((BigInteger) commonDao.getEntityManager()
+				.createNativeQuery("select questions_id from games_questions where games_id = :gameId and sequence = :sequence")
+				.setParameter("gameId", gameId)
+				.setParameter("sequence", targetSeq)
+				.getSingleResult())
+				.longValue();
+		} catch (NoResultException e) {
+			targetQuestionId = null;
+		}
 		
 		if (targetSeq != null && targetQuestionId != null) {
 			setSequence(gameId, questionId, targetSeq);
@@ -120,12 +128,18 @@ public class QuestionDao {
 			.createNativeQuery("select min(sequence) from games_questions where sequence > :sequence")
 			.setParameter("sequence", currentSeq)
 			.getSingleResult();
-		Long targetQuestionId = ((BigInteger) commonDao.getEntityManager()
-			.createNativeQuery("select questions_id from games_questions where games_id = :gameId and sequence = :sequence")
-			.setParameter("gameId", gameId)
-			.setParameter("sequence", targetSeq)
-			.getSingleResult())
-			.longValue();
+		
+		Long targetQuestionId;
+		try {
+			targetQuestionId = ((BigInteger) commonDao.getEntityManager()
+    			.createNativeQuery("select questions_id from games_questions where games_id = :gameId and sequence = :sequence")
+    			.setParameter("gameId", gameId)
+    			.setParameter("sequence", targetSeq)
+    			.getSingleResult())
+    			.longValue();
+		} catch (NoResultException e) {
+			targetQuestionId = null;
+		}
 		
 		if (targetSeq != null && targetQuestionId != null) {
 			setSequence(gameId, questionId, targetSeq);

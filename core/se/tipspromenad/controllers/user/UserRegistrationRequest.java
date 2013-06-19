@@ -7,7 +7,7 @@ import se.tipspromenad.controllers.RequestBean;
  * 
  * @author eigogul
  */
-public class UserRegistrationRequestBean extends RequestBean {
+public class UserRegistrationRequest extends RequestBean {
 
 	private static final long serialVersionUID = 1L;
 
@@ -15,11 +15,11 @@ public class UserRegistrationRequestBean extends RequestBean {
 	private String email;
 	private String password;
 
-	public UserRegistrationRequestBean() {
+	public UserRegistrationRequest() {
 		// empty
 	}
 
-	public UserRegistrationRequestBean(String username, String email, String password) {
+	public UserRegistrationRequest(String username, String email, String password) {
 		this.username = username;
 		this.email = email;
 		this.password = password;

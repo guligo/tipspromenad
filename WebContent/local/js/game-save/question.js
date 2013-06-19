@@ -3,6 +3,8 @@
  */
 var questionController = function() {
 	
+	var LABELS = ['1.', 'X.', '2.'];
+	
 	var DIRECTION_UP = 0;
 	var DIRECTION_DOWN = 1;
 	
@@ -60,23 +62,26 @@ var questionController = function() {
 			html += '<table style="width: 100%;" class="table table-bordered table-hover">';
 			for (var i = 0; i < _questions.length; i++) {
 				html += '<tr>';
-					html += '<td style="text-align: center;">';
+					html += '<td style="text-align: center; vertical-align: middle;">';
 						html += _questions[i].sequence + '.';
 					html += '</td>';
 					html += '<td style="width: 750px;">';
-						html += _questions[i].text;
-						if (_questions[i].answers != null) {
-							html += '<ol>';
-							for (var j = 0; j < _questions[i].answers.length; j++) {
-								if (_questions[i].answers[j].correct == true) {
-									// html += '<li>' + _questions[i].answers[j].text + '&nbsp;<i class="icon-ok">&nbsp;</i></li>';
-									html += '<li><b>' + _questions[i].answers[j].text + '</b></li>';
-								} else {
-									html += '<li>' + _questions[i].answers[j].text + '</li>';
+						html += '<p>';
+							html += _questions[i].text;
+						html += '</p>';
+						html += '<p>';
+							if (_questions[i].answers != null) {
+								for (var j = 0; j < _questions[i].answers.length; j++) {
+									var clazz = '';
+									if (_questions[i].answers[j].correct == true) {
+										clazz = 'badge badge-success';
+									} else {
+										clazz = 'badge';
+									}
+									html += '<span class="' + clazz + '">' + LABELS[j] + '</span>&nbsp;' + _questions[i].answers[j].text + '<br />';
 								}
 							}
-							html += '</ol>';
-						}
+						html += '</p>';
 					html += '</td>';
 					html += '<td>';
 						html += '<a href="javascript:questionController.showDialog(' + _questions[i].id + ');"><i class="icon-edit"> </i></a> ';
@@ -188,6 +193,15 @@ var questionController = function() {
 		},
 		showDialog: function(questionId, onhide) {
 			if (questionId == null) {
+				$('#questionId').val(null);
+				$('#questionText').val(null);
+				// FIXME: Ugly 3!
+				for (var i = 0; i < 3; i++) {
+					$('#answer' + (i + 1) + 'Id').val(null);
+					$('#answer' + (i + 1) + 'Text').val(null);
+					$('#answer' + (i + 1) + 'Correct').attr('checked', i == 0);
+				}
+				
 				if (gameController.getGameId() != null) {
 					$('#addQuestionModal').modal('show');
 				} else {

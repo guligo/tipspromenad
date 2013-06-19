@@ -8,6 +8,15 @@ package se.tipspromenad.globals;
 public class Constants {
 	
 	/**
+	 * Holds system constants.
+	 */
+	public static interface System {
+		
+		public final static String DEFAULT_ENCODING = "UTF-8";
+		
+	}
+	
+	/**
 	 * Holds URLs.
 	 */
 	public static class URL {
