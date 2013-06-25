@@ -74,37 +74,43 @@ var loginController = function() {
 		$('#usernameControlGroup').removeClass('error')  ; $('#usernameControlGroup .controls .help-block').remove();
 		$('#usernameControlGroup').removeClass('success');
 		$('#passwordControlGroup').removeClass('error')  ; $('#passwordControlGroup .controls .help-block').remove();
-		$('#confirmControlGroup') .removeClass('error')  ; $('#confirmControlGroup  .controls .help-block').remove();								
-		$.ajax({
-			type: 'POST',
-			url: REGISTRATION_URL,
-			data: {
-				email   : $('#emailInput')   .val(),
-				username: $('#usernameInput').val(),
-				password: $('#passwordInput').val(),
-				confirm : $('#confirmInput') .val()
-			},
-			success: function(registrationBean) {
-				if (registrationBean.status == STATUS_NOK) {
-					for (var field in registrationBean.errors) {
-						$('#' + field + 'ControlGroup').addClass('error');
-						$('#' + field + 'ControlGroup .controls').append(
-							'<span class="help-block">' +
-								registrationBean.errors[field] +
-							'</span>'
+		$('#confirmControlGroup') .removeClass('error')  ; $('#confirmControlGroup  .controls .help-block').remove();
+		
+		if ($('#passwordInput').val() == $('#confirmInput') .val()) {		
+			$.ajax({
+				type: 'post',
+				contentType: 'application/json',
+			    dataType: 'json',
+				url: REGISTRATION_URL,
+				data: JSON.stringify({
+					email   : $('#emailInput')   .val(),
+					username: $('#usernameInput').val(),
+					password: $('#passwordInput').val()
+				}),
+				success: function(registrationBean) {
+					if (registrationBean.status == STATUS_NOK) {
+						for (var field in registrationBean.errors) {
+							$('#' + field + 'ControlGroup').addClass('error');
+							$('#' + field + 'ControlGroup .controls').append(
+								'<span class="help-block">' +
+									registrationBean.errors[field] +
+								'</span>'
+							);
+						}
+					} else if (registrationBean.status == STATUS_OK) {
+						$('#usernameControlGroup').addClass('success');
+						$('#usernameControlGroup .controls').append(
+							'<span class="help-block">Now use your username to sign in!</span>'
 						);
 					}
-				} else if (registrationBean.status == STATUS_OK) {
-					$('#usernameControlGroup').addClass('success');
-					$('#usernameControlGroup .controls').append(
-						'<span class="help-block">Now use your username to sign in!</span>'
-					);
+				},
+				error: function(xhr) {
+					errorHandler.handle('Error on performing user registration', xhr);
 				}
-			},
-			error: function(xhr) {
-				errorHandler.handle('Error on performing user registration', xhr);
-			}
-		});
+			});
+		} else {
+			alert('Email too short!');
+		}		
 	}
 	
 	return {

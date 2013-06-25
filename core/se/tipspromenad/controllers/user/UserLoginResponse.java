@@ -15,9 +15,6 @@ public class UserLoginResponse extends ResponseBean {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final int ERROR_CODE_WRONG_EMAIL = 1;
-	public static final int ERROR_CODE_WRONG_PASSWORD = 2;
-
 	private Long sessionId;
 
 	public Long getSessionId() {

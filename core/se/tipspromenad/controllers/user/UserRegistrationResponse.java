@@ -16,7 +16,11 @@ public class UserRegistrationResponse extends ResponseBean {
 	private static final long serialVersionUID = 1L;
 	
 	private Long userId;
-
+	
+	public UserRegistrationResponse() {
+		super();
+	}
+	
 	public Long getUserId() {
 		return userId;
 	}

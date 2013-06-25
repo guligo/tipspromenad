@@ -65,7 +65,7 @@ public abstract class AbstractControllerTest extends TestCase {
 	};
 
 	protected <T> T postJSON(Class<T> clazz, Object controller, String url, String content) throws Exception {
-		MockHttpServletRequest request = new MockHttpServletRequest(servletContext, "POST", "/" + Constants.WS.USER_REGISTER);
+		MockHttpServletRequest request = new MockHttpServletRequest(servletContext, "POST", url);
 		request.addHeader("Accept", HTTP_ACCEPT_JSON);
 		request.addHeader("Content-Type", HTTP_CONTENT_TYPE_JSON);
 		request.setCharacterEncoding(Constants.System.DEFAULT_ENCODING);

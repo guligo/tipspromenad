@@ -1,8 +1,6 @@
 package se.tipspromenad.controllers.user;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import se.tipspromenad.beans.DataTransferBean;
 import se.tipspromenad.beans.UserProfileBean;
-import se.tipspromenad.beans.UserRegistrationBean;
 import se.tipspromenad.entities.User;
 import se.tipspromenad.entities.UserProfile;
 import se.tipspromenad.entities.enums.Gender;
@@ -50,38 +47,6 @@ public class UserController {
 		userNameValidator     = new BasicStringValidator(User.MIN_USERNAME_LENGTH, User.MAX_USERNAME_LENGTH, UserError.USERNAME_EMPTY, UserError.USERNAME_TOO_SHORT, UserError.USERNAME_TOO_LONG);
 		userEmailValidator    = new BasicStringValidator(User.MIN_EMAIL_LENGTH, User.MAX_EMAIL_LENGTH, UserError.EMAIL_EMPTY, UserError.EMAIL_TOO_SHORT, UserError.EMAIL_TOO_LONG);
 		userPasswordValidator = new BasicStringValidator(User.MIN_PASSWORD_LENGTH, User.MAX_PASSWORD_LENGTH, UserError.PASSWORD_EMPTY, UserError.PASSWORD_TOO_SHORT, UserError.PASSWORD_TOO_LONG);
-	}
-	
-	/**
-	 * Action responsible for performing registration of a new user.
-	 */
-	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.USER_REGISTRATION_ACTION)
-	public @ResponseBody DataTransferBean doRegistration(String email, String username, String password, String confirm) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-		UserRegistrationBean registrationBean = new UserRegistrationBean(email, username, password, confirm);
-		
-		// validation
-		ValidationUtils.validate(registrationBean, "email", "E-mail", email, User.MIN_EMAIL_LENGTH, User.MAX_EMAIL_LENGTH);
-		if (!registrationBean.isRejected("email")) {
-			if (userService.getUserByEmail(email) != null) {
-				registrationBean.reject("email", "User with such email is already registred");
-			}
-		}
-		ValidationUtils.validate(registrationBean, "username", "Username", username, User.MIN_USERNAME_LENGTH, User.MAX_USERNAME_LENGTH);
-		if (!registrationBean.isRejected("username")) {
-			if (userService.getUserByUsername(username) != null) {
-				registrationBean.reject("username", "User with such username is already registred");
-			}
-		}
-		ValidationUtils.validate(registrationBean, "password", "Password", password, User.MIN_PASSWORD_LENGTH, User.MAX_PASSWORD_LENGTH);
-		if (registrationBean.getStatus() == DataTransferBean.STATUS_OK && !password.equals(confirm)) {
-			registrationBean.reject("confirm", "This field must match with the password field");
-		}
-		
-		// actions
-		if (registrationBean.getStatus() == DataTransferBean.STATUS_OK) {
-			userService.createUser(registrationBean.getEmail(), registrationBean.getUsername(), registrationBean.getPassword());
-		}
-		return registrationBean;
 	}
 	
 	/**
@@ -150,7 +115,7 @@ public class UserController {
 		return response;
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, value = Constants.WS.USER_REGISTER)
+	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.USER_REGISTRATION_ACTION)
 	public @ResponseBody UserRegistrationResponse register(@RequestBody UserRegistrationRequest request) throws IOException {
 		UserRegistrationResponse response = new UserRegistrationResponse();
 		try {
@@ -170,7 +135,6 @@ public class UserController {
 			logger.error("Unexpected error in WS on user registration", e);
 		}
 		response.normalize();
-		logger.info("### " + response.getUserId() + " ###");
 		return response;
 	}
 	

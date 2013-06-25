@@ -4,8 +4,9 @@
 <!-- styles -->
 <style>
 	body {
-		background-image: url('local/img/image.jpg');
-		background-position: 50%;
+		background-image: url('local/img/image-new-one.jpg');
+		background-position: center top;
+		background-size: 100% auto;
 	}
 </style>
 
