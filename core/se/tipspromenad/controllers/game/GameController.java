@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import se.tipspromenad.controllers.ResponseBean;
 import se.tipspromenad.entities.Game;
 import se.tipspromenad.globals.Constants;
 import se.tipspromenad.security.UserWrapper;
@@ -28,61 +27,63 @@ import se.tipspromenad.validation.BasicStringValidator;
 /**
  * MVC paradigm controller responsible for actions on game page.
  * 
- * @author eigogul
+ * @author guligo
  */
 @Controller
 public class GameController {
-	
+
 	private static Logger logger = Logger.getLogger(GameController.class);
-	
+
 	private final DateFormat DATE_FORMATTER = new SimpleDateFormat("MM/dd/yyyy");
-	
+
 	// services
 	@Autowired
 	private UserService userService;
 	@Autowired
 	private GameService gameService;
-	
+
 	// validators
-	private BasicStringValidator gameNameValidator;
-	private BasicDateValidator   gameDateValidator;
-	
+	private BasicStringValidator<GameError> gameNameValidator;
+	private BasicDateValidator<GameError>   gameDateValidator;
+
 	public GameController() {
-		gameNameValidator = new BasicStringValidator(Game.MIN_NAME_LENGTH, Game.MAX_NAME_LENGTH, GameError.NAME_EMPTY, GameError.NAME_TOO_SHORT, GameError.NAME_TOO_LONG);
-		gameDateValidator = new BasicDateValidator(DATE_FORMATTER, GameError.DATE_EMPTY, GameError.DATE_WRONG_FORMAT);
+		gameNameValidator = new BasicStringValidator<GameError>(Game.MIN_NAME_LENGTH, Game.MAX_NAME_LENGTH, GameError.NAME_EMPTY, GameError.NAME_TOO_SHORT, GameError.NAME_TOO_LONG);
+		gameDateValidator = new BasicDateValidator<GameError>(DATE_FORMATTER, GameError.DATE_EMPTY, GameError.DATE_WRONG_FORMAT);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.GAME_LIST_PAGE)
 	public String showGameListPage() {
 		return Constants.Views.GAME_LIST;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.GAME_SAVE_PAGE)
 	public String showGameSavePage() {
 		return Constants.Views.GAME_SAVE;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.GAME_GET_ACTION)
 	public @ResponseBody Game getGame(@PathVariable Long id) {
-		return gameService.getGame(id);
+		Game game = gameService.getGame(id);
+		game.getCreator().secure();
+		return game;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.GAME_LIST_ACTION)
 	public @ResponseBody List<Game> getGameList() {
-		String username = ((UserWrapper) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-		return gameService.getGamesByUsername(username);
+		String email = ((UserWrapper) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+		return gameService.getGamesByEmail(email);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.GAME_SAVE_ACTION)
-	public @ResponseBody ResponseBean saveGame(@RequestBody GameSaveRequest request) throws ParseException, IOException {
-		String username = ((UserWrapper) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();	
+	public @ResponseBody GameSaveResponse saveGame(@RequestBody GameSaveRequest request) throws ParseException, IOException {
+		String email = ((UserWrapper) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();	
 		
 		GameSaveResponse response = new GameSaveResponse();
 		gameNameValidator.validate(request.getName(), response.getErrors());
 		gameDateValidator.validate(request.getDate(), response.getErrors());
 		if (!response.hasErrors()) {
 			try {
-				response.setId(gameService.saveGame(request.getId(), userService.getUserByUsername(username), request.getName(), DATE_FORMATTER.parse(request.getDate())));
+				response.setId(gameService.saveGame(request.getId(), userService.getUserByEmail(email), request.getName(), DATE_FORMATTER.parse(request.getDate())));
 			} catch (Exception e) {
 				logger.error("Error on saving game", e);
 				response.addError(GameError.UNKNOWN);
@@ -90,10 +91,10 @@ public class GameController {
 		}
 		return response;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.DELETE, value = Constants.URL.GAME_REMOVE_ACTION)
 	public @ResponseBody void removeGame(@PathVariable Long id) {
 		gameService.removeGame(id);
 	}
-	
+
 }

@@ -31,24 +31,24 @@ import se.tipspromenad.validation.BasicStringValidator;
  */
 @Controller
 public class UserController {
-	
+
 	private final static Logger logger = Logger.getLogger(UserController.class);
 	
 	// services
 	@Autowired
 	private UserService userService;
-	
+
 	// validators
-	private BasicStringValidator userNameValidator;
-	private BasicStringValidator userEmailValidator;
-	private BasicStringValidator userPasswordValidator;
-	
+	private BasicStringValidator<UserError> userNameValidator;
+	private BasicStringValidator<UserError> userEmailValidator;
+	private BasicStringValidator<UserError> userPasswordValidator;
+
 	public UserController() {
-		userNameValidator     = new BasicStringValidator(User.MIN_USERNAME_LENGTH, User.MAX_USERNAME_LENGTH, UserError.USERNAME_EMPTY, UserError.USERNAME_TOO_SHORT, UserError.USERNAME_TOO_LONG);
-		userEmailValidator    = new BasicStringValidator(User.MIN_EMAIL_LENGTH, User.MAX_EMAIL_LENGTH, UserError.EMAIL_EMPTY, UserError.EMAIL_TOO_SHORT, UserError.EMAIL_TOO_LONG);
-		userPasswordValidator = new BasicStringValidator(User.MIN_PASSWORD_LENGTH, User.MAX_PASSWORD_LENGTH, UserError.PASSWORD_EMPTY, UserError.PASSWORD_TOO_SHORT, UserError.PASSWORD_TOO_LONG);
+		userNameValidator     = new BasicStringValidator<UserError>(User.MIN_NAME_LENGTH, User.MAX_NAME_LENGTH, UserError.NAME_EMPTY, UserError.NAME_TOO_SHORT, UserError.NAME_TOO_LONG);
+		userEmailValidator    = new BasicStringValidator<UserError>(User.MIN_EMAIL_LENGTH, User.MAX_EMAIL_LENGTH, UserError.EMAIL_EMPTY, UserError.EMAIL_TOO_SHORT, UserError.EMAIL_TOO_LONG);
+		userPasswordValidator = new BasicStringValidator<UserError>(User.MIN_PASSWORD_LENGTH, User.MAX_PASSWORD_LENGTH, UserError.PASSWORD_EMPTY, UserError.PASSWORD_TOO_SHORT, UserError.PASSWORD_TOO_LONG);
 	}
-	
+
 	/**
 	 * Retrieves user profile for current user.
 	 */
@@ -86,8 +86,8 @@ public class UserController {
 		
 		// actions
 		if (userProfileBean.getStatus() == DataTransferBean.STATUS_OK) {
-			String username = ((UserWrapper) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-			userService.updateUserProfile(username, firstName, lastName, Gender.valueOf(gender.toUpperCase()));
+			// String username = ((UserWrapper) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+			// userService.updateUserProfile(username, firstName, lastName, Gender.valueOf(gender.toUpperCase()));
 		}
 		return userProfileBean;
 	}
@@ -105,7 +105,7 @@ public class UserController {
 					response.addError(UserError.PASSWORD_WRONG);
 				}
 			} else {
-				response.addError(UserError.USERNAME_DOES_NOT_EXIST);
+				response.addError(UserError.EMAIL_DOES_NOT_EXIST);
 			}
 		} catch (Exception e) {
 			response.addError(UserError.UNEXPECTED_ERROR);
@@ -120,19 +120,19 @@ public class UserController {
 		UserRegistrationResponse response = new UserRegistrationResponse();
 		try {
 			// processing
-			userNameValidator.validate(request.getUsername(), response.getErrors());
+			userNameValidator.validate(request.getName(), response.getErrors());
 			userEmailValidator.validate(request.getEmail(), response.getErrors());
 			userPasswordValidator.validate(request.getPassword(), response.getErrors());
 			if (!response.hasErrors()) {
-				if (userService.getUserByUsername(request.getUsername()) != null || userService.getUserByEmail(request.getEmail()) != null) {
+				if (userService.getUserByEmail(request.getEmail()) != null) {
 					response.addError(UserError.DUBLICATED_USER);
 				} else {
-					response.setUserId(userService.createUser(request.getEmail(), request.getUsername(), request.getPassword()));
+					response.setUserId(userService.createUser(request.getName(), request.getEmail(), request.getPassword()));
 				}
 			}
 		} catch (Exception e) {
 			response.addError(UserError.UNEXPECTED_ERROR);
-			logger.error("Unexpected error in WS on user registration", e);
+			logger.error("User registration error", e);
 		}
 		response.normalize();
 		return response;

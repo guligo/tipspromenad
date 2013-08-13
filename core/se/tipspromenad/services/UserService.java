@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import se.tipspromenad.entities.User;
 import se.tipspromenad.entities.UserProfile;
-import se.tipspromenad.entities.enums.Gender;
 import se.tipspromenad.entities.enums.UserRole;
 import se.tipspromenad.services.UserService;
 import se.tipspromenad.services.dao.UserDao;
@@ -31,10 +30,6 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 
-	public User getUserByUsername(String username) {
-		return userDao.getUserByUsername(username);
-	}
-
 	public User getUserByEmail(String email) {
 		return userDao.getUserByEmail(email);
 	}
@@ -43,33 +38,33 @@ public class UserService {
 		return userDao.getUserProfileByUsername(username);
 	}
 
-	public Long createUser(String email, String username, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+	public Long createUser(String name, String email, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		User user = new User();
+		user.setName(name);
 		user.setEmail(email);
-		user.setUsername(username);
 		user.setPassword(SecurityUtils.toBase64(SecurityUtils.toMD5(password)));
 		user.setRole(UserRole.ROLE_SIMPLE_USER);
 		user.setEnabled(true);
 		return userDao.createUser(user);
 	}
 
-	public void updateUserProfile(String username, String firstName, String lastName, Gender gender) {
-		UserProfile userProfile = userDao.getUserProfileByUsername(username);
-		if (userProfile == null) {
-			userProfile = new UserProfile();
-			userProfile.setUser(userDao.getUserByUsername(username));
-			userProfile.setFirstName(firstName);
-			userProfile.setLastName(lastName);
-			userProfile.setGender(gender);
-			userDao.createUserProfile(userProfile);
-		} else {
-			userProfile.setUser(userDao.getUserByUsername(username));
-			userProfile.setFirstName(firstName);
-			userProfile.setLastName(lastName);
-			userProfile.setGender(gender);
-			userDao.updateUserProfile(userProfile);
-		}
-	}
+//	public void updateUserProfile(String email, String firstName, String lastName, Gender gender) {
+//		UserProfile userProfile = userDao.getUserProfileByUsername(username);
+//		if (userProfile == null) {
+//			userProfile = new UserProfile();
+//			userProfile.setUser(userDao.getUserByUsername(username));
+//			userProfile.setFirstName(firstName);
+//			userProfile.setLastName(lastName);
+//			userProfile.setGender(gender);
+//			userDao.createUserProfile(userProfile);
+//		} else {
+//			userProfile.setUser(userDao.getUserByUsername(username));
+//			userProfile.setFirstName(firstName);
+//			userProfile.setLastName(lastName);
+//			userProfile.setGender(gender);
+//			userDao.updateUserProfile(userProfile);
+//		}
+//	}
 
 	public void removeUser(Long id) {
 		userDao.removeUser(id);

@@ -71,13 +71,4 @@ public class Constants {
 		
 	}
 	
-	/**
-	 * Holds web-service end-points.
-	 */
-	public static class WS {
-		
-		public final static String USER_REGISTER = "ws/users/register";
-		
-	}
-	
 }

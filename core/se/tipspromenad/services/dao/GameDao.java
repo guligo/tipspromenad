@@ -26,12 +26,23 @@ public class GameDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Game> getGamesByUsername(String username) {
-		return commonDao.getEntityManager().createQuery("from Game g where g.creator.username = :username")
-			.setParameter("username", username)
+	public Game getGameByCode(String code) {
+        List<Game> games = commonDao.getEntityManager().createQuery("from Game g where g.code = :code")
+			.setParameter("code", code)
+			.getResultList();
+		if (games != null && !games.isEmpty()) {
+			return games.get(0);
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Game> getGamesByEmail(String email) {
+		return commonDao.getEntityManager().createQuery("from Game g where g.creator.email = :email")
+			.setParameter("email", email)
 			.getResultList();
 	}
-	
+
 	public Long createGame(Game game) {
 		return commonDao.createEntity(game);
 	}

@@ -7,7 +7,7 @@ import se.tipspromenad.controllers.ResponseBean;
  * 
  * @author eigogul
  */
-public class GameSaveResponse extends ResponseBean {
+public class GameSaveResponse extends ResponseBean<GameError> {
 	
 	private static final long serialVersionUID = 1L;
 	

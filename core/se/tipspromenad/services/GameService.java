@@ -14,6 +14,7 @@ import se.tipspromenad.entities.User;
 import se.tipspromenad.services.GameService;
 import se.tipspromenad.services.dao.GameDao;
 import se.tipspromenad.services.dao.PlacemarkDao;
+import se.tipspromenad.utils.CommonUtils;
 
 /**
  * See {@link GameService}.
@@ -34,8 +35,8 @@ public class GameService {
 		return gameDao.getGame(id);
 	}
 
-	public List<Game> getGamesByUsername(String username) {
-		return (List<Game>) gameDao.getGamesByUsername(username);
+	public List<Game> getGamesByEmail(String email) {
+		return (List<Game>) gameDao.getGamesByEmail(email);
 	}
 
 	public Long saveGame(Long id, User creator, String name, Date date) {
@@ -47,6 +48,7 @@ public class GameService {
 			game.setCreationDate(new Date());
 			game.setName(name);
 			game.setDate(date);
+			game.setCode(CommonUtils.generateCode());
 			return gameDao.createGame(game);
 		} else {
 			Game game = gameDao.getGame(id);

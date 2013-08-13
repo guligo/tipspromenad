@@ -41,7 +41,7 @@
 	</div>
 </form>
 <c:if test="${empty param.id}">
-	<a href="javascript:saveGameAndQuestions();" class="btn">Next</a>
+	<a href="javascript:unlockNextTab();" class="btn">Next</a>
 </c:if>
 
 <!-- dialogs -->

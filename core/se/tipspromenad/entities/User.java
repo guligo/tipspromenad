@@ -6,6 +6,8 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonWriteNullProperties;
+
 import se.tipspromenad.entities.User;
 import se.tipspromenad.entities.UserProfile;
 import se.tipspromenad.entities.enums.UserRole;
@@ -17,27 +19,29 @@ import se.tipspromenad.entities.enums.UserRole;
  */
 @Entity
 @Table(name = "users")
+@SuppressWarnings("deprecation")
+@JsonWriteNullProperties(value = false)
 public class User extends se.tipspromenad.entities.Entity {
 
+	public final static int MIN_NAME_LENGTH     = 5;
+	public final static int MAX_NAME_LENGTH     = 30;
 	public final static int MIN_EMAIL_LENGTH    = 10;
 	public final static int MAX_EMAIL_LENGTH    = 50;
-	public final static int MIN_USERNAME_LENGTH = 5;
-	public final static int MAX_USERNAME_LENGTH = 30;
 	public final static int MIN_PASSWORD_LENGTH = 5;
 	public final static int MAX_PASSWORD_LENGTH = 30;
 
 	@OneToOne(fetch = FetchType.EAGER)
 	private UserProfile userProfile;
+	@Column(nullable = false, length = MAX_NAME_LENGTH, unique = false)
+	private String name;
 	@Column(nullable = false, length = MAX_EMAIL_LENGTH, unique = true)
 	private String email;
-	@Column(nullable = false, length = MAX_USERNAME_LENGTH, unique = true)
-	private String username;
 	@Column(nullable = false, length = MAX_PASSWORD_LENGTH)
 	private String password;
 	@Column(nullable = false)
 	private UserRole role;
 	@Column(nullable = false)
-	private boolean enabled;
+	private Boolean enabled;
 
 	public UserProfile getUserProfile() {
 		return userProfile;
@@ -47,20 +51,20 @@ public class User extends se.tipspromenad.entities.Entity {
 		this.userProfile = (UserProfile) userProfile;
 	}
 
+    public String getName() {
+    	return name;
+    }
+
+    public void setName(String name) {
+    	this.name = name;
+    }
+
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getPassword() {
@@ -79,12 +83,21 @@ public class User extends se.tipspromenad.entities.Entity {
 		this.role = role;
 	}
 
-	public boolean getEnabled() {
+	public Boolean getEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(boolean enabled) {
+	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	// this method is sometimes used before serialization into JSON format
+	// because of security reasons
+	public void secure() {
+		setId(null);
+		setPassword(null);
+		setRole(null);
+		setEnabled(null);
 	}
 
 }

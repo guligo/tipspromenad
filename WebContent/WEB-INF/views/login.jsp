@@ -37,16 +37,16 @@
 	<div style="float: right;">		
 		<form class="form-horizontal" style="border-radius: 10px; background-color: #F5F5F5; padding: 20px;">
 			<legend>Login</legend>		
-			<div id="usernameLoginControlGroup"  class="control-group">
-			    <label class="control-label" for="usernameLoginInput">Username</label>
+			<div class="control-group">
+			    <label class="control-label" for="loginEmail">Email</label>
 			    <div class="controls">
-			    	<input type="text" id="usernameLoginInput" placeholder="Username">
+			    	<input type="text" id="loginEmail" placeholder="Email">
 			    </div>
 		    </div>
     		<div class="control-group">
-			    <label class="control-label" for="passwordLoginInput">Password</label>
+			    <label class="control-label" for="loginPassword">Password</label>
 			    <div class="controls">
-			    	<input type="password" id="passwordLoginInput" placeholder="Password">
+			    	<input type="password" id="loginPassword" placeholder="Password">
 			    </div>
     		</div>
     		<div class="control-group">

@@ -36,6 +36,8 @@ public class Game extends se.tipspromenad.entities.Entity {
 	private String name;
 	@Column(nullable = false)
 	private Date date;
+	@Column(nullable = false)
+	private String code;
 	@JsonIgnore
 	@OrderBy("id")
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -79,6 +81,14 @@ public class Game extends se.tipspromenad.entities.Entity {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public Set<Question> getQuestions() {

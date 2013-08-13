@@ -23,18 +23,6 @@ public class UserDao {
 	private CommonDao commonDao;
 	
 	@SuppressWarnings("unchecked")
-	public User getUserByUsername(String username) {
-		List<User> users = commonDao.getEntityManager().createQuery("from User where username = :username")
-			.setParameter("username", username)
-			.getResultList();
-		if (users != null && users.size() > 0) {
-			assert(users.size() == 1);
-			return users.get(0);
-		}
-		return null;
-	}
-	
-	@SuppressWarnings("unchecked")
 	public User getUserByEmail(String email) {		
 		List<User> users = commonDao.getEntityManager().createQuery("from User where email = :email")
 			.setParameter("email", email)

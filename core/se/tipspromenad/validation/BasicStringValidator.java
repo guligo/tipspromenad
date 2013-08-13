@@ -6,21 +6,22 @@ import java.util.List;
  * Represents simple string object validator.
  * 
  * @author guligo
+ * @param <E>
  */
-public class BasicStringValidator implements Validator {
+public class BasicStringValidator<E extends ValidationError> implements Validator<E> {
 
-	private int             minLength;
-	private int             maxLength;
-	private ValidationError emptyErr;
-	private ValidationError tooShortErr;
-	private ValidationError tooLongErr;
+	private int minLength;
+	private int maxLength;
+	private E   emptyErr;
+	private E   tooShortErr;
+	private E   tooLongErr;
 
-	public BasicStringValidator(int minLength, int maxLength, ValidationError emptyErr, ValidationError tooShortErr, ValidationError tooLongErr) {
-		this.minLength   = minLength;
-		this.maxLength   = maxLength;
-		this.emptyErr    = emptyErr;
+	public BasicStringValidator(int minLength, int maxLength, E emptyErr, E tooShortErr, E tooLongErr) {
+		this.minLength = minLength;
+		this.maxLength = maxLength;
+		this.emptyErr = emptyErr;
 		this.tooShortErr = tooShortErr;
-		this.tooLongErr  = tooLongErr;
+		this.tooLongErr = tooLongErr;
 	}
 
 	@Override
@@ -29,7 +30,7 @@ public class BasicStringValidator implements Validator {
 	}
 
 	@Override
-	public void validate(Object target, List<ValidationError> errors) {
+	public void validate(Object target, List<E> errors) {
 		String value = (String) target;
 		if (value == null || value.length() == 0) {
 			errors.add(emptyErr);

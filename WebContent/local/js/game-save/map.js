@@ -1,5 +1,7 @@
 var mapController = function() {
 	
+	var LABELS = ['1.', 'X.', '2.'];
+	
 	var PLACEMARK_LIST_ACTION_URL   = null;
 	var PLACEMARK_SAVE_ACTION_URL   = null;
 	var PLACEMARK_REMOVE_ACTION_URL = null;
@@ -82,17 +84,24 @@ var mapController = function() {
 	
 	function _getQuestionWindow(question) {
 		var html = '';
-		html += '<div>';
+		html += '<p style="margin-top: 10px;">';
 			html += question.text;
-			html += '<br />';
-			html += '<br />';
-			if (question.answers != null) {
-				html += '<ol>';
-				for (var i = 0; i < question.answers.length; i++) {
-					html += '<li>' + question.answers[i].text + ',' + question.answers[i].correct + '</li>';
+		html += '</p>';
+		html += '<p>';
+		if (question.answers != null) {
+			for (var i = 0; i < question.answers.length; i++) {
+				var clazz = '';
+				if (question.answers[i].correct == true) {
+					clazz = 'badge badge-success';
+				} else {
+					clazz = 'badge';
 				}
-				html += '</ol>';
+				html += '<span class="' + clazz + '">' + LABELS[i] + '</span>&nbsp;' + question.answers[i].text + '<br />';
 			}
+		}
+		html += '</p>';
+		html += '<div>';
+			html += '<a href="javascript:mapController.removePlacemarkFromDatabase(' + question.placemark.id + ');" class="btn">Remove</a>';
 		html += '</div>';
 		return html;
 	}
@@ -103,7 +112,7 @@ var mapController = function() {
 				draggable: true,
 			    position: new google.maps.LatLng(question.placemark.latitude, question.placemark.longitude),
 			    title: "Question",
-			    icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + question.placemark.id + '|FF0000|000000'
+			    icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + question.sequence + '|FF0000|000000'
 			});
 			
 			var window = new google.maps.InfoWindow({
@@ -192,13 +201,39 @@ var mapController = function() {
 		if (_questions != null) {
 			for (var i = 0; i < _questions.length; i++) {
 				if (_questions[i].placemark == null) {
-					html += '<div class="hero-unit">';
-						html += _questions[i].text;
-					html += '</div>';
+					if (html == '') html += '<tr class="info">'; else html += '<tr>';
+						html += '<td style="width: 5px; text-align: center; vertical-align: middle;">';
+							html += _questions[i].sequence + '.';
+						html += '</td>';
+						html += '<td style="width: 750px;">';
+							html += '<p>';
+								html += _questions[i].text;
+							html += '</p>';
+							html += '<p>';
+								if (_questions[i].answers != null) {
+									for (var j = 0; j < _questions[i].answers.length; j++) {
+										var clazz = '';
+										if (_questions[i].answers[j].correct == true) {
+											clazz = 'badge badge-success';
+										} else {
+											clazz = 'badge';
+										}
+										html += '<span class="' + clazz + '">' + LABELS[j] + '</span>&nbsp;' + _questions[i].answers[j].text + '<br />';
+									}
+								}
+							html += '</p>';
+						html += '</td>';
+					html += '</tr>';
 				} else {
 					_putPlacemark(_questions[i]);
 				}
 			}
+		}
+		
+		if (html != '') {
+			html = '<table style="width: 100%;" class="table table-bordered table-hover">'
+				+ html;
+			html += '</table>';
 		}
 		$('#questionsContainer').html(html);
 	}

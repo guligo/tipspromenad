@@ -15,6 +15,10 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockServletConfig;
 import org.springframework.mock.web.MockServletContext;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.GenericWebApplicationContext;
@@ -33,7 +37,7 @@ import se.tipspromenad.tests.utils.OrderedRunner;
 @ContextConfiguration(locations = { "classpath:spring-application.xml" })
 public abstract class AbstractControllerTest extends TestCase {
 
-	private final static Logger              logger                 = Logger.getLogger(AbstractControllerTest.class);
+	private final static Logger logger = Logger.getLogger(AbstractControllerTest.class);
 
 	private final String                     HTTP_CONTENT_TYPE_JSON = "application/json";
 	private final String                     HTTP_ACCEPT_JSON       = "application/json";
@@ -41,11 +45,13 @@ public abstract class AbstractControllerTest extends TestCase {
 	protected DispatcherServlet              dispatcher;
 	protected ObjectMapper                   objectMapper;
 	protected ServletContext                 servletContext;
-	@Autowired
-	protected AnnotationMethodHandlerAdapter handler;
 
 	@Autowired
+	protected AnnotationMethodHandlerAdapter handler;
+	@Autowired
 	private ApplicationContext               applicationContext;
+	@Autowired
+	private ProviderManager                  authenticationManager;
 
 	@SuppressWarnings("serial")
 	protected void init() throws Exception {
@@ -64,6 +70,11 @@ public abstract class AbstractControllerTest extends TestCase {
 		objectMapper = new ObjectMapper();
 	};
 
+	protected void authenticate(String email, String password) {
+		Authentication auth = authenticationManager.doAuthentication(new UsernamePasswordAuthenticationToken(email, password));
+		SecurityContextHolder.getContext().setAuthentication(auth);
+	}
+
 	protected <T> T postJSON(Class<T> clazz, Object controller, String url, String content) throws Exception {
 		MockHttpServletRequest request = new MockHttpServletRequest(servletContext, "POST", url);
 		request.addHeader("Accept", HTTP_ACCEPT_JSON);
@@ -73,7 +84,20 @@ public abstract class AbstractControllerTest extends TestCase {
 		if (content != null) {
 			request.setContent(content.replaceAll("'", "\"").getBytes(Constants.System.DEFAULT_ENCODING));
 		}
-		logger.info(content + " -> " + url);
+		logger.info("POST " + content + " -> " + url);
+		MockHttpServletResponse response = new MockHttpServletResponse();
+		handler.handle(request, response, controller);
+		logger.info(url + " -> " + response.getContentAsString());
+		return (T) objectMapper.readValue(response.getContentAsByteArray(), clazz);
+	}
+
+	protected <T> T getJSON(Class<T> clazz, Object controller, String url) throws Exception {
+		MockHttpServletRequest request = new MockHttpServletRequest(servletContext, "GET", url);
+		request.addHeader("Accept", HTTP_ACCEPT_JSON);
+		request.addHeader("Content-Type", HTTP_CONTENT_TYPE_JSON);
+		request.setCharacterEncoding(Constants.System.DEFAULT_ENCODING);
+		
+		logger.info("GET " + url);
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		handler.handle(request, response, controller);
 		logger.info(url + " -> " + response.getContentAsString());

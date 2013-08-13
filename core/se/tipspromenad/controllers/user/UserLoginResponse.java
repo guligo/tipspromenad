@@ -11,7 +11,7 @@ import se.tipspromenad.controllers.ResponseBean;
  */
 @SuppressWarnings("deprecation")
 @JsonWriteNullProperties(value = false)
-public class UserLoginResponse extends ResponseBean {
+public class UserLoginResponse extends ResponseBean<UserError> {
 
 	private static final long serialVersionUID = 1L;
 

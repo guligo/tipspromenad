@@ -3,15 +3,13 @@ package se.tipspromenad.controllers.user;
 import se.tipspromenad.controllers.RequestBean;
 
 /**
- * See {@link UserWebService#register(UserRegistrationRequestBean, javax.servlet.http.HttpServletRequest)}.
- * 
- * @author eigogul
+ * @author guligo
  */
 public class UserRegistrationRequest extends RequestBean {
 
 	private static final long serialVersionUID = 1L;
 
-	private String username;
+	private String name;
 	private String email;
 	private String password;
 
@@ -19,18 +17,18 @@ public class UserRegistrationRequest extends RequestBean {
 		// empty
 	}
 
-	public UserRegistrationRequest(String username, String email, String password) {
-		this.username = username;
-		this.email = email;
+	public UserRegistrationRequest(String name, String email, String password) {
+		this.name     = name;
+		this.email    = email;
 		this.password = password;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getName() {
+		return name;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUsername(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {

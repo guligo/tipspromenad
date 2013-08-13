@@ -103,7 +103,7 @@
 							<ul class="nav" style="float: right">
 								<li>
 									<a data-toggle="dropdown" href="#">
-										Welcome, <span style="color: white;"><sec:authentication property="principal.username" /></span>!
+										Welcome, <span style="color: white;"><sec:authentication property="principal.name" /></span>!
 									</a>
 									<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
     									<li>

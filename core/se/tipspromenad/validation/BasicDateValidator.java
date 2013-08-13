@@ -9,13 +9,13 @@ import java.util.List;
  * 
  * @author guligo
  */
-public class BasicDateValidator implements Validator {
+public class BasicDateValidator<E extends ValidationError> implements Validator<E> {
 	
 	private DateFormat      format;
-	private ValidationError emptyErr;
-	private ValidationError formatErr;
+	private E emptyErr;
+	private E formatErr;
 
-	public BasicDateValidator(DateFormat format, ValidationError emptyErr, ValidationError formatErr) {
+	public BasicDateValidator(DateFormat format, E emptyErr, E formatErr) {
 		this.format    = format;
 		this.emptyErr  = emptyErr;
 		this.formatErr = formatErr;
@@ -27,7 +27,7 @@ public class BasicDateValidator implements Validator {
 	}
 
 	@Override
-	public void validate(Object target, List<ValidationError> errors) {
+	public void validate(Object target, List<E> errors) {
 		String value = (String) target;
 		if (value == null) {
 			errors.add(emptyErr);

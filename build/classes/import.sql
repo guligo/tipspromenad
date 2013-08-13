@@ -2,10 +2,11 @@
 alter table games_questions add sequence int null;
 
 -- users
-insert into users (email, username, password, role, enabled) values ('qwerty@qwer.ty', 'qwerty', '2FeO34RYzgb7xbt2pYxcpA==', 0, true); -- 1
+-- password 'qwerty'
+insert into users (name, email, password, role, enabled) values ('Qwerty Foobar', 'qwerty@qwer.ty', '2FeO34RYzgb7xbt2pYxcpA==', 0, true); -- 1
 
 -- games
-insert into games (creation_date, date, name, creator_id) values (now(), now(), 'Karlskrona Game', 1); -- 1
+insert into games (creation_date, date, name, code, creator_id) values (now(), now(), 'Karlskrona Game', '12345678', 1); -- 1
 
 -- questions
 insert into questions (text) values ('What is the population of Karlskrona?'); -- 1

@@ -11,21 +11,21 @@ import se.tipspromenad.validation.ValidationError;
  * 
  * @author eigogul
  */
-public class ResponseBean implements Serializable {
+public class ResponseBean<E extends ValidationError> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private List<ValidationError> errors;
+	private List<E> errors;
 
 	public ResponseBean() {
-		errors = new ArrayList<ValidationError>();
+		errors = new ArrayList<E>();
 	}
 
-	public List<ValidationError> getErrors() {
+	public List<E> getErrors() {
 		return errors;
 	}
 	
-	public void addError(ValidationError error) {
+	public void addError(E error) {
 		errors.add(error);
 	}
 	

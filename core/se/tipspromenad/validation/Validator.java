@@ -7,10 +7,10 @@ import java.util.List;
  * 
  * @author guligo
  */
-public interface Validator {
+public interface Validator<E extends ValidationError> {
 	
 	public boolean supports(Class<?> clazz);
 	
-	public void validate(Object target, List<ValidationError> errors);
+	public void validate(Object target, List<E> errors);
 	
 }

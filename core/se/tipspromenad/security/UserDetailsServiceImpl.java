@@ -11,23 +11,24 @@ import org.springframework.stereotype.Component;
 import se.tipspromenad.entities.User;
 import se.tipspromenad.services.UserService;
 
-
 /**
  * This class is used by spring security authentication mechanism.
+ * 
+ * @author guligo
  */
 @Component("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
-		User user = userService.getUserByUsername(username);
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException, DataAccessException {
+		User user = userService.getUserByEmail(email);
 		if (user == null) {
-			throw new UsernameNotFoundException("User with username " + username + " not found");
+			throw new UsernameNotFoundException("User with email " + email + " not found");
 		}
 		return new UserWrapper(user);
 	}
-	
+
 }

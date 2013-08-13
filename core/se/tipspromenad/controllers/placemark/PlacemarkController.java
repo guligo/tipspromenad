@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import se.tipspromenad.entities.Placemark;
 import se.tipspromenad.globals.Constants;
 import se.tipspromenad.services.PlacemarkService;
+import se.tipspromenad.services.QuestionService;
 
 /**
  * MVC paradigm controller responsible for actions around placemark entity.
@@ -23,11 +24,19 @@ import se.tipspromenad.services.PlacemarkService;
 public class PlacemarkController {
 	
 	@Autowired
+	private QuestionService questionService;
+	@Autowired
 	private PlacemarkService placemarkService;
 	
 	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.PLACEMARK_LIST_ACTION)
 	public @ResponseBody List<Placemark> getPlacemarks(@PathVariable Long gameId) {
-		return placemarkService.getPlacemarksByGameId(gameId);
+		List<Placemark> placemarks = placemarkService.getPlacemarksByGameId(gameId);
+		if (placemarks != null) {
+			for (Placemark placemark : placemarks) {
+				placemark.getQuestion().setSequence(questionService.getSequence(gameId, placemark.getQuestion().getId()));
+			}
+		}
+		return placemarks;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.PLACEMARK_SAVE_ACTION)

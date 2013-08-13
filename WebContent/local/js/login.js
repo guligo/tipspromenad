@@ -48,22 +48,20 @@ var loginController = function() {
 	}
 	
 	function _doLogin() {
-		$('#usernameLoginControlGroup').removeClass('error'); $('#usernameLoginControlGroup .controls .help-block').remove();
+		commonUtils.hideError($('#loginEmail'));
+		commonUtils.hideError($('#loginPassword'));
 		$.ajax({
 			url: LOGIN_URL,
 			type: 'POST',
 			data: {
-				j_username: $('#usernameLoginInput').val(),
-				j_password: $('#passwordLoginInput').val()
+				j_username: $('#loginEmail').val(),
+				j_password: $('#loginPassword').val()
 			},
 		    success: function(status) {				    	
 				if (status == STATUS_OK) {
 					$(location).attr('href', CALENDAR_URL);
 				} else if (status == STATUS_NOK) {
-					$('#usernameLoginControlGroup').addClass('error');
-					$('#usernameLoginControlGroup .controls').append(
-						'<span class="help-block">Wrong username or password</span>'
-					);
+					commonUtils.showError($('#loginEmail'), 'Wrong email or password');
 				}
 			}
 		});
