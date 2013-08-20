@@ -13,7 +13,8 @@ var friendController = function() {
 					html += '<tr>';
 					for (var j = 0; j < COLUMNS; j++) {
 						html += '<td>';
-							html += '<input type="checkbox" value="' + friends[i].id + '" />&nbsp;' + friends[i].name + '<br />';
+							html += '<input type="checkbox" value="' + friends[i].id + '" style="margin-top: -1px;" />&nbsp;<span>' + friends[i].name + '</span><br />';
+							html += '<img src="' + friends[i].picture.data.url + '" />';
 						html += '</td>';
 						
 						if (i >= friends.length - 1) {

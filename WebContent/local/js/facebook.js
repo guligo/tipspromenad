@@ -1,11 +1,15 @@
 var facebookController = function() {
 	
-	var _userId = null;
+	var APP_ID = '203913813008290';
+	var APP_SECRET = 'c91e96ffca4c5465c3353baaaaf883e3';
 	
-	function _init(callback) {
+	var _userId = null;
+	var _accessToken = null;
+	
+	function _init(callback) {		
 		window.fbAsyncInit = function() {
 			FB.init({
-				appId : '203913813008290',
+				appId : APP_ID,
 				status: true,
 				cookie: true,
 				xfbml : true
@@ -14,13 +18,18 @@ var facebookController = function() {
 			FB.Event.subscribe('auth.authResponseChange', function(response) {
 				if (response.status === 'connected') {
 					_userId = response.authResponse.userID;
+					_accessToken = response.authResponse.accessToken;
 					if (callback != null) {
 						callback();
 					}
 			    } else if (response.status === 'not_authorized') {
-			    	FB.login();
+			    	FB.login(function(response) {
+			    		console.log(response);
+			    	}, {perms: 'manage_notifications,email,user_likes'});
 			    } else {
-			    	FB.login();
+			    	FB.login(function(resonse) {
+			    		console.log(response);
+			    	}, {perms: 'manage_notifications,email,user_likes'});
 			    }
 			});
 		};
@@ -34,15 +43,54 @@ var facebookController = function() {
 		} (document));
 	}
 	
+	function _showDialog(callback) {
+		FB.login(function(response) {
+			_userId = response.authResponse.userID;
+			_accessToken = response.authResponse.accessToken;
+			if (callback != null) {
+				callback(response);
+			}
+		}, {scope: 'manage_notifications,email,user_likes'});
+	}
+	
 	function _getUserId() {
 		return _userId;
 	}
 	
 	function _getFriends(callback) {
-		FB.api('/me/friends', function(response) {
+		FB.api('/me/friends?fields=id,name,picture', function(response) {
 			var friends = response.data;
 			if (callback != null) {
 				callback(friends);
+			}
+		});
+	}
+	
+	function _sendNotification(text, callback) {
+		_getAppAccessToken(function(appAccessToken) {
+			FB.api('/' + _userId + '/notifications', 'post', {access_token: appAccessToken, template: text}, function(response) {
+				var friends = response.data;
+				if (callback != null) {
+					callback(friends);
+				}
+			});
+		});
+	}
+	
+	function _getAppAccessToken(callback) {
+		$.ajax({
+			url: "https://graph.facebook.com/oauth/access_token",
+			data: {
+				client_id: APP_ID,
+				client_secret: APP_SECRET,
+				grant_type: 'client_credentials'
+			},
+			success: function (response) {
+				// returns something like access_token=XYZ
+				var appAccessToken = response.replace('access_token=', '');
+				if (callback != null) {
+					callback(appAccessToken);
+				}
 			}
 		});
 	}
@@ -56,6 +104,12 @@ var facebookController = function() {
 		},
 		getFriends: function(callback) {
 			_getFriends(callback);
+		},
+		sendNotification: function(callback) {
+			_sendNotification(callback);
+		},
+		showDialog: function(callback) {
+			_showDialog(callback);
 		}
 	};
 	

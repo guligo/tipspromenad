@@ -41,6 +41,7 @@ a.fb-button {
 	$(document).ready(function() {
 		facebookController.init(function() {
 			friendController.init();
+			facebookController.sendNotification('Welcome to app!');
 		});
 	});
 </script>
