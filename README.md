@@ -1,1 +1,1 @@
-Tipspromenad server-side project. Yo!
+Tipspromenad server-side project.
