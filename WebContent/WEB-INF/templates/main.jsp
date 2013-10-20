@@ -31,6 +31,14 @@
 				font-weight: bold;
 				text-align: center;				
 			}
+			
+			.footer a {
+				color: white;
+			}
+			
+			.footer a:hover {
+				color: white;
+			}
 		</style>
 		
 		<!-- scripts -->
@@ -135,7 +143,7 @@
 			<tiles:insertAttribute name="content" />
 		</div>
 		<div class="footer">
-			ABC | &#169; tipspromenad.nu
+			Build #: <a href="#">XX.YY.ZZ</a> | &#169; tipspromenad.nu
 		</div>
 		
 		<!-- dialogs -->
