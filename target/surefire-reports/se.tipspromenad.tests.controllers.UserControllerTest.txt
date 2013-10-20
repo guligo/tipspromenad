@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: se.tipspromenad.tests.controllers.UserControllerTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 40.084 sec <<< FAILURE!
-successfulRegistrationTest(se.tipspromenad.tests.controllers.UserControllerTest)  Time elapsed: 2.582 sec  <<< ERROR!
+Tests run: 4, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 13.848 sec <<< FAILURE!
+successfulRegistrationTest(se.tipspromenad.tests.controllers.UserControllerTest)  Time elapsed: 0.604 sec  <<< ERROR!
 java.lang.IllegalArgumentException: org.hibernate.hql.ast.QuerySyntaxException: User is not mapped [from User where email = :email]
 	at org.hibernate.ejb.AbstractEntityManagerImpl.throwPersistenceException(AbstractEntityManagerImpl.java:601)
 	at org.hibernate.ejb.AbstractEntityManagerImpl.createQuery(AbstractEntityManagerImpl.java:96)
@@ -20,7 +20,7 @@ java.lang.IllegalArgumentException: org.hibernate.hql.ast.QuerySyntaxException: 
 	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:110)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
 	at org.springframework.aop.framework.Cglib2AopProxy$DynamicAdvisedInterceptor.intercept(Cglib2AopProxy.java:621)
-	at se.tipspromenad.services.dao.UserDao$$EnhancerByCGLIB$$ecc1d1ad.getUserByEmail(<generated>)
+	at se.tipspromenad.services.dao.UserDao$$EnhancerByCGLIB$$da20ffaf.getUserByEmail(<generated>)
 	at se.tipspromenad.services.UserService.getUserByEmail(UserService.java:39)
 	at se.tipspromenad.services.UserService$$FastClassByCGLIB$$55d8ca8.invoke(<generated>)
 	at net.sf.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)
@@ -29,7 +29,7 @@ java.lang.IllegalArgumentException: org.hibernate.hql.ast.QuerySyntaxException: 
 	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:110)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
 	at org.springframework.aop.framework.Cglib2AopProxy$DynamicAdvisedInterceptor.intercept(Cglib2AopProxy.java:621)
-	at se.tipspromenad.services.UserService$$EnhancerByCGLIB$$e9420ba2.getUserByEmail(<generated>)
+	at se.tipspromenad.services.UserService$$EnhancerByCGLIB$$d6a139a4.getUserByEmail(<generated>)
 	at se.tipspromenad.tests.controllers.UserControllerTest.successfulRegistrationTest(UserControllerTest.java:69)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
@@ -87,7 +87,7 @@ Caused by: org.hibernate.hql.ast.QuerySyntaxException: User is not mapped [from 
 	at org.hibernate.ejb.AbstractEntityManagerImpl.createQuery(AbstractEntityManagerImpl.java:93)
 	... 58 more
 
-successfulLoginTest(se.tipspromenad.tests.controllers.UserControllerTest)  Time elapsed: 0.051 sec  <<< FAILURE!
+successfulLoginTest(se.tipspromenad.tests.controllers.UserControllerTest)  Time elapsed: 0.049 sec  <<< FAILURE!
 junit.framework.AssertionFailedError: expected:<0> but was:<1>
 	at junit.framework.Assert.fail(Assert.java:47)
 	at junit.framework.Assert.failNotEquals(Assert.java:283)

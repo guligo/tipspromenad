@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="1" time="38.724" errors="1" skipped="0" tests="4" name="se.tipspromenad.tests.controllers.UserControllerTest">
+<testsuite failures="1" time="13.806" errors="1" skipped="0" tests="4" name="se.tipspromenad.tests.controllers.UserControllerTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/home/guligo/Desktop/jdk1.6.0_27/jre/lib/i386"/>
@@ -19,7 +19,7 @@
     <property name="basedir" value="/home/guligo/Dev/repos/tipspromenad"/>
     <property name="java.endorsed.dirs" value="/home/guligo/Desktop/jdk1.6.0_27/jre/lib/endorsed"/>
     <property name="os.arch" value="i386"/>
-    <property name="surefire.real.class.path" value="/tmp/surefirebooter4914191675009735354.jar"/>
+    <property name="surefire.real.class.path" value="/tmp/surefirebooter1820952393676161055.jar"/>
     <property name="java.io.tmpdir" value="/tmp"/>
     <property name="line.separator" value="
 "/>
@@ -42,7 +42,7 @@
     <property name="java.vm.specification.version" value="1.0"/>
     <property name="sun.arch.data.model" value="32"/>
     <property name="java.home" value="/home/guligo/Desktop/jdk1.6.0_27/jre"/>
-    <property name="sun.java.command" value="/tmp/surefirebooter4914191675009735354.jar /tmp/surefire2359970306031884488tmp /tmp/surefire7254119144473960501tmp"/>
+    <property name="sun.java.command" value="/tmp/surefirebooter1820952393676161055.jar /tmp/surefire7847205862672539728tmp /tmp/surefire5504157772097301764tmp"/>
     <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
     <property name="user.language" value="en"/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
@@ -58,8 +58,8 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="34.987" classname="se.tipspromenad.tests.controllers.UserControllerTest" name="unsuccessfulRegistrationTest"/>
-  <testcase time="2.58" classname="se.tipspromenad.tests.controllers.UserControllerTest" name="successfulRegistrationTest">
+  <testcase time="12.869" classname="se.tipspromenad.tests.controllers.UserControllerTest" name="unsuccessfulRegistrationTest"/>
+  <testcase time="0.601" classname="se.tipspromenad.tests.controllers.UserControllerTest" name="successfulRegistrationTest">
     <error message="org.hibernate.hql.ast.QuerySyntaxException: User is not mapped [from User where email = :email]" type="java.lang.IllegalArgumentException">java.lang.IllegalArgumentException: org.hibernate.hql.ast.QuerySyntaxException: User is not mapped [from User where email = :email]
 	at org.hibernate.ejb.AbstractEntityManagerImpl.throwPersistenceException(AbstractEntityManagerImpl.java:601)
 	at org.hibernate.ejb.AbstractEntityManagerImpl.createQuery(AbstractEntityManagerImpl.java:96)
@@ -77,7 +77,7 @@
 	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:110)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
 	at org.springframework.aop.framework.Cglib2AopProxy$DynamicAdvisedInterceptor.intercept(Cglib2AopProxy.java:621)
-	at se.tipspromenad.services.dao.UserDao$$EnhancerByCGLIB$$ecc1d1ad.getUserByEmail(&lt;generated&gt;)
+	at se.tipspromenad.services.dao.UserDao$$EnhancerByCGLIB$$da20ffaf.getUserByEmail(&lt;generated&gt;)
 	at se.tipspromenad.services.UserService.getUserByEmail(UserService.java:39)
 	at se.tipspromenad.services.UserService$$FastClassByCGLIB$$55d8ca8.invoke(&lt;generated&gt;)
 	at net.sf.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)
@@ -86,7 +86,7 @@
 	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:110)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
 	at org.springframework.aop.framework.Cglib2AopProxy$DynamicAdvisedInterceptor.intercept(Cglib2AopProxy.java:621)
-	at se.tipspromenad.services.UserService$$EnhancerByCGLIB$$e9420ba2.getUserByEmail(&lt;generated&gt;)
+	at se.tipspromenad.services.UserService$$EnhancerByCGLIB$$d6a139a4.getUserByEmail(&lt;generated&gt;)
 	at se.tipspromenad.tests.controllers.UserControllerTest.successfulRegistrationTest(UserControllerTest.java:69)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
@@ -145,8 +145,8 @@ Caused by: org.hibernate.hql.ast.QuerySyntaxException: User is not mapped [from 
 	... 58 more
 </error>
   </testcase>
-  <testcase time="0.069" classname="se.tipspromenad.tests.controllers.UserControllerTest" name="unsuccessfulLoginTest"/>
-  <testcase time="0.051" classname="se.tipspromenad.tests.controllers.UserControllerTest" name="successfulLoginTest">
+  <testcase time="0.153" classname="se.tipspromenad.tests.controllers.UserControllerTest" name="unsuccessfulLoginTest"/>
+  <testcase time="0.048" classname="se.tipspromenad.tests.controllers.UserControllerTest" name="successfulLoginTest">
     <failure message="expected:&lt;0&gt; but was:&lt;1&gt;" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: expected:&lt;0&gt; but was:&lt;1&gt;
 	at junit.framework.Assert.fail(Assert.java:47)
 	at junit.framework.Assert.failNotEquals(Assert.java:283)

@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: se.tipspromenad.tests.controllers.GameControllerTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.832 sec <<< FAILURE!
-testGetGame(se.tipspromenad.tests.controllers.GameControllerTest)  Time elapsed: 0.12 sec  <<< ERROR!
+Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.277 sec <<< FAILURE!
+testGetGame(se.tipspromenad.tests.controllers.GameControllerTest)  Time elapsed: 0.111 sec  <<< ERROR!
 java.lang.IllegalArgumentException: Unknown entity: se.tipspromenad.entities.Game
 	at org.hibernate.ejb.AbstractEntityManagerImpl.find(AbstractEntityManagerImpl.java:193)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -20,7 +20,7 @@ java.lang.IllegalArgumentException: Unknown entity: se.tipspromenad.entities.Gam
 	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:110)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
 	at org.springframework.aop.framework.Cglib2AopProxy$DynamicAdvisedInterceptor.intercept(Cglib2AopProxy.java:621)
-	at se.tipspromenad.services.dao.GameDao$$EnhancerByCGLIB$$d38407e0.getGame(<generated>)
+	at se.tipspromenad.services.dao.GameDao$$EnhancerByCGLIB$$c0e335e2.getGame(<generated>)
 	at se.tipspromenad.services.GameService.getGame(GameService.java:35)
 	at se.tipspromenad.controllers.game.GameController.getGame(GameController.java:66)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -74,7 +74,7 @@ Caused by: org.hibernate.MappingException: Unknown entity: se.tipspromenad.entit
 	at org.hibernate.ejb.AbstractEntityManagerImpl.find(AbstractEntityManagerImpl.java:182)
 	... 60 more
 
-testCreateGame(se.tipspromenad.tests.controllers.GameControllerTest)  Time elapsed: 0.602 sec  <<< ERROR!
+testCreateGame(se.tipspromenad.tests.controllers.GameControllerTest)  Time elapsed: 0.091 sec  <<< ERROR!
 java.lang.IllegalArgumentException: org.hibernate.hql.ast.QuerySyntaxException: User is not mapped [from User where email = :email]
 	at org.hibernate.ejb.AbstractEntityManagerImpl.throwPersistenceException(AbstractEntityManagerImpl.java:601)
 	at org.hibernate.ejb.AbstractEntityManagerImpl.createQuery(AbstractEntityManagerImpl.java:96)
@@ -92,7 +92,7 @@ java.lang.IllegalArgumentException: org.hibernate.hql.ast.QuerySyntaxException: 
 	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:110)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
 	at org.springframework.aop.framework.Cglib2AopProxy$DynamicAdvisedInterceptor.intercept(Cglib2AopProxy.java:621)
-	at se.tipspromenad.services.dao.UserDao$$EnhancerByCGLIB$$ecc1d1ad.getUserByEmail(<generated>)
+	at se.tipspromenad.services.dao.UserDao$$EnhancerByCGLIB$$da20ffaf.getUserByEmail(<generated>)
 	at se.tipspromenad.services.UserService.getUserByEmail(UserService.java:39)
 	at se.tipspromenad.services.UserService$$FastClassByCGLIB$$55d8ca8.invoke(<generated>)
 	at net.sf.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)
@@ -101,7 +101,7 @@ java.lang.IllegalArgumentException: org.hibernate.hql.ast.QuerySyntaxException: 
 	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:110)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
 	at org.springframework.aop.framework.Cglib2AopProxy$DynamicAdvisedInterceptor.intercept(Cglib2AopProxy.java:621)
-	at se.tipspromenad.services.UserService$$EnhancerByCGLIB$$e9420ba2.getUserByEmail(<generated>)
+	at se.tipspromenad.services.UserService$$EnhancerByCGLIB$$d6a139a4.getUserByEmail(<generated>)
 	at se.tipspromenad.security.UserDetailsServiceImpl.loadUserByUsername(UserDetailsServiceImpl.java:29)
 	at org.springframework.security.authentication.dao.DaoAuthenticationProvider.retrieveUser(DaoAuthenticationProvider.java:82)
 	at org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider.authenticate(AbstractUserDetailsAuthenticationProvider.java:124)
@@ -164,7 +164,7 @@ Caused by: org.hibernate.hql.ast.QuerySyntaxException: User is not mapped [from 
 	at org.hibernate.ejb.AbstractEntityManagerImpl.createQuery(AbstractEntityManagerImpl.java:93)
 	... 63 more
 
-testGetGameList(se.tipspromenad.tests.controllers.GameControllerTest)  Time elapsed: 0.037 sec  <<< ERROR!
+testGetGameList(se.tipspromenad.tests.controllers.GameControllerTest)  Time elapsed: 0.04 sec  <<< ERROR!
 java.lang.IllegalArgumentException: org.hibernate.hql.ast.QuerySyntaxException: User is not mapped [from User where email = :email]
 	at org.hibernate.ejb.AbstractEntityManagerImpl.throwPersistenceException(AbstractEntityManagerImpl.java:601)
 	at org.hibernate.ejb.AbstractEntityManagerImpl.createQuery(AbstractEntityManagerImpl.java:96)
@@ -182,7 +182,7 @@ java.lang.IllegalArgumentException: org.hibernate.hql.ast.QuerySyntaxException: 
 	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:110)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
 	at org.springframework.aop.framework.Cglib2AopProxy$DynamicAdvisedInterceptor.intercept(Cglib2AopProxy.java:621)
-	at se.tipspromenad.services.dao.UserDao$$EnhancerByCGLIB$$ecc1d1ad.getUserByEmail(<generated>)
+	at se.tipspromenad.services.dao.UserDao$$EnhancerByCGLIB$$da20ffaf.getUserByEmail(<generated>)
 	at se.tipspromenad.services.UserService.getUserByEmail(UserService.java:39)
 	at se.tipspromenad.services.UserService$$FastClassByCGLIB$$55d8ca8.invoke(<generated>)
 	at net.sf.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)
@@ -191,7 +191,7 @@ java.lang.IllegalArgumentException: org.hibernate.hql.ast.QuerySyntaxException: 
 	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:110)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
 	at org.springframework.aop.framework.Cglib2AopProxy$DynamicAdvisedInterceptor.intercept(Cglib2AopProxy.java:621)
-	at se.tipspromenad.services.UserService$$EnhancerByCGLIB$$e9420ba2.getUserByEmail(<generated>)
+	at se.tipspromenad.services.UserService$$EnhancerByCGLIB$$d6a139a4.getUserByEmail(<generated>)
 	at se.tipspromenad.security.UserDetailsServiceImpl.loadUserByUsername(UserDetailsServiceImpl.java:29)
 	at org.springframework.security.authentication.dao.DaoAuthenticationProvider.retrieveUser(DaoAuthenticationProvider.java:82)
 	at org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider.authenticate(AbstractUserDetailsAuthenticationProvider.java:124)
