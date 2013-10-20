@@ -19,11 +19,17 @@
 		<link href="3p/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 		<style>
 			body {
-				padding-top: 60px;
+				padding-top: 40px;
 			}
 			
 			.container {
 				width: 1125px !important;
+			}
+			
+			.footer {
+				color: white;
+				font-weight: bold;
+				text-align: center;				
 			}
 		</style>
 		
@@ -127,6 +133,9 @@
 		</sec:authorize>
 		<div class="container">
 			<tiles:insertAttribute name="content" />
+		</div>
+		<div class="footer">
+			ABC | &#169; tipspromenad.nu
 		</div>
 		
 		<!-- dialogs -->

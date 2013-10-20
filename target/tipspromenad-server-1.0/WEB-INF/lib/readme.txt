@@ -1,1 +1,0 @@
-This folder is necessary if you want work with the project in Eclipse IDE as Dynamic Web Project.
