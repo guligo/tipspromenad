@@ -22,10 +22,6 @@ var facebookController = function() {
 					if (callback != null) {
 						callback();
 					}
-			    } else if (response.status === 'not_authorized') {
-			    	FB.login(function(response) {
-			    		console.log(response);
-			    	}, {perms: 'manage_notifications,email,user_likes'});
 			    } else {
 			    	FB.login(function(resonse) {
 			    		console.log(response);
@@ -48,9 +44,17 @@ var facebookController = function() {
 			_userId = response.authResponse.userID;
 			_accessToken = response.authResponse.accessToken;
 			if (callback != null) {
-				callback(response);
+				if (response.authResponse) {
+					callback(response.authResponse);
+				} else {
+					console.log('User cancelled authentication request');
+				}
 			}
-		}, {scope: 'manage_notifications,email,user_likes'});
+		}, {scope: 'manage_notifications, email, user_likes'});
+	}
+	
+	function _foobar(response) {
+		log.console(response);
 	}
 	
 	function _getUserId() {
@@ -95,6 +99,30 @@ var facebookController = function() {
 		});
 	}
 	
+	function _verifyAccessToken(accessToken) {
+		$.ajax({
+			url: 'login/verify',
+			type: 'post',
+			data: {
+				accessToken: accessToken
+			},
+			success: function(response) {				
+				$.ajax({
+					url: 'j_spring_security_check',
+					type: 'POST',
+					data: {
+						j_username: response.email,
+						j_password: response.password
+					},
+				    success: function(status) {				    	
+				    	// $(location).attr('href', 'home.page');
+				    	alert('cool!');
+					}
+				});
+			}
+		});
+	}
+	
 	return {
 		init: function(callback) {
 			_init(callback);
@@ -108,8 +136,10 @@ var facebookController = function() {
 		sendNotification: function(callback) {
 			_sendNotification(callback);
 		},
-		showDialog: function(callback) {
-			_showDialog(callback);
+		showDialog: function() {
+			_showDialog(function(response) {
+				_verifyAccessToken(response.accessToken);
+			});
 		}
 	};
 	

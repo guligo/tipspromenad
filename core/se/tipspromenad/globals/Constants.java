@@ -21,13 +21,16 @@ public class Constants {
 	 */
 	public static class URL {
 		
-		public final static String LOGIN_PAGE = "login";
-		public final static String LOGIN_GET_SUCCESS_RESULT_ACTION = "login/success";
-		public final static String LOGIN_GET_FAIL_RESULT_ACTION = "login/fail";
+		public final static String LOGIN_PAGE                                = "login";
+		public final static String LOGIN_GET_SUCCESS_RESULT_ACTION           = "login/success";
+		public final static String LOGIN_GET_FAIL_RESULT_ACTION              = "login/fail";
+		public final static String LOGIN_VERIFY_FACEBOOK_ACCESS_TOKEN_ACTION = "login/verify";
 		
-		public final static String USER_LOGIN_ACTION = "user/login";
-		public final static String USER_REGISTRATION_ACTION = "user/register";
-		public final static String USER_PROFILE_GET_ACTION = "user/get-profile";
+		public final static String LOGOUT_ACTION = "logout";
+		
+		public final static String USER_LOGIN_ACTION          = "user/login";
+		public final static String USER_REGISTRATION_ACTION   = "user/register";
+		public final static String USER_PROFILE_GET_ACTION    = "user/get-profile";
 		public final static String USER_PROFILE_UPDATE_ACTION = "user/update-profile";
 		
 		public final static String HOME_PAGE = "home.page";

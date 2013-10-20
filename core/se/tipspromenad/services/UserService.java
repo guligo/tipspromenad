@@ -2,6 +2,7 @@ package se.tipspromenad.services;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,10 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 
+	public User getUser(Long id) {
+		return userDao.getUser(id);
+	}
+
 	public User getUserByEmail(String email) {
 		return userDao.getUserByEmail(email);
 	}
@@ -45,7 +50,33 @@ public class UserService {
 		user.setPassword(SecurityUtils.toBase64(SecurityUtils.toMD5(password)));
 		user.setRole(UserRole.ROLE_SIMPLE_USER);
 		user.setEnabled(true);
+		user.setFbUserId(null);
+		user.setResetPassword(false);
 		return userDao.createUser(user);
+	}
+
+	public Long createUser(String fbUserId, String name, String email, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		User user = new User();
+		user.setName(name);
+		user.setEmail(email);
+		user.setPassword(SecurityUtils.toBase64(SecurityUtils.toMD5(password)));
+		user.setRole(UserRole.ROLE_SIMPLE_USER);
+		user.setEnabled(true);
+		user.setFbUserId(fbUserId);
+		user.setResetPassword(true);
+		return userDao.createUser(user);
+	}
+
+	public void removeUser(Long id) {
+		userDao.removeUser(id);
+	}
+
+	public void updateUser(User user) {
+		userDao.updateUser(user);
+	}
+
+	public User getUserByFbId(String fbId) {
+		return userDao.getUserByFbId(fbId);
 	}
 
 //	public void updateUserProfile(String email, String firstName, String lastName, Gender gender) {
@@ -66,8 +97,5 @@ public class UserService {
 //		}
 //	}
 
-	public void removeUser(Long id) {
-		userDao.removeUser(id);
-	}
-
 }
+

@@ -44,7 +44,7 @@
 		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="3p/bootstrap/ico/apple-touch-icon-72-precomposed.png">
 		<link rel="apple-touch-icon-precomposed" href="3p/bootstrap/ico/apple-touch-icon-57-precomposed.png">		
 	</head>
-	<body>		
+	<body>
 		<sec:authorize ifAnyGranted="ROLE_SIMPLE_USER">
 			<div class="navbar navbar-inverse navbar-fixed-top">
 				<div class="navbar-inner">

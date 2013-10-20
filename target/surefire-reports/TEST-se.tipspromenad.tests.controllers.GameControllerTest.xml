@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite failures="0" time="0.773" errors="3" skipped="0" tests="3" name="se.tipspromenad.tests.controllers.GameControllerTest">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="/home/guligo/Desktop/jdk1.6.0_27/jre/lib/i386"/>
+    <property name="java.vm.version" value="20.2-b06"/>
+    <property name="java.vm.vendor" value="Sun Microsystems Inc."/>
+    <property name="java.vendor.url" value="http://java.sun.com/"/>
+    <property name="path.separator" value=":"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) Client VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/home/guligo/Dev/repos/tipspromenad"/>
+    <property name="java.runtime.version" value="1.6.0_27-b07"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
+    <property name="basedir" value="/home/guligo/Dev/repos/tipspromenad"/>
+    <property name="java.endorsed.dirs" value="/home/guligo/Desktop/jdk1.6.0_27/jre/lib/endorsed"/>
+    <property name="os.arch" value="i386"/>
+    <property name="surefire.real.class.path" value="/tmp/surefirebooter4914191675009735354.jar"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="os.name" value="Linux"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/home/guligo/Desktop/jdk1.6.0_27/jre/lib/i386/client:/home/guligo/Desktop/jdk1.6.0_27/jre/lib/i386:/home/guligo/Desktop/jdk1.6.0_27/jre/../lib/i386:/usr/java/packages/lib/i386:/lib:/usr/lib"/>
+    <property name="surefire.test.class.path" value="/home/guligo/Dev/repos/tipspromenad/target/test-classes:/home/guligo/Dev/repos/tipspromenad/target/classes:/home/guligo/.m2/repository/javax/servlet/servlet-api/2.4/servlet-api-2.4.jar:/home/guligo/.m2/repository/javax/servlet/jsp/jsp-api/2.0/jsp-api-2.0.jar:/home/guligo/.m2/repository/javax/servlet/jstl/1.2/jstl-1.2.jar:/home/guligo/.m2/repository/org/springframework/spring-aop/3.0.3.RELEASE/spring-aop-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar:/home/guligo/.m2/repository/org/springframework/spring-asm/3.0.3.RELEASE/spring-asm-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/spring-beans/3.0.3.RELEASE/spring-beans-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/spring-core/3.0.3.RELEASE/spring-core-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/commons-logging/commons-logging/1.1/commons-logging-1.1.jar:/home/guligo/.m2/repository/org/springframework/spring-context/3.0.3.RELEASE/spring-context-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/spring-expression/3.0.3.RELEASE/spring-expression-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/spring-context-support/3.0.3.RELEASE/spring-context-support-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/spring-jdbc/3.0.3.RELEASE/spring-jdbc-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/spring-tx/3.0.3.RELEASE/spring-tx-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/spring-webmvc/3.0.3.RELEASE/spring-webmvc-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/spring-web/3.0.3.RELEASE/spring-web-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/spring-orm/3.0.3.RELEASE/spring-orm-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/spring-test/3.0.3.RELEASE/spring-test-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/spring-jpa/2.0/spring-jpa-2.0.jar:/home/guligo/.m2/repository/org/hibernate/hibernate-core/3.3.0.SP1/hibernate-core-3.3.0.SP1.jar:/home/guligo/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar:/home/guligo/.m2/repository/commons-collections/commons-collections/3.2/commons-collections-3.2.jar:/home/guligo/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar:/home/guligo/.m2/repository/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar:/home/guligo/.m2/repository/javax/transaction/jta/1.1/jta-1.1.jar:/home/guligo/.m2/repository/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.jar:/home/guligo/.m2/repository/org/hibernate/hibernate-entitymanager/3.4.0.GA/hibernate-entitymanager-3.4.0.GA.jar:/home/guligo/.m2/repository/org/hibernate/ejb3-persistence/1.0.2.GA/ejb3-persistence-1.0.2.GA.jar:/home/guligo/.m2/repository/org/hibernate/hibernate-commons-annotations/3.1.0.GA/hibernate-commons-annotations-3.1.0.GA.jar:/home/guligo/.m2/repository/org/hibernate/hibernate-annotations/3.4.0.GA/hibernate-annotations-3.4.0.GA.jar:/home/guligo/.m2/repository/javassist/javassist/3.4.GA/javassist-3.4.GA.jar:/home/guligo/.m2/repository/org/hibernate/hibernate-c3p0/3.5.0-Final/hibernate-c3p0-3.5.0-Final.jar:/home/guligo/.m2/repository/c3p0/c3p0/0.9.1/c3p0-0.9.1.jar:/home/guligo/.m2/repository/org/springframework/security/spring-security-config/3.0.3.RELEASE/spring-security-config-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/security/spring-security-core/3.0.3.RELEASE/spring-security-core-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/aspectj/aspectjrt/1.6.8/aspectjrt-1.6.8.jar:/home/guligo/.m2/repository/org/aspectj/aspectjweaver/1.6.8/aspectjweaver-1.6.8.jar:/home/guligo/.m2/repository/org/springframework/security/spring-security-taglibs/3.0.3.RELEASE/spring-security-taglibs-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/security/spring-security-web/3.0.3.RELEASE/spring-security-web-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/security/spring-security-acl/3.0.3.RELEASE/spring-security-acl-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/apache/tiles/tiles-api/2.1.2/tiles-api-2.1.2.jar:/home/guligo/.m2/repository/commons-logging/commons-logging-api/1.1/commons-logging-api-1.1.jar:/home/guligo/.m2/repository/org/apache/tiles/tiles-jsp/2.1.2/tiles-jsp-2.1.2.jar:/home/guligo/.m2/repository/org/apache/tiles/tiles-servlet/2.1.2/tiles-servlet-2.1.2.jar:/home/guligo/.m2/repository/org/apache/tiles/tiles-core/2.1.2/tiles-core-2.1.2.jar:/home/guligo/.m2/repository/commons-digester/commons-digester/1.8.1/commons-digester-1.8.1.jar:/home/guligo/.m2/repository/commons-beanutils/commons-beanutils/1.8.0/commons-beanutils-1.8.0.jar:/home/guligo/.m2/repository/log4j/log4j/1.2.14/log4j-1.2.14.jar:/home/guligo/.m2/repository/logkit/logkit/1.0.1/logkit-1.0.1.jar:/home/guligo/.m2/repository/avalon-framework/avalon-framework/4.1.3/avalon-framework-4.1.3.jar:/home/guligo/.m2/repository/junit/junit/4.8/junit-4.8.jar:/home/guligo/.m2/repository/org/codehaus/jackson/jackson-mapper-asl/1.9.7/jackson-mapper-asl-1.9.7.jar:/home/guligo/.m2/repository/org/codehaus/jackson/jackson-core-asl/1.9.7/jackson-core-asl-1.9.7.jar:/home/guligo/.m2/repository/org/tuckey/urlrewritefilter/3.1.0/urlrewritefilter-3.1.0.jar:/home/guligo/.m2/repository/cglib/cglib/2.2.2/cglib-2.2.2.jar:/home/guligo/.m2/repository/asm/asm/3.3.1/asm-3.3.1.jar:/home/guligo/.m2/repository/mysql/mysql-connector-java/5.1.20/mysql-connector-java-5.1.20.jar:"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="50.0"/>
+    <property name="sun.management.compiler" value="HotSpot Client Compiler"/>
+    <property name="os.version" value="2.6.38-15-generic"/>
+    <property name="user.home" value="/home/guligo"/>
+    <property name="user.timezone" value="Europe/Stockholm"/>
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.specification.version" value="1.6"/>
+    <property name="user.name" value="guligo"/>
+    <property name="java.class.path" value="/home/guligo/Dev/repos/tipspromenad/target/test-classes:/home/guligo/Dev/repos/tipspromenad/target/classes:/home/guligo/.m2/repository/javax/servlet/servlet-api/2.4/servlet-api-2.4.jar:/home/guligo/.m2/repository/javax/servlet/jsp/jsp-api/2.0/jsp-api-2.0.jar:/home/guligo/.m2/repository/javax/servlet/jstl/1.2/jstl-1.2.jar:/home/guligo/.m2/repository/org/springframework/spring-aop/3.0.3.RELEASE/spring-aop-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar:/home/guligo/.m2/repository/org/springframework/spring-asm/3.0.3.RELEASE/spring-asm-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/spring-beans/3.0.3.RELEASE/spring-beans-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/spring-core/3.0.3.RELEASE/spring-core-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/commons-logging/commons-logging/1.1/commons-logging-1.1.jar:/home/guligo/.m2/repository/org/springframework/spring-context/3.0.3.RELEASE/spring-context-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/spring-expression/3.0.3.RELEASE/spring-expression-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/spring-context-support/3.0.3.RELEASE/spring-context-support-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/spring-jdbc/3.0.3.RELEASE/spring-jdbc-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/spring-tx/3.0.3.RELEASE/spring-tx-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/spring-webmvc/3.0.3.RELEASE/spring-webmvc-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/spring-web/3.0.3.RELEASE/spring-web-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/spring-orm/3.0.3.RELEASE/spring-orm-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/spring-test/3.0.3.RELEASE/spring-test-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/spring-jpa/2.0/spring-jpa-2.0.jar:/home/guligo/.m2/repository/org/hibernate/hibernate-core/3.3.0.SP1/hibernate-core-3.3.0.SP1.jar:/home/guligo/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar:/home/guligo/.m2/repository/commons-collections/commons-collections/3.2/commons-collections-3.2.jar:/home/guligo/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar:/home/guligo/.m2/repository/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar:/home/guligo/.m2/repository/javax/transaction/jta/1.1/jta-1.1.jar:/home/guligo/.m2/repository/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.jar:/home/guligo/.m2/repository/org/hibernate/hibernate-entitymanager/3.4.0.GA/hibernate-entitymanager-3.4.0.GA.jar:/home/guligo/.m2/repository/org/hibernate/ejb3-persistence/1.0.2.GA/ejb3-persistence-1.0.2.GA.jar:/home/guligo/.m2/repository/org/hibernate/hibernate-commons-annotations/3.1.0.GA/hibernate-commons-annotations-3.1.0.GA.jar:/home/guligo/.m2/repository/org/hibernate/hibernate-annotations/3.4.0.GA/hibernate-annotations-3.4.0.GA.jar:/home/guligo/.m2/repository/javassist/javassist/3.4.GA/javassist-3.4.GA.jar:/home/guligo/.m2/repository/org/hibernate/hibernate-c3p0/3.5.0-Final/hibernate-c3p0-3.5.0-Final.jar:/home/guligo/.m2/repository/c3p0/c3p0/0.9.1/c3p0-0.9.1.jar:/home/guligo/.m2/repository/org/springframework/security/spring-security-config/3.0.3.RELEASE/spring-security-config-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/security/spring-security-core/3.0.3.RELEASE/spring-security-core-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/aspectj/aspectjrt/1.6.8/aspectjrt-1.6.8.jar:/home/guligo/.m2/repository/org/aspectj/aspectjweaver/1.6.8/aspectjweaver-1.6.8.jar:/home/guligo/.m2/repository/org/springframework/security/spring-security-taglibs/3.0.3.RELEASE/spring-security-taglibs-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/security/spring-security-web/3.0.3.RELEASE/spring-security-web-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/springframework/security/spring-security-acl/3.0.3.RELEASE/spring-security-acl-3.0.3.RELEASE.jar:/home/guligo/.m2/repository/org/apache/tiles/tiles-api/2.1.2/tiles-api-2.1.2.jar:/home/guligo/.m2/repository/commons-logging/commons-logging-api/1.1/commons-logging-api-1.1.jar:/home/guligo/.m2/repository/org/apache/tiles/tiles-jsp/2.1.2/tiles-jsp-2.1.2.jar:/home/guligo/.m2/repository/org/apache/tiles/tiles-servlet/2.1.2/tiles-servlet-2.1.2.jar:/home/guligo/.m2/repository/org/apache/tiles/tiles-core/2.1.2/tiles-core-2.1.2.jar:/home/guligo/.m2/repository/commons-digester/commons-digester/1.8.1/commons-digester-1.8.1.jar:/home/guligo/.m2/repository/commons-beanutils/commons-beanutils/1.8.0/commons-beanutils-1.8.0.jar:/home/guligo/.m2/repository/log4j/log4j/1.2.14/log4j-1.2.14.jar:/home/guligo/.m2/repository/logkit/logkit/1.0.1/logkit-1.0.1.jar:/home/guligo/.m2/repository/avalon-framework/avalon-framework/4.1.3/avalon-framework-4.1.3.jar:/home/guligo/.m2/repository/junit/junit/4.8/junit-4.8.jar:/home/guligo/.m2/repository/org/codehaus/jackson/jackson-mapper-asl/1.9.7/jackson-mapper-asl-1.9.7.jar:/home/guligo/.m2/repository/org/codehaus/jackson/jackson-core-asl/1.9.7/jackson-core-asl-1.9.7.jar:/home/guligo/.m2/repository/org/tuckey/urlrewritefilter/3.1.0/urlrewritefilter-3.1.0.jar:/home/guligo/.m2/repository/cglib/cglib/2.2.2/cglib-2.2.2.jar:/home/guligo/.m2/repository/asm/asm/3.3.1/asm-3.3.1.jar:/home/guligo/.m2/repository/mysql/mysql-connector-java/5.1.20/mysql-connector-java-5.1.20.jar:"/>
+    <property name="java.vm.specification.version" value="1.0"/>
+    <property name="sun.arch.data.model" value="32"/>
+    <property name="java.home" value="/home/guligo/Desktop/jdk1.6.0_27/jre"/>
+    <property name="sun.java.command" value="/tmp/surefirebooter4914191675009735354.jar /tmp/surefire2359970306031884488tmp /tmp/surefire7254119144473960501tmp"/>
+    <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="user.language" value="en"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.version" value="1.6.0_27"/>
+    <property name="java.ext.dirs" value="/home/guligo/Desktop/jdk1.6.0_27/jre/lib/ext:/usr/java/packages/lib/ext"/>
+    <property name="sun.boot.class.path" value="/home/guligo/Desktop/jdk1.6.0_27/jre/lib/resources.jar:/home/guligo/Desktop/jdk1.6.0_27/jre/lib/rt.jar:/home/guligo/Desktop/jdk1.6.0_27/jre/lib/sunrsasign.jar:/home/guligo/Desktop/jdk1.6.0_27/jre/lib/jsse.jar:/home/guligo/Desktop/jdk1.6.0_27/jre/lib/jce.jar:/home/guligo/Desktop/jdk1.6.0_27/jre/lib/charsets.jar:/home/guligo/Desktop/jdk1.6.0_27/jre/lib/modules/jdk.boot.jar:/home/guligo/Desktop/jdk1.6.0_27/jre/classes"/>
+    <property name="java.vendor" value="Sun Microsystems Inc."/>
+    <property name="localRepository" value="/home/guligo/.m2/repository"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.desktop" value="gnome"/>
+    <property name="sun.cpu.isalist" value=""/>
+  </properties>
+  <testcase time="0.119" classname="se.tipspromenad.tests.controllers.GameControllerTest" name="testGetGame">
+    <error message="Unknown entity: se.tipspromenad.entities.Game" type="java.lang.IllegalArgumentException">java.lang.IllegalArgumentException: Unknown entity: se.tipspromenad.entities.Game
+	at org.hibernate.ejb.AbstractEntityManagerImpl.find(AbstractEntityManagerImpl.java:193)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:240)
+	at $Proxy16.find(Unknown Source)
+	at se.tipspromenad.services.dao.CommonDao.getEntity(CommonDao.java:33)
+	at se.tipspromenad.services.dao.GameDao.getGame(GameDao.java:25)
+	at se.tipspromenad.services.dao.GameDao$$FastClassByCGLIB$$42899822.invoke(&lt;generated&gt;)
+	at net.sf.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)
+	at org.springframework.aop.framework.Cglib2AopProxy$CglibMethodInvocation.invokeJoinpoint(Cglib2AopProxy.java:688)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:150)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:110)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
+	at org.springframework.aop.framework.Cglib2AopProxy$DynamicAdvisedInterceptor.intercept(Cglib2AopProxy.java:621)
+	at se.tipspromenad.services.dao.GameDao$$EnhancerByCGLIB$$d38407e0.getGame(&lt;generated&gt;)
+	at se.tipspromenad.services.GameService.getGame(GameService.java:35)
+	at se.tipspromenad.controllers.game.GameController.getGame(GameController.java:66)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.web.bind.annotation.support.HandlerMethodInvoker.invokeHandlerMethod(HandlerMethodInvoker.java:175)
+	at org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter.invokeHandlerMethod(AnnotationMethodHandlerAdapter.java:421)
+	at org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter.handle(AnnotationMethodHandlerAdapter.java:409)
+	at se.tipspromenad.tests.controllers.AbstractControllerTest.getJSON(AbstractControllerTest.java:102)
+	at se.tipspromenad.tests.controllers.GameControllerTest.testGetGame(GameControllerTest.java:42)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:44)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:41)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:82)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:72)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:240)
+	at se.tipspromenad.tests.utils.OrderedRunner.runChild(OrderedRunner.java:16)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:193)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:52)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:191)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:42)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:184)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:236)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:180)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:62)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:140)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:127)
+	at org.apache.maven.surefire.Surefire.run(Surefire.java:177)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:345)
+	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1009)
+Caused by: org.hibernate.MappingException: Unknown entity: se.tipspromenad.entities.Game
+	at org.hibernate.impl.SessionFactoryImpl.getEntityPersister(SessionFactoryImpl.java:580)
+	at org.hibernate.event.def.DefaultLoadEventListener.onLoad(DefaultLoadEventListener.java:91)
+	at org.hibernate.impl.SessionImpl.fireLoad(SessionImpl.java:905)
+	at org.hibernate.impl.SessionImpl.get(SessionImpl.java:842)
+	at org.hibernate.impl.SessionImpl.get(SessionImpl.java:835)
+	at org.hibernate.ejb.AbstractEntityManagerImpl.find(AbstractEntityManagerImpl.java:182)
+	... 60 more
+</error>
+  </testcase>
+  <testcase time="0.601" classname="se.tipspromenad.tests.controllers.GameControllerTest" name="testCreateGame">
+    <error message="org.hibernate.hql.ast.QuerySyntaxException: User is not mapped [from User where email = :email]" type="java.lang.IllegalArgumentException">java.lang.IllegalArgumentException: org.hibernate.hql.ast.QuerySyntaxException: User is not mapped [from User where email = :email]
+	at org.hibernate.ejb.AbstractEntityManagerImpl.throwPersistenceException(AbstractEntityManagerImpl.java:601)
+	at org.hibernate.ejb.AbstractEntityManagerImpl.createQuery(AbstractEntityManagerImpl.java:96)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:240)
+	at $Proxy16.createQuery(Unknown Source)
+	at se.tipspromenad.services.dao.UserDao.getUserByEmail(UserDao.java:31)
+	at se.tipspromenad.services.dao.UserDao$$FastClassByCGLIB$$456d3da9.invoke(&lt;generated&gt;)
+	at net.sf.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)
+	at org.springframework.aop.framework.Cglib2AopProxy$CglibMethodInvocation.invokeJoinpoint(Cglib2AopProxy.java:688)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:150)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:110)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
+	at org.springframework.aop.framework.Cglib2AopProxy$DynamicAdvisedInterceptor.intercept(Cglib2AopProxy.java:621)
+	at se.tipspromenad.services.dao.UserDao$$EnhancerByCGLIB$$ecc1d1ad.getUserByEmail(&lt;generated&gt;)
+	at se.tipspromenad.services.UserService.getUserByEmail(UserService.java:39)
+	at se.tipspromenad.services.UserService$$FastClassByCGLIB$$55d8ca8.invoke(&lt;generated&gt;)
+	at net.sf.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)
+	at org.springframework.aop.framework.Cglib2AopProxy$CglibMethodInvocation.invokeJoinpoint(Cglib2AopProxy.java:688)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:150)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:110)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
+	at org.springframework.aop.framework.Cglib2AopProxy$DynamicAdvisedInterceptor.intercept(Cglib2AopProxy.java:621)
+	at se.tipspromenad.services.UserService$$EnhancerByCGLIB$$e9420ba2.getUserByEmail(&lt;generated&gt;)
+	at se.tipspromenad.security.UserDetailsServiceImpl.loadUserByUsername(UserDetailsServiceImpl.java:29)
+	at org.springframework.security.authentication.dao.DaoAuthenticationProvider.retrieveUser(DaoAuthenticationProvider.java:82)
+	at org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider.authenticate(AbstractUserDetailsAuthenticationProvider.java:124)
+	at org.springframework.security.authentication.ProviderManager.doAuthentication(ProviderManager.java:130)
+	at se.tipspromenad.tests.controllers.AbstractControllerTest.authenticate(AbstractControllerTest.java:74)
+	at se.tipspromenad.tests.controllers.GameControllerTest.testCreateGame(GameControllerTest.java:55)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:44)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:41)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:82)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:72)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:240)
+	at se.tipspromenad.tests.utils.OrderedRunner.runChild(OrderedRunner.java:16)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:193)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:52)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:191)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:42)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:184)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:236)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:180)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:62)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:140)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:127)
+	at org.apache.maven.surefire.Surefire.run(Surefire.java:177)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:345)
+	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1009)
+Caused by: org.hibernate.hql.ast.QuerySyntaxException: User is not mapped [from User where email = :email]
+	at org.hibernate.hql.ast.util.SessionFactoryHelper.requireClassPersister(SessionFactoryHelper.java:181)
+	at org.hibernate.hql.ast.tree.FromElementFactory.addFromElement(FromElementFactory.java:110)
+	at org.hibernate.hql.ast.tree.FromClause.addFromElement(FromClause.java:93)
+	at org.hibernate.hql.ast.HqlSqlWalker.createFromElement(HqlSqlWalker.java:277)
+	at org.hibernate.hql.antlr.HqlSqlBaseWalker.fromElement(HqlSqlBaseWalker.java:3056)
+	at org.hibernate.hql.antlr.HqlSqlBaseWalker.fromElementList(HqlSqlBaseWalker.java:2945)
+	at org.hibernate.hql.antlr.HqlSqlBaseWalker.fromClause(HqlSqlBaseWalker.java:688)
+	at org.hibernate.hql.antlr.HqlSqlBaseWalker.query(HqlSqlBaseWalker.java:544)
+	at org.hibernate.hql.antlr.HqlSqlBaseWalker.selectStatement(HqlSqlBaseWalker.java:281)
+	at org.hibernate.hql.antlr.HqlSqlBaseWalker.statement(HqlSqlBaseWalker.java:229)
+	at org.hibernate.hql.ast.QueryTranslatorImpl.analyze(QueryTranslatorImpl.java:251)
+	at org.hibernate.hql.ast.QueryTranslatorImpl.doCompile(QueryTranslatorImpl.java:183)
+	at org.hibernate.hql.ast.QueryTranslatorImpl.compile(QueryTranslatorImpl.java:134)
+	at org.hibernate.engine.query.HQLQueryPlan.&lt;init&gt;(HQLQueryPlan.java:101)
+	at org.hibernate.engine.query.HQLQueryPlan.&lt;init&gt;(HQLQueryPlan.java:80)
+	at org.hibernate.engine.query.QueryPlanCache.getHQLQueryPlan(QueryPlanCache.java:94)
+	at org.hibernate.impl.AbstractSessionImpl.getHQLQueryPlan(AbstractSessionImpl.java:156)
+	at org.hibernate.impl.AbstractSessionImpl.createQuery(AbstractSessionImpl.java:135)
+	at org.hibernate.impl.SessionImpl.createQuery(SessionImpl.java:1650)
+	at org.hibernate.ejb.AbstractEntityManagerImpl.createQuery(AbstractEntityManagerImpl.java:93)
+	... 63 more
+</error>
+  </testcase>
+  <testcase time="0.036" classname="se.tipspromenad.tests.controllers.GameControllerTest" name="testGetGameList">
+    <error message="org.hibernate.hql.ast.QuerySyntaxException: User is not mapped [from User where email = :email]" type="java.lang.IllegalArgumentException">java.lang.IllegalArgumentException: org.hibernate.hql.ast.QuerySyntaxException: User is not mapped [from User where email = :email]
+	at org.hibernate.ejb.AbstractEntityManagerImpl.throwPersistenceException(AbstractEntityManagerImpl.java:601)
+	at org.hibernate.ejb.AbstractEntityManagerImpl.createQuery(AbstractEntityManagerImpl.java:96)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:240)
+	at $Proxy16.createQuery(Unknown Source)
+	at se.tipspromenad.services.dao.UserDao.getUserByEmail(UserDao.java:31)
+	at se.tipspromenad.services.dao.UserDao$$FastClassByCGLIB$$456d3da9.invoke(&lt;generated&gt;)
+	at net.sf.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)
+	at org.springframework.aop.framework.Cglib2AopProxy$CglibMethodInvocation.invokeJoinpoint(Cglib2AopProxy.java:688)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:150)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:110)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
+	at org.springframework.aop.framework.Cglib2AopProxy$DynamicAdvisedInterceptor.intercept(Cglib2AopProxy.java:621)
+	at se.tipspromenad.services.dao.UserDao$$EnhancerByCGLIB$$ecc1d1ad.getUserByEmail(&lt;generated&gt;)
+	at se.tipspromenad.services.UserService.getUserByEmail(UserService.java:39)
+	at se.tipspromenad.services.UserService$$FastClassByCGLIB$$55d8ca8.invoke(&lt;generated&gt;)
+	at net.sf.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)
+	at org.springframework.aop.framework.Cglib2AopProxy$CglibMethodInvocation.invokeJoinpoint(Cglib2AopProxy.java:688)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:150)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:110)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
+	at org.springframework.aop.framework.Cglib2AopProxy$DynamicAdvisedInterceptor.intercept(Cglib2AopProxy.java:621)
+	at se.tipspromenad.services.UserService$$EnhancerByCGLIB$$e9420ba2.getUserByEmail(&lt;generated&gt;)
+	at se.tipspromenad.security.UserDetailsServiceImpl.loadUserByUsername(UserDetailsServiceImpl.java:29)
+	at org.springframework.security.authentication.dao.DaoAuthenticationProvider.retrieveUser(DaoAuthenticationProvider.java:82)
+	at org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider.authenticate(AbstractUserDetailsAuthenticationProvider.java:124)
+	at org.springframework.security.authentication.ProviderManager.doAuthentication(ProviderManager.java:130)
+	at se.tipspromenad.tests.controllers.AbstractControllerTest.authenticate(AbstractControllerTest.java:74)
+	at se.tipspromenad.tests.controllers.GameControllerTest.testGetGameList(GameControllerTest.java:68)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:44)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:41)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:82)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:72)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:240)
+	at se.tipspromenad.tests.utils.OrderedRunner.runChild(OrderedRunner.java:16)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:193)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:52)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:191)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:42)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:184)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:236)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:180)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:62)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:140)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:127)
+	at org.apache.maven.surefire.Surefire.run(Surefire.java:177)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:345)
+	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1009)
+Caused by: org.hibernate.hql.ast.QuerySyntaxException: User is not mapped [from User where email = :email]
+	at org.hibernate.hql.ast.util.SessionFactoryHelper.requireClassPersister(SessionFactoryHelper.java:181)
+	at org.hibernate.hql.ast.tree.FromElementFactory.addFromElement(FromElementFactory.java:110)
+	at org.hibernate.hql.ast.tree.FromClause.addFromElement(FromClause.java:93)
+	at org.hibernate.hql.ast.HqlSqlWalker.createFromElement(HqlSqlWalker.java:277)
+	at org.hibernate.hql.antlr.HqlSqlBaseWalker.fromElement(HqlSqlBaseWalker.java:3056)
+	at org.hibernate.hql.antlr.HqlSqlBaseWalker.fromElementList(HqlSqlBaseWalker.java:2945)
+	at org.hibernate.hql.antlr.HqlSqlBaseWalker.fromClause(HqlSqlBaseWalker.java:688)
+	at org.hibernate.hql.antlr.HqlSqlBaseWalker.query(HqlSqlBaseWalker.java:544)
+	at org.hibernate.hql.antlr.HqlSqlBaseWalker.selectStatement(HqlSqlBaseWalker.java:281)
+	at org.hibernate.hql.antlr.HqlSqlBaseWalker.statement(HqlSqlBaseWalker.java:229)
+	at org.hibernate.hql.ast.QueryTranslatorImpl.analyze(QueryTranslatorImpl.java:251)
+	at org.hibernate.hql.ast.QueryTranslatorImpl.doCompile(QueryTranslatorImpl.java:183)
+	at org.hibernate.hql.ast.QueryTranslatorImpl.compile(QueryTranslatorImpl.java:134)
+	at org.hibernate.engine.query.HQLQueryPlan.&lt;init&gt;(HQLQueryPlan.java:101)
+	at org.hibernate.engine.query.HQLQueryPlan.&lt;init&gt;(HQLQueryPlan.java:80)
+	at org.hibernate.engine.query.QueryPlanCache.getHQLQueryPlan(QueryPlanCache.java:94)
+	at org.hibernate.impl.AbstractSessionImpl.getHQLQueryPlan(AbstractSessionImpl.java:156)
+	at org.hibernate.impl.AbstractSessionImpl.createQuery(AbstractSessionImpl.java:135)
+	at org.hibernate.impl.SessionImpl.createQuery(SessionImpl.java:1650)
+	at org.hibernate.ejb.AbstractEntityManagerImpl.createQuery(AbstractEntityManagerImpl.java:93)
+	... 63 more
+</error>
+  </testcase>
+</testsuite>

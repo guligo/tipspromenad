@@ -43,9 +43,14 @@ var loginController = function() {
 						}
 					});
 			    } else if (response.status === 'not_authorized') {
-			    	FB.login();
-			    } else {
-			    	FB.login();
+			    	FB.login(function(response) {
+			    		alert('I m here!');
+			    		if (response.authResponse) {
+			    			console.log('User authenticated, response object = ' + response.authResponse);
+			    		} else {
+			    			console.log('User cancelled authentication request');
+			    		}
+			    	});
 			    }
 			});
 		};

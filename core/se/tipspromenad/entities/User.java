@@ -36,12 +36,16 @@ public class User extends se.tipspromenad.entities.Entity {
 	private String name;
 	@Column(nullable = false, length = MAX_EMAIL_LENGTH, unique = true)
 	private String email;
-	@Column(nullable = false, length = MAX_PASSWORD_LENGTH)
+	@Column(nullable = true, length = MAX_PASSWORD_LENGTH)
 	private String password;
 	@Column(nullable = false)
 	private UserRole role;
 	@Column(nullable = false)
 	private Boolean enabled;
+	@Column(nullable = true, unique = true)
+	private String fbUserId;
+	@Column(nullable = false)
+	private Boolean resetPassword;
 
 	public UserProfile getUserProfile() {
 		return userProfile;
@@ -91,6 +95,22 @@ public class User extends se.tipspromenad.entities.Entity {
 		this.enabled = enabled;
 	}
 
+	public String getFbUserId() {
+		return fbUserId;
+	}
+
+	public void setFbUserId(String fbUserId) {
+		this.fbUserId = fbUserId;
+	}
+
+	public Boolean getResetPassword() {
+		return resetPassword;
+	}
+
+	public void setResetPassword(Boolean resetPassword) {
+		this.resetPassword = resetPassword;
+	}
+
 	// this method is sometimes used before serialization into JSON format
 	// because of security reasons
 	public void secure() {
@@ -98,6 +118,8 @@ public class User extends se.tipspromenad.entities.Entity {
 		setPassword(null);
 		setRole(null);
 		setEnabled(null);
+		setFbUserId(null);
+		setResetPassword(null);
 	}
 
 }

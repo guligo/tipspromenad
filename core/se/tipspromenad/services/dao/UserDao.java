@@ -22,6 +22,10 @@ public class UserDao {
 	@Autowired
 	private CommonDao commonDao;
 	
+	public User getUser(Long id) {
+		return (User) commonDao.getEntity(User.class, id);
+	}
+	
 	@SuppressWarnings("unchecked")
 	public User getUserByEmail(String email) {		
 		List<User> users = commonDao.getEntityManager().createQuery("from User where email = :email")
@@ -60,6 +64,21 @@ public class UserDao {
 	
 	public void removeUser(Long id) {
 		commonDao.removeEntity(User.class, id);
+	}
+	
+	public void updateUser(User user) {
+		commonDao.updateEntity(user);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public User getUserByFbId(String fbUserId) {		
+		List<User> users = commonDao.getEntityManager().createQuery("from User u where u.fbUserId = :fbUserId")
+			.setParameter("fbUserId", fbUserId)
+			.getResultList();
+		if (users != null && users.size() > 0) {
+			return users.get(0);
+		}
+		return null;
 	}
 	
 }

@@ -8,9 +8,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import se.tipspromenad.controllers.game.GameController;
-import se.tipspromenad.controllers.game.GameSaveRequest;
 import se.tipspromenad.controllers.game.GameSaveResponse;
-import se.tipspromenad.controllers.user.UserRegistrationResponse;
 import se.tipspromenad.entities.Game;
 import se.tipspromenad.globals.Constants;
 import se.tipspromenad.tests.utils.Order;
@@ -55,7 +53,7 @@ public class GameControllerTest extends AbstractControllerTest {
 	@Order(order = 2)
 	public void testCreateGame() throws Exception {
 		authenticate(UserControllerTest.DEFAULT_TEST_USER_EMAIL, UserControllerTest.DEFAULT_TEST_USER_PASSWORD);
-		GameSaveResponse bean = postJSON(
+		postJSON(
 			GameSaveResponse.class,
 			gameController,
 			"/" + Constants.URL.GAME_SAVE_ACTION,
