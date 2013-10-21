@@ -10,9 +10,8 @@
 	<packaging>war</packaging>
 	
 	<properties>
-		<majorVersion>0</majorVersion>
+		<majorVersion>1</majorVersion>
 		<minorVersion>0</minorVersion>
-		<buildNumber>0</buildNumber>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
