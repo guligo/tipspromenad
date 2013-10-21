@@ -12,8 +12,7 @@ public class Constants {
 	 */
 	public static interface System {
 		
-		public final static String MAJOR_VERSION    = "0";
-		public final static String MINOR_VERSION    = "0";
+		public final static String VERSION          = "1.0";
 		public final static String BUILD_NUMBER     = "13";
 		public final static String DEFAULT_ENCODING = "UTF-8";
 		

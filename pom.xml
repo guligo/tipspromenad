@@ -6,12 +6,10 @@
 	<groupId>se.tipspromenad</groupId>
     <artifactId>tipspromenad-server</artifactId>
     <name>tipspromenad-server</name>
-	<version>${majorVersion}.${minorVersion}</version>
+	<version>1.0</version>
 	<packaging>war</packaging>
 	
 	<properties>
-		<majorVersion>1</majorVersion>
-		<minorVersion>0</minorVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
