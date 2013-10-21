@@ -6,10 +6,13 @@
 	<groupId>se.tipspromenad</groupId>
     <artifactId>tipspromenad-server</artifactId>
     <name>tipspromenad-server</name>
-	<version>1.0</version>
+	<version>${majorVersion}.${minorVersion}</version>
 	<packaging>war</packaging>
 	
 	<properties>
+		<majorVersion>0</majorVersion>
+		<minorVersion>0</minorVersion>
+		<buildNumber>0</buildNumber>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
@@ -24,11 +27,13 @@
 		<resources>
 			<resource>
 				<directory>res</directory>
+				<filtering>true</filtering>
 			</resource>
 		</resources>
 		<testResources>
 			<testResource>
 				<directory>res</directory>
+				<filtering>true</filtering>
 			</testResource>
 		</testResources>
 		<plugins>

@@ -143,7 +143,9 @@
 			<tiles:insertAttribute name="content" />
 		</div>
 		<div class="footer">
-			Build #: <a href="#">XX.YY.ZZ</a> | &#169; tipspromenad.nu
+			Build #: <a href="http://54.228.222.235:8080/job/tipspromenad-dev/<%= Constants.System.BUILD_NUMBER %>">
+				<%= Constants.System.MAJOR_VERSION %>.<%= Constants.System.MINOR_VERSION %>.<%= Constants.System.BUILD_NUMBER %>
+			</a> | &#169; tipspromenad.nu
 		</div>
 		
 		<!-- dialogs -->
