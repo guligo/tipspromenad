@@ -12,12 +12,13 @@
 		<style>
 			body {
 				margin: 0px;
-				padding: 0px;
+				padding: 0px;										
 				background: url('local/img/wallpaper.png') no-repeat center center fixed;
 				-webkit-background-size: cover;
 				-moz-background-size: cover;
 				-o-background-size: cover;
-				background-size: cover;				
+				background-size: cover;
+				font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;		
 			}
 			
 			div#footer {
