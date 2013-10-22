@@ -1,5 +1,7 @@
 package se.tipspromenad.globals;
 
+import java.util.Properties;
+
 /**
  * Contains constants used by classes across the whole application.
  * 
@@ -7,13 +9,24 @@ package se.tipspromenad.globals;
  */
 public class Constants {
 	
+	private static Properties props; 
+	
+	static {
+		props = new Properties();
+		try {
+			props.load(Constants.class.getResourceAsStream("/tipspromenad.properties"));
+		} catch (Exception e) {
+			throw new RuntimeException("Could not read tipspromenad.properties file");
+		}
+	}
+	
 	/**
 	 * Holds system constants.
 	 */
 	public static interface System {
 		
-		public final static String VERSION          = "1.0";
-		public final static String BUILD_NUMBER     = "13";
+		public final static String VERSION          = props.getProperty("system.version");
+		public final static String BUILD_NUMBER     = props.getProperty("system.buildNumber");
 		public final static String DEFAULT_ENCODING = "UTF-8";
 		
 	}
