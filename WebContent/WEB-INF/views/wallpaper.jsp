@@ -21,6 +21,16 @@
 				font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;		
 			}
 			
+			a {
+				color: white;
+				text-decoration: none;
+			}
+			
+			a:hover {
+				color: white;
+				text-decoration: underline;
+			}
+			
 			div#footer {
 				width: 100%;
 				height: 50px;
@@ -37,6 +47,11 @@
 				float: right;
 				margin-right: 25px;
 			}
+			
+			span.left {
+				float: left;
+				margin-left: 25px;
+			}
 		</style>
 	</head>
 	<body>
@@ -44,6 +59,12 @@
 			&nbsp;
 		</div>
 		<div id="footer">
+			<span class="left">
+				<a href="http://www.twitter.com/tipspromenad" target="_blank">@tipspromenad</a>
+			</span>
+			<span class="left">
+				<a href="http://www.facebook.com/tipspromenad" target="_blank">facebook.com/tipspromenad</a>
+			</span>
 			<span class="right">
 				Tipspromenad.nu &#169; 2013
 			</span>
