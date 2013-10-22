@@ -7,9 +7,10 @@
     <definition name="main-template" template="/WEB-INF/templates/main.jsp" />
     <definition name="error" template="/WEB-INF/views/error.jsp" />
     <definition name="mock" template="/WEB-INF/views/mock.jsp" />
+    <definition name="wallpaper" template="/WEB-INF/views/wallpaper.jsp" />
     <!-- END! mock views -->
     
-	<!-- views -->
+	<!-- views -->			
 	<definition name="login" extends="main-template">
 		<put-attribute name="title" value="Tipspromenad | Login" />
 		<put-attribute name="content" value="/WEB-INF/views/login.jsp" />		
