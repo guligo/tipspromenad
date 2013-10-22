@@ -143,7 +143,7 @@
 			<tiles:insertAttribute name="content" />
 		</div>
 		<div class="footer">
-			Build #: <a href="http://54.228.222.235:8080/job/tipspromenad-dev/<%= Constants.System.BUILD_NUMBER %>">
+			Build #: <a href="http://<%= Constants.System.BUILD_SERVER %>/job/tipspromenad-dev/<%= Constants.System.BUILD_NUMBER %>" target="_blank">
 				<%= Constants.System.VERSION %>.<%= Constants.System.BUILD_NUMBER %>
 			</a> | &#169; tipspromenad.nu
 		</div>

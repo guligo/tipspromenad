@@ -27,6 +27,7 @@ public class Constants {
 		
 		public final static String VERSION          = props.getProperty("system.version");
 		public final static String BUILD_NUMBER     = props.getProperty("system.buildNumber");
+		public final static String BUILD_SERVER     = props.getProperty("system.buildServer");
 		public final static String DEFAULT_ENCODING = "UTF-8";
 		
 	}
