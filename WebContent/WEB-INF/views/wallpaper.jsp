@@ -31,6 +31,13 @@
 				text-decoration: underline;
 			}
 			
+			div#content {
+				color: white;
+				font-size: 30px;
+				text-align: center;
+				margin-top: 125px;
+			}
+			
 			div#footer {
 				width: 100%;
 				height: 50px;
@@ -56,7 +63,12 @@
 	</head>
 	<body>
 		<div id="content">
-			&nbsp;
+			<img src="local/img/wallpaper-logo.png" style="width: 50%; height: 50%;" />
+			<br />
+			"A classic Swedish game for the digital generation."
+			<br />
+			<br />
+			Comming soon!
 		</div>
 		<div id="footer">
 			<span class="left">
@@ -70,4 +82,12 @@
 			</span>
 		</div>
 	</body>
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-45159467-1', 'tipspromenad.nu');
+		ga('send', 'pageview');
+	</script>
 </html>
