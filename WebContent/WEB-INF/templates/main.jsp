@@ -1,4 +1,4 @@
-<%@page import="se.tipspromenad.globals.Constants"%>
+<%@ page import="se.tipspromenad.globals.Constants" %>
 <%@ include file="../commons/commons.jsp" %>
 
 <!DOCTYPE html>
@@ -8,21 +8,20 @@
 			<tiles:getAsString name="title" />
 		</title>
 		
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-		<meta name="description" content="tipspromenad.se">
-		<meta name="author" content="diky pig">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+		<meta name="description" content="Tipspromenad.nu" />
 		
 		<!-- styles -->
-		<link href="3p/bootstrap/css/bootstrap.css" rel="stylesheet">
-		<link href="3p/datepicker/css/datepicker.css" rel="stylesheet">		
-		<link href="3p/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="3p/bootstrap/css/bootstrap.css" rel="stylesheet" />
+		<link href="3p/datepicker/css/datepicker.css" rel="stylesheet" />		
+		<link href="3p/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
 		<style>
 			body {
 				padding-top: 40px;
 			}
 			
-			.container {
+			.container {				
 				width: 1125px !important;
 			}
 			
@@ -142,17 +141,26 @@
 				</div>
 			</div>
 		</sec:authorize>
+		<br />
 		<div class="container">
 			<tiles:insertAttribute name="content" />
 		</div>
 		<div class="footer">
 			Build #: <a href="http://<%= Constants.System.BUILD_SERVER %>/job/tipspromenad-dev/<%= Constants.System.BUILD_NUMBER %>" target="_blank">
 				<%= Constants.System.VERSION %>.<%= Constants.System.BUILD_NUMBER %>
-			</a> | &#169; tipspromenad.nu
+			</a> | &#169; Tipspromenad.nu
 		</div>
 		
 		<!-- dialogs -->
 		<jsp:include page="../partials/user-profile.jsp" />
 		<jsp:include page="../partials/error.jsp" />
 	</body>
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-45159467-1', 'tipspromenad.nu');
+		ga('send', 'pageview');
+	</script>
 </html>
