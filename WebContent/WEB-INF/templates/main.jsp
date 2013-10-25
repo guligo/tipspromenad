@@ -27,9 +27,12 @@
 			}
 			
 			.footer {
+				width: 100%;		
 				color: white;
 				font-weight: bold;
-				text-align: center;				
+				text-align: center;
+				position: absolute;
+				bottom: 5px;
 			}
 			
 			.footer a {

@@ -3,10 +3,12 @@
 
 <!-- styles -->
 <style>
-	body {
-		background-image: url('local/img/image-new-one.jpg');
-		background-position: center top;
-		background-size: 100% auto;
+	body {		
+		background: url('local/img/image-new-one.jpg') no-repeat center center fixed;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
 	}
 	
 	/**
@@ -66,7 +68,9 @@
 <div class="container">
 	<div style="float: right;">		
 		<form class="form-horizontal" style="float: left; margin-right: 10px; border-radius: 10px; background-color: #F5F5F5; padding: 20px;">
-			<legend>Login</legend>		
+			<legend>
+				Login
+			</legend>		
 			<div class="control-group">
 			    <label class="control-label" for="loginEmail">Email</label>
 			    <div class="controls">
@@ -127,5 +131,5 @@
 			    </div>
 			</div>
 		</form>
-	</div>		
+	</div>
 </div>

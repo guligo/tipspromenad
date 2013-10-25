@@ -35,7 +35,7 @@ public class Constants {
 	/**
 	 * Holds URLs.
 	 */
-	public static class URL {
+	public static interface URL {
 		
 		public final static String LOGIN_PAGE                                = "login";
 		public final static String LOGIN_GET_SUCCESS_RESULT_ACTION           = "login/success";
@@ -78,7 +78,7 @@ public class Constants {
 	/**
 	 * Holds view names.
 	 */
-	public static class Views {
+	public static interface Views {
 		
 		public final static String WALLPAPER = "wallpaper";
 		
