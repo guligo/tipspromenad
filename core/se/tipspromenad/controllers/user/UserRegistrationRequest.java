@@ -12,15 +12,17 @@ public class UserRegistrationRequest extends RequestBean {
 	private String name;
 	private String email;
 	private String password;
+	private String confirm;
 
 	public UserRegistrationRequest() {
 		// empty
 	}
 
-	public UserRegistrationRequest(String name, String email, String password) {
+	public UserRegistrationRequest(String name, String email, String password, String confirm) {
 		this.name     = name;
 		this.email    = email;
 		this.password = password;
+		this.confirm  = confirm;
 	}
 
 	public String getName() {
@@ -45,6 +47,14 @@ public class UserRegistrationRequest extends RequestBean {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getConfirm() {
+		return confirm;
+	}
+
+	public void setConfirm(String confirm) {
+		this.confirm = confirm;
 	}
 
 }

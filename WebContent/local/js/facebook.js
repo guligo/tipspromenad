@@ -1,10 +1,11 @@
 var facebookController = function() {
 	
-	var APP_ID = '203913813008290';
+	var APP_ID     = '203913813008290';
 	var APP_SECRET = 'c91e96ffca4c5465c3353baaaaf883e3';
 	
+	var HOME_PAGE_URL = null;
+	
 	var _userId = null;
-	var _accessToken = null;
 	
 	function _init(callback) {		
 		window.fbAsyncInit = function() {
@@ -17,11 +18,7 @@ var facebookController = function() {
 			
 			FB.Event.subscribe('auth.authResponseChange', function(response) {
 				if (response.status === 'connected') {
-					_userId = response.authResponse.userID;
-					_accessToken = response.authResponse.accessToken;
-					if (callback != null) {
-						callback();
-					}
+					_userId = response.authResponse.userID;					
 			    } else {
 			    	FB.login(function(resonse) {
 			    		console.log(response);
@@ -37,12 +34,15 @@ var facebookController = function() {
 			js.src = "//connect.facebook.net/en_US/all.js";
 			ref.parentNode.insertBefore(js, ref);
 		} (document));
+		
+		if (callback != null) {
+			callback();
+		}
 	}
 	
 	function _showDialog(callback) {
 		FB.login(function(response) {
 			_userId = response.authResponse.userID;
-			_accessToken = response.authResponse.accessToken;
 			if (callback != null) {
 				if (response.authResponse) {
 					callback(response.authResponse);
@@ -106,7 +106,7 @@ var facebookController = function() {
 			data: {
 				accessToken: accessToken
 			},
-			success: function(response) {				
+			success: function(response) {			
 				$.ajax({
 					url: 'j_spring_security_check',
 					type: 'POST',
@@ -115,8 +115,7 @@ var facebookController = function() {
 						j_password: response.password
 					},
 				    success: function(status) {				    	
-				    	// $(location).attr('href', 'home.page');
-				    	alert('cool!');
+				    	$(location).attr('href', HOME_PAGE_URL);
 					}
 				});
 			}
@@ -124,7 +123,8 @@ var facebookController = function() {
 	}
 	
 	return {
-		init: function(callback) {
+		init: function(url, callback) {
+			HOME_PAGE_URL = url;
 			_init(callback);
 		},
 		getUserId: function() {

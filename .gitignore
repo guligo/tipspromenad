@@ -1,6 +1,11 @@
+# Compilation result #
 *.class
 
-# Package Files #
+# Package files #
 *.jar
 *.war
 *.ear
+
+# Project files and folders #
+build/
+target/

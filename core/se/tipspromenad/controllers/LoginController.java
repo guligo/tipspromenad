@@ -8,10 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.ProviderManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,10 +31,13 @@ public class LoginController {
 	
 	private final static Logger logger = Logger.getLogger(LoginController.class);
 	
+	private final static String FIELD_NAME             = "name";
+	private final static String FIELD_EMAIL            = "email";
+	private final static String FIELD_ID               = "id";	
+	private final static int    RANDOM_PASSWORD_LENGTH = 10;
+	
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private ProviderManager authenticationManager;
 	
 	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.LOGIN_PAGE)
 	public String showLoginPage() {
@@ -60,18 +59,20 @@ public class LoginController {
 		Map<String, Object> info = FacebookUtils.getAccessToken(accessToken);
 		logger.debug("Information retrieved from FB together with access token = " + info);
 		
-		String fbUserId = (String) info.get("id");
-		String password = SecurityUtils.generate(10);
+		String email          = (String) info.get(FIELD_EMAIL);
+		String name           = (String) info.get(FIELD_NAME);
+		String fbUserId       = (String) info.get(FIELD_ID);		
+		String fbUserPassword = SecurityUtils.generate(RANDOM_PASSWORD_LENGTH);
+		
 		User user = userService.getUserByFbId(fbUserId);
 		if (user == null) {
 			logger.debug("User does not exist in database, so creating a new one...");
-			user = userService.getUser(userService.createUser(fbUserId, "test", "test@test.test", password));
+			user = userService.getUser(userService.createUser(name, email, fbUserId, SecurityUtils.toBase64(SecurityUtils.toMD5(fbUserPassword))));
 		} else {
-			user.setPassword(password);
-			user.setResetPassword(true);
+			user.setFbUserPassword(SecurityUtils.toBase64(SecurityUtils.toMD5(fbUserPassword)));
 			userService.updateUser(user);
 		}
-		return new VerifyAccessTokenBean(user.getEmail(), password);
+		return new VerifyAccessTokenBean(user.getEmail(), fbUserPassword);
 	}
 	
 }

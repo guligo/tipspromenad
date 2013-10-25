@@ -119,16 +119,22 @@ public class UserController {
 	public @ResponseBody UserRegistrationResponse register(@RequestBody UserRegistrationRequest request) throws IOException {
 		UserRegistrationResponse response = new UserRegistrationResponse();
 		try {
-			// processing
+			// validate
 			userNameValidator.validate(request.getName(), response.getErrors());
 			userEmailValidator.validate(request.getEmail(), response.getErrors());
 			userPasswordValidator.validate(request.getPassword(), response.getErrors());
 			if (!response.hasErrors()) {
 				if (userService.getUserByEmail(request.getEmail()) != null) {
 					response.addError(UserError.DUBLICATED_USER);
-				} else {
-					response.setUserId(userService.createUser(request.getName(), request.getEmail(), request.getPassword()));
 				}
+				if (!request.getPassword().equals(request.getConfirm())) {
+					response.addError(UserError.PASSWORD_NOT_MATCH);
+				}
+			}
+			
+			// if there were no validation errors
+			if (!response.hasErrors()) {
+				response.setUserId(userService.createUser(request.getName(), request.getEmail(), request.getPassword()));
 			}
 		} catch (Exception e) {
 			response.addError(UserError.UNEXPECTED_ERROR);

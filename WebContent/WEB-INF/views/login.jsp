@@ -42,21 +42,17 @@
 </style>
 
 <!-- scripts -->
-<!--
 <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
--->
 <script type="text/javascript" src="local/js/facebook.js"></script>
 <script type="text/javascript" src="local/js/login.js"></script>
 <script type="text/javascript">		
 	$(document).ready(function() {
-		/*
 		Recaptcha.create("6LeC6eESAAAAAAGbjL53AJyBEGyNIVlPl9tTbr2D", "captcha", {
 			theme: "red",
 			callback: Recaptcha.focus_response_field
 		});
-		*/
 		
-		facebookController.init(function() {
+		facebookController.init('<%= Constants.URL.HOME_PAGE %>', function() {
 			loginController.init(
 				'${pageContext.request.contextPath}/j_spring_security_check',
 				'<%= Constants.URL.USER_REGISTRATION_ACTION %>',
@@ -69,7 +65,7 @@
 <!-- html -->
 <div class="container">
 	<div style="float: right;">		
-		<form class="form-horizontal" style="border-radius: 10px; background-color: #F5F5F5; padding: 20px;">
+		<form class="form-horizontal" style="float: left; margin-right: 10px; border-radius: 10px; background-color: #F5F5F5; padding: 20px;">
 			<legend>Login</legend>		
 			<div class="control-group">
 			    <label class="control-label" for="loginEmail">Email</label>
@@ -88,11 +84,12 @@
 			    	<a class="btn" href="javascript:loginController.doLogin();">
 			    		Sign in
 			    	</a>
+			    	&nbsp;
 					<a id="facebookLoginButton" class="fb-button" onclick="facebookController.showDialog();">Log in with FB</a>
 			    </div>
 			</div>
 		</form>
-		<form class="form-horizontal" style="border-radius: 10px; background-color: #F5F5F5; padding: 20px;">
+		<form class="form-horizontal" style="float: right; margin-left: 10px; border-radius: 10px; background-color: #F5F5F5; padding: 20px;">
 			<legend>
 				New to <span style="color: #999999;">tipspromenad.se</span>? Sign up
 			</legend>
@@ -102,10 +99,10 @@
 			    	<input type="text" id="emailInput" placeholder="Email">
 			    </div>
 		    </div>
-		    <div id="usernameControlGroup" class="control-group">
-			    <label class="control-label" for="usernameInput">Username</label>
+		    <div id="nameControlGroup" class="control-group">
+			    <label class="control-label" for="nameInput">Name</label>
 			    <div class="controls">
-			    	<input type="text" id="usernameInput" placeholder="Username">
+			    	<input type="text" id="nameInput" placeholder="Name">
 			    </div>
 		    </div>
     		<div id="passwordControlGroup" class="control-group">

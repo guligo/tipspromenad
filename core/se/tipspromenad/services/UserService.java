@@ -2,7 +2,6 @@ package se.tipspromenad.services;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Random;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,19 +50,19 @@ public class UserService {
 		user.setRole(UserRole.ROLE_SIMPLE_USER);
 		user.setEnabled(true);
 		user.setFbUserId(null);
-		user.setResetPassword(false);
+		user.setFbUserPassword(null);
 		return userDao.createUser(user);
 	}
 
-	public Long createUser(String fbUserId, String name, String email, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+	public Long createUser(String name, String email, String fbUserId, String fbUserPassword) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		User user = new User();
 		user.setName(name);
 		user.setEmail(email);
-		user.setPassword(SecurityUtils.toBase64(SecurityUtils.toMD5(password)));
+		user.setPassword(null);
 		user.setRole(UserRole.ROLE_SIMPLE_USER);
 		user.setEnabled(true);
 		user.setFbUserId(fbUserId);
-		user.setResetPassword(true);
+		user.setFbUserPassword(fbUserPassword);
 		return userDao.createUser(user);
 	}
 

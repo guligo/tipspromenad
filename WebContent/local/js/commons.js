@@ -44,8 +44,22 @@ var commonUtils = function() {
 		);
 	}
 	
+	function _showSuccess(field, successMsg) {
+		field.parent().parent().addClass('success');
+		field.parent().append(
+			'<span class="help-block">' +
+				successMsg +
+			'</span>'
+		);
+	}
+	
 	function _hideError(field) {
 		field.parent().parent().removeClass('error');
+		field.parent().find('.help-block').remove();
+	}
+	
+	function _hideSuccess(field) {
+		field.parent().parent().removeClass('success');
 		field.parent().find('.help-block').remove();
 	}
 	
@@ -59,8 +73,14 @@ var commonUtils = function() {
 		showError: function(field, errorMsg) {
 			_showError(field, errorMsg);
 		},
+		showSuccess: function(field, successMsg) {
+			_showSuccess(field, successMsg);
+		},
 		hideError: function(field) {
 			_hideError(field);
+		},
+		hideSuccess: function(field) {
+			_hideSuccess(field);
 		}
 	};
 	

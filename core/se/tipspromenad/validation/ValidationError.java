@@ -8,7 +8,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo.Id;
  * 
  * @author guligo
  */
-@JsonTypeInfo(use = Id.CLASS)
+@JsonTypeInfo(use = Id.NONE)
 public interface ValidationError {
 	
 }

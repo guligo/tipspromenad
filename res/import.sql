@@ -3,7 +3,7 @@ alter table games_questions add sequence int null;
 
 -- users
 -- password 'qwerty'
-insert into users (name, email, password, role, resetPassword, enabled) values ('Qwerty Foobar', 'qwerty@qwer.ty', '2FeO34RYzgb7xbt2pYxcpA==', 0, false, true); -- 1
+insert into users (name, email, password, role, enabled, fbUserId, fbUserPassword) values ('Qwerty Foobar', 'qwerty@qwer.ty', '2FeO34RYzgb7xbt2pYxcpA==', 0, true, null, null); -- 1
 
 -- games
 insert into games (creation_date, date, name, code, creator_id) values (now(), now(), 'Karlskrona Game', '12345678', 1); -- 1

@@ -44,8 +44,8 @@ public class User extends se.tipspromenad.entities.Entity {
 	private Boolean enabled;
 	@Column(nullable = true, unique = true)
 	private String fbUserId;
-	@Column(nullable = false)
-	private Boolean resetPassword;
+	@Column(nullable = true, unique = false)
+	private String fbUserPassword;
 
 	public UserProfile getUserProfile() {
 		return userProfile;
@@ -103,12 +103,12 @@ public class User extends se.tipspromenad.entities.Entity {
 		this.fbUserId = fbUserId;
 	}
 
-	public Boolean getResetPassword() {
-		return resetPassword;
+	public String getFbUserPassword() {
+		return fbUserPassword;
 	}
 
-	public void setResetPassword(Boolean resetPassword) {
-		this.resetPassword = resetPassword;
+	public void setFbUserPassword(String fbUserPassword) {
+		this.fbUserPassword = fbUserPassword;
 	}
 
 	// this method is sometimes used before serialization into JSON format
@@ -119,7 +119,7 @@ public class User extends se.tipspromenad.entities.Entity {
 		setRole(null);
 		setEnabled(null);
 		setFbUserId(null);
-		setResetPassword(null);
+		setFbUserPassword(null);
 	}
 
 }
