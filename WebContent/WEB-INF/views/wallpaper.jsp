@@ -1,16 +1,20 @@
-<%@page import="se.tipspromenad.globals.Constants"%>
+<%@ page import="se.tipspromenad.globals.Constants" %>
 <%@ include file="../commons/commons.jsp" %>
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>		
+	<head>
 		<title>
 			Tipspromenad.nu | Coming soon!
 		</title>
 		
 		<!-- styles -->
 		<style>
-			body {
+			html, body {
+				height: 100%;
+			}
+			
+			body {				
 				margin: 0px;
 				padding: 0px;										
 				background: url('local/img/wallpaper.png') no-repeat center center fixed;
@@ -38,6 +42,10 @@
 				margin-top: 125px;
 			}
 			
+			img#wallpaper {
+				width: 50%;
+			}
+						
 			div#footer {
 				width: 100%;
 				height: 50px;
@@ -59,11 +67,48 @@
 				float: left;
 				margin-left: 25px;
 			}
+			
+			/* http://css-tricks.com/snippets/css/media-queries-for-standard-devices/ */
+			/* Smartphones (portrait and landscape) ----------- */
+			@media only screen 
+			and (min-device-width : 320px) 
+			and (max-device-width : 480px) {
+				div#content {
+					margin-top: 250px;
+					font-size: 50px;
+				}
+				
+				img#wallpaper {
+					width: 90%;
+				}
+				
+				div#footer {
+					height: 100px;
+					padding-top: 75px;
+					font-size: 25px;
+				}
+			}
+			
+			/* Smartphones (landscape) ----------- */
+			@media only screen 
+			and (min-width : 321px) {
+				div#content {
+					margin-top: 25px;
+				}
+			}
+			
+			/* Desktops and laptops ----------- */
+			@media only screen 
+			and (min-width : 1224px) {
+				div#content {
+					margin-top: 120px;
+				}
+			}
 		</style>
 	</head>
 	<body>
 		<div id="content">
-			<img src="local/img/wallpaper-logo.png" style="width: 50%; height: 50%;" />
+			<img id="wallpaper" src="local/img/wallpaper-logo.png" />
 			<br />
 			"A classic Swedish game for the digital generation."
 			<br />

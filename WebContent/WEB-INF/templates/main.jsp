@@ -27,19 +27,19 @@
 			
 			.footer {
 				width: 100%;		
-				color: white;
-				font-weight: bold;
+				color: black;
+				/* font-weight: bold; */
 				text-align: center;
 				position: absolute;
 				bottom: 5px;
 			}
 			
 			.footer a {
-				color: white;
+				color: black;
 			}
 			
 			.footer a:hover {
-				color: white;
+				color: black;
 			}
 		</style>
 		
@@ -71,7 +71,7 @@
 							<span class="icon-bar"></span>
 						</a>
 						<a class="brand" href="#">
-							tipspromenad.se
+							Tipspromenad.nu
 						</a>
 						<div class="nav-collapse collapse">
 							<c:set var="tab">

@@ -83,7 +83,7 @@
 				<configuration>
 					<url>http://54.228.213.17:8080/manager/text</url>
 					<server>tipspromenad-tomcat-dev</server>
-					<path>/tipspromenad</path>
+					<path>/sandbox</path>
 				</configuration>
 			</plugin>
 		</plugins>
