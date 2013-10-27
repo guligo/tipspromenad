@@ -60,7 +60,7 @@ public class GameControllerTest extends AbstractControllerTest {
 			"{'name':'" + TEST_GAME_NAME + "','date':'" + TEST_GAME_DATE + "'}"
 		);
 	}
-	
+
 	@Test
 	@Order(order = 3)
 	@SuppressWarnings("unchecked")

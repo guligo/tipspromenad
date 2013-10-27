@@ -6,6 +6,12 @@
     
     <persistence-unit name="tipspromenad" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>se.tipspromenad.entities.Answer</class>
+        <class>se.tipspromenad.entities.Game</class>
+        <class>se.tipspromenad.entities.Placemark</class>
+        <class>se.tipspromenad.entities.Question</class>
+        <class>se.tipspromenad.entities.User</class>
+        <class>se.tipspromenad.entities.UserProfile</class>
         <properties>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
             <property name="hibernate.connection.username" value="root" />

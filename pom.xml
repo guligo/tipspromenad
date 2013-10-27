@@ -27,12 +27,14 @@
 				<filtering>true</filtering>
 			</resource>
 		</resources>
+		<!--
 		<testResources>
 			<testResource>
 				<directory>res</directory>
 				<filtering>true</filtering>
 			</testResource>
 		</testResources>
+		-->
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
