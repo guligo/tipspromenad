@@ -58,7 +58,7 @@
 		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="3p/bootstrap/ico/apple-touch-icon-144-precomposed.png">
 		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="3p/bootstrap/ico/apple-touch-icon-114-precomposed.png">
 		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="3p/bootstrap/ico/apple-touch-icon-72-precomposed.png">
-		<link rel="apple-touch-icon-precomposed" href="3p/bootstrap/ico/apple-touch-icon-57-precomposed.png">		
+		<link rel="apple-touch-icon-precomposed" href="3p/bootstrap/ico/apple-touch-icon-57-precomposed.png">
 	</head>
 	<body>
 		<sec:authorize ifAnyGranted="ROLE_SIMPLE_USER">
@@ -154,13 +154,5 @@
 		<!-- dialogs -->
 		<jsp:include page="../partials/user-profile.jsp" />
 		<jsp:include page="../partials/error.jsp" />
-	</body>
-	<script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-		ga('create', 'UA-45159467-1', 'tipspromenad.nu');
-		ga('send', 'pageview');
-	</script>
+	</body>	
 </html>
