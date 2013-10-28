@@ -104,7 +104,7 @@
     									</li>
     									<li>
     										<a href="<%= Constants.URL.GAME_LIST_PAGE %>">
-    											Join, Edit & Create
+    											Edit & Create
     										</a>
     									</li>
     								</ul>

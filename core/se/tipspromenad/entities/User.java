@@ -1,8 +1,11 @@
 package se.tipspromenad.entities;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -46,6 +49,8 @@ public class User extends se.tipspromenad.entities.Entity {
 	private String fbUserId;
 	@Column(nullable = true, unique = false)
 	private String fbUserPassword;
+	@OneToMany(fetch = FetchType.EAGER)
+	private Set<Play> plays;
 
 	public UserProfile getUserProfile() {
 		return userProfile;

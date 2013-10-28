@@ -9,6 +9,7 @@
         <class>se.tipspromenad.entities.Answer</class>
         <class>se.tipspromenad.entities.Game</class>
         <class>se.tipspromenad.entities.Placemark</class>
+        <class>se.tipspromenad.entities.Play</class>
         <class>se.tipspromenad.entities.Question</class>
         <class>se.tipspromenad.entities.User</class>
         <class>se.tipspromenad.entities.UserProfile</class>

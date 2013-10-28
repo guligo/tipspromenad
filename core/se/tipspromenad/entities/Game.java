@@ -24,10 +24,10 @@ import se.tipspromenad.entities.User;
 @Entity
 @Table(name = "games")
 public class Game extends se.tipspromenad.entities.Entity {
-	
+
 	public static final int MIN_NAME_LENGTH = 5;
 	public static final int MAX_NAME_LENGTH = 50;
-	
+
 	@ManyToOne
 	private User creator;
 	@Column(name = "creation_date", nullable = false)
@@ -42,11 +42,11 @@ public class Game extends se.tipspromenad.entities.Entity {
 	@OrderBy("id")
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Question> questions;
-	
+
 	public Game() {
 		// for serialization purpose
 	}
-	
+
 	public Game(Long id) {
 		setId(id);
 	}

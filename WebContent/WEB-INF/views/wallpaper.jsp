@@ -53,10 +53,11 @@
 				padding-top: 30px;
 				color: #ffffff;
 				background-color: #4eaecb;				
-				text-aligh: left;
+				text-align: left;
 				position: absolute;
 				left: 0;
 				bottom: 0;
+				opacity: 0.90;
 			}
 			
 			span.right {
@@ -124,7 +125,7 @@
 			"A classic Swedish game for the digital generation."
 			<br />
 			<br />
-			Comming soon!
+			Coming soon!
 		</div>
 		<div id="footer">
 			<span class="left">
