@@ -73,6 +73,13 @@ public class Constants {
 		public final static String PLACEMARK_SAVE_ACTION   = "placemark/save";
 		public final static String PLACEMARK_REMOVE_ACTION = "placemark/remove/{id}";
 		
+		public final static String PLAY_GET_ACTION          = "play/{id}";
+		public final static String PLAY_LIST_BY_USER_ACTION = "play/listbyuser/{userId}";
+		public final static String PLAY_LIST_BY_GAME_ACTION = "play/listbygame/{gameId}";
+		public final static String PLAY_CREATE_ACTION       = "play";
+		public final static String PLAY_UPDATE_ACTION       = "play";
+		public final static String PLAY_REMOVE_ACTION       = "play/{id}";
+		
 	}
 	
 	/**

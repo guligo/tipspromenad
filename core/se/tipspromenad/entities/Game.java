@@ -15,6 +15,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 import se.tipspromenad.entities.Game;
 import se.tipspromenad.entities.User;
+import se.tipspromenad.entities.enums.GameState;
 
 /**
  * Database entity for {@link Game}.
@@ -38,6 +39,8 @@ public class Game extends se.tipspromenad.entities.Entity {
 	private Date date;
 	@Column(nullable = false)
 	private String code;
+	@Column(nullable = false)
+	private GameState state;
 	@JsonIgnore
 	@OrderBy("id")
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -89,6 +92,14 @@ public class Game extends se.tipspromenad.entities.Entity {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public GameState getState() {
+		return state;
+	}
+
+	public void setState(GameState state) {
+		this.state = state;
 	}
 
 	public Set<Question> getQuestions() {
