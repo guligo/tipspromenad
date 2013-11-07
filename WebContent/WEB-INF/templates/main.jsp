@@ -12,6 +12,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 		<meta name="description" content="Tipspromenad.nu" />
 		
+		<!-- icon -->
+		<link href="local/img/icon.png" rel="shortcut icon" />
+		
 		<!-- styles -->
 		<link href="3p/bootstrap/css/bootstrap.css" rel="stylesheet" />
 		<link href="3p/datepicker/css/datepicker.css" rel="stylesheet" />		

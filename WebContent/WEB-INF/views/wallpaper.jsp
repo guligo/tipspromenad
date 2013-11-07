@@ -8,6 +8,9 @@
 			Tipspromenad.nu | Coming soon!
 		</title>
 		
+		<!-- icon -->
+		<link href="local/img/icon.png" rel="shortcut icon" />
+		
 		<!-- styles -->
 		<style>
 			html, body {
