@@ -71,8 +71,12 @@ var loginController = function() {
 			}),
 			success: function(response) {
 				if (response.errors == null || response.errors.length == 0) {
-					commonUtils.showSuccess($('#emailInput'), 'Now use your username to sign in!');
-		    	} else {
+					// commonUtils.showSuccess($('#emailInput'), 'Now use your username to sign in!');
+					
+					$('#loginEmail'   ).val($('#emailInput'   ).val()),
+					$('#loginPassword').val($('#passwordInput').val())
+					_doLogin();
+				} else {
 		    		if ($.inArray('EMAIL_TOO_SHORT', response.errors) > -1) {
 		    			commonUtils.showError($('#emailInput'), 'Email is too short');
 		    		} else if ($.inArray('EMAIL_TOO_LONG', response.errors) > -1) {
