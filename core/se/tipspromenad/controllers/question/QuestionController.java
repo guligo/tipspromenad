@@ -37,8 +37,9 @@ public class QuestionController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.QUESTION_SAVE_ACTION)
-	public @ResponseBody void saveQuestion(@RequestBody QuestionSaveRequest request) {
+	public @ResponseBody Long saveQuestion(@RequestBody QuestionSaveRequest request) {
 		questionService.saveQuestion(request.getGameId(), request.getQuestion());
+		return request.getQuestion().getId();
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.QUESTION_SAVE_LIST_ACTION)
@@ -70,13 +71,15 @@ public class QuestionController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.QUESTION_MOVEUP_ACTION)
-	public @ResponseBody void moveUpQuestion(@PathVariable Long gameId, @PathVariable Long questionId) {
+	public @ResponseBody Integer moveUpQuestion(@PathVariable Long gameId, @PathVariable Long questionId) {
 		questionService.moveUp(gameId, questionId);
+		return questionService.getSequence(gameId, questionId);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.QUESTION_MOVEDOWN_ACTION)
-	public @ResponseBody void moveDownQuestion(@PathVariable Long gameId, @PathVariable Long questionId) {
+	public @ResponseBody Integer moveDownQuestion(@PathVariable Long gameId, @PathVariable Long questionId) {
 		questionService.moveDown(gameId, questionId);
+		return questionService.getSequence(gameId, questionId);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.QUESTION_REMOVE_ACTION)

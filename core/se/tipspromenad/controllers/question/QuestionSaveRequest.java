@@ -1,9 +1,6 @@
 package se.tipspromenad.controllers.question;
 
-import java.util.List;
-
 import se.tipspromenad.controllers.RequestBean;
-import se.tipspromenad.entities.Answer;
 import se.tipspromenad.entities.Question;
 
 public class QuestionSaveRequest extends RequestBean {
@@ -12,8 +9,7 @@ public class QuestionSaveRequest extends RequestBean {
 
 	private Long         gameId;
 	private Question     question;
-	private List<Answer> answers;
-	
+
 	public Long getGameId() {
 		return gameId;
 	}
@@ -30,12 +26,4 @@ public class QuestionSaveRequest extends RequestBean {
 		return this.question;
 	}
 
-	public List<Answer> getAnswers() {
-		return answers;
-	}
-
-	public void setAnswers(List<Answer> answers) {
-		this.answers = answers;
-	}
-	
 }

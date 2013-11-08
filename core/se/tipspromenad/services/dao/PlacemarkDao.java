@@ -27,7 +27,7 @@ public class PlacemarkDao {
 	@SuppressWarnings("unchecked")
 	public Placemark getPlacemarkByGameAndQuestionId(Long gameId, Long questionId) {
 		List<Placemark> placemarks = commonDao.getEntityManager().createQuery("from Placemark p where p.game.id = :gameId and p.question.id = :questionId")
-			.setParameter("gameId", questionId)
+			.setParameter("gameId", gameId)
 			.setParameter("questionId", questionId)
 			.getResultList();
 		if (placemarks != null && placemarks.size() > 0) {

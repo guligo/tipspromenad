@@ -17,9 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import se.tipspromenad.entities.Game;
+import se.tipspromenad.entities.Question;
+import se.tipspromenad.entities.enums.GameState;
 import se.tipspromenad.globals.Constants;
 import se.tipspromenad.security.UserWrapper;
 import se.tipspromenad.services.GameService;
+import se.tipspromenad.services.PlacemarkService;
 import se.tipspromenad.services.UserService;
 import se.tipspromenad.validation.BasicDateValidator;
 import se.tipspromenad.validation.BasicStringValidator;
@@ -41,6 +44,8 @@ public class GameController {
 	private UserService userService;
 	@Autowired
 	private GameService gameService;
+	@Autowired
+	private PlacemarkService placemarkService;
 
 	// validators
 	private BasicStringValidator<GameError> gameNameValidator;
@@ -64,7 +69,9 @@ public class GameController {
 	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.GAME_GET_ACTION)
 	public @ResponseBody Game getGame(@PathVariable Long id) {
 		Game game = gameService.getGame(id);
-		game.getCreator().secure();
+		if (game != null) {
+			game.getCreator().secure();
+		}
 		return game;
 	}
 
@@ -89,7 +96,32 @@ public class GameController {
 				response.addError(GameError.UNKNOWN);
 			}
 		}
+		response.normalize();
 		return response;
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.GAME_FINALIZE_ACTION)
+	public @ResponseBody Boolean finalize(@PathVariable Long id) {
+		Game game = gameService.getGame(id);
+		if (game.getQuestions() != null) {
+			for (Question question : game.getQuestions()) {
+				if (placemarkService.getPlacemarkByGameAndQuestionId(id, question.getId()) == null) {
+					return false;
+				}
+			}
+		}
+		gameService.saveGame(id, GameState.READY);
+		return true;
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.GAME_DISCARD_ACTION)
+	public @ResponseBody Boolean discard(@PathVariable Long id) {
+		Game game = gameService.getGame(id);
+		if (game.getState() == GameState.IN_PROGRESS) {
+			return false;
+		}
+		gameService.removeGame(id);
+		return true;
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE, value = Constants.URL.GAME_REMOVE_ACTION)

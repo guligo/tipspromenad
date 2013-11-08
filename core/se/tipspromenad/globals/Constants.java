@@ -53,12 +53,14 @@ public class Constants {
 		
 		public final static String WALLPAPER_PAGE = "wallpaper.page";
 		
-		public final static String GAME_LIST_PAGE     = "gamelist.page";
-		public final static String GAME_SAVE_PAGE     = "gamesave.page";
-		public final static String GAME_GET_ACTION    = "game/get/{id}";
-		public final static String GAME_LIST_ACTION   = "game/list";
-		public final static String GAME_SAVE_ACTION   = "game/save";
-		public final static String GAME_REMOVE_ACTION = "game/remove/{id}";
+		public final static String GAME_LIST_PAGE       = "gamelist.page";
+		public final static String GAME_SAVE_PAGE       = "gamesave.page";
+		public final static String GAME_GET_ACTION      = "game/get/{id}";
+		public final static String GAME_LIST_ACTION     = "game/list";
+		public final static String GAME_SAVE_ACTION     = "game/save";
+		public final static String GAME_REMOVE_ACTION   = "game/remove/{id}";
+		public final static String GAME_FINALIZE_ACTION = "game/finalize/{id}";
+		public final static String GAME_DISCARD_ACTION  = "game/discard/{id}";
 		
 		public final static String QUESTION_GET_ACTION       = "question/get/{id}";
 		public final static String QUESTION_LIST_ACTION      = "question/list/{gameId}";

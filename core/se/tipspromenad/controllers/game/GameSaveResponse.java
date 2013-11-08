@@ -1,5 +1,7 @@
 package se.tipspromenad.controllers.game;
 
+import org.codehaus.jackson.annotate.JsonWriteNullProperties;
+
 import se.tipspromenad.controllers.ResponseBean;
 
 /**
@@ -7,6 +9,8 @@ import se.tipspromenad.controllers.ResponseBean;
  * 
  * @author eigogul
  */
+@SuppressWarnings("deprecation")
+@JsonWriteNullProperties(value = false)
 public class GameSaveResponse extends ResponseBean<GameError> {
 	
 	private static final long serialVersionUID = 1L;

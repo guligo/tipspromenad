@@ -11,6 +11,7 @@ import se.tipspromenad.entities.Game;
 import se.tipspromenad.entities.Placemark;
 import se.tipspromenad.entities.Question;
 import se.tipspromenad.entities.User;
+import se.tipspromenad.entities.enums.GameState;
 import se.tipspromenad.services.GameService;
 import se.tipspromenad.services.dao.GameDao;
 import se.tipspromenad.services.dao.PlacemarkDao;
@@ -49,6 +50,7 @@ public class GameService {
 			game.setName(name);
 			game.setDate(date);
 			game.setCode(CommonUtils.generateCode());
+			game.setState(GameState.UNDER_CONSTRUCTION);
 			return gameDao.createGame(game);
 		} else {
 			Game game = gameDao.getGame(id);
@@ -58,28 +60,33 @@ public class GameService {
 			return id;
 		}
 	}
-	
-	public void removeGame(Long id) {
-		gameDao.removeGame(id);
-	}
-	
-	// placemarks
-	public void savePlacemark(Long id, Long questionId, Double latitude, Double longitude) {
-		Placemark placemark = new Placemark();
-		placemark.setQuestion(new Question(questionId));
-		placemark.setLatitude(latitude);
-		placemark.setLongitude(longitude);
+
+	public Long saveGame(Long id, GameState state) {
 		if (id == null) {
-			placemarkDao.createPlacemark(placemark);
+			throw new RuntimeException("This operation is not supported for entity which is not in database");
 		} else {
-			placemark.setId(id);
-			placemarkDao.updatePlacemark(placemark);
+			Game game = gameDao.getGame(id);
+			game.setState(state);
+			gameDao.updateGame(game);
+			return id;
 		}
 	}
-	
-	public void removePlacemark(Long id) {
-		placemarkDao.removePlacemark(id);
+
+	public void removeGame(Long id) {
+		Game game = gameDao.getGame(id);
+		
+		// remove placemarks
+		if (game.getQuestions() != null) {
+			for (Question question : game.getQuestions()) {
+				Placemark placemark = placemarkDao.getPlacemarkByGameAndQuestionId(id, question.getId());
+				if (placemark != null) {
+					placemarkDao.removePlacemark(placemark.getId());
+				}
+			}
+		}
+		
+		// remove game
+		gameDao.removeGame(id);
 	}
-	// END! placemarks
-	
+
 }
