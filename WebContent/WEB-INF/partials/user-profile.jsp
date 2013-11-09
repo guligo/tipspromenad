@@ -2,12 +2,14 @@
 
 <!-- scripts -->
 <script type="text/javascript" src="local/js/user-profile.js"></script>
+<script type="text/javascript" src="local/js/facebook.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		userProfileController.init(
-			'<%= Constants.URL.USER_PROFILE_GET_ACTION %>',
-			'<%= Constants.URL.USER_PROFILE_UPDATE_ACTION %>'			
+			'user/profile',
+			'user/profile'			
 		);
+		facebookController.init('<%= Constants.URL.HOME_PAGE %>');
 	});
 </script>
 
@@ -19,29 +21,27 @@
 	</div>
 	<div class="modal-body">
 		<form class="form-horizontal">
-			<div id="firstNameUserProfileControlGroup" class="control-group">
-				<label class="control-label" for="firstNameUserProfileInput">First name</label>
+			<div id="nameUserProfileControlGroup" class="control-group">
+				<label class="control-label" for="nameUserProfileInput">Name</label>
 				<div class="controls">
-			    	<input type="text" id="firstNameUserProfileInput" placeholder="&lt;first name&gt;">
-			    </div>
-			</div>
-			<div id="lastNameUserProfileControlGroup" class="control-group">
-				<label class="control-label" for="lastNameUserProfileInput">Last name</label>
-				<div class="controls">
-			    	<input type="text" id="lastNameUserProfileInput" placeholder="&lt;last name&gt;">
-			    </div>
-			</div>
-			<div id="imageProfileControlGroup" class="control-group">
-				<label class="control-label" for="imageUserProfileInput">Picture</label>
-				<div class="controls">
-			    	<input id="imageUserProfileInput" type="text" />
+			    	<input type="text" id="nameUserProfileInput" placeholder="Name">
 			    </div>
 			</div>
 			<div id="genderUserProfileControlGroup" class="control-group">
 				<label class="control-label" for="genderUserProfileInput">Gender</label>
 				<div class="controls" style="margin-top: 5px;">
-			    	Male <input name="genderUserProfileInput" type="radio" value="MALE" style="margin: 0px;" checked="checked" />
+			    	Male <input name="genderUserProfileInput" type="radio" value="MALE" style="margin: 0px;" />
 			    	Female <input name="genderUserProfileInput" type="radio" value="FEMALE" style="margin: 0px;" />
+			    </div>
+			</div>
+			<div class="control-group">
+			    <div class="controls">
+					<a id="facebookConnectButton" class="fb-button" onclick="facebookController.showDialogAndConnect();">Connect with FB</a>
+			    </div>
+			</div>
+			<div class="control-group">
+			    <div class="controls">
+					<a id="getCredentialsButton" class="btn" onclick="">Get credentials</a>
 			    </div>
 			</div>
 		</form>

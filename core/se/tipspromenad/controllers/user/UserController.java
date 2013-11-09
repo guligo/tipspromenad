@@ -1,7 +1,10 @@
 package se.tipspromenad.controllers.user;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Random;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,16 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import se.tipspromenad.beans.DataTransferBean;
-import se.tipspromenad.beans.UserProfileBean;
 import se.tipspromenad.entities.User;
 import se.tipspromenad.entities.UserProfile;
 import se.tipspromenad.entities.enums.Gender;
 import se.tipspromenad.globals.Constants;
 import se.tipspromenad.security.UserWrapper;
 import se.tipspromenad.services.UserService;
+import se.tipspromenad.utils.FacebookUtils;
 import se.tipspromenad.utils.SecurityUtils;
-import se.tipspromenad.utils.ValidationUtils;
 import se.tipspromenad.validation.BasicStringValidator;
 
 /**
@@ -31,69 +32,31 @@ import se.tipspromenad.validation.BasicStringValidator;
  */
 @Controller
 public class UserController {
-
+	
 	private final static Logger logger = Logger.getLogger(UserController.class);
+	
+	public final static String FIELD_NAME   = "name";
+	public final static String FIELD_EMAIL  = "email";
+	public final static String FIELD_GENDER = "gender";
+	public final static String FIELD_ID     = "id";	
 	
 	// services
 	@Autowired
 	private UserService userService;
-
+	
 	// validators
 	private BasicStringValidator<UserError> userNameValidator;
 	private BasicStringValidator<UserError> userEmailValidator;
-	private BasicStringValidator<UserError> userPasswordValidator;
-
+	private BasicStringValidator<UserError> userPasswordValidator;	
+	
 	public UserController() {
 		userNameValidator     = new BasicStringValidator<UserError>(User.MIN_NAME_LENGTH, User.MAX_NAME_LENGTH, UserError.NAME_EMPTY, UserError.NAME_TOO_SHORT, UserError.NAME_TOO_LONG);
 		userEmailValidator    = new BasicStringValidator<UserError>(User.MIN_EMAIL_LENGTH, User.MAX_EMAIL_LENGTH, UserError.EMAIL_EMPTY, UserError.EMAIL_TOO_SHORT, UserError.EMAIL_TOO_LONG);
 		userPasswordValidator = new BasicStringValidator<UserError>(User.MIN_PASSWORD_LENGTH, User.MAX_PASSWORD_LENGTH, UserError.PASSWORD_EMPTY, UserError.PASSWORD_TOO_SHORT, UserError.PASSWORD_TOO_LONG);
 	}
-
-	/**
-	 * Retrieves user profile for current user.
-	 */
-	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.USER_PROFILE_GET_ACTION)
-	public @ResponseBody DataTransferBean getUserProfile() {
-		String username = ((UserWrapper) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();		
-		
-		UserProfile userProfile = userService.getUserProfileByUsername(username);
-		if (userProfile != null) {
-			DataTransferBean userProfileBean = new UserProfileBean(
-				userProfile.getFirstName(),
-				userProfile.getLastName(),
-				userProfile.getGender().toString()
-			);
-			return userProfileBean;
-		}
-		return null;
-	}
 	
-	/**
-	 * Action responsible for updating user profile.
-	 */
-	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.USER_PROFILE_UPDATE_ACTION)
-	public @ResponseBody DataTransferBean doUpdateUserProfile(String firstName, String lastName, String gender) {
-		UserProfileBean userProfileBean = new UserProfileBean(firstName, lastName, gender);
-		
-		// validation
-		ValidationUtils.validate(userProfileBean, "firstName", "First name", userProfileBean.getFirstName(), UserProfile.MIN_FIRST_NAME_LENGTH, UserProfile.MAX_FIRST_NAME_LENGTH);
-		ValidationUtils.validate(userProfileBean, "lastName", "Last name", userProfileBean.getLastName(), UserProfile.MIN_LAST_NAME_LENGTH, UserProfile.MAX_LAST_NAME_LENGTH);		
-		try {
-			Gender.valueOf(gender.toUpperCase());
-		} catch (Exception e) {
-			userProfileBean.reject("gender", "Wrong value for gender field");
-		}
-		
-		// actions
-		if (userProfileBean.getStatus() == DataTransferBean.STATUS_OK) {
-			// String username = ((UserWrapper) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-			// userService.updateUserProfile(username, firstName, lastName, Gender.valueOf(gender.toUpperCase()));
-		}
-		return userProfileBean;
-	}
-
 	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.USER_LOGIN_ACTION)
-	public @ResponseBody UserLoginResponse login(@RequestBody UserLoginRequest request) throws IOException {
+	public @ResponseBody UserLoginResponse loginUser(@RequestBody UserLoginRequest request) throws IOException {
 		UserLoginResponse response = new UserLoginResponse();
 		try {
 			// processing
@@ -116,7 +79,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.USER_REGISTRATION_ACTION)
-	public @ResponseBody UserRegistrationResponse register(@RequestBody UserRegistrationRequest request) throws IOException {
+	public @ResponseBody UserRegistrationResponse registerUser(@RequestBody UserRegistrationRequest request) throws IOException {
 		UserRegistrationResponse response = new UserRegistrationResponse();
 		try {
 			// validate
@@ -142,6 +105,73 @@ public class UserController {
 		}
 		response.normalize();
 		return response;
+	}
+	
+	/**
+	 * Retrieves user profile for current user.
+	 */
+	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.USER_PROFILE_GET_ACTION)
+	public @ResponseBody UserProfile getUserProfile() {
+		String email = ((UserWrapper) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();		
+		UserProfile userProfile = userService.getUserProfileByEmail(email);
+		return userProfile;
+	}
+	
+	/**
+	 * Action responsible for updating user profile.
+	 */
+	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.USER_PROFILE_UPDATE_ACTION)
+	public @ResponseBody UserProfileUpdateResponse updateUserProfile(@RequestBody UserProfileUpdateRequest request) {	
+		UserProfileUpdateResponse response = new UserProfileUpdateResponse();		
+		try {
+			// validation
+			userNameValidator.validate(request.getName(), response.getErrors());
+			
+			// processing
+			if (!response.hasErrors()) {
+				String email = ((UserWrapper) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+				userService.updateUserProfile(email, request.getName(), request.getGender() != null ? Gender.valueOf(request.getGender()) : null);
+			}
+		} catch (Exception e) {
+			response.addError(UserError.UNEXPECTED_ERROR);
+			logger.error("User profile update error", e);
+		}
+		return response;
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.USER_PROFILE_FACEBOOK_ACTION)
+	public @ResponseBody Boolean connectUserProfile(HttpServletRequest request, String accessToken) throws Exception {
+		try {
+			Map<String, Object> info = FacebookUtils.getAccessToken(accessToken);
+			logger.debug("Information retrieved from FB together with access token = " + info);
+			
+			String email    = ((UserWrapper) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+			String name     = (String) info.get(FIELD_NAME);
+			String gender   = (String) info.get(FIELD_GENDER);
+			String fbUserId = (String) info.get(FIELD_ID);		
+			
+			// update user
+			User user = userService.getUserByEmail(email);
+			if (name != null) {
+				user.setName(name);
+			}
+			user.setFbUserId(fbUserId);
+			userService.updateUser(user);
+			
+			// update user profile
+			UserProfile userProfile = userService.getUserProfileByEmail(email);
+			if (name != null) {
+				userProfile.setName(name);
+			}
+			if (gender != null) {
+				userProfile.setGender(Gender.valueOf(gender.toUpperCase()));
+			}
+			userService.updateUserProfile(userProfile);
+			return true;
+		} catch (Exception e) {
+			logger.error("Error on connecting user profile with FB", e);
+		}
+		return false;
 	}
 	
 }

@@ -39,9 +39,9 @@ public class UserDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public UserProfile getUserProfileByUsername(String username) {		
-		List<UserProfile> userProfiles = commonDao.getEntityManager().createQuery("from UserProfile up where up.user.username = :username")
-			.setParameter("username", username)
+	public UserProfile getUserProfileByEmail(String email) {		
+		List<UserProfile> userProfiles = commonDao.getEntityManager().createQuery("from UserProfile up where up.user.email = :email")
+			.setParameter("email", email)
 			.getResultList();
 		if (userProfiles != null && userProfiles.size() > 0) {
 			assert(userProfiles.size() == 1);

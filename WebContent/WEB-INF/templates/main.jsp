@@ -20,21 +20,33 @@
 		<link href="3p/datepicker/css/datepicker.css" rel="stylesheet" />		
 		<link href="3p/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
 		<style>
-			body {
-				padding-top: 40px;
+			html, body {
+				height: 100%;
 			}
 			
-			.container {				
+			body {
+				background: url('local/img/image-new-one-opacity.jpg') no-repeat center center fixed;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;		
+			}
+			
+			.content {
 				width: 1125px !important;
+				padding: 25px;
+				margin-top: 40px;
+				background-color: #ffffff;
+				border-color: #000000;
+				border-radius: 10px;
+				border-width: medium;
 			}
 			
 			.footer {
 				width: 100%;		
-				color: black;
-				/* font-weight: bold; */
+				color: #000000;
 				text-align: center;
-				position: absolute;
-				bottom: 5px;
+				margin-top: 15px;
 			}
 			
 			.footer a {
@@ -43,6 +55,37 @@
 			
 			.footer a:hover {
 				color: black;
+			}
+			
+			/**
+			 * http://stackoverflow.com/questions/11396478/facebook-login-button-custom-text-reverting
+			 */
+			a.fb-button {
+			    color: #FFF;
+			    display: inline-block;
+			    text-decoration: none;
+			}
+			
+			.fb-button {
+			    background: #5F78AB;
+			    background-image: url('http://static.ak.fbcdn.net/rsrc.php/v2/yf/r/S-DbSHszr4D.png');
+			    background-repeat: no-repeat;
+			    background-position: -1px -133px;
+			    border-top: 1px solid #29447E;
+			    border-right: 1px solid #29447E;
+			    border-bottom: 1px solid #1A356E;
+			    border-left: 1px solid #29447E;
+			    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 #8A9CC2;
+			    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 #8a9cc2;
+			    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 #8A9CC2;
+			    cursor: pointer;
+			    font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+			    font-size: 12px;
+			    font-weight: bold;
+			    height: 20px;
+			    line-height: 20px;
+			    padding: 0px 5px 0px 30px;
+			    text-align: left;
 			}
 		</style>
 		
@@ -97,11 +140,6 @@
 									<ul class="dropdown-menu">
     									<li>
     										<a href="#">
-    											User Profile
-    										</a>
-    									</li>
-    									<li>
-    										<a href="#">
     											Event Hub
     										</a>
     									</li>
@@ -127,7 +165,7 @@
 									<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
     									<li>
     										<a tabindex="-1" href="javascript:javascript:userProfileController.getUserProfile();">
-    											My profile
+    											My Profile
     										</a>
     									</li>
     									<li class="divider"></li>
@@ -145,7 +183,7 @@
 			</div>
 		</sec:authorize>
 		<br />
-		<div class="container">
+		<div class="content container">
 			<tiles:insertAttribute name="content" />
 		</div>
 		<div class="footer">
@@ -154,8 +192,9 @@
 			</a> | &#169; Tipspromenad.nu
 		</div>
 		
-		<!-- dialogs -->
+		<!-- dialogs -->		
 		<jsp:include page="../partials/user-profile.jsp" />
+		<jsp:include page="../partials/construction.jsp" />		
 		<jsp:include page="../partials/error.jsp" />
 	</body>	
 </html>

@@ -122,6 +122,21 @@ var facebookController = function() {
 		});
 	}
 	
+	function _connectUserProfile(accessToken, callback) {
+		$.ajax({
+			url: 'user/profile/facebook',
+			type: 'post',
+			data: {
+				accessToken: accessToken
+			},
+			success: function(response) {			
+				if (callback != null) {
+					callback();
+				}
+			}
+		});		
+	}
+	
 	return {
 		init: function(url, callback) {
 			HOME_PAGE_URL = url;
@@ -139,6 +154,14 @@ var facebookController = function() {
 		showDialog: function() {
 			_showDialog(function(response) {
 				_verifyAccessToken(response.accessToken);
+			});
+		},
+		showDialogAndConnect: function() {
+			_showDialog(function(response) {
+				_connectUserProfile(response.accessToken, function() {
+					userProfileController.hideDialog();
+					userProfileController.getUserProfile();
+				});
 			});
 		}
 	};

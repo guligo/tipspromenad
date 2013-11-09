@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import se.tipspromenad.entities.User;
 import se.tipspromenad.entities.UserProfile;
+import se.tipspromenad.entities.enums.Gender;
 import se.tipspromenad.entities.enums.UserRole;
 import se.tipspromenad.services.UserService;
 import se.tipspromenad.services.dao.UserDao;
@@ -38,8 +39,8 @@ public class UserService {
 		return userDao.getUserByEmail(email);
 	}
 
-	public UserProfile getUserProfileByUsername(String username) {
-		return userDao.getUserProfileByUsername(username);
+	public UserProfile getUserProfileByEmail(String email) {
+		return userDao.getUserProfileByEmail(email);
 	}
 
 	public Long createUser(String name, String email, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
@@ -51,7 +52,10 @@ public class UserService {
 		user.setEnabled(true);
 		user.setFbUserId(null);
 		user.setFbUserPassword(null);
-		return userDao.createUser(user);
+		
+		userDao.createUser(user);
+		createUserProfile(user.getId(), user.getName());
+		return user.getId();
 	}
 
 	public Long createUser(String name, String email, String fbUserId, String fbUserPassword) throws NoSuchAlgorithmException, UnsupportedEncodingException {
@@ -63,7 +67,10 @@ public class UserService {
 		user.setEnabled(true);
 		user.setFbUserId(fbUserId);
 		user.setFbUserPassword(fbUserPassword);
-		return userDao.createUser(user);
+		
+		userDao.createUser(user);
+		createUserProfile(user.getId(), user.getName());
+		return user.getId();
 	}
 
 	public void removeUser(Long id) {
@@ -78,23 +85,25 @@ public class UserService {
 		return userDao.getUserByFbId(fbId);
 	}
 
-//	public void updateUserProfile(String email, String firstName, String lastName, Gender gender) {
-//		UserProfile userProfile = userDao.getUserProfileByUsername(username);
-//		if (userProfile == null) {
-//			userProfile = new UserProfile();
-//			userProfile.setUser(userDao.getUserByUsername(username));
-//			userProfile.setFirstName(firstName);
-//			userProfile.setLastName(lastName);
-//			userProfile.setGender(gender);
-//			userDao.createUserProfile(userProfile);
-//		} else {
-//			userProfile.setUser(userDao.getUserByUsername(username));
-//			userProfile.setFirstName(firstName);
-//			userProfile.setLastName(lastName);
-//			userProfile.setGender(gender);
-//			userDao.updateUserProfile(userProfile);
-//		}
-//	}
+	private Long createUserProfile(Long userId, String name) {
+		User user = userDao.getUser(userId);
+		UserProfile userProfile = new UserProfile();
+		userProfile.setName(name);
+		userProfile.setUser(user);
+		userDao.createUserProfile(userProfile);
+		return userProfile.getId();
+	}
 
+	public void updateUserProfile(String email, String name, Gender gender) {
+		UserProfile userProfile = userDao.getUserProfileByEmail(email);
+		userProfile.setUser(userDao.getUserByEmail(email));
+		userProfile.setName(name);
+		userProfile.setGender(gender);
+		userDao.updateUserProfile(userProfile);
+	}
+	
+	public void updateUserProfile(UserProfile userProfile) {
+		userDao.updateUserProfile(userProfile);
+	}
+	
 }
-

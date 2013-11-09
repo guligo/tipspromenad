@@ -44,10 +44,11 @@ public class Constants {
 		
 		public final static String LOGOUT_ACTION = "logout";
 		
-		public final static String USER_LOGIN_ACTION          = "user/login";
-		public final static String USER_REGISTRATION_ACTION   = "user/register";
-		public final static String USER_PROFILE_GET_ACTION    = "user/get-profile";
-		public final static String USER_PROFILE_UPDATE_ACTION = "user/update-profile";
+		public final static String USER_LOGIN_ACTION            = "user/login";
+		public final static String USER_REGISTRATION_ACTION     = "user/register";
+		public final static String USER_PROFILE_GET_ACTION      = "user/profile";
+		public final static String USER_PROFILE_UPDATE_ACTION   = "user/profile";
+		public final static String USER_PROFILE_FACEBOOK_ACTION = "user/profile/facebook";
 		
 		public final static String HOME_PAGE = "home.page";
 		

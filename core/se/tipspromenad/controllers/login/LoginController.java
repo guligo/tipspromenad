@@ -1,9 +1,8 @@
-package se.tipspromenad.controllers;
+package se.tipspromenad.controllers.login;
 
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import se.tipspromenad.beans.DataTransferBean;
-import se.tipspromenad.beans.VerifyAccessTokenBean;
+import se.tipspromenad.controllers.user.UserController;
 import se.tipspromenad.entities.User;
 import se.tipspromenad.globals.Constants;
 import se.tipspromenad.services.UserService;
@@ -31,10 +30,7 @@ public class LoginController {
 	
 	private final static Logger logger = Logger.getLogger(LoginController.class);
 	
-	private final static String FIELD_NAME             = "name";
-	private final static String FIELD_EMAIL            = "email";
-	private final static String FIELD_ID               = "id";	
-	private final static int    RANDOM_PASSWORD_LENGTH = 10;
+	private final static int RANDOM_PASSWORD_LENGTH = 10;
 	
 	@Autowired
 	private UserService userService;
@@ -55,13 +51,13 @@ public class LoginController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.LOGIN_VERIFY_FACEBOOK_ACCESS_TOKEN_ACTION)
-	public @ResponseBody DataTransferBean verifyAccessToken(HttpServletRequest request, HttpServletResponse response, String accessToken) throws Exception {
+	public @ResponseBody LoginVerifyAccessTokenResponse verifyAccessToken(HttpServletRequest request, String accessToken) throws Exception {
 		Map<String, Object> info = FacebookUtils.getAccessToken(accessToken);
 		logger.debug("Information retrieved from FB together with access token = " + info);
 		
-		String email          = (String) info.get(FIELD_EMAIL);
-		String name           = (String) info.get(FIELD_NAME);
-		String fbUserId       = (String) info.get(FIELD_ID);		
+		String email          = (String) info.get(UserController.FIELD_EMAIL);
+		String name           = (String) info.get(UserController.FIELD_NAME);
+		String fbUserId       = (String) info.get(UserController.FIELD_ID);		
 		String fbUserPassword = SecurityUtils.generate(RANDOM_PASSWORD_LENGTH);
 		
 		User user = userService.getUserByFbId(fbUserId);
@@ -72,7 +68,7 @@ public class LoginController {
 			user.setFbUserPassword(SecurityUtils.toBase64(SecurityUtils.toMD5(fbUserPassword)));
 			userService.updateUser(user);
 		}
-		return new VerifyAccessTokenBean(user.getEmail(), fbUserPassword);
+		return new LoginVerifyAccessTokenResponse(user.getEmail(), fbUserPassword);
 	}
 	
 }

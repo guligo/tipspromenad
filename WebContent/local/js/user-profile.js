@@ -16,19 +16,13 @@ var userProfileController = function() {
 			type: 'GET',
 			url: GET_PROFILE_URL,
 			success: function(userProfile) {
-				if (userProfile != null) {
-					$('#firstNameUserProfileInput').val(userProfile.firstName);
-					$('#lastNameUserProfileInput').val(userProfile.lastName);				
-					$('#imageUserProfileInput').val(userProfile.image);
-					$('input[name=genderUserProfileInput]').filter('[value="' + userProfile.gender + '"]').prop('checked', true);
-					
-					// image
-					if ($('#imageProfileControlGroup img')) {
-						$('#imageProfileControlGroup img').remove();
-					}
-					if (userProfile.image != null) {
-						$('#imageProfileControlGroup .controls').append('<img src="' + userProfile.image + '" class="img-polaroid" style="width: 200px; height: 200px; margin-top: 20px;" />');
-					}
+				$('#nameUserProfileInput').val(userProfile.name);
+				$('input[name=genderUserProfileInput]').filter('[value="' + userProfile.gender + '"]').prop('checked', true);				
+				if (userProfile.user.fbUserId != null) {
+					$('#facebookConnectButton').parent().parent().css('display', 'none');
+				}
+				if (userProfile.user.password != null) {
+					$('#getCredentialsButton').parent().parent().css('display', 'none');
 				}
 				_showDialog();
 			},
@@ -38,17 +32,17 @@ var userProfileController = function() {
 			}
 		});
 	}
-		
+	
 	function _updateUserProfile() {
 		$.ajax({
-			type: 'POST',
+			type: 'post',
+			contentType: 'application/json',
+		    dataType: 'json',
 			url: UPDATE_PROFILE_URL,
-			data: {
-				firstName: $('#firstNameUserProfileInput').val(),
-				lastName: $('#lastNameUserProfileInput').val(),
-				image: $('#imageUserProfileInput').val(),
+			data: JSON.stringify({
+				name: $('#nameUserProfileInput').val(),
 				gender: $('input[name=genderUserProfileInput]:checked').val()
-			},
+			}),
 			success: function() {
 				_hideDialog();
 			},

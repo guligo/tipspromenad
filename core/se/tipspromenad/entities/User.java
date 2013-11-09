@@ -23,7 +23,6 @@ import se.tipspromenad.entities.enums.UserRole;
 @Entity
 @Table(name = "users")
 @SuppressWarnings("deprecation")
-@JsonWriteNullProperties(value = false)
 public class User extends se.tipspromenad.entities.Entity {
 
 	public final static int MIN_NAME_LENGTH     = 5;

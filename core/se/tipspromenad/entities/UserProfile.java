@@ -18,18 +18,14 @@ import se.tipspromenad.entities.enums.Gender;
 @Table(name = "user_profiles")
 public class UserProfile extends se.tipspromenad.entities.Entity {
 	
-	public final static int MIN_FIRST_NAME_LENGTH = 1;
-	public final static int MAX_FIRST_NAME_LENGTH = 30;
-	public final static int MIN_LAST_NAME_LENGTH  = 1;
-	public final static int MAX_LAST_NAME_LENGTH  = 30;
+	public final static int MIN_NAME_LENGTH = User.MIN_NAME_LENGTH;
+	public final static int MAX_NAME_LENGTH = User.MAX_NAME_LENGTH;
 	
 	@OneToOne(optional = false)
 	private User user;	
-	@Column(length = MAX_FIRST_NAME_LENGTH)
-	private String firstName;
-	@Column(length = MAX_LAST_NAME_LENGTH)
-	private String lastName;
-	@Column(nullable = false)
+	@Column(nullable = false, length = MAX_NAME_LENGTH)
+	private String name;
+	@Column(nullable = true)
 	private Gender gender;
 	
 	public User getUser() {
@@ -40,20 +36,12 @@ public class UserProfile extends se.tipspromenad.entities.Entity {
 		this.user = (User) user;
 	}
 	
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 	
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	
-	public String getLastName() {
-		return lastName;
-	}
-	
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public Gender getGender() {
