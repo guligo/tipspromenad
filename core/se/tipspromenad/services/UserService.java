@@ -93,8 +93,12 @@ public class UserService {
 		userDao.createUserProfile(userProfile);
 		return userProfile.getId();
 	}
-
+	
 	public void updateUserProfile(String email, String name, Gender gender) {
+		User user = userDao.getUserByEmail(email);
+		user.setName(name);
+		userDao.updateUser(user);
+		
 		UserProfile userProfile = userDao.getUserProfileByEmail(email);
 		userProfile.setUser(userDao.getUserByEmail(email));
 		userProfile.setName(name);
