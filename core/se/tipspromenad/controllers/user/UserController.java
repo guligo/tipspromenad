@@ -33,12 +33,7 @@ import se.tipspromenad.validation.BasicStringValidator;
 @Controller
 public class UserController {
 	
-	private final static Logger logger = Logger.getLogger(UserController.class);
-	
-	public final static String FIELD_NAME   = "name";
-	public final static String FIELD_EMAIL  = "email";
-	public final static String FIELD_GENDER = "gender";
-	public final static String FIELD_ID     = "id";	
+	private final static Logger logger = Logger.getLogger(UserController.class);	
 	
 	// services
 	@Autowired
@@ -141,32 +136,20 @@ public class UserController {
 	
 	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.USER_PROFILE_FACEBOOK_ACTION)
 	public @ResponseBody Boolean connectUserProfile(HttpServletRequest request, String accessToken) throws Exception {
+		String email = ((UserWrapper) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
 		try {
 			Map<String, Object> info = FacebookUtils.getAccessToken(accessToken);
 			logger.debug("Information retrieved from FB together with access token = " + info);
 			
-			String email    = ((UserWrapper) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-			String name     = (String) info.get(FIELD_NAME);
-			String gender   = (String) info.get(FIELD_GENDER);
-			String fbUserId = (String) info.get(FIELD_ID);		
-			
-			// update user
+			// update user with information from FB
 			User user = userService.getUserByEmail(email);
-			if (name != null) {
-				user.setName(name);
-			}
-			user.setFbUserId(fbUserId);
+			FacebookUtils.updateUser(info, user);
 			userService.updateUser(user);
 			
-			// update user profile
-			UserProfile userProfile = userService.getUserProfileByEmail(email);
-			if (name != null) {
-				userProfile.setName(name);
-			}
-			if (gender != null) {
-				userProfile.setGender(Gender.valueOf(gender.toUpperCase()));
-			}
-			userService.updateUserProfile(userProfile);
+			// update user profile with information from FB
+			UserProfile userProfile = userService.getUserProfileByEmail(email);			
+			FacebookUtils.updateUserProfile(info, userProfile);
+			userService.updateUserProfile(userProfile);									
 			return true;
 		} catch (Exception e) {
 			logger.error("Error on connecting user profile with FB", e);

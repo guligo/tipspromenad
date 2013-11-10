@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import se.tipspromenad.beans.DataTransferBean;
-import se.tipspromenad.controllers.user.UserController;
 import se.tipspromenad.entities.User;
+import se.tipspromenad.entities.UserProfile;
 import se.tipspromenad.globals.Constants;
 import se.tipspromenad.services.UserService;
 import se.tipspromenad.utils.FacebookUtils;
@@ -55,15 +55,22 @@ public class LoginController {
 		Map<String, Object> info = FacebookUtils.getAccessToken(accessToken);
 		logger.debug("Information retrieved from FB together with access token = " + info);
 		
-		String email          = (String) info.get(UserController.FIELD_EMAIL);
-		String name           = (String) info.get(UserController.FIELD_NAME);
-		String fbUserId       = (String) info.get(UserController.FIELD_ID);		
+		String fbUserId       = (String) info.get(FacebookUtils.FIELD_ID);
 		String fbUserPassword = SecurityUtils.generate(RANDOM_PASSWORD_LENGTH);
 		
 		User user = userService.getUserByFbId(fbUserId);
 		if (user == null) {
 			logger.debug("User does not exist in database, so creating a new one...");
-			user = userService.getUser(userService.createUser(name, email, fbUserId, SecurityUtils.toBase64(SecurityUtils.toMD5(fbUserPassword))));
+			
+			// create user with information from FB
+			user = new User();
+			FacebookUtils.createUser(info, user);
+			user = userService.getUser(userService.createUser(user.getName(), user.getEmail(), user.getFbUserId(), SecurityUtils.toBase64(SecurityUtils.toMD5(fbUserPassword))));
+			
+			// create user profile with information from FB
+			UserProfile userProfile = userService.getUserProfileByEmail(user.getEmail());
+			FacebookUtils.updateUserProfile(info, userProfile);
+			userService.updateUserProfile(userProfile);
 		} else {
 			user.setFbUserPassword(SecurityUtils.toBase64(SecurityUtils.toMD5(fbUserPassword)));
 			userService.updateUser(user);

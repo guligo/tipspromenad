@@ -39,11 +39,6 @@
 					<a id="facebookConnectButton" class="fb-button" onclick="facebookController.showDialogAndConnect();">Connect with FB</a>
 			    </div>
 			</div>
-			<div class="control-group">
-			    <div class="controls">
-					<a id="getCredentialsButton" class="btn" onclick="">Get credentials</a>
-			    </div>
-			</div>
 		</form>
 	</div>
 	<div class="modal-footer">

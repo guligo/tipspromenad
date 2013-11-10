@@ -21,9 +21,6 @@ var userProfileController = function() {
 				if (userProfile.user.fbUserId != null) {
 					$('#facebookConnectButton').parent().parent().css('display', 'none');
 				}
-				if (userProfile.user.password != null) {
-					$('#getCredentialsButton').parent().parent().css('display', 'none');
-				}
 				_showDialog();
 			},
 			error: function(xhr) {
