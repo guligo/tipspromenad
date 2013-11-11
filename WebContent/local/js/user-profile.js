@@ -11,13 +11,24 @@ var userProfileController = function() {
 	
 	var dialog = null;
 	
+	function _init() {
+		dialog = $('#userProfileDialog');
+		$('#birthDateUserProfileInput').datepicker();
+	}
+	
 	function _getUserProfile() {
 		$.ajax({
 			type: 'GET',
 			url: GET_PROFILE_URL,
 			success: function(userProfile) {
+				// populate form
 				$('#nameUserProfileInput').val(userProfile.name);
-				$('input[name=genderUserProfileInput]').filter('[value="' + userProfile.gender + '"]').prop('checked', true);				
+				$('input[name=genderUserProfileInput]').filter('[value="' + userProfile.gender + '"]').prop('checked', true);								
+				$('#birthDateUserProfileInput').datepicker("setValue", userProfile.birthDate);
+				$('#countryUserProfileInput').val(userProfile.country),
+				$('#cityUserProfileInput').val(userProfile.city);
+				
+				// show FB connect button
 				if (userProfile.user.fbUserId != null) {
 					$('#facebookConnectButton').parent().parent().css('display', 'none');
 				}
@@ -37,8 +48,11 @@ var userProfileController = function() {
 		    dataType: 'json',
 			url: UPDATE_PROFILE_URL,
 			data: JSON.stringify({
-				name: $('#nameUserProfileInput').val(),
-				gender: $('input[name=genderUserProfileInput]:checked').val()
+				name     : $('#nameUserProfileInput').val(),
+				gender   : $('input[name=genderUserProfileInput]:checked').val(),
+				birthDate: $('#birthDateUserProfileInput').val(),
+				country  : $('#countryUserProfileInput').val(),
+				city     : $('#cityUserProfileInput').val()
 			}),
 			success: function() {
 				_hideDialog();
@@ -64,10 +78,10 @@ var userProfileController = function() {
 	
 	return {
 		init: function(url1, url2) {
-			dialog = $('#userProfileDialog');
-			
 			GET_PROFILE_URL = url1;
 			UPDATE_PROFILE_URL = url2;
+			
+			_init();
 		},
 		getUserProfile: function() {
 			_getUserProfile();

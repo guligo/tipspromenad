@@ -2,6 +2,7 @@ package se.tipspromenad.services;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,7 +95,7 @@ public class UserService {
 		return userProfile.getId();
 	}
 	
-	public void updateUserProfile(String email, String name, Gender gender) {
+	public void updateUserProfile(String email, String name, Gender gender, Date birthDate, String country, String city) {
 		User user = userDao.getUserByEmail(email);
 		user.setName(name);
 		userDao.updateUser(user);
@@ -103,6 +104,9 @@ public class UserService {
 		userProfile.setUser(userDao.getUserByEmail(email));
 		userProfile.setName(name);
 		userProfile.setGender(gender);
+		userProfile.setBirthDate(birthDate);
+		userProfile.setCountry(country);
+		userProfile.setCity(city);
 		userDao.updateUserProfile(userProfile);
 	}
 	

@@ -1,5 +1,12 @@
 <%@ page import="se.tipspromenad.globals.Constants" %>
 
+<!-- style -->
+<style>
+	.datepicker {
+		z-index: 2000;
+	}
+</style>
+
 <!-- scripts -->
 <script type="text/javascript" src="local/js/user-profile.js"></script>
 <script type="text/javascript" src="local/js/facebook.js"></script>
@@ -34,6 +41,24 @@
 			    	Female <input name="genderUserProfileInput" type="radio" value="FEMALE" style="margin: 0px;" />
 			    </div>
 			</div>
+			<div class="control-group">
+				<label for="birthDateUserProfileControlGroup" class="control-label">Date of Birth</label>
+				<div class="controls">
+					<input id="birthDateUserProfileInput" placeholder="Date of Birth" type="text" />
+				</div>
+			</div>
+			<div id="countryUserProfileControlGroup" class="control-group">
+				<label class="control-label" for="countryUserProfileInput">Country</label>
+				<div class="controls">
+			    	<input type="text" id="countryUserProfileInput" placeholder="Country">
+			    </div>
+			</div>
+			<div id="cityUserProfileControlGroup" class="control-group">
+				<label class="control-label" for="countryUserProfileInput">City</label>
+				<div class="controls">
+			    	<input type="text" id="cityUserProfileInput" placeholder="City">
+			    </div>
+			</div>			
 			<div class="control-group">
 			    <div class="controls">
 					<a id="facebookConnectButton" class="fb-button" onclick="facebookController.showDialogAndConnect();">Connect with FB</a>

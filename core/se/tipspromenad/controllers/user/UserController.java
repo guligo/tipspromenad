@@ -1,6 +1,8 @@
 package se.tipspromenad.controllers.user;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.Random;
 
@@ -34,6 +36,8 @@ import se.tipspromenad.validation.BasicStringValidator;
 public class UserController {
 	
 	private final static Logger logger = Logger.getLogger(UserController.class);	
+	
+	private final DateFormat DATE_FORMATTER = new SimpleDateFormat("MM/dd/yyyy");
 	
 	// services
 	@Autowired
@@ -125,7 +129,14 @@ public class UserController {
 			// processing
 			if (!response.hasErrors()) {
 				String email = ((UserWrapper) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-				userService.updateUserProfile(email, request.getName(), request.getGender() != null ? Gender.valueOf(request.getGender()) : null);
+				userService.updateUserProfile(
+					email,
+					request.getName(),
+					request.getGender() != null ? Gender.valueOf(request.getGender()) : null,
+					DATE_FORMATTER.parse(request.getBirthDate()),
+					request.getCountry(),
+					request.getCity()
+				);
 			}
 		} catch (Exception e) {
 			response.addError(UserError.UNEXPECTED_ERROR);

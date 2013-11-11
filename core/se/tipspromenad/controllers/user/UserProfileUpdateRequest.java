@@ -8,15 +8,9 @@ public class UserProfileUpdateRequest extends RequestBean {
 
 	private String name;
 	private String gender;
-
-	public UserProfileUpdateRequest() {
-		// empty
-	}
-
-	public UserProfileUpdateRequest(String name, String gender) {
-		this.name   = name;
-		this.gender = gender;
-	}
+	private String birthDate;
+	private String country;
+	private String city;
 
 	public String getName() {
 		return name;
@@ -32,6 +26,30 @@ public class UserProfileUpdateRequest extends RequestBean {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public String getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 }
