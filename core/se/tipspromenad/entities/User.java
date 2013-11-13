@@ -9,8 +9,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.annotate.JsonWriteNullProperties;
-
 import se.tipspromenad.entities.User;
 import se.tipspromenad.entities.UserProfile;
 import se.tipspromenad.entities.enums.UserRole;
@@ -22,10 +20,9 @@ import se.tipspromenad.entities.enums.UserRole;
  */
 @Entity
 @Table(name = "users")
-@SuppressWarnings("deprecation")
 public class User extends se.tipspromenad.entities.Entity {
 
-	public final static int MIN_NAME_LENGTH     = 5;
+	public final static int MIN_NAME_LENGTH     = 3;
 	public final static int MAX_NAME_LENGTH     = 30;
 	public final static int MIN_EMAIL_LENGTH    = 10;
 	public final static int MAX_EMAIL_LENGTH    = 50;

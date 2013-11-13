@@ -24,7 +24,7 @@
 <div class="modal" id="userProfileDialog" tabindex="-1" role="dialog" aria-labelledby="userProfileDialogLabel" aria-hidden="true" style="display: none;">
 	<div class="modal-header">
 		<a href="javascript:userProfileController.hideDialog();" class="close">×</a>
-		<h3 id="userProfileDialogLabel">Edit user profile</h3>
+		<h3 id="userProfileDialogLabel">My Profile</h3>
 	</div>
 	<div class="modal-body">
 		<form class="form-horizontal">

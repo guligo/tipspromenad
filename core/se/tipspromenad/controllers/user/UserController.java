@@ -2,6 +2,7 @@ package se.tipspromenad.controllers.user;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.Random;
@@ -25,6 +26,7 @@ import se.tipspromenad.security.UserWrapper;
 import se.tipspromenad.services.UserService;
 import se.tipspromenad.utils.FacebookUtils;
 import se.tipspromenad.utils.SecurityUtils;
+import se.tipspromenad.validation.BasicDateValidator;
 import se.tipspromenad.validation.BasicStringValidator;
 
 /**
@@ -43,15 +45,26 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	// validators
+	// user
 	private BasicStringValidator<UserError> userNameValidator;
 	private BasicStringValidator<UserError> userEmailValidator;
-	private BasicStringValidator<UserError> userPasswordValidator;	
+	private BasicStringValidator<UserError> userPasswordValidator;
+	
+	// user profile
+	private BasicDateValidator  <UserError> userProfileBirthDateValidator;
+	private BasicStringValidator<UserError> userProfileCountryValidator;
+	private BasicStringValidator<UserError> userProfileCityValidator;
 	
 	public UserController() {
+		// user
 		userNameValidator     = new BasicStringValidator<UserError>(User.MIN_NAME_LENGTH, User.MAX_NAME_LENGTH, UserError.NAME_EMPTY, UserError.NAME_TOO_SHORT, UserError.NAME_TOO_LONG);
 		userEmailValidator    = new BasicStringValidator<UserError>(User.MIN_EMAIL_LENGTH, User.MAX_EMAIL_LENGTH, UserError.EMAIL_EMPTY, UserError.EMAIL_TOO_SHORT, UserError.EMAIL_TOO_LONG);
 		userPasswordValidator = new BasicStringValidator<UserError>(User.MIN_PASSWORD_LENGTH, User.MAX_PASSWORD_LENGTH, UserError.PASSWORD_EMPTY, UserError.PASSWORD_TOO_SHORT, UserError.PASSWORD_TOO_LONG);
+		
+		// user profile
+		userProfileBirthDateValidator = new BasicDateValidator  <UserError>(DATE_FORMATTER, UserError.BIRTH_DATE_WRONG_FORMAT);
+		userProfileCountryValidator   = new BasicStringValidator<UserError>(UserProfile.MIN_COUNTRY_LENGTH, UserProfile.MAX_COUNTRY_LENGTH, UserError.COUNTRY_TOO_SHORT, UserError.COUNTRY_TOO_LONG);
+		userProfileCityValidator      = new BasicStringValidator<UserError>(UserProfile.MIN_CITY_LENGTH, UserProfile.MAX_CITY_LENGTH, UserError.CITY_TOO_SHORT, UserError.COUNTRY_TOO_LONG);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.USER_LOGIN_ACTION)
@@ -120,28 +133,27 @@ public class UserController {
 	 * Action responsible for updating user profile.
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.USER_PROFILE_UPDATE_ACTION)
-	public @ResponseBody UserProfileUpdateResponse updateUserProfile(@RequestBody UserProfileUpdateRequest request) {	
+	public @ResponseBody UserProfileUpdateResponse updateUserProfile(@RequestBody UserProfileUpdateRequest request) throws ParseException {	
 		UserProfileUpdateResponse response = new UserProfileUpdateResponse();		
-		try {
-			// validation
-			userNameValidator.validate(request.getName(), response.getErrors());
-			
-			// processing
-			if (!response.hasErrors()) {
-				String email = ((UserWrapper) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-				userService.updateUserProfile(
-					email,
-					request.getName(),
-					request.getGender() != null ? Gender.valueOf(request.getGender()) : null,
-					DATE_FORMATTER.parse(request.getBirthDate()),
-					request.getCountry(),
-					request.getCity()
-				);
-			}
-		} catch (Exception e) {
-			response.addError(UserError.UNEXPECTED_ERROR);
-			logger.error("User profile update error", e);
-		}
+		
+		// validation
+		userNameValidator.validate(request.getName(), response.getErrors());
+		userProfileBirthDateValidator.validate(request.getBirthDate(), response.getErrors());
+		userProfileCountryValidator.validate(request.getCountry(), response.getErrors());
+		userProfileCityValidator.validate(request.getCity(), response.getErrors());
+		
+		// processing
+		if (!response.hasErrors()) {
+			String email = ((UserWrapper) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+			userService.updateUserProfile(
+				email,
+				request.getName(),
+				request.getGender() != null ? Gender.valueOf(request.getGender()) : null,
+				request.getBirthDate() != null ? DATE_FORMATTER.parse(request.getBirthDate()) : null,
+				request.getCountry(),
+				request.getCity()
+			);
+		}		
 		return response;
 	}
 	
