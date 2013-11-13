@@ -3,6 +3,8 @@
  */
 var commonUtils = function() {
 	
+	var _callback = null;
+	
 	function _formatNumber(num, len) {
 		num = num.toString();
 		while (num.length < len) {
@@ -81,6 +83,12 @@ var commonUtils = function() {
 		},
 		hideSuccess: function(field) {
 			_hideSuccess(field);
+		},
+		setCallback: function(callback) {
+			_callback = callback;
+		},
+		getCallback: function() {
+			return _callback;
 		}
 	};
 	

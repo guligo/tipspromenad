@@ -1,10 +1,10 @@
 var facebookController = function() {
 	
-	// var APP_ID     = '203913813008290';
-	// var APP_SECRET = 'c91e96ffca4c5465c3353baaaaf883e3';
+	var APP_ID     = '203913813008290';
+	var APP_SECRET = 'c91e96ffca4c5465c3353baaaaf883e3';
 	
-	var APP_ID     = '493009277428978';
-	var APP_SECRET = 'e3300f4a7ca3ace4855741611e3c21ea';
+	// var APP_ID     = '493009277428978';
+	// var APP_SECRET = 'e3300f4a7ca3ace4855741611e3c21ea';
 	
 	var HOME_PAGE_URL = null;
 	
@@ -21,7 +21,7 @@ var facebookController = function() {
 			
 			FB.Event.subscribe('auth.authResponseChange', function(response) {
 				if (response.status === 'connected') {
-					_userId = response.authResponse.userID;					
+					_userId = response.authResponse.userID;
 			    } else {
 			    	FB.login(function(resonse) {
 			    		console.log(response);

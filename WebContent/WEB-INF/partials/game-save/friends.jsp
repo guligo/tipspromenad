@@ -39,9 +39,8 @@ a.fb-button {
 <script type="text/javascript" src="local/js/game-save/friend.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		facebookController.init(function() {
+		facebookController.init(null, function() {
 			friendController.init();
-			facebookController.sendNotification('Welcome to app!');
 		});
 	});
 </script>
@@ -52,12 +51,11 @@ a.fb-button {
 	the next step you will receive an event code that you can share with your family and friends!
 </p>
 <div>
-	<a class="fb-button">Connect</a>
+	<a class="fb-button" href="#">Connect</a>
 </div>
 
-<div id="friends">
-	
-</div>
+<div id="friends"></div>
+<br />
 
 <c:if test="${empty param.id}">
 	<a href="javascript:unlockNextTab();" class="btn">Next</a>
