@@ -16,12 +16,16 @@ public class BasicStringValidator<E extends ValidationError> implements Validato
 	private E   tooShortErr;
 	private E   tooLongErr;
 
+	public BasicStringValidator(int minLength, int maxLength, E tooShortErr, E tooLongErr) {
+		this(minLength, maxLength, null, tooShortErr, tooLongErr);
+	}
+
 	public BasicStringValidator(int minLength, int maxLength, E emptyErr, E tooShortErr, E tooLongErr) {
-		this.minLength = minLength;
-		this.maxLength = maxLength;
-		this.emptyErr = emptyErr;
+		this.minLength   = minLength;
+		this.maxLength   = maxLength;
+		this.emptyErr    = emptyErr;
 		this.tooShortErr = tooShortErr;
-		this.tooLongErr = tooLongErr;
+		this.tooLongErr  = tooLongErr;
 	}
 
 	@Override
@@ -32,7 +36,7 @@ public class BasicStringValidator<E extends ValidationError> implements Validato
 	@Override
 	public void validate(Object target, List<E> errors) {
 		String value = (String) target;
-		if (value == null || value.length() == 0) {
+		if (emptyErr != null && (value == null || value.length() == 0)) {
 			errors.add(emptyErr);
 		} else if (value.length() < minLength) {
 			errors.add(tooShortErr);

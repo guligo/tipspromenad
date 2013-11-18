@@ -20,8 +20,12 @@ import se.tipspromenad.entities.enums.Gender;
 @Table(name = "user_profiles")
 public class UserProfile extends se.tipspromenad.entities.Entity {
 	
-	public final static int MIN_NAME_LENGTH = User.MIN_NAME_LENGTH;
-	public final static int MAX_NAME_LENGTH = User.MAX_NAME_LENGTH;
+	public final static int MIN_NAME_LENGTH    = User.MIN_NAME_LENGTH;
+	public final static int MAX_NAME_LENGTH    = User.MAX_NAME_LENGTH;
+	public final static int MIN_COUNTRY_LENGTH = 3;
+	public final static int MAX_COUNTRY_LENGTH = 30;
+	public final static int MIN_CITY_LENGTH    = 3;
+	public final static int MAX_CITY_LENGTH    = 30;
 	
 	@OneToOne(optional = false)
 	private User user;
@@ -31,9 +35,9 @@ public class UserProfile extends se.tipspromenad.entities.Entity {
 	private Gender gender;
 	@Column(nullable = true)
 	private Date birthDate;
-	@Column(nullable = true)
+	@Column(nullable = true, length = MAX_COUNTRY_LENGTH)
 	private String country;
-	@Column(nullable = true)
+	@Column(nullable = true, length = MAX_CITY_LENGTH)
 	private String city;
 	
 	public User getUser() {

@@ -96,7 +96,7 @@ var mapController = function() {
 				} else {
 					clazz = 'badge';
 				}
-				html += '<span class="' + clazz + '">' + LABELS[i] + '</span>&nbsp;' + question.answers[i].text + '<br />';
+				html += '<div style="margin-top: 5px;"><span class="' + clazz + '" style="margin-top: 5px;">' + LABELS[i] + '</span>&nbsp;' + question.answers[i].text + '</div>';
 			}
 		}
 		html += '</p>';
