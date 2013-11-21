@@ -27,6 +27,7 @@ var gameListController = function() {
 				html += '<tr>';
 					html += '<th>Name</th>';
 					html += '<th>Date</th>';
+					html += '<th>State</th>';
 					html += '<th>Action</th>';
 				html += '</tr>';
 			html += '</thead>';
@@ -35,6 +36,7 @@ var gameListController = function() {
 				html += '<tr>'; 
 					html += '<td>' + games[index].name + '</td>';
 					html += '<td>' + commonUtils.formatDateShort(games[index].date) + '</td>';
+					html += '<td>' + games[index].state + '</td>';
 					html += '<td>';
 						html += '<a href="' + GAME_SAVE_PAGE_URL + '?id=' + games[index].id + '"><i class="icon-edit"> </i></a>&nbsp';
 						html += '<a href="javascript:gameListController.removeGame(' + games[index].id + ');"><i class="icon-remove"> </i></a>';

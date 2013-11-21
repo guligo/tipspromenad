@@ -192,8 +192,10 @@
 			</a> | &#169; Tipspromenad.nu
 		</div>
 		
-		<!-- dialogs -->		
-		<jsp:include page="../partials/user-profile.jsp" />
+		<!-- dialogs -->
+		<sec:authorize ifAnyGranted="ROLE_SIMPLE_USER">
+			<jsp:include page="../partials/user-profile.jsp" />
+		</sec:authorize>
 		<jsp:include page="../partials/construction.jsp" />		
 		<jsp:include page="../partials/error.jsp" />
 	</body>	

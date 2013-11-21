@@ -8,10 +8,18 @@
 			Tipspromenad.nu | Coming soon!
 		</title>
 		
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+		<meta name="description" content="Tipspromenad.nu" />
+		
 		<!-- icon -->
 		<link href="local/img/icon.png" rel="shortcut icon" />
 		
 		<!-- styles -->
+		<link href="3p/bootstrap/css/bootstrap.css" rel="stylesheet" />
+		<link href="3p/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+		<link href="3p/fancybox/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" media="screen" />
+		
 		<style>
 			html, body {
 				height: 100%;
@@ -112,6 +120,8 @@
 		</style>
 		
 		<!-- scripts -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+		<script type="text/javascript" src="3p/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -119,6 +129,10 @@
 			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 			ga('create', 'UA-45159467-1', 'tipspromenad.nu');
 			ga('send', 'pageview');
+			
+			$(document).ready(function() {
+				$("a#tryItOutLink").fancybox();
+			});
 		</script>
 	</head>
 	<body>
@@ -129,6 +143,10 @@
 			<br />
 			<br />
 			Coming soon!
+			<br />
+			<br />
+			<br />
+			<a id="tryItOutLink" href="#dialog" class="btn btn-info btn-large">Try it out!</a>
 		</div>
 		<div id="footer">
 			<span class="left">
@@ -141,5 +159,10 @@
 				Tipspromenad.nu &#169; 2013
 			</span>
 		</div>
-	</body>	
+		<div style="display: none">
+			<div id="dialog">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+			</div>
+		</div>
+	</body>
 </html>

@@ -37,6 +37,7 @@ a.fb-button {
 <!-- scripts -->
 <script type="text/javascript" src="local/js/facebook.js"></script>
 <script type="text/javascript" src="local/js/game-save/friend.js"></script>
+<!--
 <script type="text/javascript">
 	$(document).ready(function() {
 		facebookController.init(null, function() {
@@ -44,6 +45,7 @@ a.fb-button {
 		});
 	});
 </script>
+-->
 
 <!-- html -->
 <p style="width: 750px;">

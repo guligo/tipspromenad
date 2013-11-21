@@ -38,6 +38,8 @@
     </persistence-unit>
     
     <!--
+    mysqladmin -u root password 'secret'
+    
     create database tipspromenad default character set = "UTF8" default collate = "utf8_general_ci";
     -->
     

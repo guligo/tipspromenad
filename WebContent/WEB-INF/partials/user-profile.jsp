@@ -16,7 +16,9 @@
 			'user/profile',
 			'user/profile'			
 		);
-		facebookController.init('<%= Constants.URL.HOME_PAGE %>');
+		facebookController.init('<%= Constants.URL.HOME_PAGE %>', function() {
+			friendController.init();
+		});
 	});
 </script>
 
