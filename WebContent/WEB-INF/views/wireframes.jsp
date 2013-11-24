@@ -5,8 +5,8 @@
 <html lang="en">
 	<head>
 		<!-- meta data -->		
-		<meta property="fb:admins" content="{YOUR_FACEBOOK_USER_ID}" />
-		<meta property="fb:app_id" content="{YOUR_APPLICATION_ID}" />
+		<meta property="fb:admins" content="178951022252693" />
+		<meta property="fb:app_id" content="493009277428978" />
 		
 		<!-- css -->
 		<style>
