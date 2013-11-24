@@ -16,9 +16,8 @@
 			}
 			
 			#comments {
-				height: 630px;
+				height: 640px;
 				padding: 0 10px 0 0;
-				margin-top: -20px;
 				overflow-y: scroll;
 			}
 			

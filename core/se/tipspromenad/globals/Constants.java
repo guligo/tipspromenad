@@ -54,7 +54,7 @@ public class Constants {
 		
 		public final static String WALLPAPER_PAGE = "wallpaper.page";
 		
-		public final static String WIREFRAMES_PAGE = "wireframes.page";
+		public final static String WIREFRAMES_PAGE = "wireframes.jsp"; // NOTE: Dirty solution for dev / production env problem
 		
 		public final static String GAME_LIST_PAGE       = "gamelist.page";
 		public final static String GAME_SAVE_PAGE       = "gamesave.page";

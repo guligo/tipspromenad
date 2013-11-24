@@ -142,8 +142,8 @@
 			});
 		</script>
 	</head>
-	<body>		
-		<div id="content">		
+	<body>
+		<div id="content">
 			<img id="wallpaper" src="local/img/wallpaper-logo.png" />
 			<br />
 			"A classic Swedish game for the digital generation."
@@ -153,7 +153,7 @@
 			<br />
 			<br />
 			<br />
-			<a id="tryItOutLink" class="btn btn-info btn-large" href="wireframes.page">Try it out!</a>
+			<a id="tryItOutLink" class="btn btn-info btn-large" href="wireframes.jsp">Try it out!</a>
 		</div>
 		<div id="footer">
 			<span class="left">
