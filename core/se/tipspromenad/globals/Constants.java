@@ -54,6 +54,8 @@ public class Constants {
 		
 		public final static String WALLPAPER_PAGE = "wallpaper.page";
 		
+		public final static String WIREFRAMES_PAGE = "wireframes.page";
+		
 		public final static String GAME_LIST_PAGE       = "gamelist.page";
 		public final static String GAME_SAVE_PAGE       = "gamesave.page";
 		public final static String GAME_GET_ACTION      = "game/get/{id}";
@@ -92,12 +94,14 @@ public class Constants {
 		
 		public final static String WALLPAPER = "wallpaper";
 		
+		public final static String WIREFRAMES = "wireframes";
+		
 		public final static String ERROR = "error";
 		
 		public final static String LOGIN = "login";
 		
 		public final static String HOME = "home";
-
+		
 		public final static String GAME_LIST = "game-list";
 		
 		public final static String GAME_SAVE = "game-save";

@@ -8,6 +8,7 @@
     <definition name="error" template="/WEB-INF/views/error.jsp" />
     <definition name="mock" template="/WEB-INF/views/mock.jsp" />
     <definition name="wallpaper" template="/WEB-INF/views/wallpaper.jsp" />
+    <definition name="wireframes" template="/WEB-INF/views/wireframes.jsp" />
     <!-- END! mock views -->
     
 	<!-- views -->			

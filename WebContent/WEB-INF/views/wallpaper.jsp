@@ -8,6 +8,7 @@
 			Tipspromenad.nu | Coming soon!
 		</title>
 		
+		<!-- meta data -->
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 		<meta name="description" content="Tipspromenad.nu" />
@@ -60,8 +61,8 @@
 						
 			div#footer {
 				width: 100%;
-				height: 50px;
-				padding-top: 30px;
+				padding-top: 25px;
+				padding-bottom: 25px;
 				color: #ffffff;
 				background-color: #4eaecb;				
 				text-align: left;
@@ -122,7 +123,7 @@
 		<!-- scripts -->
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 		<script type="text/javascript" src="3p/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-		<script>
+		<script>			
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -131,12 +132,18 @@
 			ga('send', 'pageview');
 			
 			$(document).ready(function() {
-				$("a#tryItOutLink").fancybox();
+				$("a#tryItOutLink").fancybox({
+					'type': 'iframe',
+					'scrolling': 'no',
+					'width': 975,
+					'height': 650,
+					'padding': 10
+				});
 			});
 		</script>
 	</head>
-	<body>
-		<div id="content">
+	<body>		
+		<div id="content">		
 			<img id="wallpaper" src="local/img/wallpaper-logo.png" />
 			<br />
 			"A classic Swedish game for the digital generation."
@@ -146,7 +153,7 @@
 			<br />
 			<br />
 			<br />
-			<a id="tryItOutLink" href="#dialog" class="btn btn-info btn-large">Try it out!</a>
+			<a id="tryItOutLink" class="btn btn-info btn-large" href="wireframes.page">Try it out!</a>
 		</div>
 		<div id="footer">
 			<span class="left">
@@ -158,11 +165,6 @@
 			<span class="right">
 				Tipspromenad.nu &#169; 2013
 			</span>
-		</div>
-		<div style="display: none">
-			<div id="dialog">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-			</div>
 		</div>
 	</body>
 </html>

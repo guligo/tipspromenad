@@ -46,6 +46,7 @@
 		<security:intercept-url pattern="/3p/**" filters="none" />
 		<security:intercept-url pattern="/local/**" filters="none" />
 		<security:intercept-url pattern="/wallpaper.page" filters="none" />
+		<security:intercept-url pattern="/wireframes.page" filters="none" />
 		<security:intercept-url pattern="/user/login" filters="none" />
 		<security:intercept-url pattern="/user/register" filters="none" />		
 		<security:intercept-url pattern="/login" filters="none" />

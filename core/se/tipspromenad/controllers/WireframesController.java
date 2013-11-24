@@ -7,16 +7,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import se.tipspromenad.globals.Constants;
 
 /**
- * MVC controller responsible for actions around wallpaper page.
+ * MVC controller responsible for actions around wireframes dialog.
  * 
  * @author guligo
  */
 @Controller
-public class WallpaperController {
+public class WireframesController {
 
-	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.WALLPAPER_PAGE)
-	public String showWallpaperPage() {
-		return Constants.Views.WALLPAPER;
+	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.WIREFRAMES_PAGE)
+	public String showWireframesPage() {
+		return Constants.Views.WIREFRAMES;
 	}
 
 }
