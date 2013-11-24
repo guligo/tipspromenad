@@ -23,7 +23,7 @@
 			}
 			
 			.comments-cell {
-				overflow-y: scroll;
+				/* overflow: hidden; */
 			}
 			
 			.wireframe-cell {
