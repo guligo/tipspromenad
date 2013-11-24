@@ -75,7 +75,7 @@
 			<table>
 				<tr>
 					<td class="comments-cell">
-						<div id="comments" class="fb-comments" data-href="http://www.tipspromenad.nu" data-colorscheme="light" data-numposts="5" data-width="550">
+						<div id="comments" class="fb-comments" data-href="www.tipspromenad.nu" data-colorscheme="light" data-numposts="5" data-width="550">
 						</div>
 					</td>
 					<td class="wireframe-cell">
