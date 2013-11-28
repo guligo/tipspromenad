@@ -135,7 +135,7 @@
 				$("a#tryItOutLink").fancybox({
 					'type': 'iframe',
 					'scrolling': 'no',
-					'width': 1200,
+					'width': 1000,
 					'height': 650,
 					'padding': 10
 				});
