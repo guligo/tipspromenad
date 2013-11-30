@@ -136,7 +136,7 @@
 					'type': 'iframe',
 					'scrolling': 'no',
 					'width': 1000,
-					'height': 650,
+					'height': 625,
 					'padding': 10
 				});
 			});
