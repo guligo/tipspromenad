@@ -50,6 +50,39 @@
 				text-align: center;				
 			}
 			
+			.standard {
+				
+			}
+			
+			.back {
+				width: 8px;
+				height: 20px;
+				position: absolute;
+				left: 548px;
+				top: 103px;
+				opacity: 0.5;
+				border-style: solid;
+				border-color: yellow;
+			}
+			
+			.button {
+				width: 118px;
+				height: 18px; 
+				position: absolute;
+				opacity: 0.5;
+				border-style: solid;
+				border-color: yellow;
+			}
+			
+			.tab1 {
+				width: 40px;
+				height: 20px;
+				position: absolute;
+				opacity: 0.5;
+				border-color: yellow;
+				border-style: solid;
+			}
+			
 			#createmain {
 				display: block;
 			}
@@ -78,17 +111,17 @@
 				display: none;
 			}
 			
-			#playmain {
+			#playmain1 {
+				display: none;
+			}
+			
+			#playmain2 {
 				display: none;
 			}
 			
 			#playquiz {
 				display: none;
-			}
-			
-			#result {
-				display: none;
-			}			
+			}		
 		</style>
 		
 		<!-- scripts -->
@@ -126,42 +159,60 @@
 					<td class="wireframe-cell">
 						<div id="createmain">
 							<img src="local/wireframes/createmain.png" />
-							<a href="javascript:transit($('#createmain'), $('#playlist'));" style="width: 20px; height: 20px; background-color: yellow; position: absolute; left: 666px; top: 141px; opacity: 0.5; border-radius: 999px;"></a>
-							<a href="javascript:transit($('#createmain'), $('#create1'));"  style="width: 20px; height: 20px; background-color: yellow; position: absolute; left: 629px; top: 228px; opacity: 0.5; border-radius: 999px;"></a>
+							<a href="javascript:transit($('#createmain'), $('#playlist'));" class="tab1" style="left: 668px; top: 143px;"></a>
+							<a href="javascript:transit($('#createmain'), $('#create1'));" class="button" style="left: 628px; top: 226px;"></a>
 						</div>
 						<div id="create1">
 							<img src="local/wireframes/create1.png" />
-							<a href="javascript:transit($('#create1'), $('#create2'));"    style="width: 20px; height: 20px; background-color: yellow; position: absolute; left: 666px; top: 141px; opacity: 0.5; border-radius: 999px;"></a>
-							<a href="javascript:transit($('#create1'), $('#create2'));"    style="width: 20px; height: 20px; background-color: yellow; position: absolute; left: 693px; top: 511px; opacity: 0.5; border-radius: 999px;"></a>
-							<a href="javascript:transit($('#create1'), $('#createmain'));" style="width: 20px; height: 20px; background-color: yellow; position: absolute; left: 785px; top: 570px; opacity: 0.5; border-radius: 999px;"></a>
+							<a href="javascript:transit($('#create1'), $('#createmain'));" class="back"></a>
+							<a href="javascript:transit($('#create1'), $('#create2'));" class="button" style="left: 693px; top: 510px;"></a>
+							<!--
+							<a href="javascript:transit($('#create1'), $('#create2'));" style="width: 75px;  height: 20px; position: absolute; left: 650px; top: 143px; opacity: 0.5; border-style: solid; border-color: yellow;"></a>
+							-->
 						</div>
 						<div id="create2">
 							<img src="local/wireframes/create2.png" />
-							<a href="javascript:transit($('#create2'), $('#create25'));" style="width: 20px; height: 20px; background-color: yellow; position: absolute; left: 550px; top: 500px; opacity: 0.5; border-radius: 999px;"></a>
-							<a href="javascript:transit($('#create2'), $('#create1'));"  style="width: 20px; height: 20px; background-color: yellow; position: absolute; left: 785px; top: 570px; opacity: 0.5; border-radius: 999px;"></a>
+							<a href="javascript:transit($('#create2'), $('#createmain'));" class="back"></a>
+							<a href="javascript:transit($('#create2'), $('#create25'));" style="width: 35px; height: 35px; position: absolute; left: 555px; top: 501px; opacity: 0.5; border-color: yellow; border-style: solid;"></a>
+							<!--
+							<a href="javascript:transit($('#create2'), $('#create1'));" style="width: 75px; height: 20px; position: absolute; left: 555px; top: 143px; opacity: 0.5; border-style: solid;  border-color: yellow;"></a>
+							-->
 						</div>
 						<div id="create25">
 							<img src="local/wireframes/create25.png" />
-							<a href="javascript:transit($('#create25'), $('#create3'));" style="width: 20px; height: 20px; background-color: yellow; position: absolute; left: 750px; top: 141px; opacity: 0.5; border-radius: 999px;"></a>
-							<a href="javascript:transit($('#create25'), $('#create3'));" style="width: 20px; height: 20px; background-color: yellow; position: absolute; left: 630px; top: 511px; opacity: 0.5; border-radius: 999px;"></a>
+							<a href="javascript:transit($('#create25'), $('#createmain'));" class="back"></a>
+							<a href="javascript:transit($('#create25'), $('#create3'));" class="button" style="left: 628px; top: 510px;"></a>
+							<!--
+							<a href="javascript:transit($('#create25'), $('#create3'));" style="width: 75px;  height: 20px; position: absolute; left: 745px; top: 143px; opacity: 0.5; border-style: solid; border-color: yellow;"></a>
+							<a href="javascript:transit($('#create25'), $('#create1'));" style="width: 75px;  height: 20px; position: absolute; left: 555px; top: 143px; opacity: 0.5; border-style: solid; border-color: yellow;"></a>
+							-->
 						</div>
 						<div id="create3">
 							<img src="local/wireframes/create3.png" />
-							<a href="javascript:transit($('#create3'), $('#create2'));" style="width: 20px; height: 20px; background-color: yellow; position: absolute; left: 785px; top: 570px; opacity: 0.5; border-radius: 999px;"></a>
+							<a href="javascript:transit($('#create3'), $('#createmain'));" class="back"></a>
+							<a href="javascript:transit($('#create3'), $('#createmain'));" class="button" style="left: 628px; top: 510px;"></a>
+							<!--
+							<a href="javascript:transit($('#create3'), $('#create25'));" style="width: 75px;  height: 20px; position: absolute; left: 650px; top: 143px; opacity: 0.5; border-style: solid; border-color: yellow;"></a>
+							<a href="javascript:transit($('#create3'), $('#create1'));" style="width: 75px;  height: 20px; position: absolute; left: 555px; top: 143px; opacity: 0.5; border-style: solid; border-color: yellow;"></a>
+							-->
 						</div>
 						<div id="playlist">
 							<img src="local/wireframes/playlist.png" />
-							<a href="javascript:transit($('#playlist'), $('#playmain'));"   style="width: 20px; height: 20px; background-color: yellow; position: absolute; left: 752px; top: 367px; opacity: 0.5; border-radius: 999px;"></a>
-							<a href="javascript:transit($('#playlist'), $('#createmain'));" style="width: 20px; height: 20px; background-color: yellow; position: absolute; left: 607px; top: 140px; opacity: 0.5; border-radius: 999px;"></a>							
+							<a href="javascript:transit($('#playlist'), $('#createmain'));" class="tab1" style="left: 610px; top: 143px;"></a>
+							<a href="javascript:transit($('#playlist'), $('#playmain1'));" style="width: 20px; height: 20px; position: absolute; left: 751px; top: 364px; opacity: 0.5; border-color: yellow; border-style: solid;"></a>		
 						</div>
-						<div id="playmain">
-							<img src="local/wireframes/playmain.png" />
-							<a href="javascript:transit($('#playmain'), $('#playquiz'));" style="width: 20px; height: 20px; background-color: yellow; position: absolute; left: 650px; top: 290px; opacity: 0.5; border-radius: 999px;"></a>
-							<a href="javascript:transit($('#playmain'), $('#playlist'));" style="width: 20px; height: 20px; background-color: yellow; position: absolute; left: 785px; top: 570px; opacity: 0.5; border-radius: 999px;"></a>				
+						<div id="playmain1">
+							<img src="local/wireframes/playmain1.png" />
+							<a href="javascript:transit($('#playmain1'), $('#playlist'));" class="back"></a>
+							<a href="javascript:transit($('#playmain1'), $('#playquiz'));" style="width: 28px; height: 28px; position: absolute; left: 650px; top: 290px; opacity: 0.5; border-color: yellow; border-style: solid;"></a>
 						</div>
 						<div id="playquiz">
 							<img src="local/wireframes/playquiz.png" />
-							<a href="javascript:transit($('#playquiz'), $('#playlist'));" style="width: 20px; height: 20px; background-color: yellow; position: absolute; left: 785px; top: 570px; opacity: 0.5; border-radius: 999px;"></a>							
+							<a href="javascript:transit($('#playquiz'), $('#playmain2'));" style="width: 55px; height: 25px; position: absolute; left: 660px; top: 503px; opacity: 0.5; border-color: yellow; border-style: solid;"></a>							
+						</div>
+						<div id="playmain2">
+							<img src="local/wireframes/playmain2.png" />
+							<a href="javascript:transit($('#playmain2'), $('#playlist'));" class="back"></a>
 						</div>
 					</td>
 				</tr>
