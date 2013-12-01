@@ -136,7 +136,12 @@
 					'scrolling': 'no',
 					'width': 1000,
 					'height': 625,
-					'padding': 10
+					'padding': 10,
+					'onComplete': function() {
+						$("#fancybox-wrap").css({
+							'top': '20px', 'bottom': 'auto'
+						});
+					}
 				});
 			});
 		</script>
