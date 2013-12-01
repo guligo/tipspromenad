@@ -9,10 +9,15 @@
 		<meta property="fb:app_id" content="493009277428978" />
 		
 		<!-- css -->
+		<link href="3p/bootstrap/css/bootstrap.css" rel="stylesheet" />
 		<style>
 			html, body  {				
 				margin: 0px;
 				padding: 0px;
+			}
+			
+			table tr {
+				line-height: 0px;
 			}
 			
 			#comments {
@@ -79,8 +84,19 @@
 				height: 20px;
 			}
 			
-			#createmain {
+			#intro {
 				display: block;
+				line-height: 20px;
+				padding-left: 25px;
+				padding-right: 25px;
+				text-align: left;
+				vertical-align: top;
+				font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+				font-size: 15px;
+			}
+			
+			#createmain {
+				display: none;
 			}
 			
 			#create1 {
@@ -117,7 +133,7 @@
 			
 			#playquiz {
 				display: none;
-			}		
+			}
 		</style>
 		<!--[if IE]>
 		<style type="text/css">
@@ -164,6 +180,20 @@
 						</div>
 					</td>
 					<td class="wireframe-cell">
+						<div id="intro">
+							<p>
+								Tipspromenad is a Swedish traditional quiz game where players walk a predetermined path at their own pace. Along the path players answer the questions (usually 12 in total). For each question there are 3 possible answers marked with "1", "X" and "2". Organizer of the event counts up how many correct answers every participant has and winner is the one who has the most correct answers.
+							</p>
+							<br />
+							<p>
+								We are making Tipspromenad digital and if you press magic button below, you'll see how it looks. Tell us what do you think!
+							</p>
+							<br />
+							<br />
+							<p style="text-align: center;">
+								<a href="javascript:transit($('#intro'), $('#createmain'));" class="btn btn-info btn-large">A little less conversation, a little more action please</a>
+							</p>
+						</div>
 						<div id="createmain">
 							<img src="local/wireframes/createmain.png" />
 							<a href="javascript:transit($('#createmain'), $('#playlist'));" class="standard tab" style="left: 668px; top: 143px;"></a>
