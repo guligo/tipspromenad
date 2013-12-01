@@ -9,9 +9,11 @@
 		</title>
 		
 		<!-- meta data -->
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-		<meta name="description" content="A classic Swedish game - Tipspromenad - for the digital generation." />
+		<meta charset="utf-8">
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<meta name="description" content="A classic Swedish game - Tipspromenad - for the digital generation.">
+		<meta name="contact" content="tipspromenad.nu@gmail.com">
 		<meta name="keywords" content="tipspromenad, tipsrunda, quiz walk">
 		
 		<!-- icon -->
