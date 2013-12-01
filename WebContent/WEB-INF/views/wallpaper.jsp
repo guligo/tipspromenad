@@ -20,7 +20,6 @@
 		<link href="3p/bootstrap/css/bootstrap.css" rel="stylesheet" />
 		<link href="3p/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
 		<link href="3p/fancybox/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" media="screen" />
-		
 		<style>
 			html, body {
 				height: 100%;
@@ -35,7 +34,7 @@
 				-moz-background-size: cover;
 				-o-background-size: cover;
 				background-size: cover;
-				font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;		
+				font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 			}
 			
 			a {
@@ -153,7 +152,7 @@
 			<br />
 			<br />
 			<br />
-			<a id="tryItOutLink" class="btn btn-info btn-large" href="wireframes.jsp">Try it out!</a>
+			<a id="tryItOutLink" class="btn btn-info btn-large" href="wireframes.jsp">Our Concept</a>
 		</div>
 		<div id="footer">
 			<span class="left">

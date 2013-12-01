@@ -160,7 +160,7 @@
 			<table>
 				<tr>
 					<td class="comments-cell">
-						<div id="comments" class="fb-comments" data-href="www.tipspromenad.nu" data-colorscheme="light" data-numposts="5" data-width="350">
+						<div id="comments" class="fb-comments" data-href="www.tipspromenad.nu/wireframes.jsp" data-colorscheme="light" data-numposts="5" data-width="350">
 						</div>
 					</td>
 					<td class="wireframe-cell">
