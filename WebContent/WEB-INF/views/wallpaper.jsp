@@ -14,7 +14,7 @@
 		<meta name="description" content="Tipspromenad.nu" />
 		
 		<!-- icon -->
-		<link href="local/img/icon.png" rel="shortcut icon" />
+		<link href="local/img/icon.ico" rel="shortcut icon" />
 		
 		<!-- styles -->
 		<link href="3p/bootstrap/css/bootstrap.css" rel="stylesheet" />
@@ -138,9 +138,17 @@
 					'height': 625,
 					'padding': 10,
 					'onComplete': function() {
-						$("#fancybox-wrap").css({
-							'top': '0px', 'bottom': 'auto'
-						});
+						var height = window.screen.availHeight;
+						if (height <= 800) {
+							$("#fancybox-wrap").css({
+								'top': '0px',
+								'bottom': 'auto',
+								'padding-top': '12px'
+							});
+							$("#fancybox-content").css({
+								'height': '626px'
+							});
+						}
 					}
 				});
 			});
