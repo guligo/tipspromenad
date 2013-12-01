@@ -139,7 +139,7 @@
 					'padding': 10,
 					'onComplete': function() {
 						$("#fancybox-wrap").css({
-							'top': '20px', 'bottom': 'auto'
+							'top': '0px', 'bottom': 'auto'
 						});
 					}
 				});
