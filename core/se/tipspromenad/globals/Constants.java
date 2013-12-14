@@ -41,6 +41,7 @@ public class Constants {
 		public final static String LOGIN_GET_SUCCESS_RESULT_ACTION           = "login/success";
 		public final static String LOGIN_GET_FAIL_RESULT_ACTION              = "login/fail";
 		public final static String LOGIN_VERIFY_FACEBOOK_ACCESS_TOKEN_ACTION = "login/verify";
+		public final static String LOGIN_GET_MY_IP_ACTION                    = "login/myip";
 		
 		public final static String LOGOUT_ACTION = "logout";
 		

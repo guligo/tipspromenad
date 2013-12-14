@@ -78,4 +78,9 @@ public class LoginController {
 		return new LoginVerifyAccessTokenResponse(user.getEmail(), fbUserPassword);
 	}
 	
+	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.LOGIN_GET_MY_IP_ACTION)
+	public @ResponseBody String getIP(HttpServletRequest request) {
+		return request.getRemoteAddr();
+	}
+	
 }

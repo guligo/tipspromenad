@@ -6,6 +6,7 @@ var friendController = function() {
 	var COLUMNS = 3;
 	
 	function _renderFriends() {
+		$('#friendsFacebookConnect').css('display', 'none');
 		facebookController.getFriends(function(friends) {
 			var html = '<table id="friendsList" style="width: 100%;">';
 			if (friends != null) {
@@ -43,7 +44,6 @@ var friendController = function() {
 	return {
 		init: function() {
 			if (facebookController.getUserId() != null) {
-				$('#friendsFacebookConnect').css('display', 'none');
 				_renderFriends();
 			}
 		},

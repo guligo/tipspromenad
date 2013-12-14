@@ -23,7 +23,7 @@
 <script type="text/javascript" src="local/js/login.js"></script>
 <script type="text/javascript">		
 	$(document).ready(function() {
-		Recaptcha.create("6LeC6eESAAAAAAGbjL53AJyBEGyNIVlPl9tTbr2D", "captcha", {
+		Recaptcha.create("6LfXxesSAAAAALkWPknL_5TYVDAKSySk0MLXGeV3", "captcha", {
 			theme: "red",
 			callback: Recaptcha.focus_response_field
 		});
@@ -32,7 +32,8 @@
 			loginController.init(
 				'${pageContext.request.contextPath}/j_spring_security_check',
 				'<%= Constants.URL.USER_REGISTRATION_ACTION %>',
-				'<%= Constants.URL.HOME_PAGE %>'
+				'<%= Constants.URL.HOME_PAGE %>',
+				'<%= Constants.URL.LOGIN_GET_MY_IP_ACTION %>'
 			);
 		});
 	});	
@@ -68,7 +69,7 @@
 	</form>
 	<form class="form-horizontal" style="float: right; margin-left: 10px; border-radius: 10px; background-color: #F5F5F5; padding: 20px;">
 		<legend>
-			New to <span style="color: #999999;">tipspromenad.se</span>? Sign up
+			New to <span style="color: #999999;">tipspromenad.nu</span>? Sign up
 		</legend>
 		<div id="emailControlGroup" class="control-group">
 		    <label class="control-label" for="emailInput">Email</label>
