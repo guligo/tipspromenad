@@ -5,7 +5,7 @@
 <script type="text/javascript" src="local/js/game-save/finish.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		finishController.init();
+		finishController.init('<%= Constants.URL.GAME_FINALIZE_ACTION %>', '<%= Constants.URL.GAME_DISCARD_ACTION %>', '<%= Constants.URL.GAME_LIST_PAGE %>');
 	});
 </script>
 
@@ -23,7 +23,8 @@
 		</p>
 	</div>
 	<div>
-		<a href="#" class="btn">Finalize</a>
-		<a href="#" class="btn">Discard</a>
+		<a href="javascript:finishController.finalize();" class="btn">Finalize</a>
+		<a href="javascript:finishController.draft();"    class="btn">Draft</a>
+		<a href="javascript:finishController.discard();"  class="btn">Discard</a>
 	</div>
 </form>

@@ -41,7 +41,7 @@ public class User extends se.tipspromenad.entities.Entity {
 	private UserRole role;
 	@Column(nullable = false)
 	private Boolean enabled;
-	@Column(nullable = true, unique = true)
+	@Column(nullable = true /* unique = true */)
 	private String fbUserId;
 	@Column(nullable = true, unique = false)
 	private String fbUserPassword;

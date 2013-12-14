@@ -10,6 +10,7 @@
 <!-- scripts -->
 <script type="text/javascript" src="local/js/user-profile.js"></script>
 <script type="text/javascript" src="local/js/facebook.js"></script>
+<script type="text/javascript" src="local/js/game-save/friend.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		userProfileController.init(

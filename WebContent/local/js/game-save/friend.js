@@ -7,7 +7,7 @@ var friendController = function() {
 	
 	function _renderFriends() {
 		facebookController.getFriends(function(friends) {
-			var html = '<table style="width: 100%;">';
+			var html = '<table id="friendsList" style="width: 100%;">';
 			if (friends != null) {
 				for (var i = 0; i < friends.length; i++) {
 					html += '<tr>';
@@ -31,12 +31,25 @@ var friendController = function() {
 		});
 	}
 	
+	function _getUserIds() {
+		var result = [];
+		$('#friendsList :checked').each(function() {
+			result.push($(this).val());
+		});
+		result.push(facebookController.getUserId());
+		return result;
+	}
+	
 	return {
 		init: function() {
 			if (facebookController.getUserId() != null) {
+				$('#friendsFacebookConnect').css('display', 'none');
 				_renderFriends();
 			}
 		},
+		getUserIds: function() {
+			return _getUserIds();
+		}
 	};
 	
 }();

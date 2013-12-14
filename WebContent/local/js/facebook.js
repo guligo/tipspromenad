@@ -1,10 +1,10 @@
 var facebookController = function() {
 	
-	// var APP_ID     = '203913813008290';
-	// var APP_SECRET = 'c91e96ffca4c5465c3353baaaaf883e3';
+	var APP_ID     = '203913813008290';
+	var APP_SECRET = 'c91e96ffca4c5465c3353baaaaf883e3';
 	
-	var APP_ID     = '493009277428978';
-	var APP_SECRET = 'e3300f4a7ca3ace4855741611e3c21ea';
+	// var APP_ID     = '493009277428978';
+	// var APP_SECRET = 'e3300f4a7ca3ace4855741611e3c21ea';
 	
 	var HOME_PAGE_URL = null;
 	
@@ -72,9 +72,9 @@ var facebookController = function() {
 		});
 	}
 	
-	function _sendNotification(text, callback) {
+	function _sendNotification(userId, text, callback) {
 		_getAppAccessToken(function(appAccessToken) {
-			FB.api('/' + _userId + '/notifications', 'post', {access_token: appAccessToken, template: text}, function(response) {
+			FB.api('/' + userId + '/notifications', 'post', {access_token: appAccessToken, template: text}, function(response) {
 				var friends = response.data;
 				if (callback != null) {
 					callback(friends);
@@ -150,8 +150,8 @@ var facebookController = function() {
 		getFriends: function(callback) {
 			_getFriends(callback);
 		},
-		sendNotification: function(callback) {
-			_sendNotification(callback);
+		sendNotification: function(userId, text, callback) {
+			_sendNotification(userId, text, callback);
 		},
 		showDialog: function() {
 			_showDialog(function(response) {
