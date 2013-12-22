@@ -43,7 +43,7 @@ public class InvitationController {
 			}
 		} catch (Exception e) {
 			response.addError(InvitationError.UNEXPECTED_ERROR);
-			logger.error("Error on getting invitation list for game with gameId = " + gameId);
+			logger.error("Error on getting invitation list for game with gameId = " + gameId, e);
 		}
 		return response;
 	}

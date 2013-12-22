@@ -39,7 +39,7 @@ public class InvitationDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Invitation> getInvitationListByGameId(Long gameId) {
-		List<Invitation> invitations = commonDao.getEntityManager().createQuery("from Invitation where gameId = :gameId")
+		List<Invitation> invitations = commonDao.getEntityManager().createQuery("from Invitation i where i.game.id = :gameId")
 			.setParameter("gameId", gameId)
 			.getResultList();
 		return invitations;

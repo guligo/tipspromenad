@@ -5,11 +5,11 @@ var friendController = function() {
 	
 	var COLUMNS = 3;
 	
-	var INVITATION_LIST_ACTION   = "invitation/list/{gameId}";
-	var INVITATION_SAVE_ACTION   = "invitation/save";
-	var INVITATION_REMOVE_ACTION = "invitation/remove/{gameId}/{fbUserId}";
+	var INVITATION_LIST_ACTION   = 'invitation/list/{gameId}';
+	var INVITATION_SAVE_ACTION   = 'invitation/save';
+	var INVITATION_REMOVE_ACTION = 'invitation/remove/{gameId}/{fbUserId}';
 	
-	function _renderFriends() {
+	function _renderFriends(fbUserIds) {
 		$('#friendsFacebookConnect').css('display', 'none');
 		facebookController.getFriends(function(friends) {
 			var html = '<table id="friendsList" style="width: 100%;">';
@@ -18,7 +18,11 @@ var friendController = function() {
 					html += '<tr>';
 					for (var j = 0; j < COLUMNS; j++) {
 						html += '<td>';
-							html += '<input type="checkbox" value="' + friends[i].id + '" style="margin-top: -1px;" onclick="javascript:friendController.changeInvitation(this);" />&nbsp;<span>' + friends[i].name + '</span><br />';
+							var checked = '';
+							if ($.inArray(friends[i].id, fbUserIds) > -1) {
+								checked = 'checked="true"';
+							}
+							html += '<input type="checkbox" value="' + friends[i].id + '" style="margin-top: -1px;" onclick="javascript:friendController.changeInvitation(this);" ' + checked + ' />&nbsp;<span>' + friends[i].name + '</span><br />';
 							html += '<img src="' + friends[i].picture.data.url + '" />';
 						html += '</td>';
 						
@@ -42,9 +46,6 @@ var friendController = function() {
 			type: 'get',
 		    contentType: 'application/json',
 		    dataType: 'json',
-			data: JSON.stringify({
-				gameId: gameId
-			}),
 		    success: function(response) {
 		    	if (callback != null) {
 		    		callback(response.fbUserIds);
@@ -97,7 +98,9 @@ var friendController = function() {
 	return {
 		init: function() {
 			if (facebookController.getUserId() != null) {
-				_renderFriends();
+				_getInvitationList(gameController.getGameId(), function(fbUserIds) {
+					_renderFriends(fbUserIds);
+				});
 			}
 		},
 		changeInvitation: function(checkbox) {
