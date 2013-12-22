@@ -41,7 +41,7 @@ public class Constants {
 		public final static String LOGIN_GET_SUCCESS_RESULT_ACTION           = "login/success";
 		public final static String LOGIN_GET_FAIL_RESULT_ACTION              = "login/fail";
 		public final static String LOGIN_VERIFY_FACEBOOK_ACCESS_TOKEN_ACTION = "login/verify";
-		public final static String LOGIN_GET_MY_IP_ACTION                    = "login/myip";
+		public final static String LOGIN_VERIFY_CAPTCHA                      = "login/captcha";
 		
 		public final static String LOGOUT_ACTION = "logout";
 		
@@ -78,6 +78,10 @@ public class Constants {
 		public final static String PLACEMARK_LIST_ACTION   = "placemark/list/{gameId}";
 		public final static String PLACEMARK_SAVE_ACTION   = "placemark/save";
 		public final static String PLACEMARK_REMOVE_ACTION = "placemark/remove/{id}";
+		
+		public final static String INVITATION_LIST_ACTION   = "invitation/list/{gameId}";
+		public final static String INVITATION_SAVE_ACTION   = "invitation/save";
+		public final static String INVITATION_REMOVE_ACTION = "invitation/remove/{gameId}/{fbUserId}";
 		
 		public final static String PLAY_GET_ACTION          = "play/{id}";
 		public final static String PLAY_LIST_BY_USER_ACTION = "play/listbyuser/{userId}";

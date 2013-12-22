@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
@@ -45,6 +46,8 @@ public class Game extends se.tipspromenad.entities.Entity {
 	@OrderBy("id")
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Question> questions;
+	@OneToMany(fetch = FetchType.EAGER)
+	private Set<Invitation> invitations;
 
 	public Game() {
 		// for serialization purpose
@@ -108,6 +111,14 @@ public class Game extends se.tipspromenad.entities.Entity {
 
 	public void setQuestions(Set<Question> questions) {
 		this.questions = questions;
+	}
+
+	public Set<Invitation> getInvitations() {
+		return invitations;
+	}
+
+	public void setInvitations(Set<Invitation> invitations) {
+		this.invitations = invitations;
 	}
 
 }

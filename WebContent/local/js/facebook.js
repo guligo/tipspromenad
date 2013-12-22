@@ -27,12 +27,9 @@ var facebookController = function() {
 			    		console.log(response);
 			    	}, {perms: 'manage_notifications,email,user_likes'});
 			    }
-				
-				/*
 				if (callback != null) {
 					callback();
 				}
-				*/
 			});
 		};
 		
@@ -43,10 +40,6 @@ var facebookController = function() {
 			js.src = "//connect.facebook.net/en_US/all.js";
 			ref.parentNode.insertBefore(js, ref);
 		} (document));
-		
-		if (callback != null) {
-			callback();
-		}
 	}
 	
 	function _showDialog(callback) {

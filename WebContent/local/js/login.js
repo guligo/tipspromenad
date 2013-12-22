@@ -5,13 +5,16 @@
  */
 var loginController = function() {
 	
+	// var CAPTCHA_PUBLIC_KEY = '6LfXxesSAAAAALkWPknL_5TYVDAKSySk0MLXGeV3';
+	var CAPTCHA_PUBLIC_KEY = '6Ledy-sSAAAAADwUlmDRqZ-ETPjQzSAeEsp3YSnX';
+	
 	var STATUS_OK  = 0;
 	var STATUS_NOK = 1;
 	
 	var LOGIN_URL        = null;
 	var REGISTRATION_URL = null;
 	var HOME_URL         = null;
-	var MY_IP_URL        = null;
+	var CAPTCHA_URL      = null;
 	
 	function _doLogin() {
 		commonUtils.hideError($('#loginEmail'   ));
@@ -33,26 +36,28 @@ var loginController = function() {
 		});
 	}
 	
+	function _initCaptcha() {
+		Recaptcha.create(CAPTCHA_PUBLIC_KEY, "captcha", {
+			theme: "red",
+			callback: Recaptcha.focus_response_field
+		});
+	}
+	
 	function _verifyCaptcha(callback) {
-		$.ajax({
-			url: MY_IP_URL,
-			type: 'get',
-		    success: function(ip) {
-		    	$.ajax({
-					url: 'http://www.google.com/recaptcha/api/verify',
-					type: 'post',
-					data: {
-						privatekey: '6LfXxesSAAAAABCx-ahT0cJuVMUnTjr8qRWakl5_',
-						remoteip  : ip,
-						challange : Recaptcha.get_challenge(),
-						response  : Recaptcha.get_response()
-					},
-				    success: function(status) {
-				    	if (callback != null) {
-				    		callback(status);
-				    	}
-					}
-				});
+	   	$.ajax({
+			url: CAPTCHA_URL,
+			type: 'post',
+			data: {
+				challenge: Recaptcha.get_challenge(),
+				response : Recaptcha.get_response()
+			},
+		    success: function(status) {
+		    	if (callback != null) {
+		    		callback(status);
+		    	}
+			},
+			error: function(xhr) {
+				alert(xhr.status);
 			}
 		});
 	}
@@ -62,10 +67,12 @@ var loginController = function() {
 		commonUtils.hideError($('#nameInput'    ));
 		commonUtils.hideError($('#passwordInput'));
 		commonUtils.hideError($('#confirmInput' ));
+		commonUtils.hideError($('#captcha'      ));
 		
 		_verifyCaptcha(function(status) {
-			if (status != null) {
-				commonUtils.showError($('#emailInput'), 'Wrong captcha value');
+			if (status == false) {
+				commonUtils.showError($('#captcha'), 'Wrong captcha value');
+				_initCaptcha();
 			} else {
 				$.ajax({
 					type: 'post',
@@ -80,8 +87,8 @@ var loginController = function() {
 					}),
 					success: function(response) {
 						if (response.errors == null || response.errors.length == 0) {
-							$('#loginEmail'   ).val($('#emailInput'   ).val()),
-							$('#loginPassword').val($('#passwordInput').val())
+							$('#loginEmail'   ).val($('#emailInput'   ).val());
+							$('#loginPassword').val($('#passwordInput').val());
 							_doLogin();
 						} else {
 					   		if ($.inArray('EMAIL_TOO_SHORT', response.errors) > -1) {
@@ -126,7 +133,9 @@ var loginController = function() {
 			LOGIN_URL        = url1;
 			REGISTRATION_URL = url2;
 			HOME_URL         = url3;
-			MY_IP_URL        = url4;
+			CAPTCHA_URL      = url4;
+			
+			_initCaptcha();
 		},
 		doLogin: function() {
 			_doLogin();

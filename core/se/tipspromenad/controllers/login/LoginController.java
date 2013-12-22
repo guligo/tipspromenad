@@ -1,5 +1,7 @@
 package se.tipspromenad.controllers.login;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import se.tipspromenad.beans.DataTransferBean;
@@ -17,6 +20,7 @@ import se.tipspromenad.entities.User;
 import se.tipspromenad.entities.UserProfile;
 import se.tipspromenad.globals.Constants;
 import se.tipspromenad.services.UserService;
+import se.tipspromenad.utils.CommonUtils;
 import se.tipspromenad.utils.FacebookUtils;
 import se.tipspromenad.utils.SecurityUtils;
 
@@ -30,7 +34,13 @@ public class LoginController {
 	
 	private final static Logger logger = Logger.getLogger(LoginController.class);
 	
-	private final static int RANDOM_PASSWORD_LENGTH = 10;
+	private final static int    RANDOM_PASSWORD_LENGTH = 10;
+	
+	// private final static String CAPTCHA_PRIVATE_KEY = "6LfXxesSAAAAABCx-ahT0cJuVMUnTjr8qRWakl5_";
+	private final static String CAPTCHA_PRIVATE_KEY = "6Ledy-sSAAAAAA09ppUgGNR495ZS_ZLrgeD8OHGy";
+	
+	private final static String IPV6_LOCALHOST = "0:0:0:0:0:0:0:1";
+	private final static String IPV4_LOCALHOST = "127.0.0.1";
 	
 	@Autowired
 	private UserService userService;
@@ -78,9 +88,15 @@ public class LoginController {
 		return new LoginVerifyAccessTokenResponse(user.getEmail(), fbUserPassword);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.LOGIN_GET_MY_IP_ACTION)
-	public @ResponseBody String getIP(HttpServletRequest request) {
-		return request.getRemoteAddr();
+	@RequestMapping(method = RequestMethod.POST, value = Constants.URL.LOGIN_VERIFY_CAPTCHA)
+	public @ResponseBody boolean verifyCaptcha(HttpServletRequest request, @RequestParam String challenge, @RequestParam String response) throws MalformedURLException, IOException {
+		String content = "privatekey=%s&remoteip=%s&challenge=%s&response=%s";
+		content = String.format(content, CAPTCHA_PRIVATE_KEY, request.getRemoteAddr().replace(IPV6_LOCALHOST, IPV4_LOCALHOST), challenge, response);
+		logger.debug("Captcha request = " + content);
+		
+		content = CommonUtils.doHttpPost("http://www.google.com/recaptcha/api/verify", content);
+		logger.debug("Captcha response = " + content);
+		return content.indexOf(Boolean.toString(Boolean.TRUE)) != -1;
 	}
 	
 }

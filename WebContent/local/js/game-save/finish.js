@@ -18,7 +18,7 @@ var finishController = function() {
 		
 		var j = 0;
 		for (var i = 0; i < userIds.length; i++) {
-			facebookController.sendNotification(userIds[i], 'Tjena!', function() {
+			facebookController.sendNotification(userIds[i], 'You have been invited to play Tipspromenad game!', function() {
 				j++;
 			});
 		}

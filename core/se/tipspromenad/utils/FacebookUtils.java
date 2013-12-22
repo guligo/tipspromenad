@@ -31,7 +31,7 @@ public class FacebookUtils {
 	
 	@SuppressWarnings("unchecked")
 	public static Map<String, Object> getAccessToken(String accessToken) throws MalformedURLException, IOException {
-		String content = CommonUtils.doHttpGet(String.format(GET_FACEBOOK_ACCESS_TOKEN_URL, accessToken));
+		String content = CommonUtils.doHttpsGet(String.format(GET_FACEBOOK_ACCESS_TOKEN_URL, accessToken));
 		return new ObjectMapper().readValue(content, HashMap.class);
 	}
 

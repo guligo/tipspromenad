@@ -53,7 +53,7 @@
 		<security:intercept-url pattern="/login/success" filters="none" />
 		<security:intercept-url pattern="/login/fail" filters="none" />
 		<security:intercept-url pattern="/login/verify" filters="none" />
-		<security:intercept-url pattern="/login/myip" filters="none" />
+		<security:intercept-url pattern="/login/captcha" filters="none" />
 		<security:intercept-url pattern="/logout" filters="none" />
 		<security:intercept-url pattern="/**" access="ROLE_SIMPLE_USER" />
 		<security:form-login login-page="/login"

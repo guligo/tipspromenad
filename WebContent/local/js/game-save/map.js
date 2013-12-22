@@ -112,7 +112,7 @@ var mapController = function() {
 				draggable: true,
 			    position: new google.maps.LatLng(question.placemark.latitude, question.placemark.longitude),
 			    title: "Question",
-			    icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + question.sequence + '|FF0000|000000'
+			    icon: 'local/img/pins/pin' + question.sequence + '.png'
 			});
 			
 			var window = new google.maps.InfoWindow({
@@ -130,7 +130,7 @@ var mapController = function() {
 			marker.setMap(_map);
 		}
 	}
-
+	
 	function _removePlacemark(question) {
 		if (question != null
 				&& question.placemark != null

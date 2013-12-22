@@ -23,19 +23,13 @@
 <script type="text/javascript" src="local/js/login.js"></script>
 <script type="text/javascript">		
 	$(document).ready(function() {
-		Recaptcha.create("6LfXxesSAAAAALkWPknL_5TYVDAKSySk0MLXGeV3", "captcha", {
-			theme: "red",
-			callback: Recaptcha.focus_response_field
-		});
-		
-		facebookController.init('<%= Constants.URL.HOME_PAGE %>', function() {
-			loginController.init(
-				'${pageContext.request.contextPath}/j_spring_security_check',
-				'<%= Constants.URL.USER_REGISTRATION_ACTION %>',
-				'<%= Constants.URL.HOME_PAGE %>',
-				'<%= Constants.URL.LOGIN_GET_MY_IP_ACTION %>'
-			);
-		});
+		facebookController.init('<%= Constants.URL.HOME_PAGE %>');
+		loginController.init(
+			'${pageContext.request.contextPath}/j_spring_security_check',
+			'<%= Constants.URL.USER_REGISTRATION_ACTION %>',
+			'<%= Constants.URL.HOME_PAGE %>',
+			'<%= Constants.URL.LOGIN_VERIFY_CAPTCHA %>'
+		);
 	});	
 </script>
 
@@ -96,7 +90,9 @@
 		    </div>
    		</div>
 		<div class="control-group">
-		    <div id="captcha" class="controls">
+			<label class="control-label" for="confirmInput">Human verification</label>
+			<div class="controls">
+				<div id="captcha"></div>
 		    </div>
    		</div>
    		<div class="control-group">
