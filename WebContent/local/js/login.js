@@ -5,8 +5,8 @@
  */
 var loginController = function() {
 	
-	// var CAPTCHA_PUBLIC_KEY = '6LfXxesSAAAAALkWPknL_5TYVDAKSySk0MLXGeV3';
-	var CAPTCHA_PUBLIC_KEY = '6Ledy-sSAAAAADwUlmDRqZ-ETPjQzSAeEsp3YSnX';
+	var CAPTCHA_PUBLIC_KEY = '6LfXxesSAAAAALkWPknL_5TYVDAKSySk0MLXGeV3';
+	// var CAPTCHA_PUBLIC_KEY = '6Ledy-sSAAAAADwUlmDRqZ-ETPjQzSAeEsp3YSnX';
 	
 	var STATUS_OK  = 0;
 	var STATUS_NOK = 1;
