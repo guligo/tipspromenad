@@ -168,7 +168,8 @@
 			<br />
 			<br />
 			<br />
-			<a id="tryItOutLink" class="btn btn-info btn-large" href="wireframes.jsp">Our Concept</a>
+			<a id="tryItOutLink" class="btn btn-info btn-large" href="wireframes.jsp">Mobile App Concept</a>
+			<a class="btn btn-info btn-large" href="/sandbox">Web App Beta</a>
 		</div>
 		<div id="footer">
 			<span class="left">
