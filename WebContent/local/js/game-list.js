@@ -25,10 +25,12 @@ var gameListController = function() {
 		html = '<table style="width: 100%;" class="table table-bordered table-hover">';
 			html += '<thead>';
 				html += '<tr>';
-					html += '<th width="25%">Name</th>';
-					html += '<th width="25%">Date</th>';
-					html += '<th width="25%">State</th>';
-					html += '<th width="25%">Action</th>';
+					html += '<th width="16%">Name</th>';
+					html += '<th width="16%">Date</th>';
+					html += '<th width="16%">Questions</th>';
+					html += '<th width="16%">Code</th>';
+					html += '<th width="16%">State</th>';
+					html += '<th width="10%">Action</th>';
 				html += '</tr>';
 			html += '</thead>';
 			html += '<tbody>';
@@ -36,12 +38,16 @@ var gameListController = function() {
 				html += '<tr>'; 
 					html += '<td>' + games[index].name + '</td>';
 					html += '<td>' + commonUtils.formatDateShort(games[index].date) + '</td>';
+					html += '<td>' + games[index].questions.length + '</td>';
 					if (games[index].state == 'UNDER_CONSTRUCTION') {
-						html += '<td>Game is under construction</td>';
+						html += '<td>&nbsp;</td>';
+						html += '<td><code class="label label-warning" style="font-size: 15px;">Game is under construction</code></td>';
 					} else if (games[index].state == 'READY') {
-						html += '<td>Game is ready to be played</td>';
+						html += '<td><code class="label" style="font-size: 15px;">' + games[index].code + '</code></td>';
+						html += '<td><code class="label label-success" style="font-size: 15px;">Game is ready to be played</code></td>';
 					} else if (games[index].state == 'IN_PROGRESS') {
-						html += '<td>Game is in progress</td>';
+						html += '<td>&nbsp;</td>';
+						html += '<td><code class="label label-warning" style="font-size: 15px;">Game is in progress</code></td>';
 					}
 					html += '<td>';
 						html += '<a href="' + GAME_SAVE_PAGE_URL + '?id=' + games[index].id + '"><i class="icon-edit"> </i></a>&nbsp';

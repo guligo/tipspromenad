@@ -203,7 +203,7 @@ var mapController = function() {
 				if (_questions[i].placemark == null) {
 					if (html == '') html += '<tr class="info">'; else html += '<tr>';
 						html += '<td style="width: 5px; text-align: center; vertical-align: middle;">';
-							html += _questions[i].sequence + '.';
+							html += '<img src="local/img/pins/pin' +  _questions[i].sequence + '.png" />'; // html += _questions[i].sequence + '.';
 						html += '</td>';
 						html += '<td style="width: 750px;">';
 							html += '<p>';

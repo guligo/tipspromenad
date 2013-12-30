@@ -7,12 +7,6 @@ var finishController = function() {
 	var GAME_DISCARD_ACTION  = null;
 	var GAME_LIST_PAGE       = null;
 	
-	function _getCode(callback) {
-		if (callback != null) {
-			callback(code);
-		}
-	}
-	
 	function _finalize() {
 		var userIds = friendController.getUserIds();
 		
@@ -58,12 +52,6 @@ var finishController = function() {
 			GAME_FINALIZE_ACTION = url1;
 			GAME_DISCARD_ACTION  = url2;
 			GAME_LIST_PAGE       = url3;
-			
-			/*
-			_getCode(function(code) {
-				$('#code').html('12345678');
-			});
-			*/
 		},
 		finalize: function() {
 			_finalize();

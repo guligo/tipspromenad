@@ -42,7 +42,7 @@ public class Game extends se.tipspromenad.entities.Entity {
 	private String code;
 	@Column(nullable = false)
 	private GameState state;
-	@JsonIgnore
+	// @JsonIgnore
 	@OrderBy("id")
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Question> questions;
