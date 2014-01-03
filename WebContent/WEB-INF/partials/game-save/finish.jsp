@@ -16,9 +16,6 @@
 			Game will be created and invitations sent out as soon as you press "Finalize" button. "Draft" button will simply
 			save the game for further modifications whereas "Discard" button will delete the game.
 		</p>
-		<p>
-			TODO
-		</p>
 	</div>
 	<br />
 	<div>
