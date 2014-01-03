@@ -37,10 +37,10 @@ public class LoginController {
 	private final static int    RANDOM_PASSWORD_LENGTH = 10;
 	
 	// tipspromenad.nu
-	// private final static String CAPTCHA_PRIVATE_KEY = "6LfXxesSAAAAABCx-ahT0cJuVMUnTjr8qRWakl5_";
+	private final static String CAPTCHA_PRIVATE_KEY = "6LfXxesSAAAAABCx-ahT0cJuVMUnTjr8qRWakl5_";
 	
 	// localhost
-	private final static String CAPTCHA_PRIVATE_KEY = "6Ledy-sSAAAAAA09ppUgGNR495ZS_ZLrgeD8OHGy";
+	// private final static String CAPTCHA_PRIVATE_KEY = "6Ledy-sSAAAAAA09ppUgGNR495ZS_ZLrgeD8OHGy";
 	
 	private final static String IPV6_LOCALHOST = "0:0:0:0:0:0:0:1";
 	private final static String IPV4_LOCALHOST = "127.0.0.1";

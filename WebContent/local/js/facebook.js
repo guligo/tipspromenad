@@ -1,12 +1,12 @@
 var facebookController = function() {
 	
 	// tipspromenad.nu
-	// var APP_ID     = '493009277428978';
-	// var APP_SECRET = 'e3300f4a7ca3ace4855741611e3c21ea';
-
+	var APP_ID     = '493009277428978';
+	var APP_SECRET = 'e3300f4a7ca3ace4855741611e3c21ea';
+	
 	// localhost
-	var APP_ID     = '203913813008290';
-	var APP_SECRET = 'c91e96ffca4c5465c3353baaaaf883e3';
+	// var APP_ID     = '203913813008290';
+	// var APP_SECRET = 'c91e96ffca4c5465c3353baaaaf883e3';
 	
 	var HOME_PAGE_URL = null;
 	
