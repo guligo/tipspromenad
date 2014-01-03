@@ -12,8 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
 import se.tipspromenad.entities.Game;
 import se.tipspromenad.entities.User;
 import se.tipspromenad.entities.enums.GameState;
@@ -56,7 +54,7 @@ public class Game extends se.tipspromenad.entities.Entity {
 	public Game(Long id) {
 		setId(id);
 	}
-	
+
 	public User getCreator() {
 		return creator;
 	}
