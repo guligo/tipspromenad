@@ -134,6 +134,14 @@
 			#playquiz {
 				display: none;
 			}
+			
+			#result {
+				display: none;
+			}
+			
+			#join {
+				display: none;
+			}
 		</style>
 		<!--[if IE]>
 		<style type="text/css">
@@ -196,7 +204,9 @@
 						</div>
 						<div id="createmain">
 							<img src="local/wireframes/createmain.png" />
+							<a href="javascript:transit($('#createmain'), $('#join'));" class="standard tab" style="left: 553px; top: 143px;"></a>
 							<a href="javascript:transit($('#createmain'), $('#playlist'));" class="standard tab" style="left: 668px; top: 143px;"></a>
+							<a href="javascript:transit($('#createmain'), $('#result'));" class="standard tab" style="left: 725px; top: 143px;"></a>
 							<a href="javascript:transit($('#createmain'), $('#create1'));" class="standard button" style="left: 628px; top: 226px;"></a>
 						</div>
 						<div id="create1">
@@ -221,6 +231,8 @@
 						</div>
 						<div id="playlist">
 							<img src="local/wireframes/playlist.png" />
+							<a href="javascript:transit($('#playlist'), $('#join'));" class="standard tab" style="left: 553px; top: 143px;"></a>
+							<a href="javascript:transit($('#playlist'), $('#result'));" class="standard tab" style="left: 725px; top: 143px;"></a>
 							<a href="javascript:transit($('#playlist'), $('#createmain'));" class="standard tab" style="left: 610px; top: 143px;"></a>
 							<a href="javascript:transit($('#playlist'), $('#playmain1'));" class="standard marker" style="left: 747px; top: 360px;"></a>		
 						</div>
@@ -236,6 +248,18 @@
 						<div id="playmain2">
 							<img src="local/wireframes/playmain2.png" />
 							<a href="javascript:transit($('#playmain2'), $('#playlist'));" class="standard  back"></a>
+						</div>
+						<div id="result">
+							<img src="local/wireframes/result.png" />
+							<a href="javascript:transit($('#result'), $('#join'));" class="standard tab" style="left: 553px; top: 143px;"></a>
+							<a href="javascript:transit($('#result'), $('#createmain'));" class="standard tab" style="left: 610px; top: 143px;"></a>
+							<a href="javascript:transit($('#result'), $('#playlist'));" class="standard tab" style="left: 668px; top: 143px;"></a>
+						</div>
+						<div id="join">
+							<img src="local/wireframes/join.png" />
+							<a href="javascript:transit($('#join'), $('#createmain'));" class="standard tab" style="left: 610px; top: 143px;"></a>
+							<a href="javascript:transit($('#join'), $('#playlist'));" class="standard tab" style="left: 668px; top: 143px;"></a>
+							<a href="javascript:transit($('#join'), $('#result'));" class="standard tab" style="left: 725px; top: 143px;"></a>
 						</div>
 					</td>
 				</tr>
