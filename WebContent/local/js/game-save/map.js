@@ -7,8 +7,8 @@ var mapController = function() {
 	var PLACEMARK_REMOVE_ACTION_URL = null;
 	
 	var _initialized = null;
-	var _map = null;
-	var _questions = null;
+	var _map         = null;
+	var _questions   = null;
 	
 	// initialize Google map
 	function _initMap(container) {
@@ -195,17 +195,26 @@ var mapController = function() {
 		}
 		return question;
 	}
-
+	
 	function _renderQuestions() {
 		var html = '';
 		if (_questions != null) {
+			html += '<tr>';
+				html += '<td style="width: 26px; text-align: center;">';
+					html += '<img src="local/img/pins/pinstart.png" />';
+				html += '</td>';
+				html += '<td style="width: 750px; padding-top: 15px;">';
+					html += 'Starting point';
+				html += '</td>';
+			html += '</tr>';
+			
 			for (var i = 0; i < _questions.length; i++) {
 				if (_questions[i].placemark == null) {
 					if (html == '') html += '<tr class="info">'; else html += '<tr>';
-						html += '<td style="width: 5px; text-align: center; vertical-align: middle;">';
+						html += '<td style="width: 26px; text-align: center; vertical-align: middle;">';
 							html += '<img src="local/img/pins/pin' +  _questions[i].sequence + '.png" />'; // html += _questions[i].sequence + '.';
 						html += '</td>';
-						html += '<td style="width: 750px;">';
+						html += '<td style="width: 750px; padding-top: 15px;">';
 							html += '<p>';
 								html += _questions[i].text;
 							html += '</p>';
@@ -228,6 +237,15 @@ var mapController = function() {
 					_putPlacemark(_questions[i]);
 				}
 			}
+			
+			html += '<tr>';
+				html += '<td style="width: 26px; text-align: center;">';
+					html += '<img src="local/img/pins/pinfinish.png" />';
+				html += '</td>';
+				html += '<td style="width: 750px; padding-top: 15px;">';
+					html += 'Finish';
+				html += '</td>';
+			html += '</tr>';
 		}
 		
 		if (html != '') {
@@ -260,8 +278,10 @@ var mapController = function() {
 			PLACEMARK_LIST_ACTION_URL = url1;
 			PLACEMARK_SAVE_ACTION_URL = url2;
 			PLACEMARK_REMOVE_ACTION_URL = url3;
+			
 			_initialized = false;
 			_placemarks = [];
+			_combine = false;
 		},
 		initMap: function() {
 			_initMap($('#mapContainer')[0]);

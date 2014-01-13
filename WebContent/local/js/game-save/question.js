@@ -62,7 +62,7 @@ var questionController = function() {
 			html += '<table style="width: 100%;" class="table table-bordered table-hover">';
 			for (var i = 0; i < _questions.length; i++) {
 				html += '<tr>';
-					html += '<td style="text-align: center; vertical-align: middle;">';
+					html += '<td style="width: 26px; text-align: center; vertical-align: middle;">';
 						html += '<img src="local/img/pins/pin' +  _questions[i].sequence + '.png" />'; // html += _questions[i].sequence + '.';
 					html += '</td>';
 					html += '<td style="width: 750px;">';
