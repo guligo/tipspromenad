@@ -19,8 +19,10 @@ var friendController = function() {
 					for (var j = 0; j < COLUMNS; j++) {
 						html += '<td>';
 							var checked = '';
-							if ($.inArray(friends[i].id, fbUserIds) > -1) {
-								checked = 'checked="true"';
+							if (fbUserIds != null) {
+								if ($.inArray(friends[i].id, fbUserIds) > -1) {
+									checked = 'checked="true"';
+								}
 							}
 							html += '<input type="checkbox" value="' + friends[i].id + '" style="margin-top: -1px;" onclick="javascript:friendController.changeInvitation(this);" ' + checked + ' />&nbsp;<span>' + friends[i].name + '</span><br />';
 							html += '<img src="' + friends[i].picture.data.url + '" />';
@@ -41,17 +43,23 @@ var friendController = function() {
 	}
 	
 	function _getInvitationList(gameId, callback) {
-		$.ajax({
-			url: INVITATION_LIST_ACTION.replace('{gameId}', gameId),
-			type: 'get',
-		    contentType: 'application/json',
-		    dataType: 'json',
-		    success: function(response) {
-		    	if (callback != null) {
-		    		callback(response.fbUserIds);
-		    	}
-		    }
-		});
+		if (gameId != null) {
+			$.ajax({
+				url: INVITATION_LIST_ACTION.replace('{gameId}', gameId),
+				type: 'get',
+			    contentType: 'application/json',
+			    dataType: 'json',
+			    success: function(response) {
+			    	if (callback != null) {
+			    		callback(response.fbUserIds);
+			    	}
+			    }
+			});
+		} else {
+			if (callback != null) {
+	    		callback();
+	    	}
+		}
 	}
 	
 	function _saveInvitation(gameId, fbUserId, callback) {
