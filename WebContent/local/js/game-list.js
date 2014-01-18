@@ -35,6 +35,9 @@ var gameListController = function() {
 			html += '</thead>';
 			html += '<tbody>';
 			for (index in games) {
+				games[index].questions.length--;
+				games[index].questions.length--;
+				
 				html += '<tr>'; 
 					html += '<td>' + games[index].name + '</td>';
 					html += '<td>' + commonUtils.formatDateShort(games[index].date) + '</td>';

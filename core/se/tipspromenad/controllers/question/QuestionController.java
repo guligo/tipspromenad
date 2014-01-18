@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import se.tipspromenad.entities.Question;
+import se.tipspromenad.entities.enums.QuestionType;
 import se.tipspromenad.globals.Constants;
 import se.tipspromenad.services.QuestionService;
 
@@ -59,7 +60,15 @@ public class QuestionController {
 		Collections.sort(result, new Comparator<Question>() {
 			@Override
 			public int compare(Question q1, Question q2) {
-				if (q1.getSequence() > q2.getSequence()) {
+				if (q1.getType() == QuestionType.START) {
+					return -1;
+				} else if (q2.getType() == QuestionType.START) {
+					return 1;
+				} else if (q1.getType() == QuestionType.FINISH) {
+					return 1;
+				} else if (q2.getType() == QuestionType.FINISH) {
+					return -1;
+				} else if (q1.getSequence() > q2.getSequence()) {
 					return 1;
 				} else if (q1.getSequence() < q2.getSequence()) {
 					return -1;

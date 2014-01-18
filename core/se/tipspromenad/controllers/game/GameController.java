@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import se.tipspromenad.entities.Game;
 import se.tipspromenad.entities.Question;
 import se.tipspromenad.entities.enums.GameState;
+import se.tipspromenad.entities.enums.QuestionType;
 import se.tipspromenad.globals.Constants;
 import se.tipspromenad.security.UserWrapper;
 import se.tipspromenad.services.GameService;
@@ -90,7 +93,23 @@ public class GameController {
 		gameDateValidator.validate(request.getDate(), response.getErrors());
 		if (!response.hasErrors()) {
 			try {
-				response.setId(gameService.saveGame(request.getId(), userService.getUserByEmail(email), request.getName(), DATE_FORMATTER.parse(request.getDate())));
+				Long id = gameService.saveGame(request.getId(), userService.getUserByEmail(email), request.getName(), DATE_FORMATTER.parse(request.getDate()));
+				response.setId(id);
+				
+				// create mock question for start mark
+				Set<Question> questions = new HashSet<Question>();
+				Question question = new Question();
+				question.setAnswers(null);
+				question.setType(QuestionType.START);
+				questions.add(question);
+				
+				// create mock question for stop mark
+				question = new Question();
+				question.setAnswers(null);
+				question.setType(QuestionType.FINISH);
+				questions.add(question);
+				
+				gameService.saveGame(id, questions);
 			} catch (Exception e) {
 				logger.error("Error on saving game", e);
 				response.addError(GameError.UNKNOWN);

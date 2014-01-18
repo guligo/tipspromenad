@@ -27,8 +27,8 @@ public class QuestionDao {
 	@Autowired
 	private CommonDao commonDao;
 	
-	public void createQuestion(Question question) {
-		commonDao.createEntity(question);
+	public Long createQuestion(Question question) {
+		return commonDao.createEntity(question);
 	}
 	
 	public Question getQuestion(Long id) {
@@ -83,6 +83,8 @@ public class QuestionDao {
 	}
 	
 	public void setSequence(Long gameId, Long questionId, Integer sequence) {
+		logger.debug("Setting sequence = " + sequence + " for gameId = " + gameId + " and questionId = " + questionId);
+		
 		commonDao.getEntityManager()
 			.createNativeQuery("update games_questions set sequence = :sequence where games_id = :gameId and questions_id = :questionId")
 			.setParameter("gameId", gameId)

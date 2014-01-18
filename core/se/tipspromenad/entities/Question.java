@@ -10,6 +10,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import se.tipspromenad.entities.enums.QuestionType;
+
 /**
  * Represents entity for questions.
  * 
@@ -22,10 +24,12 @@ public class Question extends se.tipspromenad.entities.Entity {
 	public static final int MIN_TEXT_LENGTH = 5;
 	public static final int MAX_TEXT_LENGTH = 500;
 	
-	@Column(nullable = false, length = MAX_TEXT_LENGTH)
+	@Column(nullable = true, length = MAX_TEXT_LENGTH)
 	private String text;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<Answer> answers;
+	@Column(nullable = false)
+	private QuestionType type;
 	@Transient
 	private Integer sequence;
 	
@@ -51,6 +55,14 @@ public class Question extends se.tipspromenad.entities.Entity {
 	
 	public void setAnswers(List<Answer> answers) {
 		this.answers = answers;
+	}
+	
+	public QuestionType getType() {
+		return type;
+	}
+	
+	public void setType(QuestionType type) {
+		this.type = type;
 	}
 	
 	public Integer getSequence() {

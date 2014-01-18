@@ -12,23 +12,31 @@ var friendController = function() {
 	function _renderFriends(fbUserIds) {
 		$('#friendsFacebookConnect').css('display', 'none');
 		facebookController.getFriends(function(friends) {
-			var html = '<table id="friendsList" style="width: 100%;">';
+			var html = '<table id="friendsList" class="table table-bordered" style="width: 100%;" cellpadding="10">';
 			if (friends != null) {
 				for (var i = 0; i < friends.length; i++) {
 					html += '<tr>';
 					for (var j = 0; j < COLUMNS; j++) {
 						html += '<td>';
+							html += '<img src="' + friends[i].picture.data.url + '" />';
+							html += '<br />';
+							
 							var checked = '';
 							if (fbUserIds != null) {
 								if ($.inArray(friends[i].id, fbUserIds) > -1) {
 									checked = 'checked="true"';
 								}
 							}
-							html += '<input type="checkbox" value="' + friends[i].id + '" style="margin-top: -1px;" onclick="javascript:friendController.changeInvitation(this);" ' + checked + ' />&nbsp;<span>' + friends[i].name + '</span><br />';
-							html += '<img src="' + friends[i].picture.data.url + '" />';
+							html += '<div style="margin-top: 5px;">';
+								html += '<input type="checkbox" value="' + friends[i].id + '" style="margin-top: -1px;" onclick="javascript:friendController.changeInvitation(this);" ' + checked + ' />&nbsp;<span>' + friends[i].name + '</span>';
+							html += '</div>';
 						html += '</td>';
 						
 						if (i >= friends.length - 1) {
+							while (i % COLUMNS != 0) {
+								html += '<td>&nbsp;</td>';
+								i++;
+							}
 							break;
 						} else {
 							i++;
@@ -106,9 +114,11 @@ var friendController = function() {
 	return {
 		init: function() {
 			if (facebookController.getUserId() != null) {
-				_getInvitationList(gameController.getGameId(), function(fbUserIds) {
-					_renderFriends(fbUserIds);
-				});
+				if (typeof gameController != 'undefined') {
+					_getInvitationList(gameController.getGameId(), function(fbUserIds) {
+						_renderFriends(fbUserIds);
+					});
+				}
 			}
 		},
 		changeInvitation: function(checkbox) {

@@ -61,35 +61,37 @@ var questionController = function() {
 			var html = '';
 			html += '<table style="width: 100%;" class="table table-bordered table-hover">';
 			for (var i = 0; i < _questions.length; i++) {
-				html += '<tr>';
-					html += '<td style="width: 26px; text-align: center; vertical-align: middle;">';
-						html += '<img src="local/img/pins/pin' +  _questions[i].sequence + '.png" />'; // html += _questions[i].sequence + '.';
-					html += '</td>';
-					html += '<td style="width: 750px;">';
-						html += '<p>';
-							html += _questions[i].text;
-						html += '</p>';
-						html += '<p>';
-							if (_questions[i].answers != null) {
-								for (var j = 0; j < _questions[i].answers.length; j++) {
-									var clazz = '';
-									if (_questions[i].answers[j].correct == true) {
-										clazz = 'badge badge-success';
-									} else {
-										clazz = 'badge';
+				if (_questions[i].type == 'QUESTION') {
+					html += '<tr>';
+						html += '<td style="width: 26px; text-align: center; vertical-align: middle;">';
+							html += '<img src="local/img/pins/pin' +  _questions[i].sequence + '.png" />'; // html += _questions[i].sequence + '.';
+						html += '</td>';
+						html += '<td style="width: 750px;">';
+							html += '<p>';
+								html += _questions[i].text;
+							html += '</p>';
+							html += '<p>';
+								if (_questions[i].answers != null) {
+									for (var j = 0; j < _questions[i].answers.length; j++) {
+										var clazz = '';
+										if (_questions[i].answers[j].correct == true) {
+											clazz = 'badge badge-success';
+										} else {
+											clazz = 'badge';
+										}
+										html += '<span class="' + clazz + '">' + LABELS[j] + '</span>&nbsp;' + _questions[i].answers[j].text + '<br />';
 									}
-									html += '<span class="' + clazz + '">' + LABELS[j] + '</span>&nbsp;' + _questions[i].answers[j].text + '<br />';
 								}
-							}
-						html += '</p>';
-					html += '</td>';
-					html += '<td>';
-						html += '<a href="javascript:questionController.showDialog(' + _questions[i].id + ');"><i class="icon-edit"> </i></a> ';
-						html += '<a href="javascript:questionController.removeQuestion(' + _questions[i].id + ');"><i class="icon-remove"> </i></a> ';
-						html += '<a href="javascript:questionController.moveUpQuestion(' + gameController.getGameId() + ', ' + _questions[i].id + ');"><i class="icon-arrow-up"> </i></a> ';
-						html += '<a href="javascript:questionController.moveDownQuestion(' + gameController.getGameId() + ', ' + _questions[i].id + ');"><i class="icon-arrow-down"> </i></a> ';
-					html += '</td>';
-				html += '</tr>';
+							html += '</p>';
+						html += '</td>';
+						html += '<td>';
+							html += '<a href="javascript:questionController.showDialog(' + _questions[i].id + ');"><i class="icon-edit"> </i></a> ';
+							html += '<a href="javascript:questionController.removeQuestion(' + _questions[i].id + ');"><i class="icon-remove"> </i></a> ';
+							html += '<a href="javascript:questionController.moveUpQuestion(' + gameController.getGameId() + ', ' + _questions[i].id + ');"><i class="icon-arrow-up"> </i></a> ';
+							html += '<a href="javascript:questionController.moveDownQuestion(' + gameController.getGameId() + ', ' + _questions[i].id + ');"><i class="icon-arrow-down"> </i></a> ';
+						html += '</td>';
+					html += '</tr>';
+				}
 			}
 			html += '</table>';
 			$('#questionContainer').html(html);

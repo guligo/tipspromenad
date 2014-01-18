@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import se.tipspromenad.entities.Answer;
 import se.tipspromenad.entities.Game;
 import se.tipspromenad.entities.Question;
+import se.tipspromenad.entities.enums.QuestionType;
 import se.tipspromenad.services.dao.GameDao;
 import se.tipspromenad.services.dao.QuestionDao;
 
@@ -49,6 +50,7 @@ public class QuestionService {
 			questionDao.updateQuestion(questionInDb);
 			return questionInDb;
 		} else {
+			question.setType(QuestionType.QUESTION);
 			if (question.getAnswers() != null) {
 				for (int i = 0; i < question.getAnswers().size(); i++) {
 					questionDao.createAnswer(question.getAnswers().get(i));

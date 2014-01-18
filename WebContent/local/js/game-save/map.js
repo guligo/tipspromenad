@@ -84,22 +84,28 @@ var mapController = function() {
 	
 	function _getQuestionWindow(question) {
 		var html = '';
-		html += '<p style="margin-top: 10px;">';
-			html += question.text;
-		html += '</p>';
-		html += '<p>';
-		if (question.answers != null) {
-			for (var i = 0; i < question.answers.length; i++) {
-				var clazz = '';
-				if (question.answers[i].correct == true) {
-					clazz = 'badge badge-success';
-				} else {
-					clazz = 'badge';
+		if (question.type == 'START') {
+			// html += '<p style="margin-top: 10px;">Start</p>';
+		} else if (question.type == 'FINISH') {
+			// html += '<p style="margin-top: 10px;">Finish</p>';
+		} else {
+			html += '<p style="margin-top: 10px;">';
+				html += question.text;
+			html += '</p>';
+			html += '<p>';
+			if (question.answers != null) {
+				for (var i = 0; i < question.answers.length; i++) {
+					var clazz = '';
+					if (question.answers[i].correct == true) {
+						clazz = 'badge badge-success';
+					} else {
+						clazz = 'badge';
+					}
+					html += '<div style="margin-top: 5px;"><span class="' + clazz + '" style="margin-top: 5px;">' + LABELS[i] + '</span>&nbsp;' + question.answers[i].text + '</div>';
 				}
-				html += '<div style="margin-top: 5px;"><span class="' + clazz + '" style="margin-top: 5px;">' + LABELS[i] + '</span>&nbsp;' + question.answers[i].text + '</div>';
 			}
+			html += '</p>';
 		}
-		html += '</p>';
 		html += '<div>';
 			html += '<a href="javascript:mapController.removePlacemarkFromDatabase(' + question.placemark.id + ');" class="btn">Remove</a>';
 		html += '</div>';
@@ -108,11 +114,21 @@ var mapController = function() {
 	
 	function _putPlacemark(question) {
 		if (question != null && question.placemark != null) {
+			var title = 'Question';
+			var icon  = 'local/img/pins/pin' + question.sequence + '.png';
+			if (question.type == 'START') {
+				title = 'Start';
+				icon  = 'local/img/pins/pinstart.png';
+			} else if (question.type == 'FINISH') {
+				title = 'Finish';
+				icon  = 'local/img/pins/pinfinish.png';
+			}
+			
 			var marker = new google.maps.Marker({
 				draggable: true,
 			    position: new google.maps.LatLng(question.placemark.latitude, question.placemark.longitude),
-			    title: "Question",
-			    icon: 'local/img/pins/pin' + question.sequence + '.png'
+			    title: title,
+			    icon: icon
 			});
 			
 			var window = new google.maps.InfoWindow({
@@ -199,17 +215,26 @@ var mapController = function() {
 	function _renderQuestions() {
 		var html = '';
 		if (_questions != null) {
-			html += '<tr>';
-				html += '<td style="width: 26px; text-align: center;">';
-					html += '<img src="local/img/pins/pinstart.png" />';
-				html += '</td>';
-				html += '<td style="width: 750px; padding-top: 15px;">';
-					html += 'Starting point';
-				html += '</td>';
-			html += '</tr>';
-			
 			for (var i = 0; i < _questions.length; i++) {
-				if (_questions[i].placemark == null) {
+				if (_questions[i].type == 'START' && _questions[i].placemark == null) {
+					if (html == '') html += '<tr class="info">'; else html += '<tr>';
+						html += '<td style="width: 26px; text-align: center;">';
+							html += '<img src="local/img/pins/pinstart.png" />';
+						html += '</td>';
+						html += '<td style="width: 750px; padding-top: 15px;">';
+							html += 'Starting point';
+						html += '</td>';
+					html += '</tr>';
+				} else if (_questions[i].type == 'FINISH' && _questions[i].placemark == null) {
+					if (html == '') html += '<tr class="info">'; else html += '<tr>';
+						html += '<td style="width: 26px; text-align: center;">';
+							html += '<img src="local/img/pins/pinfinish.png" />';
+						html += '</td>';
+						html += '<td style="width: 750px; padding-top: 15px;">';
+							html += 'Finish';
+						html += '</td>';
+					html += '</tr>';
+				} else if (_questions[i].placemark == null) {
 					if (html == '') html += '<tr class="info">'; else html += '<tr>';
 						html += '<td style="width: 26px; text-align: center; vertical-align: middle;">';
 							html += '<img src="local/img/pins/pin' +  _questions[i].sequence + '.png" />'; // html += _questions[i].sequence + '.';
@@ -237,15 +262,6 @@ var mapController = function() {
 					_putPlacemark(_questions[i]);
 				}
 			}
-			
-			html += '<tr>';
-				html += '<td style="width: 26px; text-align: center;">';
-					html += '<img src="local/img/pins/pinfinish.png" />';
-				html += '</td>';
-				html += '<td style="width: 750px; padding-top: 15px;">';
-					html += 'Finish';
-				html += '</td>';
-			html += '</tr>';
 		}
 		
 		if (html != '') {
