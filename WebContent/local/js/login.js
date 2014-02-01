@@ -19,7 +19,7 @@ var loginController = function() {
 	var _redirectUrl = null;
 	
 	function _init() {
-		$("a#linkShowLoginDialog").fancybox({
+		$("#linkShowLoginDialog").fancybox({
 			'autoDimensions': false,
 			'scrolling': 'no',
 			'width': 1000,

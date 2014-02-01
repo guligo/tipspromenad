@@ -123,4 +123,13 @@ public class Constants {
 		
 	}
 	
+	/**
+	 * Holds names for session attributes.
+	 */
+	public static interface Attributes {
+		
+		public final static String SHOW_LOGIN_DIALOG = "showLoginDialog";
+		
+	}
+	
 }

@@ -6,6 +6,11 @@
 
 <!-- styles -->
 <link href="3p/fancybox/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" media="screen" />
+<style>
+	#linkShowLoginDialog {
+		opacity: 0;
+	}
+</style>
 
 <!-- scripts -->
 <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
@@ -22,7 +27,8 @@
 			'<%= Constants.URL.LOGIN_VERIFY_CAPTCHA %>'
 		);
 		
-		<% if ("true".equals(request.getParameter("showLoginDialog"))) { %>
+		<% if (session.getAttribute(Constants.Attributes.SHOW_LOGIN_DIALOG) == Boolean.TRUE) { %>
+			<% session.removeAttribute(Constants.Attributes.SHOW_LOGIN_DIALOG); %>
 			loginController.showDialog('<%= ((SavedRequest) session.getAttribute(WebAttributes.SAVED_REQUEST)).getRedirectUrl() %>');
 		<% } %>
 	});
