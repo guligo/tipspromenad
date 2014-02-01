@@ -107,56 +107,71 @@
 		<link rel="apple-touch-icon-precomposed" href="3p/bootstrap/ico/apple-touch-icon-57-precomposed.png">
 	</head>
 	<body>
-		<sec:authorize ifAnyGranted="ROLE_SIMPLE_USER">
-			<div class="navbar navbar-inverse navbar-fixed-top">
-				<div class="navbar-inner">
-					<div class="container">
-						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</a>
-						<a class="brand" href="#">
-							Tipspromenad.nu
-						</a>
-						<div class="nav-collapse collapse">
-							<c:set var="tab">
-								<tiles:getAsString name="tab" />
-							</c:set>
-							<ul class="nav">
-								<li class="${tab == 1 ? 'active': ''}">
-									<a href="<%= Constants.URL.HOME_PAGE %>">Home</a>
-								</li>
-								<li>
-									<a href="#">Community</a>
-								</li>
-								<li>
-									<a href="#">Game</a>
-								</li>
-								<li class="dropdown ${tab == 2 ? 'active': ''}">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-										My Tipspromenad <b class="caret"></b>
-									</a>
-									<ul class="dropdown-menu">
-    									<li>
-    										<a href="#">
-    											Event Hub
-    										</a>
-    									</li>
-    									<li>
-    										<a href="<%= Constants.URL.GAME_LIST_PAGE %>">
-    											Edit & Create
-    										</a>
-    									</li>
-    								</ul>
-								</li>
-								<li>
-									<a href="#">Store</a>
-								</li>
-								<li>
-									<a href="#">Download Mobile App</a>
-								</li>
-							</ul>
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
+					<a class="brand" href="#">
+						Tipspromenad.nu
+					</a>
+					<div class="nav-collapse collapse">
+						<c:set var="tab">
+							<tiles:getAsString name="tab" />
+						</c:set>
+						<ul class="nav">
+							<li class="dropdown ${tab == 1 ? 'active': ''}">
+								<a href="<%= Constants.URL.HOME_PAGE %>" class="dropdown-toggle" data-toggle="dropdown">
+									Home <b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="<%= Constants.URL.NEWS_PAGE %>">
+											News
+										</a>
+										<a href="<%= Constants.URL.RULES_PAGE %>">
+											Rules
+										</a>
+										<a href="<%= Constants.URL.GETTING_STARTED_PAGE %>">
+											Getting Started
+										</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">Community</a>
+							</li>
+							<li>
+								<a href="#">Game</a>
+							</li>
+							<li class="dropdown ${tab == 2 ? 'active': ''}">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									My Tipspromenad <b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu">
+   									<li>
+   										<a href="#">
+   											Event Hub
+   										</a>
+   									</li>
+   									<li>
+   										<a href="<%= Constants.URL.GAME_LIST_PAGE %>">
+   											Edit & Create
+   										</a>
+   									</li>
+   								</ul>
+							</li>
+							<li>
+								<a href="#">Store</a>
+							</li>
+							<li>
+								<a href="#">Download Mobile App</a>
+							</li>
+						</ul>
+						<sec:authorize ifAnyGranted="ROLE_SIMPLE_USER">
 							<ul class="nav" style="float: right">
 								<li>
 									<a data-toggle="dropdown" href="#">
@@ -177,11 +192,20 @@
     								</ul>
 								</li>
 							</ul>
-						</div>
+						</sec:authorize>
+						<sec:authorize ifNotGranted="ROLE_SIMPLE_USER">
+							<ul class="nav" style="float: right">
+								<li>
+									<a href="javascript:loginController.showDialog();">
+										Login
+									</a>
+								</li>
+							</ul>
+						</sec:authorize>
 					</div>
 				</div>
 			</div>
-		</sec:authorize>
+		</div>
 		<br />
 		<div class="content container">
 			<tiles:insertAttribute name="content" />
@@ -200,5 +224,6 @@
 		</sec:authorize>
 		<jsp:include page="../partials/construction.jsp" />		
 		<jsp:include page="../partials/error.jsp" />
+		<jsp:include page="../partials/login.jsp"></jsp:include>
 	</body>	
 </html>

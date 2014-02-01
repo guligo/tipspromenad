@@ -42,7 +42,8 @@
 	<!-- END! persistence -->
 	
 	<!-- security -->
-	<security:http auto-config="true">		
+	<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/" filters="none" />
 		<security:intercept-url pattern="/3p/**" filters="none" />
 		<security:intercept-url pattern="/local/**" filters="none" />
 		<security:intercept-url pattern="/wallpaper.page" filters="none" />
@@ -55,7 +56,10 @@
 		<security:intercept-url pattern="/login/verify" filters="none" />
 		<security:intercept-url pattern="/login/captcha" filters="none" />
 		<security:intercept-url pattern="/logout" filters="none" />
-		<security:intercept-url pattern="/**" access="ROLE_SIMPLE_USER" />
+		<security:intercept-url pattern="/news.page" access="permitAll" />
+		<security:intercept-url pattern="/rules.page" access="permitAll" />
+		<security:intercept-url pattern="/getting-started.page" access="permitAll" />
+		<security:intercept-url pattern="/**" access="hasAnyRole('ROLE_SIMPLE_USER')" />
 		<security:form-login login-page="/login"
 			default-target-url="/login/success"
 			authentication-failure-url="/login/fail"

@@ -5,8 +5,8 @@
  */
 var loginController = function() {
 	
-	var CAPTCHA_PUBLIC_KEY = '6LfXxesSAAAAALkWPknL_5TYVDAKSySk0MLXGeV3';
-	// var CAPTCHA_PUBLIC_KEY = '6Ledy-sSAAAAADwUlmDRqZ-ETPjQzSAeEsp3YSnX';
+	// var CAPTCHA_PUBLIC_KEY = '6LfXxesSAAAAALkWPknL_5TYVDAKSySk0MLXGeV3';
+	var CAPTCHA_PUBLIC_KEY = '6Ledy-sSAAAAADwUlmDRqZ-ETPjQzSAeEsp3YSnX';
 	
 	var STATUS_OK  = 0;
 	var STATUS_NOK = 1;
@@ -15,6 +15,18 @@ var loginController = function() {
 	var REGISTRATION_URL = null;
 	var HOME_URL         = null;
 	var CAPTCHA_URL      = null;
+	
+	var _redirectUrl = null;
+	
+	function _init() {
+		$("a#linkShowLoginDialog").fancybox({
+			'autoDimensions': false,
+			'scrolling': 'no',
+			'width': 1000,
+			'height': 550,
+			'padding': 10
+		});
+	}
 	
 	function _doLogin() {
 		commonUtils.hideError($('#loginEmail'   ));
@@ -28,7 +40,12 @@ var loginController = function() {
 			},
 		    success: function(status) {				    	
 				if (status == STATUS_OK) {
-					$(location).attr('href', HOME_URL);
+					_hideDialog();
+					if (_redirectUrl != null) {
+						$(location).attr('href', _redirectUrl);
+					} else {
+						$(location).attr('href', HOME_URL);
+					}
 				} else if (status == STATUS_NOK) {
 					commonUtils.showError($('#loginEmail'), 'Wrong email or password');
 				}
@@ -128,6 +145,18 @@ var loginController = function() {
 		});
 	}
 	
+	function _showDialog(redirectUrl) {
+		_redirectUrl = redirectUrl;
+		
+		console.debug('Showing login dialog');
+		$("#linkShowLoginDialog").click();
+	}
+	
+	function _hideDialog() {
+		console.debug('Hiding login dialog');
+		$.fancybox.close();
+	}
+	
 	return {
 		init: function(url1, url2, url3, url4) {
 			LOGIN_URL        = url1;
@@ -135,13 +164,26 @@ var loginController = function() {
 			HOME_URL         = url3;
 			CAPTCHA_URL      = url4;
 			
+			_init();
 			_initCaptcha();
+		},
+		checkLink: function(link) {
+			_checkLink(link);
 		},
 		doLogin: function() {
 			_doLogin();
 		},
 		doRegistration: function() {
 			_doRegistration();
+		},
+		showDialog: function(redirectUrl) {
+			_showDialog(redirectUrl);
+		},
+		hideDialog: function() {
+			_hideDialog();
+		},
+		getRedirectUrl: function() {
+			return _redirectUrl;
 		}
 	};
 	

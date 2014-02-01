@@ -51,7 +51,11 @@ public class Constants {
 		public final static String USER_PROFILE_UPDATE_ACTION   = "user/profile";
 		public final static String USER_PROFILE_FACEBOOK_ACTION = "user/profile/facebook";
 		
-		public final static String HOME_PAGE = "home.page";
+		public final static String NEWS_PAGE            = "news.page";
+		public final static String RULES_PAGE           = "rules.page";
+		public final static String GETTING_STARTED_PAGE = "getting-started.page";
+		// public final static String HOME_PAGE         = "home.page";
+		public final static String HOME_PAGE            = NEWS_PAGE;
 		
 		public final static String WALLPAPER_PAGE = "wallpaper.page";
 		
@@ -106,6 +110,12 @@ public class Constants {
 		public final static String LOGIN = "login";
 		
 		public final static String HOME = "home";
+		
+		public final static String NEWS = "news";
+		
+		public final static String RULES = "rules";
+		
+		public final static String GETTING_STARTED = "getting-started";
 		
 		public final static String GAME_LIST = "game-list";
 		

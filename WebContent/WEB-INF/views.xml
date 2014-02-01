@@ -6,21 +6,29 @@
     <!-- templates -->
     <definition name="main-template" template="/WEB-INF/templates/main.jsp" />
     <definition name="error" template="/WEB-INF/views/error.jsp" />
-    <definition name="mock" template="/WEB-INF/views/mock.jsp" />
     <definition name="wallpaper" template="/WEB-INF/views/wallpaper.jsp" />
     <definition name="wireframes" template="/WEB-INF/views/wireframes.jsp" />
     <!-- END! mock views -->
     
-	<!-- views -->			
-	<definition name="login" extends="main-template">
-		<put-attribute name="title" value="Tipspromenad | Login" />
-		<put-attribute name="content" value="/WEB-INF/views/login.jsp" />		
+	<!-- views -->
+	<definition name="login" template="/WEB-INF/views/login.jsp" />
+	
+	<definition name="news" extends="main-template">
+		<put-attribute name="tab" value="1" />
+		<put-attribute name="title" value="Tipspromenad | News" />
+		<put-attribute name="content" value="/WEB-INF/views/news.jsp" />
 	</definition>
 	
-	<definition name="home" extends="main-template">
+	<definition name="rules" extends="main-template">
 		<put-attribute name="tab" value="1" />
-		<put-attribute name="title" value="Tipspromenad | Home" />
-		<put-attribute name="content" value="/WEB-INF/views/home.jsp" />
+		<put-attribute name="title" value="Tipspromenad | Rules" />
+		<put-attribute name="content" value="/WEB-INF/views/rules.jsp" />
+	</definition>
+	
+	<definition name="getting-started" extends="main-template">
+		<put-attribute name="tab" value="1" />
+		<put-attribute name="title" value="Tipspromenad | Getting Started" />
+		<put-attribute name="content" value="/WEB-INF/views/getting-started.jsp" />
 	</definition>
 	
 	<definition name="game-list" extends="main-template">

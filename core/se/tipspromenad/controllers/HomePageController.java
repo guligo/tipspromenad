@@ -15,9 +15,26 @@ import se.tipspromenad.globals.Constants;
 @Controller
 public class HomePageController {
 	
+	/*
 	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.HOME_PAGE)
 	public String showHomePage() {
 		return Constants.Views.HOME;
+	}
+	*/
+	
+	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.NEWS_PAGE)
+	public String showNewsPage() {
+		return Constants.Views.NEWS;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.RULES_PAGE)
+	public String showRulesPage() {
+		return Constants.Views.RULES;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = Constants.URL.GETTING_STARTED_PAGE)
+	public String showGettingStartedPage() {
+		return Constants.Views.GETTING_STARTED;
 	}
 	
 	@ExceptionHandler(Exception.class)
