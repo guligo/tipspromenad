@@ -19,6 +19,7 @@
 		<link href="3p/bootstrap/css/bootstrap.css" rel="stylesheet" />
 		<link href="3p/datepicker/css/datepicker.css" rel="stylesheet" />		
 		<link href="3p/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+		<link href="3p/famfamfam-flags/css/famfamfam-flags.css" rel="stylesheet" />
 		<style>
 			html, body {
 				height: 100%;
@@ -185,8 +186,8 @@
 								<a href="#">Download Mobile App</a>
 							</li>
 						</ul>
-						<sec:authorize ifAnyGranted="ROLE_SIMPLE_USER">
-							<ul class="nav" style="float: right">
+						<ul class="nav" style="float: right">
+							<sec:authorize ifAnyGranted="ROLE_SIMPLE_USER">
 								<li>
 									<a data-toggle="dropdown" href="#">
 										Welcome, <span style="color: white;"><sec:authentication property="principal.name" /></span>!
@@ -205,17 +206,21 @@
     									</li>
     								</ul>
 								</li>
-							</ul>
-						</sec:authorize>
-						<sec:authorize ifNotGranted="ROLE_SIMPLE_USER">
-							<ul class="nav" style="float: right">
+							</sec:authorize>
+							<sec:authorize ifNotGranted="ROLE_SIMPLE_USER">
 								<li>
 									<a href="javascript:loginController.showDialog();">
 										Login
 									</a>
 								</li>
-							</ul>
-						</sec:authorize>
+							</sec:authorize>
+							<li>
+								<div class="btn-group">
+									<a class="btn" href="#"><i class="famfamfam-flag-se"></i></a>
+									<a class="btn" href="#"><i class="famfamfam-flag-gb"></i></a>
+								</div>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -225,11 +230,12 @@
 			<tiles:insertAttribute name="content" />
 		</div>
 		<div class="footer">
-			<!--
+			<%-- 
 			Build #: <a href="http://<%= Constants.System.BUILD_SERVER %>/job/tipspromenad-dev/<%= Constants.System.BUILD_NUMBER %>" target="_blank">
 				<%= Constants.System.VERSION %>.<%= Constants.System.BUILD_NUMBER %>
-			</a> | &#169; Tipspromenad.nu
-			-->
+			</a> | &#169; 2014 Tipspromenad.nu
+			--%>
+			Tipspromenad.nu &#169; 2014
 		</div>
 		
 		<!-- dialogs -->

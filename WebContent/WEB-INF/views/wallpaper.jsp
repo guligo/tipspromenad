@@ -179,7 +179,7 @@
 				<a href="http://www.facebook.com/tipspromenad" target="_blank">facebook.com/tipspromenad</a>
 			</span>
 			<span class="right">
-				Tipspromenad.nu &#169; 2013
+				Tipspromenad.nu &#169; 2014
 			</span>
 		</div>
 	</body>
