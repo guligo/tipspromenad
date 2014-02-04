@@ -1,5 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8"  %>
 <%@ page import="se.tipspromenad.globals.Constants" %>
+<%@ page import="org.springframework.web.servlet.support.RequestContext" %>
+
 <%@ include file="../commons/commons.jsp" %>
+<% String lang = (new RequestContext(request)).getLocale().getLanguage(); %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -130,9 +134,11 @@
 								</a>
 								<ul class="dropdown-menu">
 									<li>
+										<%--
 										<a href="<%= Constants.URL.NEWS_PAGE %>">
 											News
 										</a>
+										--%>
 										<a href="<%= Constants.URL.RULES_PAGE %>">
 											Rules
 										</a>
@@ -149,7 +155,7 @@
 								<ul class="dropdown-menu">
    									<li>
    										<a href="#">
-   											Forum
+   											<spring:message code="navbar.forum" />
    										</a>
    									</li>
    									<li>
@@ -216,8 +222,13 @@
 							</sec:authorize>
 							<li>
 								<div class="btn-group">
-									<a class="btn" href="#"><i class="famfamfam-flag-se"></i></a>
-									<a class="btn" href="#"><i class="famfamfam-flag-gb"></i></a>
+									<% if ("se".equals(lang)) { %>
+										SE
+									<% } else { %>
+										GB
+									<% } %>
+									<a class="btn" href="?lang=se"><i class="famfamfam-flag-se"></i></a>
+									<a class="btn" href="?lang=en"><i class="famfamfam-flag-gb"></i></a>
 								</div>
 							</li>
 						</ul>

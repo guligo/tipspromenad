@@ -54,8 +54,7 @@ public class Constants {
 		public final static String NEWS_PAGE            = "news.page";
 		public final static String RULES_PAGE           = "rules.page";
 		public final static String GETTING_STARTED_PAGE = "getting-started.page";
-		// public final static String HOME_PAGE         = "home.page";
-		public final static String HOME_PAGE            = NEWS_PAGE;
+		public final static String HOME_PAGE            = RULES_PAGE;
 		
 		public final static String WALLPAPER_PAGE = "wallpaper.page";
 		
@@ -108,8 +107,6 @@ public class Constants {
 		public final static String ERROR = "error";
 		
 		public final static String LOGIN = "login";
-		
-		public final static String HOME = "home";
 		
 		public final static String NEWS = "news";
 		
