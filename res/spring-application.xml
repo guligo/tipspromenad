@@ -59,6 +59,7 @@
 		<security:intercept-url pattern="/news.page" access="permitAll" />
 		<security:intercept-url pattern="/rules.page" access="permitAll" />
 		<security:intercept-url pattern="/getting-started.page" access="permitAll" />
+		<security:intercept-url pattern="/clubs.page" access="permitAll" />
 		<security:intercept-url pattern="/**" access="hasAnyRole('ROLE_SIMPLE_USER')" />
 		<security:form-login login-page="/login"
 			default-target-url="/login/success"

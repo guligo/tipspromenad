@@ -159,7 +159,7 @@
    										</a>
    									</li>
    									<li>
-   										<a href="#">
+   										<a href="<%= Constants.URL.CLUB_LIST_PAGE %>">
    											Clubs
    										</a>
    									</li>
