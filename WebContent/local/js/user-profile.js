@@ -6,21 +6,32 @@
 var userProfileController = function() {
 	
 	// constants
-	var GET_PROFILE_URL    = null;
-	var UPDATE_PROFILE_URL = null;
+	var _GET_PROFILE_URL    = null;
+	var _UPDATE_PROFILE_URL = null;
 	
-	var dialog     = null;
-	var datepicker = null;
+	var _dialog     = null;
+	var _datepicker = null;
+	var _dictionary = null;
 	
-	function _init() {
-		dialog     = $('#userProfileDialog');
-		datepicker = $('#birthDateUserProfileInput').datepicker();
+	function _initUrls(GET_PROFILE_URL, UPDATE_PROFILE_URL) {
+		_GET_PROFILE_URL    = GET_PROFILE_URL;
+		_UPDATE_PROFILE_URL = UPDATE_PROFILE_URL;
+	}
+	
+	function _initTranslations(dictionary) {
+		_dictionary = dictionary;
+		console.debug('UP dictionary = %o', _dictionary);
+	}
+	
+	function _initComponents() {
+		_dialog     = $('#userProfileDialog');
+		_datepicker = $('#birthDateUserProfileInput').datepicker();
 	}
 	
 	function _getUserProfile() {
 		$.ajax({
 			type: 'GET',
-			url: GET_PROFILE_URL,
+			url: _GET_PROFILE_URL,
 			success: function(userProfile) {
 				// populate form
 				$('#nameUserProfileInput').val(userProfile.name);
@@ -40,8 +51,7 @@ var userProfileController = function() {
 				_showDialog();
 			},
 			error: function(xhr) {
-				// errorHandler.handle('Error on getting user profile', xhr);
-				alert('Error on getting user profile');
+				console.error('Error on getting user profile', xhr);
 			}
 		});
 	}
@@ -55,7 +65,7 @@ var userProfileController = function() {
 			type: 'post',
 			contentType: 'application/json',
 		    dataType: 'json',
-			url: UPDATE_PROFILE_URL,
+			url: _UPDATE_PROFILE_URL,
 			data: JSON.stringify({
 				name     : $('#nameUserProfileInput').val(),
 				gender   : $('input[name=genderUserProfileInput]:checked').val(),
@@ -67,54 +77,58 @@ var userProfileController = function() {
 				if (response.errors == null || response.errors.length == 0) {
 					_hideDialog();
 				} else {
-					if ($.inArray('NAME_TOO_SHORT', response.errors) > -1) {
-		    			commonUtils.showError($('#nameUserProfileInput'), 'Name too short');
+					if ($.inArray('NAME_EMPTY', response.errors) > -1) {
+						commonUtils.showError($('#nameUserProfileInput'), _dictionary['userprofile.message.nameempty']);
+					} else if ($.inArray('NAME_TOO_SHORT', response.errors) > -1) {
+		    			commonUtils.showError($('#nameUserProfileInput'), _dictionary['userprofile.message.nametooshort']);
 		    		} if ($.inArray('NAME_TOO_LONG', response.errors) > -1) {
-		    			commonUtils.showError($('#nameUserProfileInput'), 'Name too long');
+		    			commonUtils.showError($('#nameUserProfileInput'), _dictionary['userprofile.message.nametoolong']);
 		    		}
 		    		
 		    		if ($.inArray('BIRTH_DATE_WRONG_FORMAT', response.errors) > -1) {
-		    			commonUtils.showError($('#birthDateUserProfileInput'), 'Wrong date');
+		    			commonUtils.showError($('#birthDateUserProfileInput'), _dictionary['userprofile.message.wrongdate']);
 		    		}
 		    		
 		    		if ($.inArray('COUNTRY_TOO_SHORT', response.errors) > -1) {
-		    			commonUtils.showError($('#countryUserProfileInput'), 'Country name too short');
+		    			commonUtils.showError($('#countryUserProfileInput'), _dictionary['userprofile.message.countrytooshort']);
 		    		} if ($.inArray('COUNTRY_TOO_LONG', response.errors) > -1) {
-		    			commonUtils.showError($('#countryUserProfileInput'), 'Country name too long');
+		    			commonUtils.showError($('#countryUserProfileInput'), _dictionary['userprofile.message.countrytoolong']);
 		    		}
 		    		
 		    		if ($.inArray('CITY_TOO_SHORT', response.errors) > -1) {
-		    			commonUtils.showError($('#cityUserProfileInput'), 'City name too short');
+		    			commonUtils.showError($('#cityUserProfileInput'), _dictionary['userprofile.message.citytooshort']);
 		    		} if ($.inArray('CITY_TOO_LONG', response.errors) > -1) {
-		    			commonUtils.showError($('#cityUserProfileInput'), 'City name too long');
+		    			commonUtils.showError($('#cityUserProfileInput'), _dictionary['userprofile.message.citytoolong']);
 		    		}
 				}
 			},
 			error: function(xhr) {
-				// errorHandler.handle('Error on updating user profile', xhr);
-				alert('Error on updating user profile');
+				console.error('Error on updating user profile', xhr);
 			}
 		});
 	}
 	
 	function _showDialog() {
-		if (dialog != null) {
-			dialog.modal('show');
+		if (_dialog != null) {
+			console.debug('Showing UP dialog');
+			_dialog.modal('show');
 		}
 	}
 	
 	function _hideDialog() {
-		if (dialog != null) {
-			dialog.modal('hide');
+		if (_dialog != null) {
+			console.debug('Hiding UP dialog');
+			_dialog.modal('hide');
 		}
 	}
 	
 	return {
-		init: function(url1, url2) {
-			GET_PROFILE_URL = url1;
-			UPDATE_PROFILE_URL = url2;
+		init: function(GET_PROFILE_URL, UPDATE_PROFILE_URL, dictionary) {
+			console.debug('Initializing UP controller');
 			
-			_init();
+			_initUrls(GET_PROFILE_URL, UPDATE_PROFILE_URL);
+			_initComponents();
+			_initTranslations(dictionary);
 		},
 		getUserProfile: function() {
 			_getUserProfile();

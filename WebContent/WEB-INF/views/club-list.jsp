@@ -28,7 +28,8 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		clubController.init(
-			'<%= Constants.URL.CLUB_LIST_ACTION %>', {
+			'<%= Constants.URL.CLUB_LIST_ACTION %>',
+			{
 				'clubs.map.label.name': '<spring:message code="clubs.map.label.name" />',
 			}
 		);

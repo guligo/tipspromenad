@@ -12,7 +12,7 @@ var clubController = function() {
 	
 	function _initTranslations(dictionary) {
 		_dictionary = dictionary;
-		console.debug('Dictionary = %o', _dictionary);
+		console.debug('CLB dictionary = %o', _dictionary);
 	}
 	
 	function _initMap(container) {

@@ -280,7 +280,6 @@
 		<sec:authorize ifAnyGranted="ROLE_SIMPLE_USER">
 			<jsp:include page="../partials/user-profile.jsp" />
 		</sec:authorize>
-		<jsp:include page="../partials/construction.jsp" />		
 		<jsp:include page="../partials/error.jsp" />
 		<jsp:include page="../partials/login.jsp"></jsp:include>
 	</body>	
