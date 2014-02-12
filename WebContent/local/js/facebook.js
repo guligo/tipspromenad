@@ -23,6 +23,7 @@ var facebookController = function() {
 			
 			FB.Event.subscribe('auth.authResponseChange', function(response) {
 				if (response.status === 'connected') {
+					console.debug('User is connected with FB');
 					_userId = response.authResponse.userID;
 			    } else {
 			    	FB.login(function(resonse) {
@@ -30,7 +31,10 @@ var facebookController = function() {
 			    	}, {perms: 'manage_notifications,email,user_likes'});
 			    }
 				if (callback != null) {
+					console.debug('Triggering FB callback function');
 					callback();
+				} else {
+					console.debug('FB callback function is not present');
 				}
 			});
 		};
@@ -42,6 +46,7 @@ var facebookController = function() {
 			js.src = "//connect.facebook.net/en_US/all.js";
 			ref.parentNode.insertBefore(js, ref);
 		} (document));
+		console.debug('Qutting FB controller init function');
 	}
 	
 	function _showDialog(callback) {
@@ -147,6 +152,8 @@ var facebookController = function() {
 	
 	return {
 		init: function(url, callback) {
+			console.debug('Initializing FB controller');
+			
 			HOME_PAGE_URL = url;
 			_init(callback);
 		},

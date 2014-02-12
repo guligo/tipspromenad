@@ -70,7 +70,7 @@ var loginController = function() {
 			},
 		    success: function(status) {
 		    	if (callback != null) {
-		    		callback(status);
+		    		callback(true);
 		    	}
 			},
 			error: function(xhr) {
@@ -116,17 +116,13 @@ var loginController = function() {
 					   			commonUtils.showError($('#emailInput'), 'Email may not be empty');
 					   		} else if ($.inArray('DUBLICATED_USER', response.errors) > -1) {
 					   			commonUtils.showError($('#emailInput'), 'User with such email already exist');
-					   		}
-					   		
-					   		if ($.inArray('NAME_TOO_SHORT', response.errors) > -1) {
+					   		} else if ($.inArray('NAME_TOO_SHORT', response.errors) > -1) {
 					   			commonUtils.showError($('#nameInput'), 'Name is too short');
 					   		} else if ($.inArray('NAME_TOO_LONG', response.errors) > -1) {
 					   			commonUtils.showError($('#nameInput'), 'Name is too long');
 					   		} else if ($.inArray('NAME_EMPTY', response.errors) > -1) {
 					   			commonUtils.showError($('#nameInput'), 'Name may not be empty');
-					   		}
-					   		
-					   		if ($.inArray('PASSWORD_TOO_SHORT', response.errors) > -1) {
+					   		} else if ($.inArray('PASSWORD_TOO_SHORT', response.errors) > -1) {
 					   			commonUtils.showError($('#passwordInput'), 'Password is too short');
 					   		} else if ($.inArray('PASSWORD_TOO_LONG', response.errors) > -1) {
 					   			commonUtils.showError($('#passwordInput'), 'Password is too long');

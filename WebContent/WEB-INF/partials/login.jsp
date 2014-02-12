@@ -19,7 +19,11 @@
 <script type="text/javascript" src="local/js/login.js"></script>
 <script type="text/javascript">		
 	$(document).ready(function() {
-		facebookController.init('<%= Constants.URL.HOME_PAGE %>');
+		<%-- prevents from loading FB controller twice --%>
+		<sec:authorize ifNotGranted="ROLE_SIMPLE_USER">
+			facebookController.init('<%= Constants.URL.HOME_PAGE %>');
+		</sec:authorize>
+		
 		loginController.init(
 			'${pageContext.request.contextPath}/j_spring_security_check',
 			'<%= Constants.URL.USER_REGISTRATION_ACTION %>',

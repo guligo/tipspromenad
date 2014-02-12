@@ -11,17 +11,21 @@ insert into users (name, email, password, role, enabled, fbUserId, fbUserPasswor
 insert into users (name, email, password, role, enabled, fbUserId, fbUserPassword) values ('Jane Doe', 'jane.doe@gmail.com', '2FeO34RYzgb7xbt2pYxcpA==', 0, true, null, null); -- 2
 
 -- games
-insert into games (creation_date, date, name, code, creator_id) values (now(), now(), 'Karlskrona Game', '12345678', 1); -- 1
+insert into games (creation_date, date, name, code, state, creator_id) values (now(), now(), 'Karlskrona Game', '12345678', 0, 1); -- 1
 
 -- questions
-insert into questions (text) values ('What is the population of Karlskrona?'); -- 1
-insert into questions (text) values ('What is the number of islands in Karlskrona?'); -- 2
-insert into questions (text) values ('What is the name of the volcano that erupted in iceland in 2010?'); -- 3
+insert into questions (type, text) values (0, 'What is the population of Karlskrona?'); -- 1
+insert into questions (type, text) values (0, 'What is the number of islands in Karlskrona?'); -- 2
+insert into questions (type, text) values (0, 'What is the name of the volcano that erupted in iceland in 2010?'); -- 3
+insert into questions (type) values (1); -- 4
+insert into questions (type) values (2); -- 5
 
 -- games_questions
 insert into games_questions (games_id, questions_id, sequence) values (1, 1, 1);
 insert into games_questions (games_id, questions_id, sequence) values (1, 2, 2);
 insert into games_questions (games_id, questions_id, sequence) values (1, 3, 3);
+insert into games_questions (games_id, questions_id) values (1, 4);
+insert into games_questions (games_id, questions_id) values (1, 5);
 
 -- answers
 insert into answers (text, correct) values ('No people in Karlskrona', false); -- 1

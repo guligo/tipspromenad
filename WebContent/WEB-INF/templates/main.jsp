@@ -191,8 +191,8 @@
 									<spring:message code="navbar.mytipspromenad" /> <b class="caret"></b>
 								</a>
 								<ul class="dropdown-menu">
-   									<li>
-   										<a href="#">
+   									<li class="disabled">
+   										<a>
    											<spring:message code="navbar.mytipspromenad.eventhub" />
    										</a>
    									</li>

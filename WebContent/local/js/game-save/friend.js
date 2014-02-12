@@ -113,12 +113,17 @@ var friendController = function() {
 	
 	return {
 		init: function() {
+			console.debug('Initializing FRD controller');
+			
 			if (facebookController.getUserId() != null) {
+				console.debug('FB user ID present');
 				if (typeof gameController != 'undefined') {
 					_getInvitationList(gameController.getGameId(), function(fbUserIds) {
 						_renderFriends(fbUserIds);
 					});
 				}
+			} else {
+				console.debug('No FB user ID');
 			}
 		},
 		changeInvitation: function(checkbox) {
