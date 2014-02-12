@@ -93,7 +93,8 @@ public class Constants {
 		public final static String PLAY_UPDATE_ACTION       = "play";
 		public final static String PLAY_REMOVE_ACTION       = "play/{id}";
 		
-		public final static String CLUB_LIST_PAGE = "clubs.page";
+		public final static String CLUB_LIST_PAGE   = "clubs.page";
+		public final static String CLUB_LIST_ACTION = "club/list";
 		
 	}
 	

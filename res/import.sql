@@ -1,6 +1,9 @@
 -- alter tables first where it is neccessary
 alter table games_questions add sequence int null;
 
+-- clubs
+insert into clubs (name, url, latitude, longitude) values ('FK Vittus', 'http://www3.idrottonline.se/FKVittus-Orientering/Tipspromenad2014', 56.229212, 15.667211); -- 1
+
 -- users
 -- password 'qwerty'
 insert into users (name, email, password, role, enabled, fbUserId, fbUserPassword) values ('John Doe', 'john.doe@gmail.com', '2FeO34RYzgb7xbt2pYxcpA==', 0, true, null, null); -- 1

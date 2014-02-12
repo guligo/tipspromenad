@@ -246,7 +246,7 @@
 				<%= Constants.System.VERSION %>.<%= Constants.System.BUILD_NUMBER %>
 			</a> | &#169; 2014 Tipspromenad.nu
 			--%>
-			Tipspromenad.nu &#169; 2014
+			Tipspromenad.nu &#169; 2014 | Contact us via tipspromenad@gmail.com
 		</div>
 		
 		<!-- dialogs -->
