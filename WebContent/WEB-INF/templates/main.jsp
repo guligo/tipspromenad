@@ -130,84 +130,111 @@
 						<ul class="nav">
 							<li class="dropdown ${tab == 1 ? 'active': ''}">
 								<a href="<%= Constants.URL.HOME_PAGE %>" class="dropdown-toggle" data-toggle="dropdown">
-									Home <b class="caret"></b>
+									<spring:message code="navbar.home" /> <b class="caret"></b>
 								</a>
 								<ul class="dropdown-menu">
+									<li class="disabled">
+										<a>
+											<spring:message code="navbar.home.news" />
+										</a>
+									</li>
 									<li>
-										<%--
-										<a href="<%= Constants.URL.NEWS_PAGE %>">
-											News
-										</a>
-										--%>
 										<a href="<%= Constants.URL.RULES_PAGE %>">
-											Rules
+											<spring:message code="navbar.home.rules" />
 										</a>
-										<a href="<%= Constants.URL.GETTING_STARTED_PAGE %>">
-											Getting Started
+									</li>
+									<li class="disabled">
+										<a>
+											<spring:message code="navbar.home.gettingstarted" />
 										</a>
 									</li>
 								</ul>
 							</li>
-							<li class="dropdown">
+							<li class="dropdown ${tab == 2 ? 'active': ''}">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									Community <b class="caret"></b>
+									<spring:message code="navbar.community" /> <b class="caret"></b>
 								</a>
 								<ul class="dropdown-menu">
-   									<li>
-   										<a href="#">
-   											<spring:message code="navbar.forum" />
+   									<li class="disabled">
+   										<a>
+   											<spring:message code="navbar.community.forum" />
    										</a>
    									</li>
    									<li>
    										<a href="<%= Constants.URL.CLUB_LIST_PAGE %>">
-   											Clubs
+   											<spring:message code="navbar.community.clubs" />
    										</a>
    									</li>
    								</ul>
 							</li>
-							<li>
-								<a href="#">Game</a>
-							</li>
-							<li class="dropdown ${tab == 2 ? 'active': ''}">
+							<%--
+							<li class="dropdown ${tab == 3 ? 'active': ''}">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									My Tipspromenad <b class="caret"></b>
+									<spring:message code="navbar.game" /> <b class="caret"></b>
 								</a>
 								<ul class="dropdown-menu">
    									<li>
    										<a href="#">
-   											Event Hub
+   											<spring:message code="navbar.game.statistics" />
    										</a>
    									</li>
    									<li>
    										<a href="<%= Constants.URL.GAME_LIST_PAGE %>">
-   											Edit & Create
+   											<spring:message code="navbar.game.challenges" />
    										</a>
    									</li>
    								</ul>
 							</li>
-							<li>
-								<a href="#">Store</a>
+							--%>
+							<li class="dropdown ${tab == 4 ? 'active': ''}">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<spring:message code="navbar.mytipspromenad" /> <b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu">
+   									<li>
+   										<a href="#">
+   											<spring:message code="navbar.mytipspromenad.eventhub" />
+   										</a>
+   									</li>
+   									<li>
+   										<a href="<%= Constants.URL.GAME_LIST_PAGE %>">
+   											<spring:message code="navbar.mytipspromenad.editcreate" />
+   										</a>
+   									</li>
+   								</ul>
 							</li>
-							<li>
-								<a href="#">Download Mobile App</a>
+							<%--
+							<li class="disabled">
+								<a>
+									<spring:message code="navbar.store" />
+								</a>
+							</li>
+							--%>
+							<li class="disabled">
+								<a>
+									<spring:message code="navbar.download" />
+								</a>
 							</li>
 						</ul>
 						<ul class="nav" style="float: right">
 							<sec:authorize ifAnyGranted="ROLE_SIMPLE_USER">
 								<li>
 									<a data-toggle="dropdown" href="#">
-										Welcome, <span style="color: white;"><sec:authentication property="principal.name" /></span>!
+										<c:set var="username">
+											<span style="color: white;"><sec:authentication property="principal.name" /></span>
+										</c:set>
+										<spring:message code="navbar.welcome" arguments="${username}" />
 									</a>
 									<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
     									<li>
     										<a tabindex="-1" href="javascript:javascript:userProfileController.getUserProfile();">
-    											My Profile
+    											<spring:message code="navbar.profile" />
     										</a>
     									</li>
     									<li class="divider"></li>
     									<li>
     										<a tabindex="-1" href="j_spring_security_logout">
-    											Logout
+    											<spring:message code="navbar.logout" />
     										</a>
     									</li>
     								</ul>
@@ -216,7 +243,7 @@
 							<sec:authorize ifNotGranted="ROLE_SIMPLE_USER">
 								<li>
 									<a href="javascript:loginController.showDialog();">
-										Login
+										<spring:message code="navbar.login" />
 									</a>
 								</li>
 							</sec:authorize>
@@ -246,7 +273,7 @@
 				<%= Constants.System.VERSION %>.<%= Constants.System.BUILD_NUMBER %>
 			</a> | &#169; 2014 Tipspromenad.nu
 			--%>
-			Tipspromenad.nu &#169; 2014 | Contact us via tipspromenad@gmail.com
+			Tipspromenad.nu &#169; 2014 | <spring:message code="footer.contact" />
 		</div>
 		
 		<!-- dialogs -->
