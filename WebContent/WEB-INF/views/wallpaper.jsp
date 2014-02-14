@@ -32,7 +32,7 @@
 			body {				
 				margin: 0px;
 				padding: 0px;										
-				background: url('local/img/wallpaper.png') no-repeat center center fixed;
+				background: url('local/img/wallpaper.jpg') no-repeat center center fixed;
 				-webkit-background-size: cover;
 				-moz-background-size: cover;
 				-o-background-size: cover;

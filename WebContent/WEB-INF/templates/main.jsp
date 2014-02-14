@@ -30,7 +30,7 @@
 			}
 			
 			body {
-				background: url('local/img/image-new-one-opacity.jpg') no-repeat center center fixed;
+				background: url('local/img/background-opaque.jpg') no-repeat center center fixed;
 				-webkit-background-size: cover;
 				-moz-background-size: cover;
 				-o-background-size: cover;
