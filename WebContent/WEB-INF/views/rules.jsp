@@ -12,10 +12,11 @@
 	.text {
 		width: 500px;
 		height: 300px;
-		background-color: grey;
+		background-color: #eeeeee;
 		margin-top: 5px;
 		margin-bottom: 15px;
 		padding: 10px;
+		border-radius: 3px;
 	}
 	
 	.text-left {
@@ -30,10 +31,11 @@
 	.image {
 		width: 300px;
 		height: 300px;
-		background-color: black;
+		background-color: #eeeeee;
 		margin-top: 5px;
 		margin-bottom: 15px;
 		padding: 10px;
+		border-radius: 3px;
 	}
 	
 	.image-left {
@@ -58,7 +60,7 @@
 				<div class="text text-right">
 					<spring:message code="rules.rules.text" />
 				</div>
-				<div class="image image-left"></div>
+				<img class="image image-left" src="local/img/placeholder-rules.jpg"></img>
 			</div>
 		</div>
 	</div>
@@ -73,8 +75,7 @@
 				<div class="text text-left">
 					<spring:message code="rules.participants.text" />
 				</div>
-				<div class="image image-right">
-				</div>
+				<img class="image image-right" src="local/img/placeholder-participants.jpg"></img>
 			</div>
 		</div>
 	</div>
@@ -89,8 +90,7 @@
 				<div class="text text-right">
 					<spring:message code="rules.we.text" />
 				</div>
-				<div class="image image-left">
-				</div>
+				<img class="image image-left" src="local/img/placeholder-we.jpg"></img>
 			</div>
 		</div>
 	</div>

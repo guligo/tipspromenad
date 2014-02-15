@@ -17,7 +17,7 @@
 		<meta name="description" content="Tipspromenad.nu" />
 		
 		<!-- icon -->
-		<link href="local/img/icon.png" rel="shortcut icon" />
+		<link href="local/img/icon.ico" rel="shortcut icon" />
 		
 		<!-- styles -->
 		<link href="3p/bootstrap/css/bootstrap.css" rel="stylesheet" />
@@ -30,7 +30,7 @@
 			}
 			
 			body {
-				background: url('local/img/background-opaque.jpg') no-repeat center center fixed;
+				background: url('local/img/background.jpg') no-repeat center center fixed;
 				-webkit-background-size: cover;
 				-moz-background-size: cover;
 				-o-background-size: cover;

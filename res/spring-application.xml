@@ -82,7 +82,7 @@
     </bean>
 	
 	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
-		<property name="defaultLocale" value="se" />
+		<property name="defaultLocale" value="en" />
 	</bean>
 	
 	<mvc:interceptors>
