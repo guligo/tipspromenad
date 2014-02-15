@@ -99,17 +99,42 @@
 		<!--[if lt IE 9]>
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<script src="3p/bootstrap/js/jquery-1.8.2.min.js"></script>
-		<script src="3p/bootstrap/js/bootstrap.js"></script>
-		<script src="3p/datepicker/js/bootstrap-datepicker.js"></script>
-		<script src="local/js/commons.js"></script>
-		
-		<!-- fav and touch icons -->
-		<link rel="shortcut icon" href="3p/bootstrap/ico/favicon.ico">
-		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="3p/bootstrap/ico/apple-touch-icon-144-precomposed.png">
-		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="3p/bootstrap/ico/apple-touch-icon-114-precomposed.png">
-		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="3p/bootstrap/ico/apple-touch-icon-72-precomposed.png">
-		<link rel="apple-touch-icon-precomposed" href="3p/bootstrap/ico/apple-touch-icon-57-precomposed.png">
+		<script type="text/javascript" src="3p/bootstrap/js/jquery-1.8.2.min.js"></script>
+		<script type="text/javascript" src="3p/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="3p/datepicker/js/bootstrap-datepicker.js"></script>
+		<script type="text/javascript" src="3p/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+		<script type="text/javascript" src="local/js/commons.js"></script>
+		<script>			
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-45159467-1', 'tipspromenad.nu');
+			ga('send', 'pageview');
+			
+			$(document).ready(function() {
+				$("a#tryItOutLink").fancybox({
+					'type': 'iframe',
+					'scrolling': 'no',
+					'width': 1000,
+					'height': 625,
+					'padding': 10,
+					'onComplete': function() {
+						var height = window.screen.availHeight;
+						if (height <= 800) {
+							$("#fancybox-wrap").css({
+								'top': '0px',
+								'bottom': 'auto',
+								'padding-top': '12px'
+							});
+							$("#fancybox-content").css({
+								'height': '626px'
+							});
+						}
+					}
+				});
+			});
+		</script>
 	</head>
 	<body>
 		<div class="navbar navbar-inverse navbar-fixed-top">
@@ -210,8 +235,8 @@
 								</a>
 							</li>
 							--%>
-							<li class="disabled">
-								<a>
+							<li>
+								<a id="tryItOutLink" href="wireframes.jsp">
 									<spring:message code="navbar.download" />
 								</a>
 							</li>

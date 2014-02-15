@@ -26,6 +26,10 @@
 				overflow-y: scroll;
 			}
 			
+			.comments-macos {
+				padding: 0 27px 0 0 !important;
+			}
+			
 			.comments-cell {
 				/* overflow: hidden; */
 			}
@@ -177,9 +181,16 @@
 				from.css('display', 'none');
 				to  .css('display', 'block');
 			}
+			
+			$(document).ready(function() {
+				var isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+				if (isMac) {
+					$('#comments').addClass('comments-macos');
+				}
+			});
 		</script>
 	</head>
-	<body>		
+	<body>
 		<div id="content">
 			<table>
 				<tr>
