@@ -4,6 +4,10 @@
 
 <!-- styles -->
 <style>
+	.label-club {
+		margin-left: 3px !important;
+	}
+
 	#mapContainer {
 		width: 100%;
 		height: 450px;
@@ -43,6 +47,16 @@
 <br />
 <div id="mapContainer">
 	<!-- a place for Google Map -->
+</div>
+<br />
+<div>
+	Following clubs are listed in the map:
+</div>
+<br />
+<div>
+	<c:forEach items="${clubs}" var="club">
+		<a href="javascript:clubController.showInMap(${club.id});" class="label label-club label-info">${club.name}</a>
+	</c:forEach>
 </div>
 <br />
 <div>

@@ -48,9 +48,10 @@
 			}
 			
 			.footer {
-				width: 100%;		
+				width: 1125px !important;	
 				color: #000000;
 				text-align: center;
+				margin: auto;
 				margin-top: 15px;
 			}
 			
@@ -60,6 +61,15 @@
 			
 			.footer a:hover {
 				color: black;
+				text-decoration: underline;
+			}
+			
+			.footer .footer-left {
+				float: left;
+			}
+			
+			.footer .footer-right {
+				float: right;
 			}
 			
 			/**
@@ -104,7 +114,7 @@
 		<script type="text/javascript" src="3p/datepicker/js/bootstrap-datepicker.js"></script>
 		<script type="text/javascript" src="3p/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
 		<script type="text/javascript" src="local/js/commons.js"></script>
-		<script>			
+		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -134,6 +144,20 @@
 					}
 				});
 			});
+			
+			if (!window.console) {
+				var console = {
+					log: function() {
+						// do nothing
+					},
+					debug: function() {
+						// do nothing
+					},
+					error: function() {
+						// do nothing
+					}
+				};
+			}
 		</script>
 	</head>
 	<body>
@@ -298,8 +322,17 @@
 				<%= Constants.System.VERSION %>.<%= Constants.System.BUILD_NUMBER %>
 			</a> | &#169; 2014 Tipspromenad.nu
 			--%>
-			Tipspromenad.nu &#169; 2014 | <spring:message code="footer.contact" />
+			<div class="footer-left">
+				<div class="fb-like" data-href="https://www.tipspromenad.nu" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true">
+				</div>
+				<a href="http://www.facebook.com/tipspromenad" target="_blank">facebook.com/tipspromenad</a>
+				<a href="http://www.twitter.com/tipspromenad" target="_blank">@tipspromenad</a>
+			</div>
+			<div class="footer-right">
+				Tipspromenad.nu &#169; 2013 - 2014
+			</div>
 		</div>
+		<br />
 		
 		<!-- dialogs -->
 		<sec:authorize ifAnyGranted="ROLE_SIMPLE_USER">

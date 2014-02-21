@@ -5,6 +5,11 @@ var clubController = function() {
 	var _DEFAULT_LNG = 15.586111;
 	
 	var _dictionary = null;
+	var _placemarks = null;
+	
+	function _initVariables() {
+		_placemarks = [];
+	}
 	
 	function _initUrls(CLUB_LIST_ACTION_URL) {
 		_CLUB_LIST_ACTION_URL = CLUB_LIST_ACTION_URL;
@@ -16,6 +21,7 @@ var clubController = function() {
 	}
 	
 	function _initMap(container) {
+		console.debug('Initializing map');
 		_getPosition(function(position) {		
 			var options = {
 				center: position,
@@ -27,17 +33,29 @@ var clubController = function() {
 			_getClubs(function(clubs) {
 				_renderClubs(map, clubs);
 			});
+			console.debug('Map initialized');
 		});
 	}
 	
 	function _getPosition(callback) {
 		if (navigator.geolocation) {
+			console.debug('Trying to locate user');
 			navigator.geolocation.getCurrentPosition(function(position) {
+				console.debug('User located');
 				if (callback != null) {
 					callback(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
 				}
+			},
+			function() {
+				console.debug('User not located, because of timeout. Using defaults');
+				if (callback != null) {
+					callback(new google.maps.LatLng(_DEFAULT_LAT, _DEFAULT_LNG));
+				}
+			}, {
+				timeout: 5000
 			});
 		} else {
+			console.debug('User not located, because feature is not available. Using defaults');
 			if (callback != null) {
 				callback(new google.maps.LatLng(_DEFAULT_LAT, _DEFAULT_LNG));
 			}
@@ -47,19 +65,7 @@ var clubController = function() {
 	function _renderClubs(map, clubs) {
 		if (clubs != null) {
 			for (var i = 0; i < clubs.length; i++) {
-				var window = new google.maps.InfoWindow({
-				    content: _renderClub(clubs[i])
-				});
-				
-				var marker = new google.maps.Marker({
-				    position: new google.maps.LatLng(clubs[i].latitude, clubs[i].longitude),
-				    title: clubs[i].name,
-				});
-				marker.setMap(map);
-				
-				google.maps.event.addListener(marker, 'click', function(event) {
-					window.open(map, marker);
-				});
+				_putPlacemark(map, clubs[i]);
 			}
 		}
 	}
@@ -72,6 +78,26 @@ var clubController = function() {
 			html += '</tr>';
 		html += '</table>';
 		return html;
+	}
+	
+	function _putPlacemark(map, club) {
+		var window = new google.maps.InfoWindow({
+		    content: _renderClub(club)
+		});
+		
+		var marker = new google.maps.Marker({
+		    position: new google.maps.LatLng(club.latitude, club.longitude),
+		    title: club.name,
+		    map: map
+		});
+		marker.window = window;
+		marker.club = club;
+		
+		google.maps.event.addListener(marker, 'click', function() {
+			_hideAllWindows();
+			marker.window.open(map, marker);
+		});
+		_placemarks.push(marker);
 	}
 	
 	function _getClubs(callback) {
@@ -89,12 +115,34 @@ var clubController = function() {
 		});
 	}
 	
+	function _hideAllWindows() {
+		if (_placemarks != null) {
+			for (var i = 0; i < _placemarks.length; i++) {
+				_placemarks[i].window.close();
+			}
+		}
+	}
+	
+	function _showInMap(id) {
+		if (_placemarks != null) {
+			for (var i = 0; i < _placemarks.length; i++) {
+				if (_placemarks[i].club.id == id) {
+					google.maps.event.trigger(_placemarks[i], 'click');
+				}
+			}
+		}
+	}
+	
 	return {
 		init: function(CLUB_LIST_ACTION_URL, dictionary) {
+			_initVariables();
 			_initUrls(CLUB_LIST_ACTION_URL);
 			_initTranslations(dictionary);
 			_initMap($('#mapContainer')[0]);
 		},
+		showInMap: function(id) {
+			_showInMap(id);
+		}
 	};
 	
 }();
