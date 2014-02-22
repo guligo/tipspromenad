@@ -12,9 +12,17 @@
 			<tiles:getAsString name="title" />
 		</title>
 		
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-		<meta name="description" content="Tipspromenad.nu" />
+		<!-- meta data -->
+		<meta charset="utf-8">
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<meta name="description" content="A classic Swedish game - Tipspromenad - for the digital generation.">
+		<meta name="contact" content="tipspromenad.nu@gmail.com">
+		<meta name="keywords" content="tipspromenad, tipsrunda, quiz walk">
+		
+		<meta property="og:image" content="local/img/icon.png" />
+		<meta property="og:title" content="Tipspromenad" />
+		<meta property="og:description" content="A classic Swedish game - Tipspromenad - for the digital generation." />
 		
 		<!-- icon -->
 		<link href="local/img/icon.ico" rel="shortcut icon" />
@@ -169,7 +177,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</a>
-					<a class="brand" href="#">
+					<a class="brand" href="rules.page">
 						Tipspromenad.nu
 					</a>
 					<div class="nav-collapse collapse">
