@@ -20,7 +20,7 @@
 		<meta name="contact" content="tipspromenad.nu@gmail.com">
 		<meta name="keywords" content="tipspromenad, tipsrunda, quiz walk">
 		
-		<meta property="og:image" content="local/img/icon.png" />
+		<meta property="og:image" content="http://www.tipspromenad.nu/local/img/icon.png" />
 		<meta property="og:title" content="Tipspromenad" />
 		<meta property="og:description" content="A classic Swedish game - Tipspromenad - for the digital generation." />
 		
