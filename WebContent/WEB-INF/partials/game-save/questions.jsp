@@ -1,5 +1,6 @@
-<%@ include file="../../commons/commons.jsp" %>
 <%@ page import="se.tipspromenad.globals.Constants" %>
+
+<%@ include file="../../commons/commons.jsp" %>
 
 <!-- scripts -->
 <script type="text/javascript" src="local/js/game-save/question.js"></script>
@@ -29,31 +30,37 @@
 <form id="questionForm" class="form-horizontal">
 	<div class="control-group">
 		<div id="questionContainer" class="controls">
-			No questions.
+			<spring:message code="gamesave.questions.empty" />
 		</div>
 	</div>
 	<div class="control-group">
 		<div class="controls">
 			<a href="javascript:questionController.showDialog();" role="button" class="btn">
-				Add Question
+				<spring:message code="gamesave.questions.addquestion.label" />
 			</a>
 		</div>
 	</div>
 </form>
 <c:if test="${empty param.id}">
-	<a href="javascript:unlockNextTab();" class="btn">Next</a>
+	<a href="javascript:unlockNextTab();" class="btn">
+		<spring:message code="gamesave.questions.next.label" />
+	</a>
 </c:if>
 
 <!-- dialogs -->
 <div id="addQuestionModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addQuestionModalLabel" aria-hidden="true">
   	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		<h3 id="myModalLabel">Save Question</h3>
+		<h3 id="myModalLabel">
+			<spring:message code="gamesave.questions.savequestion.label" />
+		</h3>
 	</div>
 	<div class="modal-body form-horizontal">
 		<div class="control-group">
 			<input id="questionId" type="hidden" />
-			<label for="questionText" class="control-label">Question</label>
+			<label for="questionText" class="control-label">
+				<spring:message code="gamesave.questions.savequestion.question" />
+			</label>
 			<div class="controls">
 				<textarea id="questionText" placeholder="Enter question..." style="width: 300px; height: 100px;"></textarea>
 			</div>
@@ -87,7 +94,11 @@
 		</div>
 	</div>
 	<div class="modal-footer">
-		<a href="javascript:questionController.saveQuestion();" class="btn btn-primary">Save</a>
-		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		<a href="javascript:questionController.saveQuestion();" class="btn btn-primary">
+			<spring:message code="gamesave.questions.savequestion.save.label" />
+		</a>
+		<button class="btn" data-dismiss="modal" aria-hidden="true">
+			<spring:message code="gamesave.questions.savequestion.close.label" />
+		</button>
 	</div>
 </div>

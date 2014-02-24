@@ -1,5 +1,7 @@
 <%@ page import="se.tipspromenad.globals.Constants" %>
 
+<%@ include file="../../commons/commons.jsp" %>
+
 <!-- styles -->
 <style>
 	/**
@@ -37,10 +39,11 @@
 <!-- html -->
 <div id="friendsFacebookConnect">
 	<p style="width: 750px;">
-		You can login with Facebook to invite your contacts. If you continue without Facebook login, in
-		the next step you will receive an event code that you can share with your family and friends!
+		<spring:message code="gamesave.friends.description" />
 	</p>
-	<a class="fb-button" href="javascript:facebookController.showDialogAndConnect();">Connect</a>
+	<a class="fb-button" href="javascript:facebookController.showDialogAndConnect();">
+		<spring:message code="gamesave.friends.fbconnect.label" />
+	</a>
 	<br />
 </div>
 
@@ -48,5 +51,7 @@
 <br />
 
 <c:if test="${empty param.id}">
-	<a href="javascript:unlockNextTab();" class="btn">Next</a>
+	<a href="javascript:unlockNextTab();" class="btn">
+		<spring:message code="gamesave.friends.next.label" />
+	</a>
 </c:if>

@@ -5,6 +5,13 @@ var gameListController = function() {
 	var GAME_LIST_REMOVE_ACTION_URL = null;
 	var GAME_LIST_CONTAINER = null;
 	
+	var _dictionary = null;
+	
+	function _initTranslations(dictionary) {
+		_dictionary = dictionary;
+		console.debug('Dictionary = %o', _dictionary);
+	}
+	
 	function _getGameList(callback) {
 		$.ajax({
 			type: 'GET',
@@ -25,12 +32,12 @@ var gameListController = function() {
 		html = '<table style="width: 100%;" class="table table-bordered table-hover">';
 			html += '<thead>';
 				html += '<tr>';
-					html += '<th width="16%">Name</th>';
-					html += '<th width="16%">Date</th>';
-					html += '<th width="16%">Questions</th>';
-					html += '<th width="16%">Code</th>';
-					html += '<th width="16%">State</th>';
-					html += '<th width="10%">Action</th>';
+					html += '<th width="16%">' + _dictionary['gamelist.label.name'] + '</th>';
+					html += '<th width="16%">' + _dictionary['gamelist.label.date'] + '</th>';
+					html += '<th width="16%">' + _dictionary['gamelist.label.questions'] + '</th>';
+					html += '<th width="16%">' + _dictionary['gamelist.label.code'] + '</th>';
+					html += '<th width="16%">' + _dictionary['gamelist.label.state'] + '</th>';
+					html += '<th width="10%">' + _dictionary['gamelist.label.action'] + '</th>';
 				html += '</tr>';
 			html += '</thead>';
 			html += '<tbody>';
@@ -81,11 +88,13 @@ var gameListController = function() {
 	}
 	
 	return {
-		init: function(url1, url2, url3, container) {
+		init: function(url1, url2, url3, container, translations) {
 			GAME_SAVE_PAGE_URL = url1;
 			GAME_LIST_GET_LIST_ACTION_URL = url2;
 			GAME_LIST_REMOVE_ACTION_URL = url3;
 			GAME_LIST_CONTAINER = container;
+			
+			_initTranslations(translations);
 			_getGameList(_renderGameList);
 		},
 		removeGame: function(id) {

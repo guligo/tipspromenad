@@ -34,7 +34,7 @@
 		clubController.init(
 			'<%= Constants.URL.CLUB_LIST_ACTION %>',
 			{
-				'clubs.map.label.name': '<spring:message code="clubs.map.label.name" />',
+				<%-- 'clubs.map.label.name': '<spring:message code="clubs.map.label.name" />', --%>
 			}
 		);
 	});
@@ -50,7 +50,7 @@
 </div>
 <br />
 <div>
-	Following clubs are listed in the map:
+	<spring:message code="clubs.list" />
 </div>
 <br />
 <div>

@@ -1,6 +1,7 @@
-<%@ include file="../commons/commons.jsp" %>
 <%@ page import="se.tipspromenad.globals.Constants" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+
+<%@ include file="../commons/commons.jsp" %>
 
 <!-- styles -->
 <style>
@@ -57,21 +58,21 @@
 	<ul class="nav nav-pills">
 		<li id="questionsTab">
 			<a href="#questionsTabContainer" data-toggle="tab">
-				Questions
+				<spring:message code="gamesave.tab.questions" />
 			</a>
 		</li>
 		<li id="mapTab">
 			<a href="#mapTabContainer" data-toggle="tab">
-				Map
+				<spring:message code="gamesave.tab.map" />
 			</a>
 		<li>
 		<li id="friendsTab">
 			<a href="#friendsTabContainer" data-toggle="tab">
-				Friends
+				<spring:message code="gamesave.tab.friends" />
 			</a>
 		<li id="finishTab">
 			<a href="#finishTabContainer" data-toggle="tab">
-				Finish
+				<spring:message code="gamesave.tab.finish" />
 			</a>
 		<li>
 	</ul>
