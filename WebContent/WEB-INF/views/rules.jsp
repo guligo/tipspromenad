@@ -12,11 +12,13 @@
 	.text {
 		width: 500px;
 		height: 300px;
+		/* line-height: 300px; */
 		background-color: #eeeeee;
 		margin-top: 5px;
 		margin-bottom: 15px;
 		padding: 10px;
 		border-radius: 3px;
+		vertical-align: middle;
 	}
 	
 	.text-left {
