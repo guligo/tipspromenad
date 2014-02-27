@@ -10,14 +10,20 @@
 <!-- styles -->
 <style>
 	.text {
-		width: 500px;
+		width: 600px;
 		height: 300px;
-		/* line-height: 300px; */
-		background-color: #eeeeee;
 		margin-top: 5px;
 		margin-bottom: 15px;
 		padding: 10px;
-		border-radius: 3px;
+		border-radius: 5px;
+		vertical-align: middle;
+		color: #777777;
+		background-color: #f7f7f7;
+		display: table;
+	}
+	
+	.text div {
+		display: table-cell;
 		vertical-align: middle;
 	}
 	
@@ -33,11 +39,11 @@
 	.image {
 		width: 300px;
 		height: 300px;
-		background-color: #eeeeee;
 		margin-top: 5px;
 		margin-bottom: 15px;
 		padding: 10px;
-		border-radius: 3px;
+		border-radius: 175px;
+		background-color: #f1f1f1;
 	}
 	
 	.image-left {
@@ -60,7 +66,9 @@
 		<div id="rules" class="accordion-body collapse">
 			<div class="accordion-inner">
 				<div class="text text-right">
-					<spring:message code="rules.rules.text" />
+					<div>
+						<spring:message code="rules.rules.text" />
+					</div>
 				</div>
 				<img class="image image-left" src="local/img/placeholder-rules.jpg"></img>
 			</div>
@@ -75,7 +83,9 @@
 		<div id="participants" class="accordion-body collapse">
 			<div class="accordion-inner">
 				<div class="text text-left">
-					<spring:message code="rules.participants.text" />
+					<div>
+						<spring:message code="rules.participants.text" />
+					</div>
 				</div>
 				<img class="image image-right" src="local/img/placeholder-participants.jpg"></img>
 			</div>
@@ -90,7 +100,9 @@
 		<div id="we" class="accordion-body collapse">
 			<div class="accordion-inner">
 				<div class="text text-right">
-					<spring:message code="rules.we.text" />
+					<div>
+						<spring:message code="rules.we.text" />
+					</div>
 				</div>
 				<img class="image image-left" src="local/img/placeholder-we.jpg"></img>
 			</div>

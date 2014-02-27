@@ -1,5 +1,7 @@
 var mapController = function() {
 	
+	var DEFAULT_LAT = 56.160833; 
+	var DEFAULT_LNG = 15.586111;
 	var LABELS = ['1.', 'X.', '2.'];
 	
 	var PLACEMARK_LIST_ACTION_URL   = null;
@@ -11,30 +13,61 @@ var mapController = function() {
 	var _questions   = null;
 	
 	// initialize Google map
-	function _initMap(container) {
+	function _initMap(container, callback) {
 		if (!_initialized) {
-			var options = {
-				center: new google.maps.LatLng(-34.397, 150.644),
-				zoom: 8,
-				mapTypeId: google.maps.MapTypeId.ROADMAP
-			};
-			_map = new google.maps.Map(container, options);
-			
-			google.maps.event.addListener(_map, 'click', function(event) {
-				if (_questions != null && _questions.length > 0) {
-					var question = _getCurrentQuestion();
-					if (question != null) {
-						_removePlacemarks();
-						_savePlacemark(gameController.getGameId(), question, event.latLng.lat(), event.latLng.lng(), function (placemark) {
-							_getPlacemarks(gameController.getGameId(), function(placemarks) {
-								_assignPlacemarksToQuestions(placemarks);
-								_renderQuestions();
+			_getPosition(function(position) {
+				var options = {
+					center: position,
+					zoom: 14,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				_map = new google.maps.Map(container, options);
+				
+				google.maps.event.addListener(_map, 'click', function(event) {
+					if (_questions != null && _questions.length > 0) {
+						var question = _getCurrentQuestion();
+						if (question != null) {
+							_removePlacemarks();
+							_savePlacemark(gameController.getGameId(), question, event.latLng.lat(), event.latLng.lng(), function (placemark) {
+								_getPlacemarks(gameController.getGameId(), function(placemarks) {
+									_assignPlacemarksToQuestions(placemarks);
+									_renderQuestions();
+								});
 							});
-						});
+						}
 					}
+				});
+				_initialized = true;
+				
+				if (callback != null) {
+					callback();
 				}
 			});
-			_initialized = true;
+		}
+	}
+	
+	function _getPosition(callback) {
+		if (navigator.geolocation) {
+			console.debug('Trying to locate user');
+			navigator.geolocation.getCurrentPosition(function(position) {
+				console.debug('User located');
+				if (callback != null) {
+					callback(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+				}
+			},
+			function() {
+				console.debug('User not located, because of timeout. Using defaults');
+				if (callback != null) {
+					callback(new google.maps.LatLng(DEFAULT_LAT, DEFAULT_LNG));
+				}
+			}, {
+				timeout: 5000
+			});
+		} else {
+			console.debug('User not located, because feature is not available. Using defaults');
+			if (callback != null) {
+				callback(new google.maps.LatLng(DEFAULT_LAT, DEFAULT_LNG));
+			}
 		}
 	}
 	
@@ -182,6 +215,9 @@ var mapController = function() {
 			for (var i = 0; i < placemarks.length; i++) {
 				question = _getQuestion(placemarks[i].question.id);
 				if (question != null) {
+					if (question.type == 'START') {
+						_map.setCenter(new google.maps.LatLng(placemarks[i].latitude, placemarks[i].longitude));
+					}
 					question.placemark = placemarks[i];
 				}
 			}
@@ -299,8 +335,8 @@ var mapController = function() {
 			_placemarks = [];
 			_combine = false;
 		},
-		initMap: function() {
-			_initMap($('#mapContainer')[0]);
+		initMap: function(callback) {
+			_initMap($('#mapContainer')[0], callback);
 		},
 		initData: function() {
 			_initData();

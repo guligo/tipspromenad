@@ -47,8 +47,9 @@
 			lockTabs();
 		</c:if>
 		$('#mapTab a').bind('click', function (e) {
-			mapController.initMap();
-			mapController.initData();
+			mapController.initMap(function() {
+				mapController.initData();
+			});
 		});
 	});
 </script>

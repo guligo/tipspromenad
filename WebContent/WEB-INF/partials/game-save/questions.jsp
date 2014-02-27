@@ -13,6 +13,23 @@
 		});
 	};
 	
+	var unlockMapTab = function() {
+		var errorMsg = 'Fill in information and add some questions before pressing "Next" button ;)';
+		
+		commonUtils.hideError($('#gameName'));
+		if (gameController.getGameId() != null) {
+			questionController.getQuestions(gameController.getGameId(), function(questions) {
+				if (questions != null && questions.length > 2) {
+					unlockNextTab();
+				} else {
+					commonUtils.showError($('#gameName'), errorMsg);
+				}
+			});
+		} else {
+			commonUtils.showError($('#gameName'), errorMsg);
+		}
+	};
+	
 	$(document).ready(function() {
 		questionController.init(
 			<%= request.getParameter("id") %>,
@@ -42,7 +59,7 @@
 	</div>
 </form>
 <c:if test="${empty param.id}">
-	<a href="javascript:unlockNextTab();" class="btn">
+	<a href="javascript:unlockMapTab();" class="btn">
 		<spring:message code="gamesave.questions.next.label" />
 	</a>
 </c:if>
