@@ -330,6 +330,7 @@
 				<%= Constants.System.VERSION %>.<%= Constants.System.BUILD_NUMBER %>
 			</a> | &#169; 2014 Tipspromenad.nu
 			--%>
+			<!-- <%= Constants.System.VERSION %>.<%= Constants.System.BUILD_NUMBER %> -->
 			<div class="footer-left">
 				<div class="fb-like" data-href="https://www.tipspromenad.nu" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true">
 				</div>
