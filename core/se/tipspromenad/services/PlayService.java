@@ -17,32 +17,32 @@ import se.tipspromenad.services.dao.PlayDao;
  */
 @Component
 public class PlayService {
-	
+
 	@Autowired
 	private PlayDao playDao;
-	
+
 	public Play getPlay(Long id) {
 		return null;
 	}
-	
+
 	public List<Play> getPlaysByUser(Long userId) {
 		return null;
 	}
-	
+
 	public List<Play> getPlaysByGame(Long gameId) {
 		return null;
 	}
-	
+
 	public void createPlay(Long userId, Date start) {
-		
+		// throw new RuntimeException("Method not implemented yet");
 	}
-	
+
 	public void updatePlay(Long id, Date end) {
-		
+		// throw new RuntimeException("Method not implemented yet");
 	}
-	
+
 	public void removePlay(Long id) {
-		
+		// throw new RuntimeException("Method not implemented yet");
 	}
-	
+
 }
