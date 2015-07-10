@@ -11,7 +11,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<env.BUILD_NUMBER>0</env.BUILD_NUMBER>
 	</properties>
 
 	<build>
@@ -27,14 +26,6 @@
 				<filtering>true</filtering>
 			</resource>
 		</resources>
-		<!--
-		<testResources>
-			<testResource>
-				<directory>res</directory>
-				<filtering>true</filtering>
-			</testResource>
-		</testResources>
-		-->
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -45,14 +36,14 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
-			<!-- https://weblogs.java.net/blog/felipegaucho/archive/2009/12/28/webapps-eclipse-and-maven-maven-war-plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.0.2</version>
+				<version>2.6</version>
 				<configuration>
 					<webResources>
 						<resource>
+							<filtering>true</filtering>
 							<directory>${basedir}/WebContent</directory>
 							<excludes>
 								<exclude>WEB-INF/lib/*.jar</exclude>
@@ -68,24 +59,40 @@
 					</archive>
 				</configuration>
 			</plugin>
-			<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.16</version>
 				<configuration>
-					<testFailureIgnore>true</testFailureIgnore>		            
+					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
-			-->
 			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.1</version>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
+				<version>1.4.8</version>
 				<configuration>
-					<url>http://54.228.213.17:8080/manager/text</url>
-					<server>tipspromenad-tomcat-dev</server>
-					<path>/sandbox</path>
+					<container>
+						<containerId>tomcat8x</containerId>
+						<home>${env.serverHome}</home>
+					</container>
+					<configuration>
+						<type>existing</type>
+						<home>${env.serverHome}</home>
+					</configuration>
+					<deployables>
+						<deployable>
+							<groupId>se.tipspromenad</groupId>
+							<artifactId>tipspromenad-server</artifactId>
+							<type>war</type>
+							<properties>
+								<context>tipspromenad</context>
+							</properties>
+						</deployable>
+					</deployables>
+					<deployer>
+						<type>installed</type>
+					</deployer>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -135,7 +142,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<!-- spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -214,8 +221,8 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-        
-        <!-- hibernate -->
+
+		<!-- hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -246,7 +253,7 @@
 			<artifactId>ejb3-persistence</artifactId>
 			<version>1.0.2.GA</version>
 		</dependency>
-		
+
 		<!-- spring security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -268,7 +275,7 @@
 			<artifactId>spring-security-web</artifactId>
 			<version>3.0.3.RELEASE</version>
 		</dependency>
-        
+
 		<!-- apache tiles for templating -->
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
@@ -285,7 +292,7 @@
 			<artifactId>tiles-core</artifactId>
 			<version>2.1.2</version>
 		</dependency>
-		
+
 		<!-- apache commons -->
 		<dependency>
 			<groupId>commons-beanutils</groupId>
@@ -312,15 +319,15 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.6.4</version>
 		</dependency>
-		
+
 		<!-- utils -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.8</version>
 			<scope>test</scope>
-		</dependency> 
-		
+		</dependency>
+
 		<!-- json for the AJAX -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
@@ -332,7 +339,7 @@
 			<artifactId>jackson-core-asl</artifactId>
 			<version>1.9.7</version>
 		</dependency>
-        
+
 		<!-- URL rewrite -->
 		<dependency>
 			<groupId>org.tuckey</groupId>
@@ -349,15 +356,15 @@
 			<artifactId>cglib</artifactId>
 			<version>2.2.2</version>
 		</dependency>
-        
-        <!-- mysql connector -->
+
+		<!-- mysql connector -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.20</version>
 		</dependency>
-        
-        <!-- log4j -->
+
+		<!-- log4j -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
