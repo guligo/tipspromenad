@@ -9,3 +9,9 @@
 # Project files and folders #
 build/
 target/
+
+# IDE files and folders #
+.settings/
+.classpath
+.project
+
