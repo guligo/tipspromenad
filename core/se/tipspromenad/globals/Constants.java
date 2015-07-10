@@ -6,6 +6,7 @@ import java.util.Properties;
  * Contains constants used by classes across the whole application.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 public class Constants {
 	

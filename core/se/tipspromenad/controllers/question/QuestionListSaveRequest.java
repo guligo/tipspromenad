@@ -7,6 +7,7 @@ import se.tipspromenad.entities.Question;
  * See {@link QuestionController#saveQuestions()}.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 public class QuestionListSaveRequest extends RequestBean {
 

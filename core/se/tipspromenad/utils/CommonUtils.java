@@ -16,6 +16,7 @@ import javax.net.ssl.HttpsURLConnection;
  * Contains misc helper functions.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 public class CommonUtils {
 

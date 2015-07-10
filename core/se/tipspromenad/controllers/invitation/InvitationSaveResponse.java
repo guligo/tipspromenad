@@ -6,6 +6,7 @@ import se.tipspromenad.controllers.ResponseBean;
  * See {@link InvitationController#saveInvitation(InvitationSaveRequest)}.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 public class InvitationSaveResponse extends ResponseBean<InvitationError> {
 	

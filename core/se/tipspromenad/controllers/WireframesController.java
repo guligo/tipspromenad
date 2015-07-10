@@ -10,6 +10,7 @@ import se.tipspromenad.globals.Constants;
  * MVC controller responsible for actions around wireframes dialog.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Controller
 public class WireframesController {

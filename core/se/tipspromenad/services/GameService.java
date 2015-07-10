@@ -24,6 +24,7 @@ import se.tipspromenad.utils.CommonUtils;
  * See {@link GameService}.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Component
 public class GameService {

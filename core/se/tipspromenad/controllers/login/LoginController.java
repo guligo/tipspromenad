@@ -28,6 +28,7 @@ import se.tipspromenad.utils.SecurityUtils;
  * MVC controller responsible for actions around authentication and authorization mechanisms.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Controller
 public class LoginController {

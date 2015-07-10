@@ -10,7 +10,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 /**
  * Contains helper function for serialization.
  * 
- * @author eigogul
+ * @author guligo
+ * @author pavelefimov
  */
 public class SerializationUtils {
 

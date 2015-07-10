@@ -6,6 +6,7 @@ import se.tipspromenad.controllers.ResponseBean;
  * See {@link PlayController#createPlay(request)}.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 public class PlayCreateResponse extends ResponseBean<PlayError> {
 	

@@ -5,7 +5,8 @@ import se.tipspromenad.controllers.RequestBean;
 /**
  * Request object of {@link GameController#saveGame(Long, String, String)}.
  * 
- * @author eigogul
+ * @author guligo
+ * @author pavelefimov
  */
 public class GameSaveRequest extends RequestBean {
 

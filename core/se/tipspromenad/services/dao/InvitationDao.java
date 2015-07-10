@@ -12,6 +12,7 @@ import se.tipspromenad.entities.Invitation;
  * Persistence layer for {@link Invitation} entity.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Component
 @Transactional

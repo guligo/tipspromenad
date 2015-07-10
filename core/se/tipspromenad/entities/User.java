@@ -17,6 +17,7 @@ import se.tipspromenad.entities.enums.UserRole;
  * Database entity for {@link User}.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Entity
 @Table(name = "users")

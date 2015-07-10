@@ -13,7 +13,8 @@ import sun.misc.BASE64Encoder;
 /**
  * Helper functions for security enhancements.
  * 
- * @author eigogul
+ * @author guligo
+ * @author pavelefimov
  */
 public class SecurityUtils {
 

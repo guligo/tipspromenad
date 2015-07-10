@@ -20,6 +20,7 @@ import se.tipspromenad.entities.enums.GameState;
  * Database entity for {@link Game}.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Entity
 @Table(name = "games")

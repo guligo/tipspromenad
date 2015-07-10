@@ -8,6 +8,7 @@ import javax.persistence.Table;
  * Represents club.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Entity
 @Table(name = "clubs")

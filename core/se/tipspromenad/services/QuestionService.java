@@ -16,6 +16,7 @@ import se.tipspromenad.services.dao.QuestionDao;
 
 /**
  * @author guligo
+ * @author pavelefimov
  */
 @Component
 public class QuestionService {

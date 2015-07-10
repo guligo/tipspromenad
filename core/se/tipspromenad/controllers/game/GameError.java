@@ -6,6 +6,7 @@ import se.tipspromenad.validation.ValidationError;
  * Validation errors related to game page.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 public enum GameError implements ValidationError {
 	

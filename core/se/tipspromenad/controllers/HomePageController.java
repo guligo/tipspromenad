@@ -11,6 +11,7 @@ import se.tipspromenad.globals.Constants;
  * Represents MVC home page controller.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Controller
 public class HomePageController {

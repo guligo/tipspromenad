@@ -10,6 +10,7 @@ import se.tipspromenad.entities.Entity;
  * Represents database entity.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @MappedSuperclass
 public abstract class Entity {

@@ -15,6 +15,7 @@ import se.tipspromenad.entities.enums.Gender;
  * Database entity of {@link UserProfile}.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Entity
 @Table(name = "user_profiles")

@@ -7,7 +7,8 @@ import se.tipspromenad.controllers.ResponseBean;
 /**
  * See {@link UserWebService#register(UserRegistrationRequestBean, javax.servlet.http.HttpServletRequest)}.
  * 
- * @author eigogul
+ * @author guligo
+ * @author pavelefimov
  */
 @SuppressWarnings("deprecation")
 @JsonWriteNullProperties(value = false)

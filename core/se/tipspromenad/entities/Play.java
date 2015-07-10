@@ -13,6 +13,7 @@ import javax.persistence.Table;
  * Represents single play of a game by user.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Entity
 @Table(name = "plays")

@@ -6,6 +6,7 @@ import java.util.List;
  * Represents simple string object validator.
  * 
  * @author guligo
+ * @author pavelefimov
  * @param <E>
  */
 public class BasicStringValidator<E extends ValidationError> implements Validator<E> {

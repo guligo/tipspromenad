@@ -15,6 +15,7 @@ import se.tipspromenad.services.UserService;
  * This class is used by spring security authentication mechanism.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Component("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {

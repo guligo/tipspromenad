@@ -16,6 +16,7 @@ import se.tipspromenad.entities.enums.QuestionType;
  * Represents entity for questions.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Entity
 @Table(name = "questions")

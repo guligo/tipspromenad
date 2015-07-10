@@ -8,6 +8,7 @@ import java.util.Map;
  * MVC controller and view.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 public abstract class DataTransferBean {
 

@@ -4,6 +4,7 @@ package se.tipspromenad.entities.enums;
  * Represents user's gender.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 public enum Gender {
 	

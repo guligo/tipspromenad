@@ -20,6 +20,7 @@ import se.tipspromenad.services.InvitationService;
  * MVC paradigm controller responsible for actions around friends page.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Controller
 public class InvitationController {

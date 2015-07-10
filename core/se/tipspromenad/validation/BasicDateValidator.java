@@ -8,6 +8,7 @@ import java.util.List;
  * Represents simple date object validator.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 public class BasicDateValidator<E extends ValidationError> implements Validator<E> {
 	

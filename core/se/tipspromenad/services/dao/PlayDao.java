@@ -9,6 +9,7 @@ import se.tipspromenad.entities.Play;
  * Database access layer for {@link Play} entity.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Component
 @Transactional

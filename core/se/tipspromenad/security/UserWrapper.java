@@ -14,6 +14,7 @@ import se.tipspromenad.entities.User;
  * {@link org.springframework.security.core.userdetails.UserDetails} class used by spring security.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 public class UserWrapper implements UserDetails {
 

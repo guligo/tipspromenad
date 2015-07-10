@@ -6,6 +6,7 @@ import se.tipspromenad.controllers.RequestBean;
  * See {@link InvitationController#saveInvitation(InvitationSaveRequest)}.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 public class InvitationSaveRequest extends RequestBean {
 	

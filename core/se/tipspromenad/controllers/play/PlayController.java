@@ -21,6 +21,7 @@ import se.tipspromenad.services.PlayService;
  * MVC controller responsible for actions around {@link Play} entity.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Controller
 public class PlayController {

@@ -6,6 +6,7 @@ import se.tipspromenad.controllers.RequestBean;
  * See {@link PlayController#updatePlay(request)}.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 public class PlayUpdateRequest extends RequestBean {
 	

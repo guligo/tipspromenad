@@ -13,6 +13,7 @@ import se.tipspromenad.services.dao.PlayDao;
  * Partially provides business-logic related to {@link Play}.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Component
 public class PlayService {

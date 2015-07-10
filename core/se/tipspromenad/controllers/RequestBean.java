@@ -5,7 +5,8 @@ import java.io.Serializable;
 /**
  * Represents request object of MVC controller.
  * 
- * @author eigogul
+ * @author guligo
+ * @author pavelefimov
  */
 public class RequestBean implements Serializable {
 

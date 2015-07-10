@@ -7,6 +7,7 @@ import se.tipspromenad.validation.ValidationError;
  * Represents various {@link Play} entity related errors.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 public enum PlayError implements ValidationError {
 	

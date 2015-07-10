@@ -22,6 +22,7 @@ import se.tipspromenad.services.QuestionService;
  * Responsible for actions around question entity.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Controller
 public class QuestionController {

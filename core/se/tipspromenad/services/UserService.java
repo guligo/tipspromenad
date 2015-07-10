@@ -21,6 +21,7 @@ import se.tipspromenad.utils.SecurityUtils;
  * See {@link UserService}.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Component
 @Transactional

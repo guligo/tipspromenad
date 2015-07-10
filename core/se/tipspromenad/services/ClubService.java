@@ -12,6 +12,7 @@ import se.tipspromenad.services.dao.ClubDao;
  * Provides partial business logic for {@link Club} entity.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Component
 public class ClubService {

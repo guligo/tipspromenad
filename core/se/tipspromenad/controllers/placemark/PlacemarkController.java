@@ -19,6 +19,7 @@ import se.tipspromenad.services.QuestionService;
  * MVC paradigm controller responsible for actions around placemark entity.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Controller
 public class PlacemarkController {

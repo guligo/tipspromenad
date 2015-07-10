@@ -12,6 +12,7 @@ import se.tipspromenad.entities.Club;
  * Persistence layer for {@link Club}.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Component
 @Transactional

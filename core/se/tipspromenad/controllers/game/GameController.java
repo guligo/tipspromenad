@@ -34,6 +34,7 @@ import se.tipspromenad.validation.BasicStringValidator;
  * MVC paradigm controller responsible for actions on game page.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Controller
 public class GameController {

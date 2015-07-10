@@ -8,7 +8,8 @@ import javax.persistence.Table;
 /**
  * Represents database entity for FB invitations.
  * 
- * @author eigogul
+ * @author guligo
+ * @author pavelefimov
  */
 @Entity
 @Table(name = "invitations")

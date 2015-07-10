@@ -13,6 +13,7 @@ import se.tipspromenad.services.dao.GameDao;
  * See {@link GameDao}.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Component
 @Transactional

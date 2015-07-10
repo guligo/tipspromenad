@@ -6,6 +6,7 @@ import se.tipspromenad.controllers.ResponseBean;
  * See {@link PlayController#updatePlay(request)}.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 public class PlayUpdateResponse extends ResponseBean<PlayError> {
 	

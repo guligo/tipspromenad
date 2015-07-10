@@ -6,6 +6,7 @@ import se.tipspromenad.validation.ValidationError;
  * Validation errors related to user.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 public enum UserError implements ValidationError {
 

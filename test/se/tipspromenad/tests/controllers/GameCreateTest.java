@@ -23,6 +23,7 @@ import se.tipspromenad.tests.utils.Order;
  * Tests game creation flow that is to be performed by web-service client app.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 public class GameCreateTest extends AbstractControllerTest {
 

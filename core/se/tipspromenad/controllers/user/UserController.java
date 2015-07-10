@@ -33,6 +33,7 @@ import se.tipspromenad.validation.BasicStringValidator;
  * Controller of MVC paradigm that is responsible for {@link User} related actions.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Controller
 public class UserController {

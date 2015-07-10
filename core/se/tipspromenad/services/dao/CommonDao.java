@@ -12,6 +12,7 @@ import se.tipspromenad.entities.Entity;
  * Generic data-access-object layer class that provides common functions.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Component
 public class CommonDao {

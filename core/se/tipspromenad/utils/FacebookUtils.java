@@ -15,6 +15,7 @@ import se.tipspromenad.entities.enums.Gender;
  * Helper functions for working with FB social network.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 public class FacebookUtils {
 

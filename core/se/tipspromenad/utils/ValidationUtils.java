@@ -9,6 +9,7 @@ import se.tipspromenad.beans.DataTransferBean;
  * Utils for data validation.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 public class ValidationUtils {
 	

@@ -14,6 +14,7 @@ import se.tipspromenad.services.dao.InvitationDao;
  * Provides business logic for {@link Invitation} entity.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Component
 public class InvitationService {

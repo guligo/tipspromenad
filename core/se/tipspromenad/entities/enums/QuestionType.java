@@ -6,6 +6,7 @@ package se.tipspromenad.entities.enums;
  * FIXME: Should be PlacemarkType actually!
  * 
  * @author guligo
+ * @author pavelefimov
  */
 public enum QuestionType {
 	

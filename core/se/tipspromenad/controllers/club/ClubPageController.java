@@ -17,6 +17,7 @@ import se.tipspromenad.services.ClubService;
  * MVC paradigm controller responsible for actions on clubs page.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Controller
 public class ClubPageController {

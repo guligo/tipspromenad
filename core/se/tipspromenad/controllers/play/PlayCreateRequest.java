@@ -6,6 +6,7 @@ import se.tipspromenad.controllers.RequestBean;
  * See {@link PlayController#createPlay(request)}.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 public class PlayCreateRequest extends RequestBean {
 	

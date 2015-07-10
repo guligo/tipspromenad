@@ -6,6 +6,7 @@ import java.util.List;
  * Interface for object validator.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 public interface Validator<E extends ValidationError> {
 	

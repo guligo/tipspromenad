@@ -9,7 +9,8 @@ import se.tipspromenad.validation.ValidationError;
 /**
  * Represents response object of MVC controller.
  * 
- * @author eigogul
+ * @author guligo
+ * @author pavelefimov
  */
 public class ResponseBean<E extends ValidationError> implements Serializable {
 

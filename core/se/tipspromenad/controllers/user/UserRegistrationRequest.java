@@ -4,6 +4,7 @@ import se.tipspromenad.controllers.RequestBean;
 
 /**
  * @author guligo
+ * @author pavelefimov
  */
 public class UserRegistrationRequest extends RequestBean {
 

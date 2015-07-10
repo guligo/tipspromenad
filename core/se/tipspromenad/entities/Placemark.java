@@ -11,6 +11,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
  * Represents entity for question placemark.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Entity
 @Table(name = "placemarks")

@@ -8,6 +8,7 @@ import se.tipspromenad.controllers.ResponseBean;
  * See {@link InvitationController#getInvitationList(InvitationGetListRequest)}.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 public class InvitationGetListResponse extends ResponseBean<InvitationError> {
 	

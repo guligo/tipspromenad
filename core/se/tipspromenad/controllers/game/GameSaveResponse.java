@@ -7,7 +7,8 @@ import se.tipspromenad.controllers.ResponseBean;
 /**
  * Response object of {@link GameController#saveGame(Long, String, String)}.
  * 
- * @author eigogul
+ * @author guligo
+ * @author pavelefimov
  */
 @SuppressWarnings("deprecation")
 @JsonWriteNullProperties(value = false)

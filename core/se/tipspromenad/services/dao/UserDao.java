@@ -14,6 +14,7 @@ import se.tipspromenad.services.dao.UserDao;
  * See {@link UserDao}.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Component
 @Transactional

@@ -17,6 +17,7 @@ import se.tipspromenad.entities.Question;
  * Link between business logic and database.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Component
 @Transactional

@@ -32,6 +32,7 @@ import se.tipspromenad.tests.utils.OrderedRunner;
  * Base test case class for MVC controller tests.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @RunWith(OrderedRunner.class)
 @ContextConfiguration({ "classpath:spring-application.xml" })

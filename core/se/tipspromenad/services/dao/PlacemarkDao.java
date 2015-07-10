@@ -12,6 +12,7 @@ import se.tipspromenad.entities.Placemark;
  * Link between business logic and database.
  * 
  * @author guligo
+ * @author pavelefimov
  */
 @Component
 @Transactional
