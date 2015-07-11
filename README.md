@@ -1,8 +1,10 @@
 # Tipspromenad.nu
 
+![alt tag](https://raw.githubusercontent.com/guligo/docker-images/master/tipspromenad/tipspromenad.png)
+
 ## About
 
-Repository contains server-side code for project called Tipspromenad.nu whose main goal was to digitalize traditional Swedish game called ... yeah, you guessed it - "tipspromenad". The idea never really saw the light of day, however to give more meaning to the work that has been done, team decided to make server-side part of project open source.
+Repository contains server-side code for project called Tipspromenad.nu whose main goal was to digitalize traditional Swedish game called ... yeah, you guessed it - "tipspromenad". The idea never really saw the light of day, however to give more meaning to the work that has been done, team decided to make server-side (web-app) part of project open source.
 
 Some insight into progress our team made:
 
@@ -21,9 +23,10 @@ docker run -t -p 8080:8080 guligo/tipspromenad:latest sh /tmp/start.sh \
     <Facebook application secret>
 ```
 
-Once container is up and running, use following URL:
+Once container is up and running, check out one of following URLs:
 
 ```
+http://<your host>:8080/tipspromenad/wallpaper.page
 http://<your host>:8080/tipspromenad
 ```
 
