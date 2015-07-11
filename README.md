@@ -22,7 +22,7 @@ mvn clean package cargo:run \
 For lazy people there is docker image available.
 
 ```
-sudo docker run -t -p 80:8080 tipspromenad sh /tmp/entrypoint.sh \
+sudo docker run -t -p 8080:8080 tipspromenad sh /tmp/entrypoint.sh \
     2c1f8106eac4517f531c7565f99a096edc467272 \
     /etc/tomcat-8.0.24 \
     6Ledy-sSAAAAAA09ppUgGNR495ZS_ZLrgeD8OHGy \
