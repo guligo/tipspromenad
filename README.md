@@ -4,7 +4,7 @@
 
 Repository contains server-side code for project called Tipspromenad.nu whose main goal was to digitalize traditional Swedish game called "tipspromenad". The idea never really saw the light of day, however to give more meaning to the work that has been done, team decided to make server-side part of project open source.
 
-Some insight into how did the project go:
+Some insight into progress we made:
 
 + [Tipspromenad on Twitter](http://www.twitter.com/tipspromenad)
 + [Tipspromenad on Facebook](http://www.facebook.com/tipspromenad)
@@ -31,8 +31,5 @@ In case you're interested in building and deploying the project outside of Docke
 
 ## Credits
 
-+ [Igors Gulbinskis] (https://se.linkedin.com/pub/igors-gulbinskis/17/128/b41)
++ [guligo] (https://se.linkedin.com/pub/igors-gulbinskis/17/128/b41)
 + [Pavel Efimov] (https://se.linkedin.com/in/meetpavelefimov)
-+ Askar Abdurazakov
-+ Gustav Salomonsson
-+ Ksenia Sigakova
