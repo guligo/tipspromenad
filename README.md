@@ -17,7 +17,7 @@ Tipspromenad.nu requires at least Oracle JDK 7, Tomcat 7 and MySQL 5 server duri
 
 ```
 docker pull guligo/tipspromenad:latest
-docker run -t -p 8080:8080 guligo/tipspromenad:latest sh /tmp/start.sh \
+docker run -t -p 8080:8080 guligo/tipspromenad:latest sh start.sh \
     <reCAPTCHA private key> \
     <Facebook application ID> \
     <Facebook application secret>
