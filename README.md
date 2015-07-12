@@ -30,6 +30,8 @@ http://<your host>:8080/tipspromenad/wallpaper.page
 http://<your host>:8080/tipspromenad
 ```
 
+Use john.doe[at]gmail.com / qwerty as credentials.
+
 In case you're interested in building and deploying the project outside of Docker image, then follow [Dockerfile] (https://github.com/guligo/docker-images/blob/master/tipspromenad/Dockerfile) and make conclusions on how to do it yourself.
 
 ## Credits
