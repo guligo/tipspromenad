@@ -2,14 +2,18 @@
 
 ![alt tag](https://raw.githubusercontent.com/guligo/docker-images/master/tipspromenad/tipspromenad.png)
 
-## About
-
 Repository contains server-side code for project called Tipspromenad.nu whose main goal was to digitalize traditional Swedish game called ... yeah, you guessed it - "tipspromenad". The idea never really saw the light of day, however to give more meaning to the work that has been done, team decided to make server-side (web-app) part of project open source.
 
 Some insight into progress our team made:
 
 + [Tipspromenad on Twitter](http://www.twitter.com/tipspromenad)
 + [Tipspromenad on Facebook](http://www.facebook.com/tipspromenad)
+
+## Key technologies
+
+Java, JSP, Spring, Tomcat, MySQL, HTML + JS + CSS + Bootstrap, Maven
+
+## About
 
 ## Instructions
 
