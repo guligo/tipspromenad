@@ -17,7 +17,7 @@ Java, JSP, Spring, Tomcat, MySQL, HTML + JS + CSS + Bootstrap, Maven
 
 ## Deployment instructions
 
-In order to avoid detailed steps involved into deployment process [Docker image] (https://registry.hub.docker.com/u/guligo/tipspromenad) for Tipspromenad.nu has been created. To get project running, introduce yourself to [Docker] (https://www.docker.com) platform and use commands below to start up container:
+In order to avoid detailed steps involved into deployment process [Docker image](https://registry.hub.docker.com/u/guligo/tipspromenad) for Tipspromenad.nu has been created. To get project running, introduce yourself to [Docker](https://www.docker.com) platform and use commands below to start up container:
 
 ```
 docker pull guligo/tipspromenad:latest
@@ -36,11 +36,11 @@ http://<your host>:8080/tipspromenad
 
 Use john.doe[at]gmail.com / qwerty as credentials.
 
-In case you're interested in building and deploying the project outside of Docker image, then follow [Dockerfile] (https://github.com/guligo/docker-images/blob/master/tipspromenad/Dockerfile) and make conclusions on how to do it yourself.
+In case you're interested in building and deploying the project outside of Docker image, then follow [Dockerfile](https://github.com/guligo/docker-images/blob/master/tipspromenad/Dockerfile) and make conclusions on how to do it yourself.
 
 ## Credits
 
 People involved in production of the code:
 
-+ [guligo] (https://se.linkedin.com/pub/igors-gulbinskis/17/128/b41)
-+ [Pavel Efimov] (https://se.linkedin.com/in/meetpavelefimov)
++ [guligo](https://se.linkedin.com/pub/igors-gulbinskis/17/128/b41)
++ [Pavel Efimov](https://se.linkedin.com/in/meetpavelefimov)
