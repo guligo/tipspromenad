@@ -42,7 +42,7 @@ In case you're interested in building and deploying the project outside of Docke
 
 People involved in production of the code:
 
-+ [guligo](https://www.linkedin.com/in/guligo)
++ [Igors Gulbinskis](https://www.linkedin.com/in/guligo)
 + [Pavel Efimov](https://www.linkedin.com/in/meetpavelefimov)
 + [Askar Abdurazakov](https://www.linkedin.com/pub/askar-abdurazakov/1b/580/b01)
 + [Ksenia Sigakova](https://www.linkedin.com/pub/ksenia-sigakova/46/214/196)
